@@ -1,6 +1,18 @@
 {
   "name": "@ds/frontend",
   "repository": "https://github.com/all-about-ds/DS-Frontend",
+  "contributors": [
+    {
+      "name": "jongjin1010",
+      "email": "jongjin024@gmail.com",
+      "url": "https://github.com/jongjin1010"
+    },
+    {
+      "name": "ParkSeoJune",
+      "email": "tjwns4122@gmail.com",
+      "url": "https://github.com/ParkSeoJune"
+    }
+  ],
   "version": "0.1.0",
   "private": true,
   "dependencies": {
