@@ -1,5 +1,6 @@
 {
-  "name": "ds",
+  "name": "@ds/frotend",
+  "repository": "https://github.com/all-about-ds/DS-Frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
