@@ -1,20 +1,49 @@
 {
-  "name": "ds",
+  "name": "@ds/frontend",
+  "repository": "https://github.com/all-about-ds/DS-Frontend",
+  "contributors": [
+    {
+      "name": "jongjin1010",
+      "email": "jongjin024@gmail.com",
+      "url": "https://github.com/jongjin1010"
+    },
+    {
+      "name": "ParkSeoJune",
+      "email": "tjwns4122@gmail.com",
+      "url": "https://github.com/ParkSeoJune"
+    }
+  ],
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^13.0.0",
-    "@testing-library/user-event": "^13.2.1",
-    "@types/jest": "^27.0.1",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "axios": "^1.2.2",
+    "emotion-reset": "^3.0.1",
+    "react-hook-form": "^7.41.5",
+    "react-router-dom": "^6.6.1",
+    "react-scripts": "^5.0.1",
+    "recoil": "^0.7.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.12",
+    "@babel/preset-react": "^7.18.6",
+    "@emotion/babel-plugin": "^11.10.5",
+    "@emotion/babel-preset-css-prop": "^11.10.0",
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "@types/react-router-dom": "^5.3.3",
+    "@typescript-eslint/eslint-plugin": "^5.48.0",
+    "@typescript-eslint/parser": "^5.48.0",
+    "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.11",
+    "prettier": "^2.8.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "typescript": "^4.4.2",
-    "web-vitals": "^2.1.0"
+    "typescript": "^4.9.4"
   },
   "scripts": {
     "start": "react-scripts start",
