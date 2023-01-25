@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useRecoilState } from 'recoil';
 import { REACT_APP_BASE_URL } from 'shared/config';
 import TokenService from 'utils/tokenService';
 import { getAuth } from '../utils/getUrl';
