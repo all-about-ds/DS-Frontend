@@ -1,9 +1,8 @@
-import { loggedAtom } from 'atoms/AtomContainer';
 import axios from 'axios';
 import { useRecoilState } from 'recoil';
-import { REACT_APP_BASE_URL } from 'shared/BaseUrl';
-import { getAuth } from './getUrl';
-import TokenService from './TokenService';
+import { REACT_APP_BASE_URL } from 'shared/config';
+import TokenService from 'utils/tokenService';
+import { getAuth } from '../utils/getUrl';
 
 export const createAxios = axios.create({
   baseURL: REACT_APP_BASE_URL,
@@ -55,9 +54,7 @@ function getAuthToken() {
     authTokenRequest = makeActualAuthenticationRequest();
     authTokenRequest
       .catch(function () {
-        const [, setLogged] = useRecoilState(loggedAtom);
         TokenService.removeUser();
-        setLogged(false);
         window.location.replace('/login');
       })
       .then(resetAuthTokenRequest, resetAuthTokenRequest);
