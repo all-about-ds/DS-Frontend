@@ -39,11 +39,16 @@ export const InputWrapper = styled.div`
   margin-top: 2.08vh;
 `;
 
-export const InputText = styled.p`
+export const InputText = styled.p<{ isError: boolean }>`
   font-weight: 400;
   font-size: 13px;
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: 10px;
+
+  &::placeholder {
+    color: ${(props) =>
+      props.isError ? '#EE3939' : 'rgba(255, 255, 255, 0.35)'};
+  }
 `;
 
 export const InputBox = styled.input`
@@ -52,7 +57,6 @@ export const InputBox = styled.input`
   height: 40px;
   background: #232323;
   border-radius: 10px;
-  border: none;
   padding-left: 16px;
 `;
 
@@ -62,7 +66,6 @@ export const Button = styled.div`
   height: 40px;
   background: #7848de;
   border-radius: 10px;
-  margin-top: 10.32vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -107,4 +110,10 @@ export const Bar = styled.div`
   border-radius: 11px;
   margin-top: 1.21vh;
   margin-bottom: 11px;
+`;
+
+export const ErrorText = styled.div`
+  color: #ee3939;
+  font-size: 12px;
+  margin-top: 16px;
 `;
