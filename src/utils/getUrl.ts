@@ -1,4 +1,4 @@
-import { REACT_APP_BASE_URL } from 'shared/BaseUrl';
+import { REACT_APP_BASE_URL } from 'shared/config';
 
 export const getAuth = {
   tokenReissuance: () => {
