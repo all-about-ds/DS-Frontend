@@ -1,4 +1,4 @@
-import SignFrame from 'components/common/auth/authLayout';
+import AuthLayout from 'components/common/layout/auth';
 import Background from 'components/common/background';
 import * as S from './style';
 import React, { useState } from 'react';
@@ -9,7 +9,7 @@ function Signin() {
   return (
     <>
       <Background>
-        <SignFrame title='로그인'>
+        <AuthLayout title='로그인'>
           <S.DescWrapper>
             <S.IconBox>😎</S.IconBox>
             <S.DescText>
@@ -67,7 +67,7 @@ function Signin() {
           </S.BottomTextBox>
           <S.Bar />
           <S.ClickText>비밀번호 찾기</S.ClickText>
-        </SignFrame>
+        </AuthLayout>
       </Background>
     </>
   );

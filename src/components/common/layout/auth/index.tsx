@@ -6,7 +6,7 @@ interface AuthLayoutProps extends React.HTMLAttributes<HTMLButtonElement> {
   title: string;
 }
 
-function SignFrame(props: AuthLayoutProps) {
+function AuthLayout(props: AuthLayoutProps) {
   return (
     <>
       <S.SignFrame>
@@ -17,4 +17,4 @@ function SignFrame(props: AuthLayoutProps) {
   );
 }
 
-export default SignFrame;
+export default AuthLayout;
