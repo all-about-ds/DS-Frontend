@@ -1,14 +1,16 @@
-import SignFrame from 'components/common/auth/authLayout';
-import Background from 'components/common/background';
+import SignFrame from 'components/common/layout/auth/authLayout';
 import * as S from './style';
 import React, { useState } from 'react';
+import Header from '../common/header/header';
+import CommonLayout from 'components/common/layout/common';
 
 function Signin() {
   const [isError, setError] = useState(false);
 
   return (
     <>
-      <Background>
+      <CommonLayout>
+        <Header />
         <SignFrame title='로그인'>
           <S.DescWrapper>
             <S.IconBox>😎</S.IconBox>
@@ -68,7 +70,7 @@ function Signin() {
           <S.Bar />
           <S.ClickText>비밀번호 찾기</S.ClickText>
         </SignFrame>
-      </Background>
+      </CommonLayout>
     </>
   );
 }
