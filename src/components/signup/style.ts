@@ -1,16 +1,5 @@
 import styled from '@emotion/styled';
 
-export const SignupPageLayout = styled.section``;
-
-export const SignupBox = styled.div`
-  width: 400px;
-  height: 51vh;
-  min-height: 550px;
-  background: #161616;
-  border-radius: 10px;
-  padding: 35px 0;
-`;
-
 export const Title = styled.p`
   font-style: normal;
   font-weight: 400;
@@ -20,24 +9,9 @@ export const Title = styled.p`
   margin-bottom: 25px;
 `;
 
-export const ProgressBar = styled.progress`
-  width: 100%;
-  height: 2px;
-  appearance: none;
-
-  ::-webkit-progress-bar {
-    background: #333333;
-  }
-
-  ::-webkit-progress-value {
-    background: #7139ea;
-    transition: width 0.5s;
-  }
-  margin-bottom: 36px;
-`;
-
 export const InputWrapper = styled.div`
-  width: 90%;
+  width: 16.5vw;
+  min-width: 284px;
   margin: 24px auto 0;
 `;
 
@@ -71,8 +45,9 @@ export const Input = styled.input`
 `;
 
 export const SignupButton = styled.button`
-  width: 90%;
-  margin: 12rem auto 0;
+  width: 16.5vw;
+  min-width: 284px;
+  margin: 11rem auto 0;
   outline: none;
   display: block;
   border: none;

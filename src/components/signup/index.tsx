@@ -1,11 +1,11 @@
+import Background from 'components/common/background';
+import AuthLayout from 'components/common/layout/auth';
 import * as S from './style';
 
 function SignupPage() {
   return (
-    <S.SignupPageLayout>
-      <S.SignupBox>
-        <S.Title>회원가입</S.Title>
-        <S.ProgressBar id='progress' value={33} max='100' />
+    <Background>
+      <AuthLayout title='회원가입' progressBar={{ need: true, value: 33 }}>
         <S.InputWrapper>
           <S.InputTitle>이메일</S.InputTitle>
           <S.Input placeholder='이메일을 입력해주세요' type='email' />
@@ -19,8 +19,8 @@ function SignupPage() {
           <p>기존 회원이신가요?</p>
           <p style={{ color: '#7139EA', cursor: 'pointer' }}>로그인</p>
         </S.GoLoginBox>
-      </S.SignupBox>
-    </S.SignupPageLayout>
+      </AuthLayout>
+    </Background>
   );
 }
 
