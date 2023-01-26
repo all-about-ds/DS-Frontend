@@ -10,11 +10,10 @@ function Header() {
       <S.HeaderLayout>
         <S.HeaderContentWrapper>
           <S.LogoText>Do Study</S.LogoText>
-
           {tokenService.getLocalAccessToken() ? (
             <AfterLoginHeader />
           ) : (
-            <BeforeLoginHeader></BeforeLoginHeader>
+            <BeforeLoginHeader />
           )}
         </S.HeaderContentWrapper>
       </S.HeaderLayout>
