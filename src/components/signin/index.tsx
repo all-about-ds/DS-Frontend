@@ -19,7 +19,6 @@ function Signin() {
 
           <S.InputWrapper>
             <S.InputText
-              isError={isError}
               style={{
                 color: isError ? '#EE3939' : 'rgba(255, 255, 255, 0.9)',
               }}
@@ -27,17 +26,17 @@ function Signin() {
               이메일
             </S.InputText>
             <S.InputBox
+              isError={isError}
               placeholder='이메일을 입력해주세요'
               style={{
-                border: isError ? '1px solid #EE3939;' : 'none',
+                border: isError ? '1px solid #EE3939' : 'none',
                 background: isError ? '#412626' : '#232323',
               }}
-            ></S.InputBox>
+            />
           </S.InputWrapper>
 
           <S.InputWrapper>
             <S.InputText
-              isError={isError}
               style={{
                 color: isError ? '#EE3939' : 'rgba(255, 255, 255, 0.9)',
               }}
@@ -45,19 +44,20 @@ function Signin() {
               비밀번호
             </S.InputText>
             <S.InputBox
+              isError={isError}
               placeholder='비밀번호를 입력해주세요'
               style={{
-                border: isError ? '1px solid #EE3939;' : 'none',
+                border: isError ? '1px solid #EE3939' : 'none',
                 background: isError ? '#412626' : '#232323',
               }}
-            ></S.InputBox>
+            />
           </S.InputWrapper>
 
           {isError && (
             <S.ErrorText>이메일 혹은 비밀번호가 일치하지 않아요</S.ErrorText>
           )}
 
-          <S.Button style={{ marginTop: isError ? '7.5vh' : '10.32vh' }}>
+          <S.Button style={{ marginTop: isError ? '9.7vh' : '12.92vh' }}>
             로그인
           </S.Button>
 
