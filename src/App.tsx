@@ -1,7 +1,7 @@
 import GlobalStyle from 'shared/style';
 import SigninPage from 'pages/auth/signinPage';
 import { Route, Routes } from 'react-router-dom';
-import SignupPage from 'components/signup';
+import SignupPage from 'components/signup/page';
 
 function App() {
   return (
