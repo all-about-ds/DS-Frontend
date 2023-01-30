@@ -1,7 +1,6 @@
-import React from 'react';
 import tokenService from 'utils/tokenService';
-import AfterLoginHeader from './afterLoginHeader';
-import BeforeLoginHeader from './beforeLoginHeader';
+import AfterLoginHeader from './afterLogin';
+import BeforeLoginHeader from './beforeLogin';
 import * as S from './style';
 
 function Header() {

@@ -3,8 +3,8 @@ import {
   signupEmailDuplicationModalAtom,
 } from 'atoms';
 import Header from 'components/common/header';
-import AuthLayout from 'components/common/layout/auth';
-import CommonLayout from 'components/common/layout/common';
+import AuthFrame from 'components/frame/auth';
+import CenterAlignmentLayout from 'components/common/layout/align/center';
 import SignupEmailDuplicationModal from 'components/modals/signupException';
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
@@ -36,9 +36,9 @@ function SignupPage() {
   return (
     <>
       {signupEmailDuplicationModal && <SignupEmailDuplicationModal />}
-      <CommonLayout>
-        <Header />
-        <AuthLayout
+      <Header />
+      <CenterAlignmentLayout>
+        <AuthFrame
           title='회원가입'
           progressBar={{ need: true, value: progress }}
         >
@@ -47,8 +47,8 @@ function SignupPage() {
             <p>기존 회원이신가요?</p>
             <p style={{ color: '#7139EA', cursor: 'pointer' }}>로그인</p>
           </S.GoLoginBox>
-        </AuthLayout>
-      </CommonLayout>
+        </AuthFrame>
+      </CenterAlignmentLayout>
     </>
   );
 }

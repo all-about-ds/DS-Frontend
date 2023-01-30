@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from './style';
 
-interface AuthLayoutProps extends React.HTMLAttributes<HTMLElement> {
+interface AuthFrameProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
   title: '회원가입' | '로그인' | '비밀번호 찾기';
   progressBar: {
@@ -10,7 +10,7 @@ interface AuthLayoutProps extends React.HTMLAttributes<HTMLElement> {
   };
 }
 
-function AuthLayout(props: AuthLayoutProps) {
+function AuthFrame(props: AuthFrameProps) {
   return (
     <S.AuthFrame>
       <S.TitleText>{props.title}</S.TitleText>
@@ -28,4 +28,4 @@ function AuthLayout(props: AuthLayoutProps) {
   );
 }
 
-export default AuthLayout;
+export default AuthFrame;
