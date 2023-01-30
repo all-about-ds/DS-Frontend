@@ -5,8 +5,8 @@ interface BackgroundProps extends React.HTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
 }
 
-function Background(props: BackgroundProps) {
-  return <S.Background>{props.children}</S.Background>;
+function CommonLayout(props: BackgroundProps) {
+  return <S.CommonLayout>{props.children}</S.CommonLayout>;
 }
 
-export default Background;
+export default CommonLayout;

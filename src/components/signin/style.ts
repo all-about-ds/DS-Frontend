@@ -7,6 +7,7 @@ export const DescWrapper = styled.div`
   background: #1c1c1c;
   border-radius: 10px;
   margin-top: 28px;
+  margin-bottom: 1.22vh;
 `;
 
 export const IconBox = styled.div`
@@ -39,25 +40,26 @@ export const InputWrapper = styled.div`
   margin-top: 2.08vh;
 `;
 
-export const InputText = styled.p<{ isError: boolean }>`
+export const InputText = styled.p`
   font-weight: 400;
   font-size: 13px;
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: 10px;
-
-  &::placeholder {
-    color: ${(props) =>
-      props.isError ? '#EE3939' : 'rgba(255, 255, 255, 0.35)'};
-  }
 `;
 
-export const InputBox = styled.input`
+export const InputBox = styled.input<{ isError: boolean }>`
   width: 15.5vw;
   min-width: 266px;
   height: 40px;
   background: #232323;
   border-radius: 10px;
+  color: rgba(255, 255, 255, 0.9);
   padding-left: 16px;
+
+  ::placeholder {
+    color: ${(props) =>
+      props.isError ? '#EE3939' : 'rgba(255, 255, 255, 0.35)'};
+  }
 `;
 
 export const Button = styled.div`
@@ -90,13 +92,13 @@ export const BottomTextBox = styled.div`
   align-items: center;
 `;
 
-export const FirstText = styled.div`
+export const FirstText = styled.p`
   color: #c2c2c2;
 
   margin-right: 4px;
 `;
 
-export const ClickText = styled.div`
+export const ClickText = styled.p`
   color: #7139ea;
   font-size: 12px;
   cursor: pointer;
@@ -112,7 +114,7 @@ export const Bar = styled.div`
   margin-bottom: 11px;
 `;
 
-export const ErrorText = styled.div`
+export const ErrorText = styled.p`
   color: #ee3939;
   font-size: 12px;
   margin-top: 16px;
