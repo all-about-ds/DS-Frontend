@@ -8,7 +8,7 @@ function App() {
     <RecoilRoot>
       <GlobalStyle />
       <Routes>
-        <Route path='/' element={<MainPage/>}
+        <Route path='/' element={<MainPage />} />
         <Route path='/signin' element={<SigninPage />} />
         <Route path='/signup' element={<SignupPage />} />
       </Routes>
