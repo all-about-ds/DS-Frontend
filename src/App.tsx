@@ -1,8 +1,7 @@
 import GlobalStyle from 'shared/style';
-import SigninPage from 'pages/SigninPage';
 import { Route, Routes } from 'react-router-dom';
-import SignupPage from 'components/signup/page';
 import { RecoilRoot } from 'recoil';
+import { SigninPage, SignupPage } from 'pages';
 
 function App() {
   return (

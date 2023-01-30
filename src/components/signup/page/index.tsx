@@ -11,7 +11,7 @@ import { useRecoilState } from 'recoil';
 import SignupSectionContainer from '../container';
 import * as S from './style';
 
-function SignupPage() {
+function Signup() {
   const [signupEmailDuplicationModal, _] = useRecoilState(
     signupEmailDuplicationModalAtom
   );
@@ -53,4 +53,4 @@ function SignupPage() {
   );
 }
 
-export default SignupPage;
+export default Signup;
