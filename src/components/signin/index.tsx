@@ -1,4 +1,5 @@
-import SignFrame from 'components/common/layout/auth/authLayout';
+import AuthLayout from 'components/common/layout/auth';
+import Background from 'components/common/background';
 import * as S from './style';
 import React, { useState } from 'react';
 import Header from '../common/header/header';
@@ -9,16 +10,14 @@ function Signin() {
 
   return (
     <>
-      <CommonLayout>
-        <Header />
-        <SignFrame title='로그인'>
+      <Background>
+        <AuthLayout title='로그인' progressBar={{ need: false, value: 0 }}>
           <S.DescWrapper>
             <S.IconBox>😎</S.IconBox>
             <S.DescText>
               DS에서 그룹을 만들거나 참여해서 같이 성장해봐!
             </S.DescText>
           </S.DescWrapper>
-
           <S.InputWrapper>
             <S.InputText
               style={{
@@ -36,7 +35,6 @@ function Signin() {
               }}
             />
           </S.InputWrapper>
-
           <S.InputWrapper>
             <S.InputText
               style={{
@@ -54,23 +52,21 @@ function Signin() {
               }}
             />
           </S.InputWrapper>
-
           {isError && (
             <S.ErrorText>이메일 혹은 비밀번호가 일치하지 않아요</S.ErrorText>
           )}
-
+          <S.Button style={{ marginTop: isError ? '7.5vh' : '10.32vh' }}>
           <S.Button style={{ marginTop: isError ? '9.7vh' : '12.92vh' }}>
             로그인
           </S.Button>
-
           <S.BottomTextBox>
             <S.FirstText>DS가 처음이신가요?</S.FirstText>
             <S.ClickText>회원가입</S.ClickText>
           </S.BottomTextBox>
           <S.Bar />
           <S.ClickText>비밀번호 찾기</S.ClickText>
-        </SignFrame>
-      </CommonLayout>
+        </AuthLayout>
+      </Background>
     </>
   );
 }

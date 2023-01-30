@@ -19,6 +19,10 @@ function GlobalStyle() {
         }
         input {
           font-family: 'Noto Sans KR', sans-serif;
+
+          :focus {
+            outline: none;
+          }
         }
       `}
     />
