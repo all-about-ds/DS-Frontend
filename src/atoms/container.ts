@@ -12,5 +12,5 @@ export const signupCurrentSectionAtom = atom({
 
 export const signupEmailDuplicationModalAtom = atom({
   key: 'signupEmailDuplicationModal',
-  default: true,
+  default: false,
 });
