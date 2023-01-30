@@ -1,40 +1,73 @@
 import styled from '@emotion/styled';
 
-export const FirstSectionLayout = styled.section`
-  margin: 2rem 0 -1rem 0;
+export const SecondSectionLayout = styled.section`
+  margin: 0.8rem auto -1rem;
+  width: 18vw;
+  min-width: 300px;
 `;
 
-export const InputWrapper = styled.div`
-  width: 16.5vw;
-  min-width: 284px;
-  margin: 0 auto 24px;
-`;
-
-export const InputTitle = styled.p`
-  font-style: normal;
-  font-weight: 400;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.9);
-  margin-left: 8px;
-  margin: 0 0 10px 8px;
-`;
-
-export const Input = styled.input`
-  border: none;
-  width: 100%;
-  height: 40px;
-  border-radius: 10px;
-  background: #232323;
+export const Text = styled.p`
+  font-family: 'AppleSDGothicNeoM00';
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
+  color: #acacac;
+  text-align: center;
+  margin-bottom: 3rem;
+`;
+
+export const InputWrapper = styled.div`
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+  gap: 10px;
+  margin-bottom: 1.2rem;
+`;
+
+export const AuthenticationNumberInput = styled.input`
+  height: 70px;
+  border-radius: 10px;
+  border: none;
+  background: #232323;
+  font-size: 2em;
+  padding: 0;
+  text-align: center;
   color: rgba(255, 255, 255, 0.9);
-  padding: 13px;
-  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box; /* Firefox, other Gecko */
-  box-sizing: border-box; /* Opera/IE 8+ */
 
   :focus {
     outline: none;
   }
+`;
+
+export const ResendBox = styled.div`
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  gap: 5px;
+
+  p {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    color: #6a6a6a;
+  }
+  margin-bottom: 1rem;
+`;
+
+export const Timer = styled.p`
+  font-family: 'AppleSDGothicNeoM00';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  text-align: center;
+  color: #efefef;
+  margin-bottom: 9.1rem;
+`;
+
+export const Div = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
 `;
