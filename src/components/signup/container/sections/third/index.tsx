@@ -1,17 +1,20 @@
+import SignupButton from 'components/signup/common';
 import * as S from './style';
 
 function SignupThirdSection() {
   return (
-    <S.FirstSectionLayout>
+    <S.SecondSectionLayout>
+      <S.Text>
+        이제 마지막 단계에요, DS에서 사용하실 닉네임을 입력해주세요.
+      </S.Text>
       <S.InputWrapper>
-        <S.InputTitle>이메일</S.InputTitle>
-        <S.Input placeholder='이메일을 입력해주세요' type='email' />
+        <S.InputTitle>닉네임</S.InputTitle>
+        <S.Input placeholder='닉네임을 입력해주세요' type='text' />
       </S.InputWrapper>
-      <S.InputWrapper>
-        <S.InputTitle>비밀번호</S.InputTitle>
-        <S.Input placeholder='비밀번호 입력해주세요' type='password' />
-      </S.InputWrapper>
-    </S.FirstSectionLayout>
+      <S.Div>
+        <SignupButton>완료</SignupButton>
+      </S.Div>
+    </S.SecondSectionLayout>
   );
 }
 

@@ -1,13 +1,26 @@
 import styled from '@emotion/styled';
 
-export const FirstSectionLayout = styled.section`
-  margin: 2rem 0 -1rem 0;
+export const SecondSectionLayout = styled.section`
+  margin: 0.8rem auto -1rem;
+  width: 18vw;
+  min-width: 300px;
+`;
+
+export const Text = styled.p`
+  font-family: 'AppleSDGothicNeoM00';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: #acacac;
+  text-align: left;
+  line-height: 20px;
+  margin-bottom: 3rem;
 `;
 
 export const InputWrapper = styled.div`
-  width: 16.5vw;
+  width: 100%;
   min-width: 284px;
-  margin: 0 auto 24px;
+  margin: 0 auto 11.7rem;
 `;
 
 export const InputTitle = styled.p`
@@ -36,5 +49,16 @@ export const Input = styled.input`
 
   :focus {
     outline: none;
+  }
+`;
+
+export const Div = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+
+  button {
+    width: 100%;
   }
 `;
