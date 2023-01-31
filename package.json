@@ -24,7 +24,7 @@
     "axios": "^1.2.2",
     "dotenv": "^16.0.3",
     "emotion-reset": "^3.0.1",
-    "react-hook-form": "^7.41.5",
+    "react-hook-form": "^7.43.0",
     "react-router-dom": "^6.7.0",
     "react-scripts": "^5.0.1",
     "recoil": "^0.7.6",

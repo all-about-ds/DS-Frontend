@@ -62,18 +62,20 @@ export const InputBox = styled.input<{ isError: boolean }>`
   }
 `;
 
-export const Button = styled.div`
+export const Button = styled.button`
   width: 16.5vw;
   min-width: 284px;
   height: 40px;
   background: #7848de;
   border-radius: 10px;
+  border-style: none;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 400;
   font-size: 15px;
   color: #ffffff;
+  cursor: pointer;
 
   &:hover {
     border: 1px solid #7848de;
@@ -112,6 +114,11 @@ export const Bar = styled.div`
   border-radius: 11px;
   margin-top: 1.21vh;
   margin-bottom: 11px;
+`;
+
+export const ErrorTextBox = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 export const ErrorText = styled.p`
