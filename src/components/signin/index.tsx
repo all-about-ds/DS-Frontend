@@ -14,7 +14,7 @@ function Signin() {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting },
   } = useForm<LoginInterface>();
 
   const onValid = async (data: LoginInterface) => {
