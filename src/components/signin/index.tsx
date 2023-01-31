@@ -19,10 +19,11 @@ function Signin() {
 
   const onValid = async (data: LoginInterface) => {
     try {
-      console.log(data);
       setError(false);
       const response = await auth.signin(data);
-      if (response === 200) navigate('/');
+      if (response === 200) {
+        navigate('/');
+      }
     } catch (e) {
       console.log(e);
     }

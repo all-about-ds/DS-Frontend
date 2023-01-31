@@ -1,6 +1,7 @@
 import { createAxios } from 'libs/createAxios';
 import { getAuth } from 'libs/getUrl';
 import { LoginInterface } from 'types/auth.type';
+import tokenService from 'utils/tokenService';
 
 class Auth {
   async signin(data: LoginInterface) {
@@ -10,10 +11,7 @@ class Auth {
         password: data.password,
       });
 
-      localStorage.setItem('token', JSON.stringify(response.data));
-      if (localStorage.getItem('token') === null) {
-        throw new Error(`No token`);
-      }
+      tokenService.setLocalToken(response);
 
       return response.status;
     } catch (error) {

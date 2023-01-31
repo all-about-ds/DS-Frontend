@@ -1,6 +1,12 @@
 import { TokenInterface } from 'types/token';
 
 class TokenService {
+  setLocalToken(response: any) {
+    localStorage.setItem('token', JSON.stringify(response.data));
+    if (localStorage.getItem('token') === null) {
+      throw new Error(`No token`);
+    }
+  }
   getLocalRefreshToken() {
     const user = JSON.parse(localStorage.getItem('token') || '{}');
     return user?.refreshToken;
