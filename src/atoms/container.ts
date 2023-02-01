@@ -14,3 +14,8 @@ export const signupEmailDuplicationModalAtom = atom({
   key: 'signupEmailDuplicationModal',
   default: false,
 });
+
+export const findPasswordCurrentSectionAtom = atom({
+  key: 'findPasswordCurrentSection',
+  default: 1,
+});
