@@ -11,7 +11,7 @@ import tokenService from 'utils/tokenService';
 
 function Signin() {
   const navigate = useNavigate();
-  const [isError, setError] = useState(false);
+  const [isError, setError] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
