@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SignupButton = styled.button`
+export const AuthButton = styled.button`
   width: 16.5vw;
   min-width: 284px;
   outline: none;

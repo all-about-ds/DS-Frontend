@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const SecondSectionLayout = styled.section`
+export const ThirdSectionLayout = styled.section`
   margin: 0.8rem auto -1rem;
   width: 18vw;
   min-width: 300px;
@@ -20,7 +20,7 @@ export const Text = styled.p`
 export const InputWrapper = styled.div`
   width: 100%;
   min-width: 284px;
-  margin: 0 auto 11.7rem;
+  margin: 0 auto 1.5rem;
 `;
 
 export const InputTitle = styled.p`
@@ -56,7 +56,7 @@ export const Div = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1rem;
+  margin-top: 7.5rem;
 
   button {
     width: 100%;

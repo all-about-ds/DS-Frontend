@@ -1,14 +1,5 @@
 import styled from '@emotion/styled';
 
-export const Title = styled.p`
-  font-style: normal;
-  font-weight: 400;
-  font-size: 24px;
-  text-align: center;
-  color: #ffffff;
-  margin-bottom: 25px;
-`;
-
 export const GoLoginBox = styled.div`
   display: flex;
   justify-content: center;

@@ -1,11 +1,10 @@
-import SignupButton from 'components/signup/common';
-import { useEffect, useState } from 'react';
+import AuthButton from 'components/auth/button';
 import * as S from './style';
 
-function SignupSecondSection() {
+function FindPasswordSecondSection() {
   return (
     <S.SecondSectionLayout>
-      <S.Text>입력하신 이메일로 인증번호 4자리를 전송했어요</S.Text>
+      <S.Text>가입하신 이메일로 인증번호 4자리를 전송했어요</S.Text>
       <S.InputWrapper>
         <S.AuthenticationNumberInput type='text' />
         <S.AuthenticationNumberInput />
@@ -18,10 +17,10 @@ function SignupSecondSection() {
       </S.ResendBox>
       <S.Timer>5: 00</S.Timer>
       <S.Div>
-        <SignupButton>다음</SignupButton>
+        <AuthButton>다음</AuthButton>
       </S.Div>
     </S.SecondSectionLayout>
   );
 }
 
-export default SignupSecondSection;
+export default FindPasswordSecondSection;

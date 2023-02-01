@@ -6,8 +6,7 @@ export const DescWrapper = styled.div`
   display: flex;
   background: #1c1c1c;
   border-radius: 10px;
-  margin-top: 28px;
-  margin-bottom: 1.22vh;
+  margin: 28px 0 1.22vh;
 `;
 
 export const IconBox = styled.div`
@@ -28,8 +27,7 @@ export const DescText = styled.p`
   font-weight: 400;
   font-size: 12px;
   color: #acacac;
-  margin-top: 12px;
-  margin-right: 12px;
+  margin: 12px 12px 0 0;
 `;
 
 export const InputWrapper = styled.div`
@@ -44,7 +42,7 @@ export const InputText = styled.p`
   font-weight: 400;
   font-size: 13px;
   color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 10px;
+  margin: 0 0 10px 8px;
 `;
 
 export const InputBox = styled.input<{ isError: boolean }>`
@@ -109,11 +107,9 @@ export const ClickText = styled.p`
 export const Bar = styled.div`
   width: 22px;
   height: 1px;
-
   background: #a2a2a2;
   border-radius: 11px;
-  margin-top: 1.21vh;
-  margin-bottom: 11px;
+  margin: 1.21vh 0 11px;
 `;
 
 export const ErrorTextBox = styled.div`

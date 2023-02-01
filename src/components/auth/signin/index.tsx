@@ -1,7 +1,7 @@
 import AuthFrame from 'components/frame/auth';
 import * as S from './style';
 import { useState } from 'react';
-import Header from '../common/header';
+import Header from '../../common/header';
 import CenterAlignmentLayout from 'components/common/layout/align/center';
 import { useForm } from 'react-hook-form';
 import { LoginInterface } from 'types/auth.type';
@@ -11,7 +11,7 @@ import tokenService from 'utils/tokenService';
 
 function Signin() {
   const navigate = useNavigate();
-  const [isError, setError] = useState(false);
+  const [isError, setError] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
