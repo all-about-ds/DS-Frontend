@@ -17,7 +17,7 @@ function Signup() {
   );
   const [signupCurrentSection, __] = useRecoilState(signupCurrentSectionAtom);
 
-  const [progress, setProgress] = useState(33);
+  const [progress, setProgress] = useState<number>(33);
 
   useEffect(() => {
     switch (signupCurrentSection) {

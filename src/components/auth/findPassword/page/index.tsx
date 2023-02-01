@@ -11,7 +11,7 @@ function FindPassword() {
     findPasswordCurrentSectionAtom
   );
 
-  const [progress, setProgress] = useState(33);
+  const [progress, setProgress] = useState<number>(33);
 
   useEffect(() => {
     switch (findPasswordCurrentSection) {
