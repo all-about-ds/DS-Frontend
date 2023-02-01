@@ -1,5 +1,4 @@
 import AuthButton from 'components/auth/button';
-import { useEffect, useState } from 'react';
 import * as S from './style';
 
 function SignupSecondSection() {
