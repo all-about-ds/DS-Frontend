@@ -21,9 +21,7 @@ function Signin() {
     try {
       setError(false);
       const response = await auth.signin(data);
-      if (response === 200) {
-        navigate('/');
-      }
+      navigate('/');
     } catch (e) {
       console.log(e);
     }
