@@ -9,9 +9,9 @@ function App() {
       <GlobalStyle />
       <Routes>
         <Route path='/' element={<MainPage />} />
-        <Route path='/signin' element={<SigninPage />} />
-        <Route path='/signup' element={<SignupPage />} />
-        <Route path='/findPassword' element={<FindPasswordPage />} />
+        <Route path='/auth/signin' element={<SigninPage />} />
+        <Route path='/auth/signup' element={<SignupPage />} />
+        <Route path='/auth/findPassword' element={<FindPasswordPage />} />
       </Routes>
     </RecoilRoot>
   );
