@@ -11,7 +11,10 @@ class Auth {
         password: data.password,
       });
 
-      tokenService.setLocalToken(response);
+      tokenService.setUser(response.data);
+      if (localStorage.getItem('token') === null) {
+        throw new Error(`No token`);
+      }
 
       return response.status;
     } catch (error) {
