@@ -1,4 +1,4 @@
-import SignupButton from 'components/signup/common';
+import AuthButton from 'components/auth/button';
 import { useEffect, useState } from 'react';
 import * as S from './style';
 
@@ -18,7 +18,7 @@ function SignupSecondSection() {
       </S.ResendBox>
       <S.Timer>5: 00</S.Timer>
       <S.Div>
-        <SignupButton>다음</SignupButton>
+        <AuthButton>다음</AuthButton>
       </S.Div>
     </S.SecondSectionLayout>
   );

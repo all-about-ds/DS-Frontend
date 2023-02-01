@@ -1,4 +1,4 @@
-import SignupButton from 'components/signup/common';
+import AuthButton from 'components/auth/button';
 import * as S from './style';
 
 function SignupFirstSection() {
@@ -12,7 +12,7 @@ function SignupFirstSection() {
         <S.InputTitle>비밀번호</S.InputTitle>
         <S.Input placeholder='비밀번호 입력해주세요' type='password' />
       </S.InputWrapper>
-      <SignupButton style={{ margin: '10.5rem 0 1rem' }}>다음</SignupButton>
+      <AuthButton style={{ margin: '10.5rem 0 1rem' }}>다음</AuthButton>
     </S.FirstSectionLayout>
   );
 }

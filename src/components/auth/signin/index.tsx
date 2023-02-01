@@ -1,7 +1,7 @@
 import AuthFrame from 'components/frame/auth';
 import * as S from './style';
 import { useState } from 'react';
-import Header from '../common/header';
+import Header from '../../common/header';
 import CenterAlignmentLayout from 'components/common/layout/align/center';
 
 function Signin() {
