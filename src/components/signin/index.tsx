@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import { LoginInterface } from 'types/auth.type';
 import auth from 'api/auth';
 import { useNavigate } from 'react-router-dom';
+import tokenService from 'utils/tokenService';
 
 function Signin() {
   const navigate = useNavigate();
@@ -20,7 +21,11 @@ function Signin() {
   const onValid = async (data: LoginInterface) => {
     try {
       setError(false);
-      const response = await auth.signin(data);
+      const response: any = await auth.signin(data);
+      tokenService.setUser(response.data);
+      if (localStorage.getItem('token') === null) {
+        throw new Error(`No token`);
+      }
       navigate('/');
     } catch (e) {
       console.log(e);

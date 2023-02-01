@@ -4,19 +4,16 @@ import { LoginInterface } from 'types/auth.type';
 import tokenService from 'utils/tokenService';
 
 class Auth {
-  async signin(data: LoginInterface) {
+  signin(data: LoginInterface) {
     try {
-      const response = await createAxios.post(getAuth.signin(), {
-        email: data.email,
-        password: data.password,
+      return createAxios({
+        method: 'POST',
+        url: getAuth.signin(),
+        data: {
+          email: data.email,
+          password: data.password,
+        },
       });
-
-      tokenService.setUser(response.data);
-      if (localStorage.getItem('token') === null) {
-        throw new Error(`No token`);
-      }
-
-      return response.status;
     } catch (error) {
       return error;
     }
