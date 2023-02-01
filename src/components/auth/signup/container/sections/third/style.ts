@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const SecondSectionLayout = styled.section`
+export const ThirdSectionLayout = styled.section`
   margin: 0.8rem auto -1rem;
   width: 18vw;
   min-width: 300px;
