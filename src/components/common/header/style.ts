@@ -18,7 +18,7 @@ export const HeaderBottomBar = styled.div`
 `;
 
 export const HeaderContentWrapper = styled.div`
-  width: 61.25vw;
+  width: 66.25vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
