@@ -8,7 +8,7 @@ function GlobalStyle() {
         ${emotionReset}
         body {
           font-family: 'Noto Sans KR', sans-serif;
-          background-color: #1a1b1e;
+          background-color: #101010;
         }
         a {
           text-decoration: none;
