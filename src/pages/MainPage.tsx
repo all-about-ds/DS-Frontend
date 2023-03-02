@@ -1,5 +1,7 @@
+import Main from 'components/main';
+
 function MainPage() {
-  return <></>;
+  return <Main></Main>;
 }
 
 export default MainPage;
