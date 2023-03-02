@@ -2,7 +2,7 @@ import Header from 'components/common/header';
 import CenterAlignmentLayout from 'components/common/layout/align/center';
 import MainFrame from 'components/frame/main';
 import React, { useState } from 'react';
-import Group from '../item';
+import GroupItem from '../item';
 import * as S from './style';
 
 function Main() {
@@ -43,7 +43,7 @@ function Main() {
             </S.SortButton>
           </S.SortButtonWrapper>
           <S.GroupBoxWrapper>
-            <Group />
+            <GroupItem />
           </S.GroupBoxWrapper>
         </MainFrame>
       </CenterAlignmentLayout>

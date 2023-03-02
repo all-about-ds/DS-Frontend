@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from './style';
 
-function Group() {
+function GroupItem() {
   return (
     <>
       <S.GroupBox>
@@ -21,4 +21,4 @@ function Group() {
   );
 }
 
-export default Group;
+export default GroupItem;
