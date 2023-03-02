@@ -13,9 +13,9 @@ function FindPasswordThirdSection() {
         <S.InputTitle>비밀번호 재확인</S.InputTitle>
         <S.Input placeholder='비밀번호를 다시 한번 입력해주세요' type='text' />
       </S.InputWrapper>
-      <S.Div>
+      <S.Box>
         <AuthButton>완료</AuthButton>
-      </S.Div>
+      </S.Box>
     </S.ThirdSectionLayout>
   );
 }
