@@ -1,10 +1,10 @@
-import AuthButton from 'components/auth/button';
+import AuthButton from 'components/auth/ui/button';
 import * as S from './style';
 
-function FindPasswordSecondSection() {
+function SignupSecondSection() {
   return (
     <S.SecondSectionLayout>
-      <S.Text>가입하신 이메일로 인증번호 4자리를 전송했어요</S.Text>
+      <S.Text>입력하신 이메일로 인증번호 4자리를 전송했어요</S.Text>
       <S.InputWrapper>
         <S.AuthenticationNumberInput type='text' />
         <S.AuthenticationNumberInput />
@@ -23,4 +23,4 @@ function FindPasswordSecondSection() {
   );
 }
 
-export default FindPasswordSecondSection;
+export default SignupSecondSection;

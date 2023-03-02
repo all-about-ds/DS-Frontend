@@ -1,4 +1,4 @@
-import AuthButton from 'components/auth/button';
+import AuthButton from 'components/auth/ui/button';
 import * as S from './style';
 
 function SignupThirdSection() {
