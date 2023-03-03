@@ -7,6 +7,7 @@ import {
   MyPage,
   SigninPage,
   SignupPage,
+  CreateGroupPage,
 } from 'pages';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path='/auth/signup' element={<SignupPage />} />
         <Route path='/auth/findPassword' element={<FindPasswordPage />} />
         <Route path='/my' element={<MyPage />} />
+        <Route path='/group/create' element={<CreateGroupPage />} />
       </Routes>
     </RecoilRoot>
   );
