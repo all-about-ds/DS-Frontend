@@ -9,9 +9,9 @@ function FindPasswordFirstSection() {
         <S.InputTitle>이메일</S.InputTitle>
         <S.Input placeholder='이메일을 입력해주세요' type='text' />
       </S.InputWrapper>
-      <S.Div>
+      <S.Box>
         <AuthButton>완료</AuthButton>
-      </S.Div>
+      </S.Box>
     </S.FirstSectionLayout>
   );
 }
