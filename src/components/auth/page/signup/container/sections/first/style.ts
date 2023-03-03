@@ -5,7 +5,7 @@ export const FirstSectionLayout = styled.section`
 `;
 
 export const InputWrapper = styled.div`
-  width: 16.5vw;
+  width: 18vw;
   min-width: 284px;
   margin: 0 auto 24px;
 `;
