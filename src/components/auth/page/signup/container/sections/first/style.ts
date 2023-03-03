@@ -2,10 +2,12 @@ import styled from '@emotion/styled';
 
 export const FirstSectionLayout = styled.section`
   margin: 2rem 0 -1rem 0;
+  width: 18vw;
+  min-width: 300px;
 `;
 
 export const InputWrapper = styled.div`
-  width: 18vw;
+  width: 100%;
   min-width: 284px;
   margin: 0 auto 24px;
 `;
@@ -36,5 +38,16 @@ export const Input = styled.input`
 
   :focus {
     outline: none;
+  }
+`;
+
+export const Box = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  button {
+    width: 100%;
+    margin: 14.5rem 0 1rem;
   }
 `;
