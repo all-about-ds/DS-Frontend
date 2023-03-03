@@ -52,7 +52,7 @@ export const Input = styled.input`
   }
 `;
 
-export const Div = styled.div`
+export const Box = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
