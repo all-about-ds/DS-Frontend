@@ -14,13 +14,13 @@ export const Text = styled.p`
   color: #acacac;
   text-align: left;
   line-height: 20px;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 `;
 
 export const InputWrapper = styled.div`
   width: 100%;
   min-width: 284px;
-  margin: 0 auto 11.7rem;
+  margin: 0 auto 1.2rem;
 `;
 
 export const InputTitle = styled.p`
@@ -60,5 +60,6 @@ export const Div = styled.div`
 
   button {
     width: 100%;
+    margin-top: 6.4rem;
   }
 `;

@@ -16,9 +16,9 @@ function FindPasswordSecondSection() {
         <p style={{ color: '#7139EA', cursor: 'pointer' }}>재전송</p>
       </S.ResendBox>
       <S.Timer>5: 00</S.Timer>
-      <S.Div>
+      <S.Box>
         <AuthButton>다음</AuthButton>
-      </S.Div>
+      </S.Box>
     </S.SecondSectionLayout>
   );
 }
