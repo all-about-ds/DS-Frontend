@@ -9,7 +9,9 @@ import {
   SignupPage,
   CreateGroupPage,
   MemberSettingPage,
+  EditGroupPage,
 } from 'pages';
+import EditGroup from 'components/group/page/edit';
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
         <Route path='/auth/findPassword' element={<FindPasswordPage />} />
         <Route path='/my' element={<MyPage />} />
         <Route path='/group/create' element={<CreateGroupPage />} />
+        <Route path='/group/edit' element={<EditGroupPage />} />
         <Route path='/group/member' element={<MemberSettingPage />} />
       </Routes>
     </RecoilRoot>
