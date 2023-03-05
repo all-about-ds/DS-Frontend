@@ -13,3 +13,5 @@ export { UpdateNameIcon } from './updateNameIcon';
 export { Photo } from './photo';
 
 export { ArrowUp, ArrowDown } from './arrow';
+
+export { ThreeDot } from './threeDot';
