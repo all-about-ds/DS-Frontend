@@ -26,7 +26,7 @@ function App() {
         <Route path='/group/create' element={<CreateGroupPage />} />
         <Route path='/group/edit' element={<EditGroupPage />} />
         <Route path='/group/member' element={<MemberSettingPage />} />
-        <Route path='/group/information'element={<GroupInformationPage/>}
+        <Route path='/group/information' element={<GroupInformationPage />} />
       </Routes>
     </RecoilRoot>
   );
