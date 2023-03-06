@@ -28,7 +28,7 @@ function Signin() {
       if (localStorage.getItem('token') === null) {
         throw new Error(`No token`);
       }
-
+      toast.success('로그인 성공!');
       navigate('/');
     } catch (e: any) {
       if (e.response.status === 400)

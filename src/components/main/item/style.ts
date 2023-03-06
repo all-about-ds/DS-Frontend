@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from '@emotion/styled/macro';
 
 export const Description = styled.div`
   font-family: 'AppleSDGothicNeoM00';
