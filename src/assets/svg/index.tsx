@@ -17,3 +17,5 @@ export { ArrowUp, ArrowDown } from './arrow';
 export { ThreeDot, PurpleDot } from './threeDot';
 
 export { Lock } from './lock';
+
+export { Exit } from './exit';

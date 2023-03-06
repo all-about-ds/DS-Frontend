@@ -33,11 +33,12 @@ export const GroupBox = styled.div`
   }
 `;
 
-export const Image = styled.div`
+export const Image = styled.div<{ image: string }>`
   width: 300px;
   height: 200px;
   border-radius: 10px;
   margin-bottom: 12px;
+  background: url(${(props) => props.image});
   background-color: #ffffff;
   position: relative;
 `;

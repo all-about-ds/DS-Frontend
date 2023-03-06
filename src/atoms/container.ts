@@ -19,3 +19,8 @@ export const findPasswordCurrentSectionAtom = atom({
   key: 'findPasswordCurrentSection',
   default: 1,
 });
+
+export const groupIsClickedAtom = atom({
+  key: 'groupIsClicked',
+  default: false,
+});
