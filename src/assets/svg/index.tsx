@@ -29,3 +29,7 @@ export { InformationIcon } from './informationIcon';
 export { ChattingIcon } from './chattingIcon';
 
 export { TimerIcon } from './timerIcon';
+
+export { OwnerButton } from './ownerButton';
+
+export { OwnerIcon } from './ownerIcon';
