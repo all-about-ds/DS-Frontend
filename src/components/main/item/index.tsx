@@ -9,7 +9,6 @@ function GroupItem() {
   const [, setGroupIsClicked] = useRecoilState(groupIsClickedAtom);
 
   const onClick = () => {
-    console.log('click');
     setGroupIsClicked(true);
   };
 
