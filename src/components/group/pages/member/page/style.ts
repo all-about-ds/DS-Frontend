@@ -26,32 +26,42 @@ export const TitleText = styled.div`
   margin-bottom: 34px;
 `;
 
-export const UserBox = styled.div`
-  width: 230px;
-  height: 36px;
+export const SubmithButtonBox = styled.div`
+  width: 196px;
+  height: 40px;
   display: flex;
+  justify-content: space-between;
+  position: absolute;
+  margin-top: 899px;
+`;
+
+export const CancelButton = styled.div`
+  background: #2e2e2e;
+  border-radius: 10px;
+  width: 92px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 16px;
-`;
-
-export const UserProfile = styled.div<{ image: string | undefined }>`
-  background: url(${(props) => props.image});
-  background: #d9d9d9;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-`;
-
-export const UserName = styled.div`
-  font-family: 'AppleSDGothicNeoB00';
+  font-family: 'AppleSDGothicNeoSB00';
   font-style: normal;
   font-weight: 400;
-  font-size: 14px;
-  color: #969696;
-  margin-left: 12px;
-  margin-right: 142px;
+  color: #818181;
+  cursor: pointer;
 `;
 
-export const SettingBox = styled.div`
-  position: relative;
+export const SubmitButton = styled.div`
+  background: #7848de;
+  border-radius: 10px;
+  width: 92px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'AppleSDGothicNeoSB00';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  color: #ffffff;
+  cursor: pointer;
 `;
