@@ -35,19 +35,24 @@ function GroupInformation() {
         <I.OwnerIcon />
       </div>
       <S.MemberList>
+        <S.Memeber
+          src='https://newsimg-hams.hankookilbo.com/2022/11/11/dba4d061-b5f9-486f-9bb8-cd09f5f75277.jpg'
+          alt='그룹원 이미지'
+        />
+        <S.Memeber
+          src='https://newsimg-hams.hankookilbo.com/2022/11/11/dba4d061-b5f9-486f-9bb8-cd09f5f75277.jpg'
+          alt='그룹원 이미지'
+        />
         <S.Memeber src='https://newsimg-hams.hankookilbo.com/2022/11/11/dba4d061-b5f9-486f-9bb8-cd09f5f75277.jpg' />
+        <S.Memeber
+          src='https://newsimg-hams.hankookilbo.com/2022/11/11/dba4d061-b5f9-486f-9bb8-cd09f5f75277.jpg'
+          alt='그룹원 이미지'
+        />
         <S.Memeber src='https://newsimg-hams.hankookilbo.com/2022/11/11/dba4d061-b5f9-486f-9bb8-cd09f5f75277.jpg' />
-        <S.Memeber src='https://newsimg-hams.hankookilbo.com/2022/11/11/dba4d061-b5f9-486f-9bb8-cd09f5f75277.jpg' />
-        <S.Memeber src='https://newsimg-hams.hankookilbo.com/2022/11/11/dba4d061-b5f9-486f-9bb8-cd09f5f75277.jpg' />
-        <S.Memeber src='https://newsimg-hams.hankookilbo.com/2022/11/11/dba4d061-b5f9-486f-9bb8-cd09f5f75277.jpg' />
-        <S.Memeber src='https://newsimg-hams.hankookilbo.com/2022/11/11/dba4d061-b5f9-486f-9bb8-cd09f5f75277.jpg' />
-        <S.Memeber src='https://newsimg-hams.hankookilbo.com/2022/11/11/dba4d061-b5f9-486f-9bb8-cd09f5f75277.jpg' />
-        <S.Memeber src='https://newsimg-hams.hankookilbo.com/2022/11/11/dba4d061-b5f9-486f-9bb8-cd09f5f75277.jpg' />
-        <S.Memeber src='https://newsimg-hams.hankookilbo.com/2022/11/11/dba4d061-b5f9-486f-9bb8-cd09f5f75277.jpg' />
-        <S.Memeber src='https://newsimg-hams.hankookilbo.com/2022/11/11/dba4d061-b5f9-486f-9bb8-cd09f5f75277.jpg' />
-        <S.Memeber src='https://newsimg-hams.hankookilbo.com/2022/11/11/dba4d061-b5f9-486f-9bb8-cd09f5f75277.jpg' />
-        <S.Memeber src='https://newsimg-hams.hankookilbo.com/2022/11/11/dba4d061-b5f9-486f-9bb8-cd09f5f75277.jpg' />
-        <S.Memeber src='https://newsimg-hams.hankookilbo.com/2022/11/11/dba4d061-b5f9-486f-9bb8-cd09f5f75277.jpg' />
+        <S.Memeber
+          src='https://newsimg-hams.hankookilbo.com/2022/11/11/dba4d061-b5f9-486f-9bb8-cd09f5f75277.jpg'
+          alt='그룹원 이미지'
+        />
       </S.MemberList>
       {isOwner && <S.RemoveGroupButton>그룹삭제</S.RemoveGroupButton>}
     </S.GroupInformationPageLayout>
