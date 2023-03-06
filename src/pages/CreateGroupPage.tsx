@@ -1,4 +1,4 @@
-import CreateGroup from 'components/group/page/create';
+import CreateGroup from 'components/group/pages/create';
 
 function CreateGroupPage() {
   return <CreateGroup />;
