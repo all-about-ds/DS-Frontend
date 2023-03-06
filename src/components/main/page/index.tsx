@@ -1,13 +1,17 @@
+import { groupIsClickedAtom } from 'atoms/container';
 import Header from 'components/common/header';
 import CenterAlignmentLayout from 'components/common/layout/align/center';
 import MainFrame from 'components/frame/main';
+import MainModal from 'components/modals/main';
 import React, { useState } from 'react';
+import { useRecoilState } from 'recoil';
 import GroupItem from '../item';
 import * as S from './style';
 
 function Main() {
   const [byPopularity, setByPopularity] = useState<boolean>(true);
   const [byLatest, setByLatest] = useState<boolean>(false);
+  const [groupIsClicked] = useRecoilState(groupIsClickedAtom);
 
   const sortButton = (type: string) => {
     if (type === '인기') {
@@ -21,6 +25,7 @@ function Main() {
 
   return (
     <>
+      {groupIsClicked && <MainModal />}
       <Header />
       <CenterAlignmentLayout>
         <MainFrame>

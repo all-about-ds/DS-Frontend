@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as S from './style';
+import * as I from '../../../assets/svg';
+import { useRecoilState } from 'recoil';
+import { groupIsClickedAtom } from 'atoms/container';
 
 function GroupItem() {
+  const [isLocked] = useState<boolean>(false);
+  const [, setGroupIsClicked] = useRecoilState(groupIsClickedAtom);
+
+  const onClick = () => {
+    setGroupIsClicked(true);
+  };
+
   return (
     <>
-      <S.GroupBox>
-        <S.Image />
+      <S.GroupBox onClick={onClick}>
+        <S.Image image=''>
+          {isLocked && (
+            <S.LockBox>
+              <I.Lock />
+            </S.LockBox>
+          )}
+        </S.Image>
         <S.MaxPeople>정원 20명</S.MaxPeople>
         <S.Title>광주소프트웨어마이스터고등학교</S.Title>
         <S.Description>
