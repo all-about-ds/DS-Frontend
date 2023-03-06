@@ -31,9 +31,12 @@ function Signin() {
       toast.success('로그인 성공!');
       navigate('/');
     } catch (e: any) {
-      if (e.response.status === 400)
+      if (e.response.status === 400) {
         toast.error('유효하지 않는 비밀번호입니다!');
-      if (e.response.status === 404) toast.error('존재하지 않는 이메일입니다!');
+      }
+      if (e.response.status === 404) {
+        toast.error('존재하지 않는 이메일입니다!');
+      }
       console.log(e);
     }
   };
