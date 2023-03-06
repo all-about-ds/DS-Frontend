@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const GroupPageHeader = styled.div`
+export const GroupPageHeader = styled.header`
   width: 100%;
   display: flex;
   justify-content: space-between;

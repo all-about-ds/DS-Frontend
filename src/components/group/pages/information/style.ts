@@ -10,7 +10,7 @@ export const GroupImage = styled.img`
   border-radius: 10px;
 `;
 
-export const TitleBox = styled.div`
+export const TitleBox = styled.section`
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -21,7 +21,7 @@ export const TitleBox = styled.div`
   }
 `;
 
-export const Title = styled.p`
+export const Title = styled.h1`
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
@@ -29,7 +29,7 @@ export const Title = styled.p`
   color: #f1f1f1;
 `;
 
-export const Description = styled.p`
+export const Description = styled.article`
   width: 100%;
   font-style: normal;
   font-weight: 400;
@@ -47,11 +47,11 @@ export const Line = styled.div`
   margin: 2.5rem 0 1.25rem;
 `;
 
-export const TextMembersBox = styled.div`
+export const TextMembersBox = styled.section`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 `;
 
 export const TextMembers = styled.p`
@@ -61,7 +61,7 @@ export const TextMembers = styled.p`
   color: #f1f1f1;
 `;
 
-export const MemberList = styled.div`
+export const MemberList = styled.section`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
