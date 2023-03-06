@@ -1,7 +1,6 @@
 import { createAxios } from 'libs/createAxios';
 import { getAuth } from 'libs/getUrl';
 import { LoginInterface } from 'types/auth.type';
-import tokenService from 'utils/tokenService';
 
 class Auth {
   signin(data: LoginInterface) {

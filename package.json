@@ -20,16 +20,15 @@
     "@emotion/styled": "^11.10.5",
     "@types/axios": "^0.14.0",
     "@types/recoil": "^0.0.9",
-    "@types/styled-components": "^5.1.26",
     "axios": "^1.2.2",
     "dotenv": "^16.0.3",
     "emotion-reset": "^3.0.1",
     "react-hook-form": "^7.43.0",
     "react-router-dom": "^6.7.0",
     "react-scripts": "^5.0.1",
+    "react-toastify": "^9.1.1",
     "recoil": "^0.7.6",
-    "recoil-persist": "^4.2.0",
-    "styled-components": "^5.3.6"
+    "recoil-persist": "^4.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
