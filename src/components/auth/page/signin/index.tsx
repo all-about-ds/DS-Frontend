@@ -8,6 +8,7 @@ import { LoginInterface } from 'types/auth.type';
 import auth from 'api/auth';
 import { useNavigate } from 'react-router-dom';
 import tokenService from 'utils/tokenService';
+import { toast } from 'react-toastify';
 
 function Signin() {
   const navigate = useNavigate();
@@ -21,13 +22,18 @@ function Signin() {
   const onValid = async (data: LoginInterface) => {
     try {
       setError(false);
+
       const response: any = await auth.signin(data);
       tokenService.setUser(response.data);
       if (localStorage.getItem('token') === null) {
         throw new Error(`No token`);
       }
+
       navigate('/');
-    } catch (e) {
+    } catch (e: any) {
+      if (e.response.status === 400)
+        toast.error('유효하지 않는 비밀번호입니다!');
+      if (e.response.status === 404) toast.error('존재하지 않는 이메일입니다!');
       console.log(e);
     }
   };

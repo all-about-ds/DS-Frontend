@@ -11,10 +11,17 @@ import {
   MemberSettingPage,
   EditGroupPage,
 } from 'pages';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
     <RecoilRoot>
+      <ToastContainer
+        position='top-right'
+        closeButton={false}
+        autoClose={600}
+      />
       <GlobalStyle />
       <Routes>
         <Route path='/' element={<MainPage />} />
