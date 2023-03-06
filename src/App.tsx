@@ -11,7 +11,6 @@ import {
   MemberSettingPage,
   EditGroupPage,
 } from 'pages';
-import EditGroup from 'components/group/page/edit';
 
 function App() {
   return (

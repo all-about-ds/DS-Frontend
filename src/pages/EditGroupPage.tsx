@@ -1,4 +1,4 @@
-import EditGroup from 'components/group/page/edit';
+import EditGroup from 'components/group/pages/edit';
 
 function EditGroupPage() {
   return <EditGroup></EditGroup>;

@@ -31,6 +31,7 @@ export const UserBox = styled.div`
   height: 36px;
   display: flex;
   align-items: center;
+  margin-bottom: 16px;
 `;
 
 export const UserProfile = styled.div<{ image: string | undefined }>`

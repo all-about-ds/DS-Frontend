@@ -1,4 +1,4 @@
-import MemberSetting from 'components/group/page/member';
+import MemberSetting from 'components/group/pages/member/page';
 
 function MemberSettingPage() {
   return <MemberSetting></MemberSetting>;

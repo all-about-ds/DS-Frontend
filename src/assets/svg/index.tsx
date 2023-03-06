@@ -14,4 +14,4 @@ export { Photo } from './photo';
 
 export { ArrowUp, ArrowDown } from './arrow';
 
-export { ThreeDot } from './threeDot';
+export { ThreeDot, PurpleDot } from './threeDot';
