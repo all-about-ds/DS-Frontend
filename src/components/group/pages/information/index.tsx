@@ -1,23 +1,14 @@
 import * as S from './style';
 import * as I from 'assets/svg';
 import { useState } from 'react';
+import GroupPageHeader from 'components/group/ui/groupPageHeader';
 
 function GroupInformation() {
   const [isOwner, setIsOwner] = useState<boolean>(false);
 
   return (
     <S.GroupInformationPageLayout>
-      <S.GroupPageHeader>
-        <S.Elements>
-          <I.BackButton />
-        </S.Elements>
-        <S.Elements>
-          <I.ChattingIcon />
-          <I.TimerIcon />
-          <I.FaceTimeIcon />
-          <I.InformationIcon />
-        </S.Elements>
-      </S.GroupPageHeader>
+      <GroupPageHeader />
       <S.GroupImage src='https://mblogthumb-phinf.pstatic.net/MjAxNzA0MTlfMTM1/MDAxNDkyNTQ0OTExODU2.O_zowy-4bYAqqjN0X-muG2w0Y5yCcS2ohYhSkiZwzC0g.GHDfrpt_xE8Wo_qhTOtfupeVs04Zb3DzHWT7BPF4Xccg.JPEG.badpark/1920X1080-06.jpg?type=w800' />
       <S.TitleBox>
         <S.Title>그냥 공부하는 방</S.Title>

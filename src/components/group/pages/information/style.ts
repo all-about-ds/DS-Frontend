@@ -5,22 +5,6 @@ export const GroupInformationPageLayout = styled.section`
   margin: auto;
 `;
 
-export const GroupPageHeader = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  margin: 2rem 0 1rem;
-`;
-
-export const Elements = styled.div`
-  display: flex;
-  gap: 16px;
-
-  & > svg {
-    cursor: pointer;
-  }
-`;
-
 export const GroupImage = styled.img`
   width: 100%;
   border-radius: 10px;
