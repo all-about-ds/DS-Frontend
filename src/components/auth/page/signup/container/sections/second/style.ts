@@ -62,7 +62,7 @@ export const Timer = styled.p`
   font-size: 12px;
   text-align: center;
   color: #efefef;
-  margin-bottom: 9.1rem;
+  margin-bottom: 10.1rem;
 `;
 
 export const Div = styled.div`

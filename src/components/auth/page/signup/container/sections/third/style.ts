@@ -60,6 +60,6 @@ export const Div = styled.div`
 
   button {
     width: 100%;
-    margin-top: 6.4rem;
+    margin-top: 7.4rem;
   }
 `;
