@@ -41,6 +41,12 @@ export const Input = styled.input`
   }
 `;
 
+export const Description = styled.article`
+  text-align: center;
+  color: white;
+  margin-top: 7rem;
+`;
+
 export const Box = styled.div`
   display: flex;
   align-items: center;
@@ -48,6 +54,6 @@ export const Box = styled.div`
 
   button {
     width: 100%;
-    margin: 14.5rem 0 1rem;
+    margin: 8.5rem 0 1rem;
   }
 `;
