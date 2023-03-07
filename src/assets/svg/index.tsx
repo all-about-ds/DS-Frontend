@@ -19,3 +19,7 @@ export { ThreeDot, PurpleDot } from './threeDot';
 export { Lock } from './lock';
 
 export { Exit } from './exit';
+
+export { AuthGoBackIcon } from './authGoBackIcon';
+
+export { AuthExitIcon } from './authExitIcon';
