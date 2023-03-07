@@ -9,7 +9,10 @@ function GroupInformation() {
   return (
     <S.GroupInformationPageLayout>
       <GroupPageHeader />
-      <S.GroupImage src='https://mblogthumb-phinf.pstatic.net/MjAxNzA0MTlfMTM1/MDAxNDkyNTQ0OTExODU2.O_zowy-4bYAqqjN0X-muG2w0Y5yCcS2ohYhSkiZwzC0g.GHDfrpt_xE8Wo_qhTOtfupeVs04Zb3DzHWT7BPF4Xccg.JPEG.badpark/1920X1080-06.jpg?type=w800' />
+      <S.GroupImage
+        src='https://mblogthumb-phinf.pstatic.net/MjAxNzA0MTlfMTM1/MDAxNDkyNTQ0OTExODU2.O_zowy-4bYAqqjN0X-muG2w0Y5yCcS2ohYhSkiZwzC0g.GHDfrpt_xE8Wo_qhTOtfupeVs04Zb3DzHWT7BPF4Xccg.JPEG.badpark/1920X1080-06.jpg?type=w800'
+        alt='그룹 이미지'
+      />
       <S.TitleBox>
         <S.Title>그냥 공부하는 방</S.Title>
         {isOwner && <I.OwnerButton />}
