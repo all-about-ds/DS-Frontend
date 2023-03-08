@@ -6,7 +6,7 @@ export const DescWrapper = styled.div`
   display: flex;
   background: #1c1c1c;
   border-radius: 10px;
-  margin: 28px 0 1.22vh;
+  margin: 18px 0 1.22vh;
 `;
 
 export const IconBox = styled.div`
