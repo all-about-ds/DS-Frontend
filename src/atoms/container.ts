@@ -1,4 +1,6 @@
 import { atom } from 'recoil';
+import { recoilPersist } from 'recoil-persist';
+const { persistAtom } = recoilPersist();
 
 export const dummyAtom = atom({
   key: 'dummy',
@@ -8,6 +10,7 @@ export const dummyAtom = atom({
 export const signupCurrentSectionAtom = atom({
   key: 'signupCurrentSection',
   default: 1,
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const signupEmailDuplicationModalAtom = atom({
@@ -23,4 +26,13 @@ export const findPasswordCurrentSectionAtom = atom({
 export const groupIsClickedAtom = atom({
   key: 'groupIsClicked',
   default: false,
+});
+
+export const timerAtom = atom({
+  key: 'timer',
+  default: {
+    minute: 5,
+    seconds: 0,
+  },
+  effects_UNSTABLE: [persistAtom],
 });
