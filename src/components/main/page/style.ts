@@ -7,10 +7,11 @@ export const SortButtonWrapper = styled.div`
   justify-content: space-between;
   //margin-left: 24px;
 `;
-export const SortButton = styled.div`
+export const SortButton = styled.div<{ byPopularity: boolean }>`
   font-weight: 400;
   font-size: 15px;
-  color: rgba(255, 255, 255, 0.4);
+  color: ${(props) =>
+    props.byPopularity ? '#ffffff' : 'rgba(255, 255, 255, 0.4)'};
   cursor: pointer;
 `;
 

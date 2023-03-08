@@ -38,10 +38,10 @@ export const InputWrapper = styled.div`
   margin-top: 2.08vh;
 `;
 
-export const InputText = styled.p`
+export const InputText = styled.p<{ isError: boolean }>`
   font-weight: 400;
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.9);
+  color: ${(props) => (props.isError ? '#EE3939' : 'rgba(255, 255, 255, 0.9)')};
   margin: 0 0 10px 8px;
 `;
 
@@ -49,10 +49,11 @@ export const InputBox = styled.input<{ isError: boolean }>`
   width: 15.5vw;
   min-width: 266px;
   height: 40px;
-  background: #232323;
   border-radius: 10px;
   color: rgba(255, 255, 255, 0.9);
   padding-left: 16px;
+  border: ${(props) => (props.isError ? '1px solid #EE3939' : 'none')};
+  background: ${(props) => (props.isError ? '#412626' : '#232323')};
 
   ::placeholder {
     color: ${(props) =>
@@ -60,7 +61,7 @@ export const InputBox = styled.input<{ isError: boolean }>`
   }
 `;
 
-export const Button = styled.button`
+export const Button = styled.button<{ isError: boolean }>`
   width: 16.5vw;
   min-width: 284px;
   height: 40px;
@@ -74,6 +75,7 @@ export const Button = styled.button`
   font-size: 15px;
   color: #ffffff;
   cursor: pointer;
+  margin-top: ${(props) => (props.isError ? '7.5vh' : '10.32vh')};
 
   &:hover {
     border: 1px solid #7848de;
