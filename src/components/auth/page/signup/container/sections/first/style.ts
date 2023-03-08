@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const FirstSectionLayout = styled.section`
+export const FirstSectionLayout = styled.form`
   margin: 2rem 0 -1rem 0;
   width: 18vw;
   min-width: 300px;
@@ -56,4 +56,12 @@ export const Box = styled.div`
     width: 100%;
     margin: 8.5rem 0 1rem;
   }
+`;
+
+export const ErrorText = styled.p<{ isError: boolean }>`
+  display: ${(e) => (e.isError ? 'block' : 'none')};
+  color: #ee3939;
+  font-size: 13px;
+  text-align: center;
+  margin-bottom: -1.9rem;
 `;
