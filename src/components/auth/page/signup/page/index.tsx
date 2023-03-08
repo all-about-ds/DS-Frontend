@@ -38,10 +38,7 @@ function Signup() {
       {signupEmailDuplicationModal && <SignupEmailDuplicationModal />}
       <Header />
       <CenterAlignmentLayout>
-        <AuthFrame
-          title='회원가입'
-          progressBar={{ need: true, value: progress }}
-        >
+        <AuthFrame title='회원가입' progressBarValue={progress}>
           <SignupSectionContainer />
           <S.GoLoginBox>
             <p>기존 회원이신가요?</p>

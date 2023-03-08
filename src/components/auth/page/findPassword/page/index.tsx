@@ -31,10 +31,7 @@ function FindPassword() {
     <>
       <Header />
       <CenterAlignmentLayout>
-        <AuthFrame
-          title='비밀번호 찾기'
-          progressBar={{ need: true, value: progress }}
-        >
+        <AuthFrame title='비밀번호 찾기' progressBarValue={progress}>
           <FindPasswordSectionContainer />
         </AuthFrame>
       </CenterAlignmentLayout>

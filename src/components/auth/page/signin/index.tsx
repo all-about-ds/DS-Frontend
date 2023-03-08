@@ -49,9 +49,8 @@ function Signin() {
   return (
     <>
       <Header />
-
       <CenterAlignmentLayout>
-        <AuthFrame title='로그인' progressBar={{ need: false, value: 0 }}>
+        <AuthFrame title='로그인'>
           <S.DescWrapper>
             <S.IconBox>😎</S.IconBox>
             <S.DescText>
