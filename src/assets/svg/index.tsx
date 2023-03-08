@@ -19,3 +19,17 @@ export { ThreeDot, PurpleDot } from './threeDot';
 export { Lock } from './lock';
 
 export { Exit } from './exit';
+
+export { BackButton } from './backButton';
+
+export { FaceTimeIcon } from './faceTimeIcon';
+
+export { InformationIcon } from './informationIcon';
+
+export { ChattingIcon } from './chattingIcon';
+
+export { TimerIcon } from './timerIcon';
+
+export { OwnerButton } from './ownerButton';
+
+export { OwnerIcon } from './ownerIcon';
