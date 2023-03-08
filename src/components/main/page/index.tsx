@@ -8,7 +8,7 @@ import { useRecoilState } from 'recoil';
 import GroupItem from '../item';
 import * as S from './style';
 import group from 'api/group';
-import { GroupContents, GroupType } from 'types/group.type';
+import { GroupType } from 'types/group.type';
 
 function Main() {
   const observerTargetEl = useRef<HTMLDivElement>(null);
@@ -17,13 +17,8 @@ function Main() {
   const [loaded, setLoaded] = useState<boolean>(true);
   const [byPopularity, setByPopularity] = useState<boolean>(true);
   const [byLatest, setByLatest] = useState<boolean>(false);
-  const [groupContents, setGroupContents] = useState<GroupContents[]>([]);
   const [list, setList] = useState<GroupType[]>([]);
   const [groupIsClicked] = useRecoilState(groupIsClickedAtom);
-
-  useEffect(() => {
-    console.log(groupContents);
-  }, [groupContents]);
 
   const sortButton = (type: string) => {
     if (type === '인기') {
@@ -43,10 +38,11 @@ function Main() {
         page: page.current,
         size: 8,
       });
-      console.log(response.data);
+
       setHasNextPage(response.data.groups.length === 8);
       setList((prevPosts) => [...prevPosts, ...response.data.groups]);
       setLoaded(true);
+
       if (response.data.groups.length) {
         page.current += 1;
       }
