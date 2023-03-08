@@ -22,7 +22,7 @@ export const TopBox = styled.div`
   margin-top: 40px;
   align-items: center;
 
-  & > svg {
+  & > div > svg {
     cursor: pointer;
   }
 `;
@@ -31,6 +31,7 @@ export const AuthText = styled.h1`
   font-weight: 400;
   font-size: 24px;
   color: #ffffff;
+  margin-left: 3px;
 `;
 
 export const LoginText = styled.h1`
