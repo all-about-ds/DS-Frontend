@@ -31,7 +31,7 @@ export const AuthText = styled.h1`
   font-weight: 400;
   font-size: 24px;
   color: #ffffff;
-  margin-left: 3px;
+  margin-left: 13px;
 `;
 
 export const LoginText = styled.h1`
