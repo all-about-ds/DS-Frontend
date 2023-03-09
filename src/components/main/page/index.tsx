@@ -7,6 +7,8 @@ import GroupItem from '../item';
 import * as S from './style';
 import group from 'api/group';
 import { GroupType } from 'types/group.type';
+import { useRecoilState } from 'recoil';
+import { groupIsClickedAtom } from 'atoms';
 
 function Main() {
   const observerTargetEl = useRef<HTMLDivElement>(null);
@@ -17,6 +19,8 @@ function Main() {
   const [, setByLatest] = useState<boolean>(false);
   const [list, setList] = useState<GroupType[]>([]);
   const [modalData, setModalData] = useState<GroupType>();
+  const [groupIsClicked, setGroupIsClicked] =
+    useRecoilState(groupIsClickedAtom);
 
   const sortButton = (type: string) => {
     if (type === '인기') {
@@ -30,6 +34,7 @@ function Main() {
 
   const groupClick = (props: GroupType) => {
     setModalData(props);
+    setGroupIsClicked(true);
   };
 
   const getDiaryList = useCallback(async () => {
@@ -69,7 +74,7 @@ function Main() {
 
   return (
     <>
-      {modalData && <MainModal GroupProps={modalData} />}
+      {groupIsClicked && <MainModal GroupProps={modalData} />}
       <Header />
       <CenterAlignmentLayout>
         <MainFrame>

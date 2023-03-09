@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router';
 import { GroupType } from 'types/group.type';
 
 interface GroupProps {
-  GroupProps: GroupType;
+  GroupProps: GroupType | undefined;
 }
 
 function MainModal(props: GroupProps) {
@@ -15,7 +15,7 @@ function MainModal(props: GroupProps) {
   const navigate = useNavigate();
 
   const onClick = () => {
-    if (props.GroupProps.secret) {
+    if (props.GroupProps?.secret) {
       // 모달 바꿈
     } else {
       //
@@ -25,7 +25,7 @@ function MainModal(props: GroupProps) {
   return (
     <ModalLayout setModal={setGroupIsClicked}>
       <S.GroupIsClickedModal onClick={(e) => e.stopPropagation()}>
-        <S.Image image={props.GroupProps.groupImg}>
+        <S.Image image={props.GroupProps?.groupImg}>
           <S.LockBox>
             <I.Lock />
           </S.LockBox>
@@ -35,15 +35,15 @@ function MainModal(props: GroupProps) {
         </S.Image>
         <S.ContentWrapper>
           <S.memberNum>
-            정원 {props.GroupProps.groupMemberCount}/
-            {props.GroupProps.groupMaxCount}명
+            정원 {props.GroupProps?.groupMemberCount}/
+            {props.GroupProps?.groupMaxCount}명
           </S.memberNum>
-          <S.Title>{props.GroupProps.groupName}</S.Title>
+          <S.Title>{props.GroupProps?.groupName}</S.Title>
           <S.UserBox>
-            <S.Profile image={props.GroupProps.groupLeaderImg} />
-            <S.UserName>{props.GroupProps.groupLeaderName}</S.UserName>
+            <S.Profile image={props.GroupProps?.groupLeaderImg} />
+            <S.UserName>{props.GroupProps?.groupLeaderName}</S.UserName>
           </S.UserBox>
-          <S.Description>{props.GroupProps.groupDescription}</S.Description>
+          <S.Description>{props.GroupProps?.groupDescription}</S.Description>
           <S.JoinButton onClick={onClick}>가입</S.JoinButton>
         </S.ContentWrapper>
       </S.GroupIsClickedModal>
