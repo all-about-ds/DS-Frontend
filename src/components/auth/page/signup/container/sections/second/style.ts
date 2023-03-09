@@ -16,12 +16,17 @@ export const Text = styled.p`
   margin-bottom: 3rem;
 `;
 
-export const NumberForm = styled.form`
+export const NumberForm = styled.form<{ isError: string }>`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
   gap: 10px;
   margin-bottom: 1.2rem;
+
+  & > input {
+    border: ${(e) => (e.isError ? '1px solid #EE3939' : 'none')};
+    background: ${(e) => (e.isError ? '#412626' : '#232323')};
+  }
 `;
 
 export const AuthenticationNumberInput = styled.input`
@@ -78,4 +83,12 @@ export const Div = styled.div`
   button {
     width: 100%;
   }
+`;
+
+export const ErrorText = styled.p<{ isError: string }>`
+  display: ${(e) => (e.isError ? 'block' : 'none')};
+  color: #ee3939;
+  font-size: 13px;
+  text-align: center;
+  margin-bottom: -1.9rem;
 `;
