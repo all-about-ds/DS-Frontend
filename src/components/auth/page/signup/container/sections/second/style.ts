@@ -64,14 +64,14 @@ export const ResendBox = styled.div`
   margin-bottom: 1rem;
 `;
 
-export const Timer = styled.p`
+export const Timer = styled.p<{ isError: string }>`
   font-family: 'AppleSDGothicNeoM00';
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
   text-align: center;
   color: #efefef;
-  margin-bottom: 9.6rem;
+  margin-bottom: ${(e) => (e.isError ? '3rem' : '9.6rem')};
 `;
 
 export const Box = styled.div`
@@ -90,5 +90,5 @@ export const ErrorText = styled.p<{ isError: string }>`
   color: #ee3939;
   font-size: 13px;
   text-align: center;
-  margin-bottom: -1.9rem;
+  margin-bottom: 5.5rem;
 `;
