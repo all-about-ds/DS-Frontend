@@ -1,4 +1,8 @@
-import { groupIsClickedAtom } from 'atoms/container';
+import {
+  groupIndexAtom,
+  groupIsClickedAtom,
+  groupPasswordModalAtom,
+} from 'atoms/container';
 import ModalLayout from 'components/common/layout/modal';
 import { useRecoilState } from 'recoil';
 import * as S from './style';
@@ -6,6 +10,7 @@ import * as I from '../../../../assets/svg';
 import { useNavigate } from 'react-router';
 import { GroupType } from 'types/group.type';
 import { useState } from 'react';
+import PasswordModal from '../passwordCheck';
 
 interface GroupProps {
   GroupProps: GroupType | undefined;
@@ -13,20 +18,23 @@ interface GroupProps {
 
 function MainModal(props: GroupProps) {
   const [, setGroupIsClicked] = useRecoilState(groupIsClickedAtom);
-  const [isSecret, setIsSecret] = useState<boolean>(false);
+  const [groupPasswordModal, setGroupPasswordModal] = useRecoilState(
+    groupPasswordModalAtom
+  );
+  const [, setIndex] = useRecoilState(groupIndexAtom);
   const navigate = useNavigate();
 
   const onClick = () => {
     if (props.GroupProps?.secret) {
-      setIsSecret(true);
-      console.log(props.GroupProps?.idx);
+      setIndex(props.GroupProps.idx);
+      setGroupIsClicked(false);
+      setGroupPasswordModal(true);
     }
     // 요청 넣기
   };
 
   return (
     <>
-      {isSecret && <></>}
       <ModalLayout setModal={setGroupIsClicked}>
         <S.GroupIsClickedModal onClick={(e) => e.stopPropagation()}>
           <S.Image image={props.GroupProps?.groupImg}>

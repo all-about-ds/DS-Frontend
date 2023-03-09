@@ -9,6 +9,8 @@ import group from 'api/group';
 import { GroupType } from 'types/group.type';
 import { useRecoilState } from 'recoil';
 import { groupIsClickedAtom } from 'atoms';
+import { groupIndexAtom, groupPasswordModalAtom } from 'atoms/container';
+import PasswordModal from 'components/modals/main/passwordCheck';
 
 function Main() {
   const observerTargetEl = useRef<HTMLDivElement>(null);
@@ -21,6 +23,8 @@ function Main() {
   const [modalData, setModalData] = useState<GroupType>();
   const [groupIsClicked, setGroupIsClicked] =
     useRecoilState(groupIsClickedAtom);
+  const [groupPassword] = useRecoilState(groupPasswordModalAtom);
+  const [index] = useRecoilState(groupIndexAtom);
 
   const sortButton = (type: string) => {
     if (type === '인기') {
@@ -73,6 +77,7 @@ function Main() {
 
   return (
     <>
+      {groupPassword && <PasswordModal index={index} />}
       {groupIsClicked && <MainModal GroupProps={modalData} />}
       <Header />
       <CenterAlignmentLayout>

@@ -29,3 +29,7 @@ export interface GroupType {
   groupLeaderName: string;
   secret: boolean;
 }
+
+export type PasswordType = {
+  password: string | undefined;
+};

@@ -24,3 +24,13 @@ export const groupIsClickedAtom = atom({
   key: 'groupIsClicked',
   default: false,
 });
+
+export const groupPasswordModalAtom = atom({
+  key: 'groupPasswordAtom',
+  default: false,
+});
+
+export const groupIndexAtom = atom({
+  key: 'gruopIndex',
+  default: 0,
+});
