@@ -1,13 +1,18 @@
-import { timerAtom } from 'atoms';
+import { signupCurrentSectionAtom, signupDataAtom, timerAtom } from 'atoms';
 import AuthButton from 'components/auth/ui/button';
+import auth from 'api/auth';
 import { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useResetRecoilState } from 'recoil';
 import * as S from './style';
+import { toast } from 'react-toastify';
 
 function SignupSecondSection() {
   const [timer, setTimer] = useRecoilState(timerAtom);
-  const [inputs, setInputs] = useState(['', '', '', '']);
+  const [inputs, setInputs] = useState<string[]>(['', '', '', '']);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [_, setSignupCurrentSection] = useRecoilState(signupCurrentSectionAtom);
+  const resetTimer = useResetRecoilState(timerAtom);
+  const [signupData, __] = useRecoilState(signupDataAtom);
 
   const handleChange = (index: number, value: string) => {
     const newInputs = [...inputs];
@@ -52,8 +57,29 @@ function SignupSecondSection() {
     return () => clearInterval(countdown);
   }, [timer]);
 
-  const checkAuthenticationNumber = () => {
-    console.log();
+  const checkAuthenticationNumber = async () => {
+    try {
+      let code = '';
+      inputs.forEach(function (currentvalue) {
+        code += currentvalue;
+      });
+      await auth.checkAuthenticationNumber(signupData.email, code);
+      setSignupCurrentSection(3);
+    } catch {
+      setErrorMessage('거부된 인증번호 입니다');
+    }
+  };
+
+  const resend = async () => {
+    resetTimer();
+    setErrorMessage('');
+
+    try {
+      await auth.sendAuthenticationNumber('');
+      toast.success('인증번호를 재전송 했어요');
+    } catch {
+      throw new Error('알 수 없는 에러입니다.');
+    }
   };
 
   return (
@@ -75,9 +101,11 @@ function SignupSecondSection() {
       </S.NumberForm>
       <S.ResendBox>
         <p>인증번호가 오지않았나요?</p>
-        <p style={{ color: '#7139EA', cursor: 'pointer' }}>재전송</p>
+        <p style={{ color: '#7139EA', cursor: 'pointer' }} onClick={resend}>
+          재전송
+        </p>
       </S.ResendBox>
-      <S.Timer>
+      <S.Timer isError={errorMessage}>
         {timer.minute}:
         {timer.seconds < 10 ? `0${timer.seconds}` : timer.seconds}
       </S.Timer>
