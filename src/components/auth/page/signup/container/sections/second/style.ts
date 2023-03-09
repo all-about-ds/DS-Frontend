@@ -33,8 +33,12 @@ export const AuthenticationNumberInput = styled.input`
   padding: 0;
   text-align: center;
   color: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease;
 
   :focus {
+    transform: scale(1.1);
+    border-color: blue;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     outline: none;
   }
 `;

@@ -35,7 +35,7 @@ function SignupSecondSection() {
   }, [timer]);
 
   const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
-    if (e.key === 'Enter' || e.currentTarget.value.length === 1) {
+    if (e.key !== 'Backspace' && e.currentTarget.value.length === 1) {
       switch (e.currentTarget.name) {
         case 'input1':
           input2.current?.focus();
@@ -65,6 +65,7 @@ function SignupSecondSection() {
           maxLength={1}
           ref={input1}
           onKeyDown={handleKeyDown}
+          autoFocus
         />
         <S.AuthenticationNumberInput
           name={'input2'}
