@@ -1,5 +1,6 @@
 import { atom } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
+import { SignupInterface } from 'types/auth.type';
 const { persistAtom } = recoilPersist();
 
 export const dummyAtom = atom({
@@ -26,6 +27,15 @@ export const findPasswordCurrentSectionAtom = atom({
 export const groupIsClickedAtom = atom({
   key: 'groupIsClicked',
   default: false,
+});
+
+export const signupDataAtom = atom<SignupInterface>({
+  key: 'signupData',
+  default: {
+    name: '',
+    email: '',
+    password: '',
+  },
 });
 
 export const timerAtom = atom({
