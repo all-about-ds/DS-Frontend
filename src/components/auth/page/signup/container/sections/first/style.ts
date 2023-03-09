@@ -63,5 +63,5 @@ export const ErrorText = styled.p<{ isError: boolean }>`
   color: #ee3939;
   font-size: 13px;
   text-align: center;
-  margin-bottom: -1.9rem;
+  margin-bottom: -2.2rem;
 `;
