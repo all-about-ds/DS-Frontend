@@ -31,6 +31,21 @@ class Auth {
       return error;
     }
   }
+
+  checkAuthenticationNumber(email: string, code: string) {
+    try {
+      return createAxios({
+        method: 'GET',
+        url: getAuth.checkAuthenticationNumber(),
+        params: {
+          email: email,
+          code: code,
+        },
+      });
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
 export default new Auth();

@@ -9,6 +9,10 @@ export const getAuth = {
     return 'auth/email';
   },
 
+  checkAuthenticationNumber: () => {
+    return 'auth/code';
+  },
+
   tokenReissuance: () => {
     return REACT_APP_BASE_URL + 'auth/refresh';
   },
