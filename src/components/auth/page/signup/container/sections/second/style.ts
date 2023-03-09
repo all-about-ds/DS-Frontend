@@ -74,7 +74,7 @@ export const Timer = styled.p`
   margin-bottom: 9.6rem;
 `;
 
-export const Div = styled.div`
+export const Box = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

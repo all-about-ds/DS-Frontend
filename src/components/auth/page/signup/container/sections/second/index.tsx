@@ -82,9 +82,9 @@ function SignupSecondSection() {
         {timer.seconds < 10 ? `0${timer.seconds}` : timer.seconds}
       </S.Timer>
       <S.ErrorText isError={errorMessage}>{errorMessage}</S.ErrorText>
-      <S.Div>
+      <S.Box>
         <AuthButton onClick={checkAuthenticationNumber}>다음</AuthButton>
-      </S.Div>
+      </S.Box>
     </S.SecondSectionLayout>
   );
 }
