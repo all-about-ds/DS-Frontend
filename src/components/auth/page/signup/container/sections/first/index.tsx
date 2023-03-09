@@ -1,14 +1,15 @@
-import { signupCurrentSectionAtom } from 'atoms';
+import { signupCurrentSectionAtom, timerAtom } from 'atoms';
 import AuthButton from 'components/auth/ui/button';
 import AuthInput from 'components/auth/ui/input';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useResetRecoilState } from 'recoil';
 import * as S from './style';
 
 function SignupFirstSection() {
   const [isError, setIsError] = useState<boolean>(false);
   const [_, setSignupCurrentSection] = useRecoilState(signupCurrentSectionAtom);
+  const resetTimer = useResetRecoilState(timerAtom);
 
   const {
     register,
@@ -17,6 +18,7 @@ function SignupFirstSection() {
   } = useForm<{ email: string }>();
 
   const onValid = () => {
+    resetTimer();
     setSignupCurrentSection(2);
   };
 
