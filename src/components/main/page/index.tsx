@@ -1,7 +1,7 @@
 import Header from 'components/common/header';
 import CenterAlignmentLayout from 'components/common/layout/align/center';
 import MainFrame from 'components/frame/main';
-import MainModal from 'components/modals/main';
+import MainModal from 'components/modals/main/group';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import GroupItem from '../item';
 import * as S from './style';
@@ -45,7 +45,6 @@ function Main() {
         page: page.current,
         size: 8,
       });
-      console.log(response.data);
 
       setHasNextPage(response.data.groups.length === 8);
       setList((prevPosts) => [...prevPosts, ...response.data.groups]);
