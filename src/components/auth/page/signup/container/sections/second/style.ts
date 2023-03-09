@@ -33,7 +33,7 @@ export const AuthenticationNumberInput = styled.input`
   padding: 0;
   text-align: center;
   color: rgba(255, 255, 255, 0.9);
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
 
   :focus {
     transform: scale(1.1);
