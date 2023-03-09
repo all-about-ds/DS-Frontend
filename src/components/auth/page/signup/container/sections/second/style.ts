@@ -42,7 +42,6 @@ export const AuthenticationNumberInput = styled.input`
 
   :focus {
     transform: scale(1.1);
-    border-color: blue;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     outline: none;
   }
