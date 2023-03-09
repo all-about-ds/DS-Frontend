@@ -16,7 +16,7 @@ export const Text = styled.p`
   margin-bottom: 3rem;
 `;
 
-export const InputWrapper = styled.div`
+export const NumberForm = styled.form`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
