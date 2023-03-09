@@ -18,7 +18,7 @@ function Main() {
   const [hasNextPage, setHasNextPage] = useState<boolean>(true);
   const [loaded, setLoaded] = useState<boolean>(true);
   const [byPopularity, setByPopularity] = useState<boolean>(true);
-  const [, setByLatest] = useState<boolean>(false);
+  const [byLatest, setByLatest] = useState<boolean>(false);
   const [list, setList] = useState<GroupType[]>([]);
   const [modalData, setModalData] = useState<GroupType>();
   const [groupIsClicked, setGroupIsClicked] =
@@ -90,7 +90,7 @@ function Main() {
               인기
             </S.SortButton>
             <S.SortButton
-              byPopularity={byPopularity}
+              byPopularity={byLatest}
               onClick={() => sortButton('최신')}
             >
               최신순
