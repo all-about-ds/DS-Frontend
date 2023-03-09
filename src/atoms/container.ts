@@ -24,3 +24,8 @@ export const groupIsClickedAtom = atom({
   key: 'groupIsClicked',
   default: false,
 });
+
+export const groupIsClickedIndexAtom = atom({
+  key: 'groupIsClickedIndex',
+  default: 0,
+});

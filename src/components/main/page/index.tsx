@@ -1,10 +1,8 @@
-import { groupIsClickedAtom } from 'atoms/container';
 import Header from 'components/common/header';
 import CenterAlignmentLayout from 'components/common/layout/align/center';
 import MainFrame from 'components/frame/main';
 import MainModal from 'components/modals/main';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import GroupItem from '../item';
 import * as S from './style';
 import group from 'api/group';
@@ -16,9 +14,9 @@ function Main() {
   const [hasNextPage, setHasNextPage] = useState<boolean>(true);
   const [loaded, setLoaded] = useState<boolean>(true);
   const [byPopularity, setByPopularity] = useState<boolean>(true);
-  const [byLatest, setByLatest] = useState<boolean>(false);
+  const [, setByLatest] = useState<boolean>(false);
   const [list, setList] = useState<GroupType[]>([]);
-  const [groupIsClicked] = useRecoilState(groupIsClickedAtom);
+  const [modalData, setModalData] = useState<GroupType>();
 
   const sortButton = (type: string) => {
     if (type === '인기') {
@@ -30,6 +28,10 @@ function Main() {
     }
   };
 
+  const groupClick = (props: GroupType) => {
+    setModalData(props);
+  };
+
   const getDiaryList = useCallback(async () => {
     setLoaded(false);
     try {
@@ -38,6 +40,7 @@ function Main() {
         page: page.current,
         size: 8,
       });
+      console.log(response.data);
 
       setHasNextPage(response.data.groups.length === 8);
       setList((prevPosts) => [...prevPosts, ...response.data.groups]);
@@ -66,31 +69,30 @@ function Main() {
 
   return (
     <>
-      {groupIsClicked && <MainModal />}
+      {modalData && <MainModal GroupProps={modalData} />}
       <Header />
       <CenterAlignmentLayout>
         <MainFrame>
           <S.SortButtonWrapper>
             <S.SortButton
-              style={{
-                color: byPopularity ? '#FFFFFF' : '',
-              }}
+              byPopularity={byPopularity}
               onClick={() => sortButton('인기')}
             >
               인기
             </S.SortButton>
             <S.SortButton
-              style={{
-                color: byLatest ? '#FFFFFF' : '',
-              }}
+              byPopularity={byPopularity}
               onClick={() => sortButton('최신')}
             >
               최신순
             </S.SortButton>
           </S.SortButtonWrapper>
+
           <S.GroupBoxWrapper>
-            {list.map((group: GroupType, index) => (
-              <GroupItem key={index} GroupProps={group} />
+            {list.map((group: GroupType, index: number) => (
+              <div key={index} onClick={() => groupClick(group)}>
+                <GroupItem GroupProps={group} />
+              </div>
             ))}
             <div ref={observerTargetEl} />
           </S.GroupBoxWrapper>

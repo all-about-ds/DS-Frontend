@@ -19,9 +19,11 @@ export interface GroupContents {
 }
 
 export interface GroupType {
+  idx: number;
   groupName: string;
   groupImg: string;
   groupDescription: string;
+  groupMemberCount: number;
   groupMaxCount: number;
   groupLeaderImg: string;
   groupLeaderName: string;

@@ -14,4 +14,8 @@ export const getGroup = {
   getList: () => {
     return REACT_APP_BASE_URL + 'group';
   },
+
+  getModalDetail: () => {
+    return 'group/detail/';
+  },
 };

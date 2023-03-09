@@ -18,6 +18,17 @@ class Group {
       return error;
     }
   }
+
+  getGroupModalDetail(index: number) {
+    try {
+      return createAxios({
+        method: 'GET',
+        url: getGroup.getModalDetail() + `${index}`,
+      });
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
 // + `?page=${page}&size=${size}`
