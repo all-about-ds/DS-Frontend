@@ -1,4 +1,4 @@
-import { signupCurrentSectionAtom, signupDataAtom, timerAtom } from 'atoms';
+import { signupCurrentSectionAtom, signupEmailAtom, timerAtom } from 'atoms';
 import AuthButton from 'components/auth/ui/button';
 import auth from 'api/auth';
 import { useEffect, useState } from 'react';
@@ -12,7 +12,7 @@ function SignupSecondSection() {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [_, setSignupCurrentSection] = useRecoilState(signupCurrentSectionAtom);
   const resetTimer = useResetRecoilState(timerAtom);
-  const [signupData, __] = useRecoilState(signupDataAtom);
+  const [signupEmail, __] = useRecoilState(signupEmailAtom);
 
   const handleChange = (index: number, value: string) => {
     const newInputs = [...inputs];
@@ -63,7 +63,7 @@ function SignupSecondSection() {
       inputs.forEach(function (currentvalue) {
         code += currentvalue;
       });
-      await auth.checkAuthenticationNumber(signupData.email, code);
+      await auth.checkAuthenticationNumber(signupEmail.email, code);
       setSignupCurrentSection(3);
     } catch {
       setErrorMessage('거부된 인증번호 입니다');
@@ -75,7 +75,7 @@ function SignupSecondSection() {
     setErrorMessage('');
 
     try {
-      await auth.sendAuthenticationNumber('');
+      await auth.sendAuthenticationNumber(signupEmail.email);
       toast.success('인증번호를 재전송 했어요');
     } catch {
       throw new Error('알 수 없는 에러입니다.');
