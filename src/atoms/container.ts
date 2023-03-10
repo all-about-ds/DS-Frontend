@@ -29,13 +29,10 @@ export const groupIsClickedAtom = atom({
   default: false,
 });
 
-export const signupDataAtom = atom<SignupInterface>({
+export const signupEmailAtom = atom({
   key: 'signupData',
-  default: {
-    name: '',
-    email: '',
-    password: '',
-  },
+  default: '',
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const timerAtom = atom({
