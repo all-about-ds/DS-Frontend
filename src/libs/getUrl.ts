@@ -13,6 +13,10 @@ export const getAuth = {
     return 'auth/code';
   },
 
+  signup: () => {
+    return 'auth/signup';
+  },
+
   tokenReissuance: () => {
     return REACT_APP_BASE_URL + 'auth/refresh';
   },
