@@ -55,7 +55,7 @@ export const UserBox = styled.div`
   margin-bottom: 20px;
 `;
 
-export const Profile = styled.div<{ image: string }>`
+export const Profile = styled.div<{ image: string | undefined }>`
   background: url(${(props) => props.image});
   width: 36px;
   height: 36px;
