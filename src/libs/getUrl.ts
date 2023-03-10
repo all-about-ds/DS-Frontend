@@ -18,4 +18,8 @@ export const getGroup = {
   getModalDetail: () => {
     return 'group/detail/';
   },
+
+  joinGroup: () => {
+    return 'group/join';
+  },
 };

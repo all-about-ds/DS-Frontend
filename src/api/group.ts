@@ -1,6 +1,7 @@
 import { createAxios } from 'libs/createAxios';
 import { getGroup } from 'libs/getUrl';
 import { GetGroupListInterface } from 'types/group.type';
+import tokenService from 'utils/tokenService';
 
 class Group {
   getGroupList(data: GetGroupListInterface) {
@@ -29,7 +30,23 @@ class Group {
       return error;
     }
   }
+
+  joinGroup(password: string | undefined, index: number | undefined) {
+    try {
+      return createAxios({
+        method: 'POST',
+        url: getGroup.joinGroup() + `/${index}`,
+        params: {
+          password: password,
+        },
+        headers: {
+          Authorization: 'Bearer ' + tokenService.getLocalAccessToken(),
+        },
+      });
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
-// + `?page=${page}&size=${size}`
 export default new Group();

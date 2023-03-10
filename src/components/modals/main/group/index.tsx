@@ -9,8 +9,8 @@ import * as S from './style';
 import * as I from '../../../../assets/svg';
 import { useNavigate } from 'react-router';
 import { GroupType } from 'types/group.type';
-import { useState } from 'react';
-import PasswordModal from '../passwordCheck';
+import group from 'api/group';
+import tokenService from 'utils/tokenService';
 
 interface GroupProps {
   GroupProps: GroupType | undefined;
@@ -18,19 +18,19 @@ interface GroupProps {
 
 function MainModal(props: GroupProps) {
   const [, setGroupIsClicked] = useRecoilState(groupIsClickedAtom);
-  const [groupPasswordModal, setGroupPasswordModal] = useRecoilState(
-    groupPasswordModalAtom
-  );
-  const [, setIndex] = useRecoilState(groupIndexAtom);
+  const [, setGroupPasswordModal] = useRecoilState(groupPasswordModalAtom);
+  const [index, setIndex] = useRecoilState(groupIndexAtom);
   const navigate = useNavigate();
 
-  const onClick = () => {
+  const onClick = async () => {
     if (props.GroupProps?.secret) {
       setIndex(props.GroupProps.idx);
       setGroupIsClicked(false);
       setGroupPasswordModal(true);
+    } else {
+      const response = await group.joinGroup(undefined, index);
+      navigate(`/group/information/${index}`);
     }
-    // 요청 넣기
   };
 
   return (

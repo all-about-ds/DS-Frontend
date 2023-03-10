@@ -1,9 +1,11 @@
+import group from 'api/group';
 import { groupPasswordModalAtom } from 'atoms/container';
 import ModalLayout from 'components/common/layout/modal';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { useRecoilState } from 'recoil';
+import tokenService from 'utils/tokenService';
 import * as S from './style';
 
 interface PasswordProps {
@@ -20,11 +22,12 @@ function PasswordModal(props: PasswordProps) {
     formState: { isSubmitting },
   } = useForm<{ password: string }>();
 
-  const onValid = async () => {
+  const onValid = async (data: { password: string | undefined }) => {
     try {
       setError(false);
-
-      // api
+      console.log(data.password);
+      const response: any = await group.joinGroup(data.password, props.index);
+      navigate(`/group/information/${props.index}`);
     } catch (e: any) {
       console.log(e);
     }
