@@ -17,6 +17,20 @@ class Auth {
       return error;
     }
   }
+
+  sendAuthenticationNumber(email: string) {
+    try {
+      return createAxios({
+        method: 'POST',
+        url: getAuth.sendAuthenticationNumber(),
+        params: {
+          email: email,
+        },
+      });
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
 export default new Auth();

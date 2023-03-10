@@ -6,3 +6,4 @@ export { default as MyPage } from './MyPage';
 export { default as CreateGroupPage } from './CreateGroupPage';
 export { default as MemberSettingPage } from './MemberSettingPage';
 export { default as EditGroupPage } from './EditGroupPage';
+export { default as GroupInformationPage } from './GroupInformationPage';

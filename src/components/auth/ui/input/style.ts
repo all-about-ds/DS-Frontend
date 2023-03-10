@@ -5,21 +5,21 @@ export const InputWrapper = styled.div`
   min-width: 284px;
 `;
 
-export const InputTitle = styled.p`
+export const InputTitle = styled.p<{ isError: boolean | undefined }>`
   font-style: normal;
   font-weight: 400;
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.9);
+  color: ${(e) => (e.isError ? '#EE3939' : 'rgba(255, 255, 255, 0.9)')};
   margin-left: 8px;
   margin: 0 0 10px 8px;
 `;
 
-export const Input = styled.input`
-  border: none;
+export const Input = styled.input<{ isError?: boolean | undefined }>`
+  border: ${(e) => (e.isError ? '1px solid #EE3939' : 'none')};
+  background: ${(e) => (e.isError ? '#412626' : '#232323')};
   width: 100%;
   height: 40px;
   border-radius: 10px;
-  background: #232323;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;

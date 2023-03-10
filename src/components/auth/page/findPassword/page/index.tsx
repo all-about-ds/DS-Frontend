@@ -7,9 +7,8 @@ import { useRecoilState } from 'recoil';
 import FindPasswordSectionContainer from '../container';
 
 function FindPassword() {
-  const [findPasswordCurrentSection, _] = useRecoilState(
-    findPasswordCurrentSectionAtom
-  );
+  const [findPasswordCurrentSection, setFindPasswordCurrentSection] =
+    useRecoilState(findPasswordCurrentSectionAtom);
 
   const [progress, setProgress] = useState<number>(33);
 
@@ -33,7 +32,8 @@ function FindPassword() {
       <CenterAlignmentLayout>
         <AuthFrame
           title='비밀번호 찾기'
-          progressBar={{ need: true, value: progress }}
+          progressBarValue={progress}
+          setSection={setFindPasswordCurrentSection}
         >
           <FindPasswordSectionContainer />
         </AuthFrame>

@@ -13,11 +13,33 @@ export const AuthFrame = styled.div`
   align-items: center;
 `;
 
-export const TitleText = styled.div`
+export const TopBox = styled.div`
+  width: 16.5vw;
+  min-width: 284px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  align-items: center;
+
+  & > div > svg {
+    cursor: pointer;
+  }
+`;
+
+export const AuthText = styled.h1`
   font-weight: 400;
   font-size: 24px;
   color: #ffffff;
-  margin-top: 25px;
+  margin-left: 13px;
+`;
+
+export const LoginText = styled.h1`
+  font-weight: 400;
+  font-size: 24px;
+  color: #ffffff;
+  margin-top: 40px;
+  text-align: center;
 `;
 
 export const ProgressBar = styled.progress`
@@ -33,5 +55,5 @@ export const ProgressBar = styled.progress`
     background: #7139ea;
     transition: width 0.5s;
   }
-  margin: 25px 0 38px 0;
+  margin: 5px 0 38px 0;
 `;

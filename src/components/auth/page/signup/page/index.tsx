@@ -15,7 +15,9 @@ function Signup() {
   const [signupEmailDuplicationModal, _] = useRecoilState(
     signupEmailDuplicationModalAtom
   );
-  const [signupCurrentSection, __] = useRecoilState(signupCurrentSectionAtom);
+  const [signupCurrentSection, setSignupCurrentSection] = useRecoilState(
+    signupCurrentSectionAtom
+  );
 
   const [progress, setProgress] = useState<number>(33);
 
@@ -40,7 +42,8 @@ function Signup() {
       <CenterAlignmentLayout>
         <AuthFrame
           title='회원가입'
-          progressBar={{ need: true, value: progress }}
+          progressBarValue={progress}
+          setSection={setSignupCurrentSection}
         >
           <SignupSectionContainer />
           <S.GoLoginBox>

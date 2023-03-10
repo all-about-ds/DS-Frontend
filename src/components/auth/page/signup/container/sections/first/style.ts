@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const FirstSectionLayout = styled.section`
+export const FirstSectionLayout = styled.form`
   margin: 2rem 0 -1rem 0;
   width: 18vw;
   min-width: 300px;
@@ -41,6 +41,12 @@ export const Input = styled.input`
   }
 `;
 
+export const Description = styled.article`
+  text-align: center;
+  color: white;
+  margin-top: 7rem;
+`;
+
 export const Box = styled.div`
   display: flex;
   align-items: center;
@@ -48,6 +54,14 @@ export const Box = styled.div`
 
   button {
     width: 100%;
-    margin: 14.5rem 0 1rem;
+    margin: 8.5rem 0 1rem;
   }
+`;
+
+export const ErrorText = styled.p<{ isError: boolean }>`
+  display: ${(e) => (e.isError ? 'block' : 'none')};
+  color: #ee3939;
+  font-size: 13px;
+  text-align: center;
+  margin-bottom: -1.9rem;
 `;

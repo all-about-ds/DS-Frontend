@@ -2,7 +2,7 @@ import { Input } from 'components/auth/ui/input/style';
 import React, { useState } from 'react';
 import { ManageGroupType } from 'types/group.type';
 import * as S from './style';
-import * as I from '../../../assets/svg';
+import * as I from '../../../../assets/svg';
 
 function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
   const [memberNum, setMemberNum] = useState<number>(1);
