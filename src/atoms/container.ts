@@ -35,6 +35,16 @@ export const signupEmailAtom = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
+export const groupPasswordModalAtom = atom({
+  key: 'groupPasswordAtom',
+  default: false,
+});
+
+export const groupIndexAtom = atom({
+  key: 'gruopIndex',
+  default: 0,
+});
+
 export const timerAtom = atom({
   key: 'timer',
   default: {

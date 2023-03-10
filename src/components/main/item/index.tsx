@@ -1,36 +1,31 @@
-import React, { useState } from 'react';
 import * as S from './style';
 import * as I from '../../../assets/svg';
-import { useRecoilState } from 'recoil';
-import { groupIsClickedAtom } from 'atoms/container';
+import { GroupType } from 'types/group.type';
 
-function GroupItem() {
-  const [isLocked] = useState<boolean>(false);
-  const [, setGroupIsClicked] = useRecoilState(groupIsClickedAtom);
+interface GroupProps {
+  GroupProps: GroupType;
+}
 
-  const onClick = () => {
-    setGroupIsClicked(true);
-  };
-
+function GroupItem(props: GroupProps) {
   return (
     <>
-      <S.GroupBox onClick={onClick}>
-        <S.Image image=''>
-          {isLocked && (
+      <S.GroupBox>
+        <S.Image image={props.GroupProps.groupImg}>
+          {props.GroupProps.secret && (
             <S.LockBox>
               <I.Lock />
             </S.LockBox>
           )}
         </S.Image>
-        <S.MaxPeople>정원 20명</S.MaxPeople>
-        <S.Title>광주소프트웨어마이스터고등학교</S.Title>
-        <S.Description>
-          광주광역시 광산구 송정동에 위치한 SW 마이스터 고등학교로 대한민국에서
-          세 번째로 개교한 마이스터고이고 가나다라마바사
-        </S.Description>
+        <S.MaxPeople>
+          현재 {props.GroupProps.groupMemberCount}/
+          {props.GroupProps.groupMaxCount}명
+        </S.MaxPeople>
+        <S.Title>{props.GroupProps.groupName}</S.Title>
+        <S.Description>{props.GroupProps.groupDescription}</S.Description>
         <S.User>
-          <S.Profile image=''></S.Profile>
-          <S.UserName>오종진</S.UserName>
+          <S.Profile image={props.GroupProps.groupLeaderImg}></S.Profile>
+          <S.UserName>{props.GroupProps.groupLeaderName}</S.UserName>
         </S.User>
       </S.GroupBox>
     </>

@@ -59,20 +59,10 @@ function Signin() {
           </S.DescWrapper>
           <form onSubmit={handleSubmit(onValid, inValid)}>
             <S.InputWrapper>
-              <S.InputText
-                style={{
-                  color: isError ? '#EE3939' : 'rgba(255, 255, 255, 0.9)',
-                }}
-              >
-                이메일
-              </S.InputText>
+              <S.InputText isError={isError}>이메일</S.InputText>
               <S.InputBox
                 isError={isError}
                 placeholder='이메일을 입력해주세요'
-                style={{
-                  border: isError ? '1px solid #EE3939' : 'none',
-                  background: isError ? '#412626' : '#232323',
-                }}
                 {...register('email', {
                   required: '이메일은 필수 입력입니다.',
                   pattern: {
@@ -83,20 +73,10 @@ function Signin() {
               />
             </S.InputWrapper>
             <S.InputWrapper>
-              <S.InputText
-                style={{
-                  color: isError ? '#EE3939' : 'rgba(255, 255, 255, 0.9)',
-                }}
-              >
-                비밀번호
-              </S.InputText>
+              <S.InputText isError={isError}>비밀번호</S.InputText>
               <S.InputBox
                 isError={isError}
                 placeholder='비밀번호를 입력해주세요'
-                style={{
-                  border: isError ? '1px solid #EE3939' : 'none',
-                  background: isError ? '#412626' : '#232323',
-                }}
                 type='password'
                 {...register('password', {
                   required: '비밀번호는 필수 입력입니다.',
@@ -118,10 +98,7 @@ function Signin() {
                 </S.ErrorText>
               </S.ErrorTextBox>
             )}
-            <S.Button
-              style={{ marginTop: isError ? '7.5vh' : '10.32vh' }}
-              disabled={isSubmitting}
-            >
+            <S.Button isError={isError} disabled={isSubmitting}>
               로그인
             </S.Button>
           </form>

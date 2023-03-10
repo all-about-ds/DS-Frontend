@@ -18,6 +18,20 @@ export const getAuth = {
   },
 
   tokenReissuance: () => {
-    return REACT_APP_BASE_URL + 'auth/refresh';
+    return REACT_APP_BASE_URL + 'auth';
+  },
+};
+
+export const getGroup = {
+  getList: () => {
+    return REACT_APP_BASE_URL + 'group';
+  },
+
+  getModalDetail: () => {
+    return 'group/detail/';
+  },
+
+  joinGroup: () => {
+    return 'group/join';
   },
 };
