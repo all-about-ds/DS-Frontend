@@ -23,11 +23,7 @@ function SignupThirdSection() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const toggleShowPassword = () => setShowPassword(!showPassword);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<UseFormType>();
+  const { register, handleSubmit } = useForm<UseFormType>();
 
   const onValid = async (data: UseFormType) => {
     try {
