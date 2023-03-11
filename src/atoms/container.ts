@@ -1,6 +1,5 @@
 import { atom } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
-import { SignupInterface } from 'types/auth.type';
 const { persistAtom } = recoilPersist();
 
 export const dummyAtom = atom({
