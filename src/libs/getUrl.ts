@@ -34,4 +34,8 @@ export const getGroup = {
   joinGroup: () => {
     return 'group/join';
   },
+
+  getGroupInformation: () => {
+    return 'group/information/';
+  },
 };
