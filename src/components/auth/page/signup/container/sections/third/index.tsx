@@ -60,20 +60,19 @@ function SignupThirdSection() {
         <S.Input
           placeholder='닉네임을 입력해주세요'
           type='text'
-          isError={Boolean(errorMessage)}
           {...register('name', {
             required: '이름은 필수 입력입니다.',
           })}
+          isError={Boolean(errorMessage)}
         />
       </S.InputWrapper>
-      <S.InputWrapper className='password'>
+      <S.InputWrapper className='password' isError={Boolean(errorMessage)}>
         <S.InputTitle isError={Boolean(errorMessage)}>비밀번호</S.InputTitle>
-        <S.InputBox>
+        <S.InputBox isError={Boolean(errorMessage)}>
           <S.Input
             className='password-input'
             placeholder='비밀번호를 입력해주세요'
             type={showPassword ? 'text' : 'password'}
-            isError={Boolean(errorMessage)}
             {...register('password', {
               required: '이름은 필수 입력입니다.',
               minLength: {

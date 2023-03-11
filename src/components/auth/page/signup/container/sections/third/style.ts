@@ -25,10 +25,11 @@ export const Text = styled.h1`
   }
 `;
 
-export const InputWrapper = styled.div`
+export const InputWrapper = styled.div<{ isError?: boolean | undefined }>`
   width: 100%;
   min-width: 284px;
   margin: 0 auto 1.2rem;
+  border-radius: 10px;
 
   &.name {
     margin: 2rem auto 1.2rem;
@@ -48,11 +49,17 @@ export const InputTitle = styled.p<{ isError: boolean | undefined }>`
   margin: 0 0 10px 8px;
 `;
 
-export const InputBox = styled.div`
+export const InputBox = styled.div<{ isError?: boolean | undefined }>`
   display: flex;
   background-color: #232323;
   border-radius: 10px;
   align-items: center;
+  border: ${(e) => (e.isError ? '1px solid #EE3939' : 'none')};
+  background: ${(e) => (e.isError ? '#412626' : '#232323')};
+
+  & > input {
+    background: ${(e) => (e.isError ? '#412626' : '#232323')};
+  }
 
   @keyframes fadein {
     from {
