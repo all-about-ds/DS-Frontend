@@ -1,5 +1,10 @@
 import auth from 'api/auth';
-import { signupCurrentSectionAtom, signupEmailAtom, timerAtom } from 'atoms';
+import {
+  signupCurrentSectionAtom,
+  signupEmailAtom,
+  signupEmailDuplicationModalAtom,
+  timerAtom,
+} from 'atoms';
 import AuthButton from 'components/auth/ui/button';
 import AuthInput from 'components/auth/ui/input';
 import { useEffect, useState } from 'react';
@@ -12,6 +17,9 @@ function SignupFirstSection() {
   const [_, setSignupCurrentSection] = useRecoilState(signupCurrentSectionAtom);
   const resetTimer = useResetRecoilState(timerAtom);
   const [__, setSignEmail] = useRecoilState(signupEmailAtom);
+  const [___, setSignupEmailDuplicationModal] = useRecoilState(
+    signupEmailDuplicationModalAtom
+  );
 
   const {
     register,
@@ -24,11 +32,10 @@ function SignupFirstSection() {
 
     try {
       await auth.sendAuthenticationNumber(email);
-
       setSignEmail(email);
       setSignupCurrentSection(2);
     } catch {
-      throw new Error('알 수 없는 에러입니다.');
+      setSignupEmailDuplicationModal(true);
     }
   };
 
