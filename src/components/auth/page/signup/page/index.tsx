@@ -1,5 +1,6 @@
 import {
   signupCurrentSectionAtom,
+  signupEmailAtom,
   signupEmailDuplicationModalAtom,
 } from 'atoms';
 import Header from 'components/common/header';
@@ -10,6 +11,7 @@ import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import SignupSectionContainer from '../container';
 import * as S from './style';
+import { useNavigate } from 'react-router';
 
 function Signup() {
   const [signupEmailDuplicationModal, _] = useRecoilState(
@@ -18,6 +20,8 @@ function Signup() {
   const [signupCurrentSection, setSignupCurrentSection] = useRecoilState(
     signupCurrentSectionAtom
   );
+  const [__, setSignupEmail] = useRecoilState(signupEmailAtom);
+  const navigate = useNavigate();
 
   const [progress, setProgress] = useState<number>(33);
 
@@ -35,6 +39,12 @@ function Signup() {
     }
   }, [signupCurrentSection]);
 
+  const onLogin = () => {
+    setSignupEmail('');
+    setSignupCurrentSection(1);
+    navigate('/auth/signin');
+  };
+
   return (
     <>
       {signupEmailDuplicationModal && <SignupEmailDuplicationModal />}
@@ -48,7 +58,12 @@ function Signup() {
           <SignupSectionContainer />
           <S.GoLoginBox>
             <p>기존 회원이신가요?</p>
-            <p style={{ color: '#7139EA', cursor: 'pointer' }}>로그인</p>
+            <p
+              style={{ color: '#7139EA', cursor: 'pointer' }}
+              onClick={onLogin}
+            >
+              로그인
+            </p>
           </S.GoLoginBox>
         </AuthFrame>
       </CenterAlignmentLayout>

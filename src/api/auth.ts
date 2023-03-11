@@ -1,6 +1,6 @@
 import { createAxios } from 'libs/createAxios';
 import { getAuth } from 'libs/getUrl';
-import { LoginInterface } from 'types/auth.type';
+import { LoginInterface, SignupInterface } from 'types/auth.type';
 
 class Auth {
   signin(data: LoginInterface) {
@@ -25,6 +25,37 @@ class Auth {
         url: getAuth.sendAuthenticationNumber(),
         params: {
           email: email,
+        },
+      });
+    } catch (error) {
+      return error;
+    }
+  }
+
+  checkAuthenticationNumber(email: string, code: string) {
+    try {
+      return createAxios({
+        method: 'GET',
+        url: getAuth.checkAuthenticationNumber(),
+        params: {
+          email: email,
+          code: code,
+        },
+      });
+    } catch (error) {
+      return error;
+    }
+  }
+
+  signup(data: SignupInterface) {
+    try {
+      return createAxios({
+        method: 'GET',
+        url: getAuth.checkAuthenticationNumber(),
+        data: {
+          name: data.name,
+          email: data.email,
+          password: data.password,
         },
       });
     } catch (error) {

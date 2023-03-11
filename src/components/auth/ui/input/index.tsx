@@ -1,6 +1,6 @@
 import * as S from './style';
 
-interface AuthInputProps extends React.HTMLAttributes<HTMLInputElement> {
+interface AuthInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   title: string;
   margin: string;
   isError?: boolean;

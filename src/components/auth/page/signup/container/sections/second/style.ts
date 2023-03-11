@@ -16,12 +16,17 @@ export const Text = styled.p`
   margin-bottom: 3rem;
 `;
 
-export const InputWrapper = styled.div`
+export const NumberForm = styled.form<{ isError: string }>`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
   gap: 10px;
   margin-bottom: 1.2rem;
+
+  & > input {
+    border: ${(e) => (e.isError ? '1px solid #EE3939' : 'none')};
+    background: ${(e) => (e.isError ? '#412626' : '#232323')};
+  }
 `;
 
 export const AuthenticationNumberInput = styled.input`
@@ -33,8 +38,11 @@ export const AuthenticationNumberInput = styled.input`
   padding: 0;
   text-align: center;
   color: rgba(255, 255, 255, 0.9);
+  transition: all 0.5s ease;
 
   :focus {
+    transform: scale(1.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     outline: none;
   }
 `;
@@ -55,17 +63,17 @@ export const ResendBox = styled.div`
   margin-bottom: 1rem;
 `;
 
-export const Timer = styled.p`
+export const Timer = styled.p<{ isError: string }>`
   font-family: 'AppleSDGothicNeoM00';
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
   text-align: center;
   color: #efefef;
-  margin-bottom: 9.6rem;
+  margin-bottom: ${(e) => (e.isError ? '3rem' : '9.6rem')};
 `;
 
-export const Div = styled.div`
+export const Box = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -74,4 +82,12 @@ export const Div = styled.div`
   button {
     width: 100%;
   }
+`;
+
+export const ErrorText = styled.p<{ isError: string }>`
+  display: ${(e) => (e.isError ? 'block' : 'none')};
+  color: #ee3939;
+  font-size: 13px;
+  text-align: center;
+  margin-bottom: 5.5rem;
 `;

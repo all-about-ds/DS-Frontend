@@ -1,14 +1,25 @@
-import { signupCurrentSectionAtom } from 'atoms';
+import auth from 'api/auth';
+import {
+  signupCurrentSectionAtom,
+  signupEmailAtom,
+  signupEmailDuplicationModalAtom,
+  timerAtom,
+} from 'atoms';
 import AuthButton from 'components/auth/ui/button';
 import AuthInput from 'components/auth/ui/input';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useResetRecoilState } from 'recoil';
 import * as S from './style';
 
 function SignupFirstSection() {
   const [isError, setIsError] = useState<boolean>(false);
   const [_, setSignupCurrentSection] = useRecoilState(signupCurrentSectionAtom);
+  const resetTimer = useResetRecoilState(timerAtom);
+  const [__, setSignEmail] = useRecoilState(signupEmailAtom);
+  const [___, setSignupEmailDuplicationModal] = useRecoilState(
+    signupEmailDuplicationModalAtom
+  );
 
   const {
     register,
@@ -16,13 +27,28 @@ function SignupFirstSection() {
     formState: { errors },
   } = useForm<{ email: string }>();
 
-  const onValid = () => {
-    setSignupCurrentSection(2);
+  const onValid = async ({ email }: { email: string }) => {
+    resetTimer();
+
+    try {
+      await auth.sendAuthenticationNumber(email);
+      setSignEmail(email);
+      setSignupCurrentSection(2);
+    } catch {
+      setSignupEmailDuplicationModal(true);
+    }
   };
 
   const inValid = () => {
     setIsError(true);
+    setSignEmail('');
   };
+
+  useEffect(() => {
+    if (!errors.email) {
+      setIsError(false);
+    }
+  }, [errors.email]);
 
   return (
     <S.FirstSectionLayout onSubmit={handleSubmit(onValid, inValid)}>

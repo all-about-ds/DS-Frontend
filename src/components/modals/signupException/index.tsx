@@ -14,7 +14,7 @@ function SignupEmailDuplicationModal() {
         <S.Text>이미 가입된 이메일이에요</S.Text>
         <S.EmojiBox>😯</S.EmojiBox>
         <S.BottomButtonBox>
-          <Link to={'/signin'}>
+          <Link to={'/auth/signin'}>
             <S.GoLoginBox>로그인 하러가기</S.GoLoginBox>
           </Link>
           <S.RetryBox onClick={() => setSignupEmailDuplicationModal(false)}>
