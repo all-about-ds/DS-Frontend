@@ -48,7 +48,7 @@ class Group {
     }
   }
 
-  getGroupInformation(groupId: number) {
+  getGroupInformation(groupId: string) {
     try {
       return createAxios({
         method: 'GET',
