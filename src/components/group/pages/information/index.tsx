@@ -1,10 +1,32 @@
 import * as S from './style';
 import * as I from 'assets/svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import GroupPageHeader from 'components/group/ui/groupPageHeader';
+import { useParams } from 'react-router-dom';
+import group from 'api/group';
+import { GroupInformationInterface } from 'types/group.type';
 
 function GroupInformation() {
   const [isOwner, setIsOwner] = useState<boolean>(false);
+  const [information, setInformation] = useState<GroupInformationInterface>();
+  const params = useParams();
+
+  useEffect(() => {
+    const getGroupInformationById = async () => {
+      try {
+        const res: any = await group.getGroupInformation(
+          String(params.groupId)
+        );
+        setInformation(res.data);
+      } catch (e: any) {
+        if (e.respones.status === 404) {
+          console.log('없는 그룹');
+        }
+      }
+    };
+
+    getGroupInformationById();
+  }, []);
 
   return (
     <S.GroupInformationPageLayout>
