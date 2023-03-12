@@ -40,7 +40,7 @@ interface MemberType {
   profileImg: string;
 }
 
-export interface GroupInformationType {
+export interface GroupInformationInterface {
   idx: number;
   groupName: string;
   groupImg: string;
