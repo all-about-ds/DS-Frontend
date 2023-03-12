@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 export const GroupInformationPageLayout = styled.section`
   width: 35.4vw;
   margin: auto;
+  min-width: 450px;
 `;
 
 export const GroupImage = styled.img`
