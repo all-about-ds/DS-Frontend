@@ -14,6 +14,7 @@ import {
 } from 'pages';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import GroupChattingPage from 'pages/GroupChattingPage';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path='/group/edit' element={<EditGroupPage />} />
         <Route path='/group/member' element={<MemberSettingPage />} />
         <Route path='/group/information' element={<GroupInformationPage />} />
+        <Route path='/group/chatting' element={<GroupChattingPage />} />
       </Routes>
     </RecoilRoot>
   );
