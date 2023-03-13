@@ -10,7 +10,6 @@ import * as I from '../../../../assets/svg';
 import { useNavigate } from 'react-router';
 import { GroupType } from 'types/group.type';
 import group from 'api/group';
-import tokenService from 'utils/tokenService';
 
 interface GroupProps {
   GroupProps: GroupType | undefined;
@@ -24,12 +23,15 @@ function MainModal(props: GroupProps) {
 
   const onClick = async () => {
     if (props.GroupProps?.secret) {
-      setIndex(props.GroupProps.idx);
+      setIndex(props.GroupProps?.idx);
       setGroupIsClicked(false);
       setGroupPasswordModal(true);
     } else {
-      const response = await group.joinGroup(undefined, index);
-      navigate(`/group/information/${index}`);
+      const response: any = await group.joinGroup(
+        undefined,
+        props.GroupProps?.idx
+      );
+      navigate(`/group/information/${props.GroupProps?.idx}`);
     }
   };
 
