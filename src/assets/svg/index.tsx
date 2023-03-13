@@ -12,7 +12,7 @@ export { UpdateNameIcon } from './updateNameIcon';
 
 export { Photo } from './photo';
 
-export { ArrowUp, ArrowDown } from './arrow';
+export { ArrowUp, ArrowDown, SubmitArrow } from './arrow';
 
 export { ThreeDot, PurpleDot } from './threeDot';
 
@@ -37,3 +37,5 @@ export { TimerIcon } from './timerIcon';
 export { OwnerButton } from './ownerButton';
 
 export { OwnerIcon } from './ownerIcon';
+
+export { LongRectengle } from './rectengle';
