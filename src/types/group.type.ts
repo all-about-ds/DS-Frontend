@@ -45,6 +45,7 @@ export interface GroupInformationInterface {
   groupName: string;
   groupImg: string;
   groupDescription: string;
+  host: boolean;
   head: {
     idx: number;
     name: string;
