@@ -5,7 +5,6 @@ import GroupPageHeader from 'components/group/ui/groupPageHeader';
 import { useParams } from 'react-router-dom';
 import group from 'api/group';
 import { GroupInformationInterface } from 'types/group.type';
-import { getGroup } from 'libs/getUrl';
 
 function GroupInformation() {
   const [isOwner, setIsOwner] = useState<boolean>(false);
