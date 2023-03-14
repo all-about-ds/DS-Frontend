@@ -53,6 +53,9 @@ class Group {
       return createAxios({
         method: 'GET',
         url: getGroup.getGroupInformation() + groupId,
+        headers: {
+          Authorization: 'Bearer' + tokenService.getLocalAccessToken(),
+        },
       });
     } catch (error) {
       return error;
