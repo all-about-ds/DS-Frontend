@@ -20,13 +20,13 @@ export interface GroupContents {
 
 export interface GroupType {
   idx: number;
-  groupName: string;
-  groupImg: string;
-  groupDescription: string;
-  groupMemberCount: number;
-  groupMaxCount: number;
-  groupLeaderImg: string;
-  groupLeaderName: string;
+  name: string;
+  img: string;
+  description: string;
+  memberCount: number;
+  maxCount: number;
+  leaderImg: string;
+  leaderName: string;
   secret: boolean;
 }
 

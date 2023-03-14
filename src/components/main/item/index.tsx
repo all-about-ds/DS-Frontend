@@ -10,7 +10,7 @@ function GroupItem(props: GroupProps) {
   return (
     <>
       <S.GroupBox>
-        <S.Image image={props.GroupProps.groupImg}>
+        <S.Image image={props.GroupProps.img}>
           {props.GroupProps.secret && (
             <S.LockBox>
               <I.Lock />
@@ -18,14 +18,13 @@ function GroupItem(props: GroupProps) {
           )}
         </S.Image>
         <S.MaxPeople>
-          현재 {props.GroupProps.groupMemberCount}/
-          {props.GroupProps.groupMaxCount}명
+          현재 {props.GroupProps.memberCount}/{props.GroupProps.maxCount}명
         </S.MaxPeople>
-        <S.Title>{props.GroupProps.groupName}</S.Title>
-        <S.Description>{props.GroupProps.groupDescription}</S.Description>
+        <S.Title>{props.GroupProps.name}</S.Title>
+        <S.Description>{props.GroupProps.description}</S.Description>
         <S.User>
-          <S.Profile image={props.GroupProps.groupLeaderImg}></S.Profile>
-          <S.UserName>{props.GroupProps.groupLeaderName}</S.UserName>
+          <S.Profile image={props.GroupProps.leaderImg}></S.Profile>
+          <S.UserName>{props.GroupProps.leaderName}</S.UserName>
         </S.User>
       </S.GroupBox>
     </>
