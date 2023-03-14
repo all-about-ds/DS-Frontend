@@ -54,7 +54,7 @@ class Group {
         method: 'GET',
         url: getGroup.getGroupInformation() + groupId,
         headers: {
-          Authorization: 'Bearer' + tokenService.getLocalAccessToken(),
+          Authorization: 'Bearer ' + tokenService.getLocalAccessToken(),
         },
       });
     } catch (error) {
