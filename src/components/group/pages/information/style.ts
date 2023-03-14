@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 export const GroupInformationPageLayout = styled.section`
   width: 35.4vw;
   margin: auto;
+  min-width: 450px;
 `;
 
 export const GroupImage = styled.img`
@@ -65,10 +66,32 @@ export const MemberList = styled.section`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  gap: 8.5px 8.5px;
+  gap: 13px 30px;
 `;
 
-export const Memeber = styled.img`
+export const MemberBox = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
+export const MemberRole = styled.h3`
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 13px;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 5px;
+`;
+
+export const MemberName = styled.h3`
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #ffffff;
+`;
+
+export const MemberImage = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 50px;

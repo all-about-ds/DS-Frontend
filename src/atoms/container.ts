@@ -28,6 +28,12 @@ export const groupIsClickedAtom = atom({
   default: false,
 });
 
+export const signupEmailAtom = atom({
+  key: 'signupData',
+  default: '',
+  effects_UNSTABLE: [persistAtom],
+});
+
 export const groupPasswordModalAtom = atom({
   key: 'groupPasswordAtom',
   default: false,

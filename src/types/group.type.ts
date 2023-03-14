@@ -33,3 +33,23 @@ export interface GroupType {
 export type PasswordType = {
   password: string | undefined;
 };
+
+interface MemberType {
+  idx: number;
+  name: string;
+  profileImg: string;
+}
+
+export interface GroupInformationInterface {
+  idx: number;
+  groupName: string;
+  groupImg: string;
+  groupDescription: string;
+  host: boolean;
+  head: {
+    idx: number;
+    name: string;
+    profileImg: string;
+  };
+  memberList: MemberType[];
+}
