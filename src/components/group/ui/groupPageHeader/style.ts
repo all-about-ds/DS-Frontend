@@ -21,6 +21,8 @@ export const Elements = styled.div`
 
   &.center {
     position: absolute;
-    left: 45%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
 `;
