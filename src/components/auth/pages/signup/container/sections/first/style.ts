@@ -8,7 +8,7 @@ export const FirstSectionLayout = styled.form<{ isLoading: boolean }>`
   pointer-events: ${(e) => e.isLoading && 'none'};
 
   .lds-roller {
-    display: inline-block;
+    display: ${(e) => (e.isLoading ? 'inline-block' : 'none')};
     position: absolute;
     width: 80px;
     height: 80px;
