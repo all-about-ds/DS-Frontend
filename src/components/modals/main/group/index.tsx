@@ -10,7 +10,6 @@ import * as I from '../../../../assets/svg';
 import { useNavigate } from 'react-router';
 import { GroupType } from 'types/group.type';
 import group from 'api/group';
-import tokenService from 'utils/tokenService';
 
 interface GroupProps {
   GroupProps: GroupType | undefined;
@@ -24,12 +23,15 @@ function MainModal(props: GroupProps) {
 
   const onClick = async () => {
     if (props.GroupProps?.secret) {
-      setIndex(props.GroupProps.idx);
+      setIndex(props.GroupProps?.idx);
       setGroupIsClicked(false);
       setGroupPasswordModal(true);
     } else {
-      const response = await group.joinGroup(undefined, index);
-      navigate(`/group/information/${index}`);
+      const response: any = await group.joinGroup(
+        undefined,
+        props.GroupProps?.idx
+      );
+      navigate(`/group/information/${props.GroupProps?.idx}`);
     }
   };
 
@@ -37,7 +39,7 @@ function MainModal(props: GroupProps) {
     <>
       <ModalLayout setModal={setGroupIsClicked}>
         <S.GroupIsClickedModal onClick={(e) => e.stopPropagation()}>
-          <S.Image image={props.GroupProps?.groupImg}>
+          <S.Image image={props.GroupProps?.img}>
             {props.GroupProps?.secret && (
               <S.LockBox>
                 <I.Lock />
@@ -49,15 +51,15 @@ function MainModal(props: GroupProps) {
           </S.Image>
           <S.ContentWrapper>
             <S.memberNum>
-              현재 {props.GroupProps?.groupMemberCount}/
-              {props.GroupProps?.groupMaxCount}명
+              현재 {props.GroupProps?.memberCount}/{props.GroupProps?.maxCount}
+              명
             </S.memberNum>
-            <S.Title>{props.GroupProps?.groupName}</S.Title>
+            <S.Title>{props.GroupProps?.name}</S.Title>
             <S.UserBox>
-              <S.Profile image={props.GroupProps?.groupLeaderImg} />
-              <S.UserName>{props.GroupProps?.groupLeaderName}</S.UserName>
+              <S.Profile image={props.GroupProps?.leaderImg} />
+              <S.UserName>{props.GroupProps?.leaderName}</S.UserName>
             </S.UserBox>
-            <S.Description>{props.GroupProps?.groupDescription}</S.Description>
+            <S.Description>{props.GroupProps?.description}</S.Description>
             <S.JoinButton onClick={onClick}>가입</S.JoinButton>
           </S.ContentWrapper>
         </S.GroupIsClickedModal>
