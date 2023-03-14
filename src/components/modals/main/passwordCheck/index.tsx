@@ -4,6 +4,7 @@ import ModalLayout from 'components/common/layout/modal';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
 import { useRecoilState } from 'recoil';
 import tokenService from 'utils/tokenService';
 import * as S from './style';
@@ -30,6 +31,13 @@ function PasswordModal(props: PasswordProps) {
       navigate(`/group/information/${props.index}`);
     } catch (e: any) {
       console.log(e);
+      if (e.response.status === 400) {
+        toast.error('비밀번호가 일치하지 않았어요!');
+      } else if (e.response.status === 404) {
+        toast.error('존재하지 않는 그룹이에요');
+      } else if (e.response.status === 409) {
+        toast.error('이미 가입된 그룹이에요!');
+      }
     }
   };
 
