@@ -50,8 +50,8 @@ class Auth {
   signup(data: SignupInterface) {
     try {
       return createAxios({
-        method: 'GET',
-        url: getAuth.checkAuthenticationNumber(),
+        method: 'POST',
+        url: getAuth.signup(),
         data: {
           name: data.name,
           email: data.email,

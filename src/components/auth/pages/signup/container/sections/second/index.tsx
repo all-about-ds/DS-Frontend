@@ -11,7 +11,6 @@ function SignupSecondSection() {
   const [inputs, setInputs] = useState<string[]>(['', '', '', '']);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [_, setSignupCurrentSection] = useRecoilState(signupCurrentSectionAtom);
-  const resetTimer = useResetRecoilState(timerAtom);
   const [signupEmail, __] = useRecoilState(signupEmailAtom);
 
   const handleChange = (index: number, value: string) => {
@@ -63,7 +62,7 @@ function SignupSecondSection() {
       inputs.forEach(function (currentvalue) {
         code += currentvalue;
       });
-      await auth.checkAuthenticationNumber(signupEmail.email, code);
+      await auth.checkAuthenticationNumber(signupEmail, code);
       setSignupCurrentSection(3);
     } catch {
       setErrorMessage('거부된 인증번호 입니다');
@@ -71,11 +70,14 @@ function SignupSecondSection() {
   };
 
   const resend = async () => {
-    resetTimer();
     setErrorMessage('');
 
     try {
       await auth.sendAuthenticationNumber(signupEmail.email);
+      setTimer({
+        minute: 5,
+        seconds: 0,
+      });
       toast.success('인증번호를 재전송 했어요');
     } catch {
       throw new Error('알 수 없는 에러입니다.');

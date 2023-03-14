@@ -9,17 +9,18 @@ import AuthButton from 'components/auth/ui/button';
 import AuthInput from 'components/auth/ui/input';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useRecoilState, useResetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import * as S from './style';
 
 function SignupFirstSection() {
   const [isError, setIsError] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [_, setSignupCurrentSection] = useRecoilState(signupCurrentSectionAtom);
-  const resetTimer = useResetRecoilState(timerAtom);
   const [__, setSignEmail] = useRecoilState(signupEmailAtom);
   const [___, setSignupEmailDuplicationModal] = useRecoilState(
     signupEmailDuplicationModalAtom
   );
+  const [____, setTimer] = useRecoilState(timerAtom);
 
   const {
     register,
@@ -28,14 +29,20 @@ function SignupFirstSection() {
   } = useForm<{ email: string }>();
 
   const onValid = async ({ email }: { email: string }) => {
-    resetTimer();
+    setIsLoading(true);
 
     try {
       await auth.sendAuthenticationNumber(email);
+      setTimer({
+        minute: 5,
+        seconds: 0,
+      });
+      setIsLoading(false);
       setSignEmail(email);
       setSignupCurrentSection(2);
     } catch {
       setSignupEmailDuplicationModal(true);
+      setIsLoading(false);
     }
   };
 
@@ -51,7 +58,20 @@ function SignupFirstSection() {
   }, [errors.email]);
 
   return (
-    <S.FirstSectionLayout onSubmit={handleSubmit(onValid, inValid)}>
+    <S.FirstSectionLayout
+      onSubmit={handleSubmit(onValid, inValid)}
+      isLoading={isLoading}
+    >
+      <div className='lds-roller'>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
       <AuthInput
         title={'이메일'}
         margin={'0 auto 24px'}
