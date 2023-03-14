@@ -24,6 +24,7 @@ export const ChattingLayout = styled.div`
 export const ChattingWrapper = styled.div`
   width: 60vw;
   height: 85.93vh;
+  position: relative;
 `;
 
 export const InputBox = styled.div`
@@ -131,4 +132,47 @@ export const Time = styled.p`
   color: #6a6a6a;
   margin-top: 10px;
   margin-left: 12px;
+`;
+
+export const MyChatBox = styled.div`
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-left: 23.54vw;
+  margin-top: 9.26vh;
+`;
+
+export const MyChatting = styled.div`
+  max-width: 652px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px 0px 10px 10px;
+  padding: 16px 24px;
+  background: #dfdfdf;
+`;
+
+export const MyChatText = styled.p`
+  font-family: 'AppleSDGothicNeoM00';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: rgba(28, 28, 28, 0.76);
+`;
+
+export const MyChatTime = styled.p`
+  font-family: 'AppleSDGothicNeoB00';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  color: #6a6a6a;
+  margin-top: 10px;
+  margin-right: 12px;
+  position: absolute;
+  bottom: -28px;
+  right: 0;
 `;
