@@ -39,7 +39,7 @@ function MainModal(props: GroupProps) {
     <>
       <ModalLayout setModal={setGroupIsClicked}>
         <S.GroupIsClickedModal onClick={(e) => e.stopPropagation()}>
-          <S.Image image={props.GroupProps?.groupImg}>
+          <S.Image image={props.GroupProps?.img}>
             {props.GroupProps?.secret && (
               <S.LockBox>
                 <I.Lock />
@@ -51,15 +51,15 @@ function MainModal(props: GroupProps) {
           </S.Image>
           <S.ContentWrapper>
             <S.memberNum>
-              현재 {props.GroupProps?.groupMemberCount}/
-              {props.GroupProps?.groupMaxCount}명
+              현재 {props.GroupProps?.memberCount}/{props.GroupProps?.maxCount}
+              명
             </S.memberNum>
-            <S.Title>{props.GroupProps?.groupName}</S.Title>
+            <S.Title>{props.GroupProps?.name}</S.Title>
             <S.UserBox>
-              <S.Profile image={props.GroupProps?.groupLeaderImg} />
-              <S.UserName>{props.GroupProps?.groupLeaderName}</S.UserName>
+              <S.Profile image={props.GroupProps?.leaderImg} />
+              <S.UserName>{props.GroupProps?.leaderName}</S.UserName>
             </S.UserBox>
-            <S.Description>{props.GroupProps?.groupDescription}</S.Description>
+            <S.Description>{props.GroupProps?.description}</S.Description>
             <S.JoinButton onClick={onClick}>가입</S.JoinButton>
           </S.ContentWrapper>
         </S.GroupIsClickedModal>
