@@ -10,6 +10,7 @@ import * as I from '../../../../assets/svg';
 import { useNavigate } from 'react-router';
 import { GroupType } from 'types/group.type';
 import group from 'api/group';
+import { toast } from 'react-toastify';
 
 interface GroupProps {
   GroupProps: GroupType | undefined;
@@ -27,11 +28,20 @@ function MainModal(props: GroupProps) {
       setGroupIsClicked(false);
       setGroupPasswordModal(true);
     } else {
-      const response: any = await group.joinGroup(
-        undefined,
-        props.GroupProps?.idx
-      );
-      navigate(`/group/information/${props.GroupProps?.idx}`);
+      try {
+        const response: any = await group.joinGroup(
+          undefined,
+          props.GroupProps?.idx
+        );
+        navigate(`/group/information/${props.GroupProps?.idx}`);
+      } catch (e: any) {
+        if (e.response.status === 404) {
+          toast.error('존재하지 않는 그룹이에요');
+        } else if (e.response.status === 409) {
+          toast.error('이미 가입된 그룹이에요!');
+        }
+        console.log(e);
+      }
     }
   };
 
