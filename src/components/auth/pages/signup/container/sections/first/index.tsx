@@ -21,6 +21,7 @@ function SignupFirstSection() {
     signupEmailDuplicationModalAtom
   );
   const [____, setTimer] = useRecoilState(timerAtom);
+
   const {
     register,
     handleSubmit,
@@ -41,6 +42,7 @@ function SignupFirstSection() {
       setSignupCurrentSection(2);
     } catch {
       setSignupEmailDuplicationModal(true);
+      setIsLoading(false);
     }
   };
 
@@ -56,7 +58,20 @@ function SignupFirstSection() {
   }, [errors.email]);
 
   return (
-    <S.FirstSectionLayout onSubmit={handleSubmit(onValid, inValid)}>
+    <S.FirstSectionLayout
+      onSubmit={handleSubmit(onValid, inValid)}
+      isLoading={isLoading}
+    >
+      <div className='lds-roller'>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
       <AuthInput
         title={'이메일'}
         margin={'0 auto 24px'}
