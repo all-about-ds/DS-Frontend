@@ -47,6 +47,20 @@ class Group {
       return error;
     }
   }
+
+  getGroupInformation(groupId: string) {
+    try {
+      return createAxios({
+        method: 'GET',
+        url: getGroup.getGroupInformation() + groupId,
+        headers: {
+          Authorization: 'Bearer ' + tokenService.getLocalAccessToken(),
+        },
+      });
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
 export default new Group();
