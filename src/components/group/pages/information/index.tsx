@@ -32,12 +32,12 @@ function GroupInformation() {
   return (
     <S.GroupInformationPageLayout>
       <GroupPageHeader />
-      <S.GroupImage src={information?.groupImg} alt='그룹 이미지' />
+      <S.GroupImage src={information?.img} alt='그룹 이미지' />
       <S.TitleBox>
-        <S.Title>{information?.groupName}</S.Title>
+        <S.Title>{information?.name}</S.Title>
         {isOwner && <I.OwnerButton />}
       </S.TitleBox>
-      <S.Description>{information?.groupDescription}</S.Description>
+      <S.Description>{information?.description}</S.Description>
       <S.Line />
       <S.TextMembersBox>
         <S.TextMembers>그룹원들</S.TextMembers>
