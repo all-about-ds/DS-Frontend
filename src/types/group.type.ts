@@ -42,9 +42,9 @@ interface MemberType {
 
 export interface GroupInformationInterface {
   idx: number;
-  groupName: string;
-  groupImg: string;
-  groupDescription: string;
+  name: string;
+  img: string;
+  description: string;
   host: boolean;
   head: {
     idx: number;
