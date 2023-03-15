@@ -3,7 +3,7 @@ import CenterAlignmentLayout from 'components/common/layout/align/center';
 import * as S from './style';
 import { useState } from 'react';
 import User from '../ui';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { MemberType } from 'types/group.type';
 
 interface LocationType {
@@ -13,6 +13,8 @@ interface LocationType {
 function MemberSetting() {
   const [isClicked, setIsClicked] = useState<any>(false);
   const location = useLocation().state as LocationType;
+  const navigate = useNavigate();
+  const params = useParams();
 
   const handleClick = (idx: any) => {
     const newArr = Array(location.list.length).fill(false);
@@ -39,8 +41,11 @@ function MemberSetting() {
                 profileImg={currentValue.profileImg}
               />
             ))}
-          <S.SubmithButtonBox>
-            <S.CancelButton>취소</S.CancelButton>
+          <S.SubmithButtonBox
+            onClick={() => {
+              navigate('/group/' + params.groupId + '/information');
+            }}
+          >
             <S.SubmitButton>완료</S.SubmitButton>
           </S.SubmithButtonBox>
         </S.Layout>
