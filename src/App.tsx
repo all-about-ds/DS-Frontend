@@ -33,7 +33,7 @@ function App() {
         <Route path='/my' element={<MyPage />} />
         <Route path='/group/create' element={<CreateGroupPage />} />
         <Route path='/group/edit' element={<EditGroupPage />} />
-        <Route path='/group/member' element={<MemberSettingPage />} />
+        <Route path='/group/:groupId/member' element={<MemberSettingPage />} />
         <Route path='/group/information' element={<GroupInformationPage />} />
         <Route path='/group/chatting' element={<GroupChattingPage />} />
         <Route

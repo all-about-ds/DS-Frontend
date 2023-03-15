@@ -76,6 +76,35 @@ class Group {
       return error;
     }
   }
+
+
+  kickMember(groupId: number, memberId: number) {
+    try {
+      return createAxios({
+        method: 'DELETE',
+        url: getGroup.kickMember() + groupId + '/' + memberId,
+        headers: {
+          Authorization: 'Bearer ' + tokenService.getLocalAccessToken(),
+        },
+      });
+    } catch (error) {
+      return error;
+    }
+  }
+
+  mandateMember(groupId: number, memberId: number) {
+    try {
+      return createAxios({
+        method: 'POST',
+        url: getGroup.mandateMember() + groupId + '/' + memberId,
+        headers: {
+          Authorization: 'Bearer ' + tokenService.getLocalAccessToken(),
+        },
+      });
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
 export default new Group();

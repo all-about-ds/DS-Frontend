@@ -35,29 +35,15 @@ export const SubmithButtonBox = styled.div`
   margin-top: 899px;
 `;
 
-export const CancelButton = styled.div`
-  background: #2e2e2e;
-  border-radius: 10px;
-  width: 92px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'AppleSDGothicNeoSB00';
-  font-style: normal;
-  font-weight: 400;
-  color: #818181;
-  cursor: pointer;
-`;
-
 export const SubmitButton = styled.div`
   background: #7848de;
   border-radius: 10px;
-  width: 92px;
+  width: 160px;
   height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: auto;
   font-family: 'AppleSDGothicNeoSB00';
   font-style: normal;
   font-weight: 400;

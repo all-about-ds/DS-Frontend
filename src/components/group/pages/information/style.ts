@@ -53,6 +53,10 @@ export const TextMembersBox = styled.section`
   display: flex;
   justify-content: space-between;
   margin-bottom: 1.5rem;
+
+  & > div > svg {
+    cursor: pointer;
+  }
 `;
 
 export const TextMembers = styled.p`
