@@ -1,19 +1,25 @@
 import styled from '@emotion/styled';
 
-export const UserBox = styled.div`
-  width: 230px;
+export const UserItem = styled.div`
+  width: 250px;
   height: 36px;
   display: flex;
   align-items: center;
   margin-bottom: 16px;
+  justify-content: space-between;
 `;
 
-export const UserProfile = styled.div<{ image: string | undefined }>`
-  background: url(${(props) => props.image});
-  background: #d9d9d9;
+export const UserBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12.5px;
+`;
+
+export const UserProfile = styled.img`
   width: 36px;
   height: 36px;
   border-radius: 50%;
+  object-fit: cover;
 `;
 
 export const UserName = styled.div`
@@ -22,8 +28,6 @@ export const UserName = styled.div`
   font-weight: 400;
   font-size: 14px;
   color: #969696;
-  margin-left: 12px;
-  margin-right: 142px;
 `;
 
 export const SettingBox = styled.div`

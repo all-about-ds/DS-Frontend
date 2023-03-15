@@ -8,14 +8,18 @@ function User(props: UserProps) {
 
   return (
     <>
-      <S.UserBox>
-        <S.UserProfile image='' />
-        <S.UserName>박서준</S.UserName>
+      <S.UserItem>
+        <S.UserBox>
+          <S.UserProfile src={props.profileImg} alt='그룹원 이미지' />
+          <S.UserName>{props.name}</S.UserName>
+        </S.UserBox>
         <S.SettingBox onClick={() => handleClick(elementIndex)}>
-          {isClicked ? <I.PurpleDot /> : <I.ThreeDot />}
+          <div style={{ cursor: 'pointer' }}>
+            {isClicked ? <I.PurpleDot /> : <I.ThreeDot />}
+          </div>
           {isClicked && (
             <S.ManageButtonBox>
-              <S.NameBox>진시윤님</S.NameBox>
+              <S.NameBox>{props.name}</S.NameBox>
               <S.Line />
               <S.Expel>추방하기</S.Expel>
               <S.Line />
@@ -23,7 +27,7 @@ function User(props: UserProps) {
             </S.ManageButtonBox>
           )}
         </S.SettingBox>
-      </S.UserBox>
+      </S.UserItem>
     </>
   );
 }
