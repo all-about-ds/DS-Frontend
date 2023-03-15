@@ -1,16 +1,21 @@
 import Header from 'components/common/header';
 import CenterAlignmentLayout from 'components/common/layout/align/center';
 import * as S from './style';
-import * as I from '../../../../../assets/svg';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import User from '../ui';
+import { useLocation } from 'react-router-dom';
+import { MemberType } from 'types/group.type';
+
+interface LocationType {
+  list: MemberType[];
+}
 
 function MemberSetting() {
   const [isClicked, setIsClicked] = useState<any>(false);
-  const [hh, setHh] = useState<Array<number>>([1, 2]);
+  const location = useLocation().state as LocationType;
 
   const handleClick = (idx: any) => {
-    const newArr = Array(hh.length).fill(false);
+    const newArr = Array(location.list.length).fill(false);
     newArr[idx] = !isClicked[idx];
     setIsClicked(newArr);
   };
@@ -22,13 +27,16 @@ function MemberSetting() {
         <S.Layout>
           <S.TopText>DS</S.TopText>
           <S.TitleText>그룹원 설정</S.TitleText>
-          {hh &&
-            hh.map((h: number, index) => (
+          {location.list &&
+            location.list.map((currentValue, index) => (
               <User
-                key={h}
+                key={currentValue.idx}
                 handleClick={handleClick}
                 elementIndex={index}
                 isClicked={isClicked[index]}
+                idx={currentValue.idx}
+                name={currentValue.name}
+                profileImg={currentValue.profileImg}
               />
             ))}
           <S.SubmithButtonBox>
