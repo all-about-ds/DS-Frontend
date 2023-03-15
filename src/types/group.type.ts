@@ -4,6 +4,9 @@ export type UserProps = {
   isClicked: boolean;
   handleClick(idx: number): void;
   elementIndex: number;
+  idx: number;
+  name: string;
+  profileImg: string;
 };
 
 export interface GetGroupListInterface {
@@ -34,7 +37,7 @@ export type PasswordType = {
   password: string | undefined;
 };
 
-interface MemberType {
+export interface MemberType {
   idx: number;
   name: string;
   profileImg: string;

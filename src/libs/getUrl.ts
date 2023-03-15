@@ -38,4 +38,12 @@ export const getGroup = {
   getGroupInformation: () => {
     return 'group/information/';
   },
+
+  kickMember: () => {
+    return 'group/member/';
+  },
+
+  mandateMember: () => {
+    return 'group/mandate/';
+  },
 };

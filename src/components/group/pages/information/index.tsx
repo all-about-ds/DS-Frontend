@@ -2,7 +2,7 @@ import * as S from './style';
 import * as I from 'assets/svg';
 import { useEffect, useState } from 'react';
 import GroupPageHeader from 'components/group/ui/groupPageHeader';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import group from 'api/group';
 import { GroupInformationInterface } from 'types/group.type';
 
@@ -10,6 +10,7 @@ function GroupInformation() {
   const [isOwner, setIsOwner] = useState<boolean>(false);
   const [information, setInformation] = useState<GroupInformationInterface>();
   const params = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getGroupInformationById = async () => {
@@ -35,13 +36,23 @@ function GroupInformation() {
       <S.GroupImage src={information?.img} alt='그룹 이미지' />
       <S.TitleBox>
         <S.Title>{information?.name}</S.Title>
-        {isOwner && <I.OwnerButton />}
+        <I.OwnerButton />
       </S.TitleBox>
       <S.Description>{information?.description}</S.Description>
       <S.Line />
       <S.TextMembersBox>
         <S.TextMembers>그룹원들</S.TextMembers>
-        {isOwner && <I.OwnerButton />}
+        <div
+          onClick={() => {
+            navigate('/group/' + params.groupId + '/member', {
+              state: {
+                list: information?.memberList,
+              },
+            });
+          }}
+        >
+          <I.OwnerButton />
+        </div>
       </S.TextMembersBox>
       <div style={{ margin: '0px 0px 2px 12.43px' }}>
         <I.OwnerIcon />
