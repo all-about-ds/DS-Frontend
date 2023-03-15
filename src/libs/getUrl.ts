@@ -43,7 +43,7 @@ export const getGroup = {
     return 'group/member/';
   },
 
-  authorizeMember: () => {
+  mandateMember: () => {
     return 'group/mandate/';
   },
 };
