@@ -17,16 +17,19 @@ export const HeaderContentBox = styled.div`
   justify-content: space-between;
 `;
 
-export const UserProfile = styled.div`
+export const UserProfile = styled.div<{ image: string }>`
   width: 36px;
   height: 36px;
   border-radius: 50%;
+  background: url(${(props) => props.image});
   background: #d9d9d9;
+  cursor: pointer;
 `;
 
 export const UserName = styled.p`
   color: rgba(255, 255, 255, 0.8);
   font-size: 15px;
+  cursor: pointer;
 `;
 
 export const SearchBar = styled.div`
