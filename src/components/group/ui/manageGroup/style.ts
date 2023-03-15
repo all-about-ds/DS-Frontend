@@ -69,9 +69,14 @@ export const ImageBox = styled.div`
   justify-content: center;
   background: #232323;
   border-radius: 10px;
+  position: relative;
 `;
 
-export const ImageArea = styled.div`
+export const ImageArea = styled.input`
+  display: none;
+`;
+
+export const ImageLabel = styled.label`
   width: 100px;
   height: 130px;
   margin-top: 50px;
@@ -205,7 +210,8 @@ export const CancelButton = styled.div`
   cursor: pointer;
 `;
 
-export const SubmitButton = styled.div`
+export const SubmitButton = styled.button`
+  border: none;
   background: #7848de;
   border-radius: 10px;
   width: 92px;
@@ -219,4 +225,38 @@ export const SubmitButton = styled.div`
   font-size: 15px;
   color: #ffffff;
   cursor: pointer;
+`;
+
+export const UploadedImage = styled.div<{ image: string }>`
+  width: 300px;
+  height: 200px;
+  border-radius: 10px;
+  background: url(${(props) => props.image});
+  flex-shrink: 0;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+`;
+
+export const ChangeButton = styled.input`
+  display: none;
+`;
+
+export const ChangeText = styled.label`
+  font-family: 'AppleSDGothicNeoM00';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #915de7;
+  margin-bottom: 0.63rem;
+  margin-top: 2.5rem;
+  cursor: pointer;
+`;
+
+export const TextWrapper = styled.div`
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
 `;
