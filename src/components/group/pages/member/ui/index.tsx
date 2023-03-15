@@ -2,9 +2,33 @@ import React from 'react';
 import * as S from './style';
 import * as I from '../../../../../assets/svg';
 import { UserProps } from 'types/group.type';
+import { toast } from 'react-toastify';
+import group from 'api/group';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function User(props: UserProps) {
   const { isClicked, handleClick, elementIndex } = props;
+  const params = useParams();
+  const navigate = useNavigate();
+
+  const onKickMember = async () => {
+    try {
+      await group.kickMember(Number(params.groupId), props.idx);
+      toast.success(props.name + '님을 추방했어요');
+    } catch {
+      toast.error('알 수 없는 오류에요');
+    }
+  };
+
+  const onMandateMember = async () => {
+    try {
+      await group.mandateMember(Number(params.groupId), props.idx);
+      toast.success('위임을 성공했어요');
+      navigate('/group/' + params.groupId + '/information');
+    } catch {
+      toast.error('알 수 없는 오류에요');
+    }
+  };
 
   return (
     <>
@@ -21,9 +45,9 @@ function User(props: UserProps) {
             <S.ManageButtonBox>
               <S.NameBox>{props.name}</S.NameBox>
               <S.Line />
-              <S.Expel>추방하기</S.Expel>
+              <S.Expel onClick={onKickMember}>추방하기</S.Expel>
               <S.Line />
-              <S.HandOver>관리자 넘기기</S.HandOver>
+              <S.HandOver onClick={onMandateMember}>관리자 넘기기</S.HandOver>
             </S.ManageButtonBox>
           )}
         </S.SettingBox>
