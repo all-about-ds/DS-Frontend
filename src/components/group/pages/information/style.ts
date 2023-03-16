@@ -22,6 +22,13 @@ export const TitleBox = styled.section`
   }
 `;
 
+export const GroupManageButtonBox = styled.section`
+  width: 52px;
+  height: 20px;
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const Title = styled.h1`
   font-style: normal;
   font-weight: 600;
