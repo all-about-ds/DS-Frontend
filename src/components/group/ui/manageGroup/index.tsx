@@ -1,5 +1,5 @@
 import { Input } from 'components/auth/ui/input/style';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CreateGroupInterface, ManageGroupType } from 'types/group.type';
 import * as S from './style';
 import * as I from '../../../../assets/svg';
@@ -8,7 +8,7 @@ import { ImagesAtom, ImageSrcAtom } from 'atoms/container';
 import { useRecoilState } from 'recoil';
 import group from 'api/group';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
 function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
   const [imageSrc, setImageSrc] = useRecoilState<File[]>(ImageSrcAtom);
@@ -16,11 +16,16 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
   const [memberNum, setMemberNum] = useState<number>(1);
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const {
     register,
     handleSubmit,
     formState: { isSubmitting },
   } = useForm<CreateGroupInterface>();
+
+  useEffect(() => {
+    setImage('');
+  }, []);
 
   const memberUp = () => {
     if (memberNum !== 7) {
@@ -55,9 +60,14 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
         'req',
         new Blob([JSON.stringify(reqDto)], { type: 'application/json' })
       );
-      await group.createGroup(formData);
+      if (groupType === 'create') {
+        await group.createGroup(formData, undefined);
+      } else {
+        await group.createGroup(formData, location.state.idx);
+      }
       setImage('');
-      toast.success('생성되었어요!');
+      if (groupType === 'create') toast.success('생성되었어요!');
+      else toast.success('수정되었어요!');
       navigate('/');
     } catch (e) {
       console.log(e);
@@ -96,6 +106,7 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
               {...register('name', {
                 required: '이름은 필수 입력입니다.',
               })}
+              defaultValue={groupType === 'create' ? '' : location.state.title}
             ></Input>
 
             <S.BoldText style={{ marginTop: '1.5rem' }}>그룹 설명</S.BoldText>
@@ -104,6 +115,9 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
               {...register('description', {
                 required: '설명은 필수 입력입니다.',
               })}
+              defaultValue={
+                groupType === 'create' ? '' : location.state.description
+              }
             ></S.Input>
 
             <S.TextWrapper>
@@ -117,6 +131,10 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
                       encodeFileToBase64(e.target.files![0]);
                     }}
                     id={'image'}
+                    accept='image/*'
+                    defaultValue={
+                      groupType === 'create' ? '' : location.state.img
+                    }
                   />
                   <S.ChangeText htmlFor='image'>변경</S.ChangeText>
                 </>
@@ -130,6 +148,7 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
                   setImageSrc([...imageSrc, e.target.files![0]]);
                   encodeFileToBase64(e.target.files![0]);
                 }}
+                accept='image/*'
                 id={'imageBox'}
               />
               <S.ImageLabel htmlFor='imageBox'>

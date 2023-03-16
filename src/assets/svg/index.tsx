@@ -34,7 +34,7 @@ export { ChattingIcon } from './chattingIcon';
 
 export { TimerIcon } from './timerIcon';
 
-export { OwnerButton } from './ownerButton';
+export { OwnerButton, DeleteButton } from './ownerButton';
 
 export { OwnerIcon } from './ownerIcon';
 
@@ -43,4 +43,3 @@ export { LongRectengle } from './rectengle';
 export { ShowPassword } from './showPassword';
 
 export { HidePassword } from './hidePassword';
-
