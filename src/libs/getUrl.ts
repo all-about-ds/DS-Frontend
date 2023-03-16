@@ -47,3 +47,9 @@ export const getGroup = {
     return 'group/mandate/';
   },
 };
+
+export const getHeader = {
+  getUserInfo: () => {
+    return REACT_APP_BASE_URL + 'header';
+  },
+};
