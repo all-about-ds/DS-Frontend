@@ -43,7 +43,7 @@ function GroupInformation() {
             </div>
             <div
               onClick={() =>
-                navigate('/', {
+                navigate('/group/edit', {
                   state: {
                     idx: information?.idx,
                     img: information?.img,

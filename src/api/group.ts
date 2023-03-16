@@ -62,11 +62,11 @@ class Group {
     }
   }
 
-  createGroup(data: FormData) {
+  createGroup(data: FormData, index: number | undefined) {
     try {
       return createAxios({
         method: 'POST',
-        url: getGroup.getList(),
+        url: getGroup.getList() + `/${index}`,
         data,
         headers: {
           Authorization: 'Bearer ' + tokenService.getLocalAccessToken(),
@@ -76,7 +76,6 @@ class Group {
       return error;
     }
   }
-
 
   kickMember(groupId: number, memberId: number) {
     try {
