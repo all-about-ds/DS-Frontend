@@ -5,6 +5,7 @@ import GroupPageHeader from 'components/group/ui/groupPageHeader';
 import { useNavigate, useParams } from 'react-router-dom';
 import group from 'api/group';
 import { GroupInformationInterface } from 'types/group.type';
+import { toast } from 'react-toastify';
 
 function GroupInformation() {
   const [isOwner, setIsOwner] = useState<boolean>(false);
@@ -29,6 +30,16 @@ function GroupInformation() {
 
     getGroupInformationById();
   }, []);
+
+  const deleteGroup = async () => {
+    try {
+      const response: any = await group.deleteGroup(information?.idx);
+      toast.error('삭제되었습니다!');
+      navigate('/');
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <S.GroupInformationPageLayout>
@@ -78,7 +89,11 @@ function GroupInformation() {
           </S.MemberBox>
         ))}
       </S.MemberList>
-      {isOwner && <S.RemoveGroupButton>그룹삭제</S.RemoveGroupButton>}
+      {isOwner && (
+        <S.RemoveGroupButton onClick={deleteGroup}>
+          그룹삭제
+        </S.RemoveGroupButton>
+      )}
     </S.GroupInformationPageLayout>
   );
 }

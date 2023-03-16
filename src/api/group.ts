@@ -77,7 +77,6 @@ class Group {
     }
   }
 
-
   kickMember(groupId: number, memberId: number) {
     try {
       return createAxios({
@@ -97,6 +96,20 @@ class Group {
       return createAxios({
         method: 'POST',
         url: getGroup.mandateMember() + groupId + '/' + memberId,
+        headers: {
+          Authorization: 'Bearer ' + tokenService.getLocalAccessToken(),
+        },
+      });
+    } catch (error) {
+      return error;
+    }
+  }
+
+  deleteGroup(index: number | undefined) {
+    try {
+      return createAxios({
+        method: 'DELETE',
+        url: getGroup.deleteGroup() + `${index}`,
         headers: {
           Authorization: 'Bearer ' + tokenService.getLocalAccessToken(),
         },

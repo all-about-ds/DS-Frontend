@@ -46,6 +46,10 @@ export const getGroup = {
   mandateMember: () => {
     return 'group/mandate/';
   },
+
+  deleteGroup: () => {
+    return 'group/';
+  },
 };
 
 export const getHeader = {
