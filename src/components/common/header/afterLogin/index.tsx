@@ -14,7 +14,7 @@ function AfterLoginHeader() {
   const getUser = async () => {
     try {
       const response: any = await header.getUserInfo();
-      console.log(response.data);
+
       setName(response.data.name);
       setImage(response.data.img);
     } catch (e) {

@@ -104,6 +104,20 @@ class Group {
       return error;
     }
   }
+
+  deleteGroup(index: number | undefined) {
+    try {
+      return createAxios({
+        method: 'DELETE',
+        url: getGroup.deleteGroup() + `${index}`,
+        headers: {
+          Authorization: 'Bearer ' + tokenService.getLocalAccessToken(),
+        },
+      });
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
 export default new Group();
