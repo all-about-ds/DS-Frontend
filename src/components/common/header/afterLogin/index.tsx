@@ -1,12 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as S from './style';
 import * as I from '../../../../assets/svg';
 import { ReactComponent as Search } from '../../../../assets/svg/search.svg';
 import { useNavigate } from 'react-router';
+import header from 'api/header';
 
 function AfterLoginHeader() {
   const [search, setSearch] = useState(false);
   const navigate = useNavigate();
+  const [name, setName] = useState<string>('');
+  const [image, setImage] = useState<string>('');
+
+  const getUser = async () => {
+    try {
+      const response: any = await header.getUserInfo();
+      console.log(response.data);
+      setName(response.data.name);
+      setImage(response.data.img);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
   return (
     <>
       {search && (
@@ -29,8 +48,8 @@ function AfterLoginHeader() {
         <div onClick={() => navigate('/group/create')}>
           <I.MakeGroup />
         </div>
-        <S.UserProfile image='' onClick={() => navigate('/my')} />
-        <S.UserName onClick={() => navigate('/my')}>오종진님</S.UserName>
+        <S.UserProfile image={image} onClick={() => navigate('/my')} />
+        <S.UserName onClick={() => navigate('/my')}>{name}님</S.UserName>
       </S.HeaderContentBox>
     </>
   );
