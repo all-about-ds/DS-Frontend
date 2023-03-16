@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router';
 
 function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
   const [imageSrc, setImageSrc] = useRecoilState<File[]>(ImageSrcAtom);
-  const [image, setImages] = useRecoilState<string>(ImagesAtom);
+  const [image, setImage] = useRecoilState<string>(ImagesAtom);
   const [memberNum, setMemberNum] = useState<number>(1);
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -56,6 +56,7 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
         new Blob([JSON.stringify(reqDto)], { type: 'application/json' })
       );
       await group.createGroup(formData);
+      setImage('');
       toast.success('생성되었어요!');
       navigate('/');
     } catch (e) {
@@ -73,13 +74,9 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
 
     reader.onload = () => {
       if (reader.result) {
-        setImages(reader.result.toString());
+        setImage(reader.result.toString());
       }
     };
-  };
-
-  const deleteImg = (index: number) => {
-    setImages('');
   };
 
   return (
