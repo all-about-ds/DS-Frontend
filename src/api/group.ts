@@ -62,6 +62,22 @@ class Group {
     }
   }
 
+  createGroup(data: FormData) {
+    try {
+      return createAxios({
+        method: 'POST',
+        url: getGroup.getList(),
+        data,
+        headers: {
+          Authorization: 'Bearer ' + tokenService.getLocalAccessToken(),
+        },
+      });
+    } catch (error) {
+      return error;
+    }
+  }
+
+
   kickMember(groupId: number, memberId: number) {
     try {
       return createAxios({
