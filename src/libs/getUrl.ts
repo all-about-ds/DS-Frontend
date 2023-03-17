@@ -20,6 +20,10 @@ export const getAuth = {
   tokenReissuance: () => {
     return REACT_APP_BASE_URL + 'auth';
   },
+
+  findPassword: () => {
+    return 'auth/change';
+  },
 };
 
 export const getGroup = {

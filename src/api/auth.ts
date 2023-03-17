@@ -1,6 +1,10 @@
 import { createAxios } from 'libs/createAxios';
 import { getAuth } from 'libs/getUrl';
-import { LoginInterface, SignupInterface } from 'types/auth.type';
+import {
+  FindPasswordInterface,
+  LoginInterface,
+  SignupInterface,
+} from 'types/auth.type';
 
 class Auth {
   signin(data: LoginInterface) {
@@ -56,6 +60,22 @@ class Auth {
           name: data.name,
           email: data.email,
           password: data.password,
+        },
+      });
+    } catch (error) {
+      return error;
+    }
+  }
+
+  findPassword(data: FindPasswordInterface) {
+    try {
+      return createAxios({
+        method: 'POST',
+        url: getAuth.findPassword(),
+        data: {
+          email: data.email,
+          password: data.password,
+          newPassword: data.newPassword,
         },
       });
     } catch (error) {
