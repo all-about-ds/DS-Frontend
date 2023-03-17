@@ -50,4 +50,14 @@ export const getGroup = {
   mandateMember: () => {
     return 'group/mandate/';
   },
+
+  deleteGroup: () => {
+    return 'group/';
+  },
+};
+
+export const getHeader = {
+  getUserInfo: () => {
+    return REACT_APP_BASE_URL + 'header';
+  },
 };

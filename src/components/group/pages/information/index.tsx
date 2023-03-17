@@ -5,6 +5,7 @@ import GroupPageHeader from 'components/group/ui/groupPageHeader';
 import { useNavigate, useParams } from 'react-router-dom';
 import group from 'api/group';
 import { GroupInformationInterface } from 'types/group.type';
+import { toast } from 'react-toastify';
 
 function GroupInformation() {
   const [isOwner, setIsOwner] = useState<boolean>(false);
@@ -30,29 +31,61 @@ function GroupInformation() {
     getGroupInformationById();
   }, []);
 
+  const deleteGroup = async () => {
+    try {
+      const response: any = await group.deleteGroup(information?.idx);
+      toast.error('삭제되었습니다!');
+      navigate('/');
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <S.GroupInformationPageLayout>
       <GroupPageHeader />
       <S.GroupImage src={information?.img} alt='그룹 이미지' />
       <S.TitleBox>
         <S.Title>{information?.name}</S.Title>
-        <I.OwnerButton />
+        {isOwner && (
+          <S.GroupManageButtonBox>
+            <div>
+              <I.DeleteButton />
+            </div>
+            <div
+              onClick={() =>
+                navigate('/group/edit', {
+                  state: {
+                    idx: information?.idx,
+                    img: information?.img,
+                    title: information?.name,
+                    description: information?.description,
+                  },
+                })
+              }
+            >
+              <I.OwnerButton />
+            </div>
+          </S.GroupManageButtonBox>
+        )}
       </S.TitleBox>
       <S.Description>{information?.description}</S.Description>
       <S.Line />
       <S.TextMembersBox>
         <S.TextMembers>그룹원들</S.TextMembers>
-        <div
-          onClick={() => {
-            navigate('/group/' + params.groupId + '/member', {
-              state: {
-                list: information?.memberList,
-              },
-            });
-          }}
-        >
-          <I.OwnerButton />
-        </div>
+        {isOwner && (
+          <div
+            onClick={() => {
+              navigate('/group/' + params.groupId + '/member', {
+                state: {
+                  list: information?.memberList,
+                },
+              });
+            }}
+          >
+            <I.OwnerButton />
+          </div>
+        )}
       </S.TextMembersBox>
       <div style={{ margin: '0px 0px 2px 12.43px' }}>
         <I.OwnerIcon />
@@ -78,7 +111,11 @@ function GroupInformation() {
           </S.MemberBox>
         ))}
       </S.MemberList>
-      {isOwner && <S.RemoveGroupButton>그룹삭제</S.RemoveGroupButton>}
+      {isOwner && (
+        <S.RemoveGroupButton onClick={deleteGroup}>
+          그룹삭제
+        </S.RemoveGroupButton>
+      )}
     </S.GroupInformationPageLayout>
   );
 }

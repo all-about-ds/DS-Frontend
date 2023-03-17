@@ -56,3 +56,12 @@ export interface GroupInformationInterface {
   };
   memberList: MemberType[];
 }
+
+export interface CreateGroupInterface {
+  name: string;
+  description: string;
+  img: string;
+  maxCount: number;
+  secret: boolean;
+  password: string;
+}

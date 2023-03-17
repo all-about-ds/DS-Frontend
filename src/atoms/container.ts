@@ -68,3 +68,15 @@ export const modalAtomFamily = atomFamily({
   key: 'modal',
   default: false,
 });
+
+export const ImageSrcAtom = atom({
+  key: 'imageSrc',
+  default: [],
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const ImagesAtom = atom({
+  key: 'image',
+  default: undefined,
+  effects_UNSTABLE: [persistAtom],
+});
