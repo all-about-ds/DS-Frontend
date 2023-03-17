@@ -85,13 +85,8 @@ function SecondSection(props: AuthFormSectionPropsInterface) {
   };
 
   useEffect(() => {
-    const zero = {
-      minute: 0,
-      seconds: 0,
-    };
-
-    if (email && timer === zero) {
-      console.log('ds');
+    if (email && timer.minute === 5 && timer.seconds === 0) {
+      setErrorMessage('인증번호가 만료됐어요');
     }
   }, []);
 
