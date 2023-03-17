@@ -1,11 +1,6 @@
-import { atom } from 'recoil';
+import { atom, atomFamily } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
 const { persistAtom } = recoilPersist();
-
-export const dummyAtom = atom({
-  key: 'dummy',
-  default: false,
-});
 
 export const signupCurrentSectionAtom = atom({
   key: 'signupCurrentSection',
@@ -16,11 +11,6 @@ export const signupCurrentSectionAtom = atom({
 export const signupEmailDuplicationModalAtom = atom({
   key: 'signupEmailDuplicationModal',
   default: false,
-});
-
-export const findPasswordCurrentSectionAtom = atom({
-  key: 'findPasswordCurrentSection',
-  default: 1,
 });
 
 export const groupIsClickedAtom = atom({
@@ -51,4 +41,30 @@ export const timerAtom = atom({
     seconds: 0,
   },
   effects_UNSTABLE: [persistAtom],
+});
+
+export const currentSectionsAtomFamily = atomFamily({
+  key: 'currentSection',
+  default: 1,
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const timerAtomFamily = atomFamily({
+  key: 'currentTimer',
+  default: {
+    minute: 5,
+    seconds: 0,
+  },
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const authEmailAtomFamily = atomFamily({
+  key: 'authEmail',
+  default: '',
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const modalAtomFamily = atomFamily({
+  key: 'modal',
+  default: false,
 });
