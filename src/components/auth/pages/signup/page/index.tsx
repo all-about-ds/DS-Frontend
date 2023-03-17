@@ -6,7 +6,7 @@ import {
 import Header from 'components/common/header';
 import AuthFrame from 'components/frame/auth';
 import CenterAlignmentLayout from 'components/common/layout/align/center';
-import SignupEmailDuplicationModal from 'components/modals/signupException';
+import AuthEmailErrorModal from 'components/modals/authException';
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import SignupSectionContainer from '../container';
@@ -47,7 +47,7 @@ function Signup() {
 
   return (
     <>
-      {signupEmailDuplicationModal && <SignupEmailDuplicationModal />}
+      {/* {signupEmailDuplicationModal && <AuthEmailErrorModal />} */}
       <Header />
       <CenterAlignmentLayout>
         <AuthFrame
