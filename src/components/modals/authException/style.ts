@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 
-export const SignupEmailDuplicationModal = styled.div`
+export const AuthEmailErrorModal = styled.div`
   position: relative;
-  width: 20vw;
+  width: 22vw;
   max-width: 240px;
-  min-width: 180px;
+  min-width: 200px;
   height: 20vh;
   min-height: 200px;
   background-color: #212121;
