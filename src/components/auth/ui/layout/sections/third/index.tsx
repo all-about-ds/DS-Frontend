@@ -36,9 +36,6 @@ function ThirdSection(props: AuthFormSectionPropsInterface) {
           email: email,
           password: data.input2,
         });
-        navigate('/auth/signin');
-        setEmail('');
-        setCurrentSection(1);
         toast.success('회원가입 성공!');
       } catch {
         setErrorMessage('이미 있는 이름이에요');
@@ -53,9 +50,6 @@ function ThirdSection(props: AuthFormSectionPropsInterface) {
             password: data.input1,
             newPassword: data.input2,
           });
-          navigate('/auth/signin');
-          setEmail('');
-          setCurrentSection(1);
           toast.success('비밀번호를 변경했어요!');
         } catch {
           setErrorMessage('알 수 없는 에러에요');
@@ -64,6 +58,10 @@ function ThirdSection(props: AuthFormSectionPropsInterface) {
         setErrorMessage('비밀번호가 일치하지 않아요');
       }
     }
+
+    navigate('/auth/signin');
+    setEmail('');
+    setCurrentSection(1);
   };
 
   const inValid = () => {
