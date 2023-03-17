@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 interface AuthFrameProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
-  title: '회원가입' | '로그인' | '비밀번호 찾기';
+  title: string;
   progressBarValue?: number;
   setSection?: SetterOrUpdater<number>;
 }
@@ -31,7 +31,7 @@ function AuthFrame(props: AuthFrameProps) {
   return (
     <S.AuthFrame>
       {props.title === '로그인' && <S.LoginText>{props.title}</S.LoginText>}
-      {props.title === ('회원가입' || '비밀번호 찾기') && (
+      {props.title !== '로그인' && (
         <S.TopBox>
           <div onClick={onBackIconClick}>
             <I.AuthGoBackIcon />
