@@ -1,7 +1,3 @@
-export { dummyAtom } from './container';
-export { signupCurrentSectionAtom } from './container';
-export { signupEmailDuplicationModalAtom } from './container';
-export { findPasswordCurrentSectionAtom } from './container';
 export { groupIsClickedAtom } from './container';
 export { timerAtom } from './container';
 export { signupEmailAtom } from './container';
@@ -10,3 +6,7 @@ export { groupIndexAtom } from './container';
 export { ImageSrcAtom } from './container';
 export { ImagesAtom } from './container';
 export { SearchAtom } from './container';
+export { currentSectionsAtomFamily } from './container';
+export { timerAtomFamily } from './container';
+export { authEmailAtomFamily } from './container';
+export { modalAtomFamily } from './container';

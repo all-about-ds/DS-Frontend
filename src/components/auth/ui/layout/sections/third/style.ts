@@ -22,6 +22,7 @@ export const Text = styled.h1`
     font-size: 12px;
     text-align: center;
     color: #acacac;
+    margin-bottom: 1.8rem;
   }
 `;
 

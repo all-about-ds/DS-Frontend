@@ -5,8 +5,12 @@ export const getAuth = {
     return REACT_APP_BASE_URL + 'auth/signin';
   },
 
-  sendAuthenticationNumber: () => {
+  sendSignupAuthenticationNumber: () => {
     return 'auth/email';
+  },
+
+  sendFindPasswordAuthenticationNumber: () => {
+    return 'auth/password/email';
   },
 
   checkAuthenticationNumber: () => {
@@ -19,6 +23,10 @@ export const getAuth = {
 
   tokenReissuance: () => {
     return REACT_APP_BASE_URL + 'auth';
+  },
+
+  findPassword: () => {
+    return 'auth/change';
   },
 };
 
