@@ -9,7 +9,11 @@ import group from 'api/group';
 import { GroupType } from 'types/group.type';
 import { useRecoilState } from 'recoil';
 import { groupIsClickedAtom } from 'atoms';
-import { groupIndexAtom, groupPasswordModalAtom } from 'atoms/container';
+import {
+  groupIndexAtom,
+  groupPasswordModalAtom,
+  SearchAtom,
+} from 'atoms/container';
 import PasswordModal from 'components/modals/main/passwordCheck';
 
 function Main() {
@@ -25,6 +29,7 @@ function Main() {
     useRecoilState(groupIsClickedAtom);
   const [groupPassword] = useRecoilState(groupPasswordModalAtom);
   const [index] = useRecoilState(groupIndexAtom);
+  const [search, setSearch] = useRecoilState(SearchAtom);
 
   const sortButton = (type: string) => {
     if (type === '인기') {
@@ -41,11 +46,11 @@ function Main() {
     setGroupIsClicked(true);
   };
 
-  const getDiaryList = useCallback(async () => {
+  const getGroupList = useCallback(async () => {
     setLoaded(false);
     try {
       const response: any = await group.getGroupList({
-        keword: undefined,
+        keyword: search.keyword === '' ? undefined : search.keyword,
         page: page.current,
         size: 8,
       });
@@ -60,20 +65,37 @@ function Main() {
     } catch (e: any) {
       throw new Error(e);
     }
-  }, []);
+  }, [search]);
 
   useEffect(() => {
     if (!observerTargetEl.current || !hasNextPage) return;
 
     const io = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting && loaded) {
-        getDiaryList();
+        getGroupList();
       }
     });
 
     io.observe(observerTargetEl.current as HTMLElement);
     return () => io.disconnect();
-  }, [getDiaryList, hasNextPage]);
+  }, [getGroupList, hasNextPage]);
+
+  useEffect(() => {
+    if (search.isSearchRequested) {
+      page.current = 0;
+      setList([]);
+      getGroupList();
+      setSearch((oldValue) => ({
+        ...oldValue,
+        keyword: '',
+        isSearchRequested: false,
+      }));
+    }
+  }, [search.isSearchRequested]);
+
+  useEffect(() => {
+    getGroupList();
+  }, []);
 
   return (
     <>

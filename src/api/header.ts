@@ -1,5 +1,6 @@
 import { createAxios } from 'libs/createAxios';
-import { getHeader } from 'libs/getUrl';
+import { getUser } from 'libs/getUrl';
+
 import tokenService from 'utils/tokenService';
 
 class Header {
@@ -7,7 +8,7 @@ class Header {
     try {
       return createAxios({
         method: 'GET',
-        url: getHeader.getUserInfo(),
+        url: getUser.getUserInfo(),
         headers: {
           Authorization: 'Bearer ' + tokenService.getLocalAccessToken(),
         },
