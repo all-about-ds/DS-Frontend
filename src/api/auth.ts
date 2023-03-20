@@ -26,7 +26,21 @@ class Auth {
     try {
       return createAxios({
         method: 'POST',
-        url: getAuth.sendAuthenticationNumber(),
+        url: getAuth.sendSignupAuthenticationNumber(),
+        params: {
+          email: email,
+        },
+      });
+    } catch (error) {
+      return error;
+    }
+  }
+
+  sendFindPasswordAuthenticationNumber(email: string) {
+    try {
+      return createAxios({
+        method: 'POST',
+        url: getAuth.sendSignupAuthenticationNumber(),
         params: {
           email: email,
         },
