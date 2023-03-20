@@ -96,6 +96,8 @@ export const FirstSectionLayout = styled.form<{ isLoading: boolean }>`
   }
 `;
 
+export const LoadingAnimation = styled.div``;
+
 export const Description = styled.article<{ isError: string | undefined }>`
   text-align: center;
   color: white;
