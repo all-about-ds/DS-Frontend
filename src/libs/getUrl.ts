@@ -65,3 +65,9 @@ export const getHeader = {
     return REACT_APP_BASE_URL + 'header';
   },
 };
+
+export const getUser = {
+  getMyInfo: () => {
+    return 'user/';
+  },
+};
