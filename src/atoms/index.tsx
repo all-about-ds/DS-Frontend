@@ -1,6 +1,4 @@
 export { groupIsClickedAtom } from './container';
-export { timerAtom } from './container';
-export { signupEmailAtom } from './container';
 export { groupPasswordModalAtom } from './container';
 export { groupIndexAtom } from './container';
 export { ImageSrcAtom } from './container';
