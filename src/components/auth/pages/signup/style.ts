@@ -6,7 +6,7 @@ export const GoLoginBox = styled.div`
   text-align: center;
   margin: auto;
   gap: 5px;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 
   p {
     font-style: normal;

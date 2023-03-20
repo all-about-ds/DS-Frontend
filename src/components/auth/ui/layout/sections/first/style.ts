@@ -96,54 +96,12 @@ export const FirstSectionLayout = styled.form<{ isLoading: boolean }>`
   }
 `;
 
-export const LoadingGif = styled.img`
-  position: absolute;
-  left: 50%;
-  top: 40%;
-  transform: translate(-50%, -50%);
-  width: 75px;
-  height: 75px;
-`;
+export const LoadingAnimation = styled.div``;
 
-export const InputWrapper = styled.div`
-  width: 100%;
-  min-width: 284px;
-  margin: 0 auto 24px;
-`;
-
-export const InputTitle = styled.p`
-  font-style: normal;
-  font-weight: 400;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.9);
-  margin-left: 8px;
-  margin: 0 0 10px 8px;
-`;
-
-export const Input = styled.input`
-  border: none;
-  width: 100%;
-  height: 40px;
-  border-radius: 10px;
-  background: #232323;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.9);
-  padding: 13px;
-  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box; /* Firefox, other Gecko */
-  box-sizing: border-box; /* Opera/IE 8+ */
-
-  :focus {
-    outline: none;
-  }
-`;
-
-export const Description = styled.article`
+export const Description = styled.article<{ isError: string | undefined }>`
   text-align: center;
   color: white;
-  margin-top: 7rem;
+  margin-top: ${(e) => (e.isError ? '5rem' : '7.1rem')};
 `;
 
 export const Box = styled.div`
@@ -157,10 +115,8 @@ export const Box = styled.div`
   }
 `;
 
-export const ErrorText = styled.p<{ isError: boolean }>`
-  display: ${(e) => (e.isError ? 'block' : 'none')};
+export const ErrorText = styled.p`
   color: #ee3939;
   font-size: 13px;
-  text-align: center;
-  margin-bottom: -2.2rem;
+  margin: 0 0 0 0.5rem;
 `;

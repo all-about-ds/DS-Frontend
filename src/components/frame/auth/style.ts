@@ -16,7 +16,7 @@ export const AuthFrame = styled.div`
 export const TopBox = styled.div`
   width: 16.5vw;
   min-width: 284px;
-  margin: auto;
+  margin: 0 auto 2rem;
   display: flex;
   justify-content: space-between;
   margin-top: 40px;

@@ -1,17 +1,17 @@
-import { signupCurrentSectionAtom, signupEmailAtom, timerAtom } from 'atoms';
-import AuthButton from 'components/auth/ui/button';
 import auth from 'api/auth';
+import { authEmailAtomFamily, timerAtomFamily } from 'atoms';
+import AuthButton from 'components/auth/ui/button';
 import { useEffect, useState } from 'react';
-import { useRecoilState, useResetRecoilState } from 'recoil';
-import * as S from './style';
 import { toast } from 'react-toastify';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { AuthFormSectionPropsInterface } from 'types/auth.type';
+import * as S from './style';
 
-function SignupSecondSection() {
-  const [timer, setTimer] = useRecoilState(timerAtom);
+function SecondSection(props: AuthFormSectionPropsInterface) {
   const [inputs, setInputs] = useState<string[]>(['', '', '', '']);
   const [errorMessage, setErrorMessage] = useState<string>('');
-  const [_, setSignupCurrentSection] = useRecoilState(signupCurrentSectionAtom);
-  const [signupEmail, __] = useRecoilState(signupEmailAtom);
+  const [timer, setTimer] = useRecoilState(timerAtomFamily(props.atomKey));
+  const email = useRecoilValue(authEmailAtomFamily(props.atomKey));
 
   const handleChange = (index: number, value: string) => {
     const newInputs = [...inputs];
@@ -62,8 +62,8 @@ function SignupSecondSection() {
       inputs.forEach(function (currentvalue) {
         code += currentvalue;
       });
-      await auth.checkAuthenticationNumber(signupEmail, code);
-      setSignupCurrentSection(3);
+      await auth.checkAuthenticationNumber(email, code);
+      props.setSection(3);
     } catch {
       setErrorMessage('거부된 인증번호 입니다');
     }
@@ -73,16 +73,32 @@ function SignupSecondSection() {
     setErrorMessage('');
 
     try {
-      await auth.sendAuthenticationNumber(signupEmail.email);
+      switch (props.atomKey) {
+        case 'signup': {
+          await auth.sendSignupAuthenticationNumber(email);
+          break;
+        }
+        case 'findPassword': {
+          await auth.sendFindPasswordAuthenticationNumber(email);
+          break;
+        }
+      }
+
       setTimer({
         minute: 5,
         seconds: 0,
       });
       toast.success('인증번호를 재전송 했어요');
     } catch {
-      throw new Error('알 수 없는 에러입니다.');
+      setErrorMessage('알 수 없는 오류입니다');
     }
   };
+
+  useEffect(() => {
+    if (email && timer.minute === 0 && timer.seconds === 0) {
+      setErrorMessage('인증번호가 만료됐어요');
+    }
+  }, [timer]);
 
   return (
     <S.SecondSectionLayout>
@@ -119,4 +135,4 @@ function SignupSecondSection() {
   );
 }
 
-export default SignupSecondSection;
+export default SecondSection;
