@@ -25,6 +25,7 @@ function AuthForm(props: AuthFormProps) {
           title={props.title}
           progressBarValue={props.progressBarValue}
           setSection={props.setSection}
+          atomKey={props.atomKey}
         >
           {props.children}
         </AuthFrame>
