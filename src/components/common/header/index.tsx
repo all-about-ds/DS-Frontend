@@ -1,4 +1,4 @@
-import { signupCurrentSectionAtom, signupEmailAtom, timerAtom } from 'atoms';
+import { authEmailAtomFamily, currentSectionsAtomFamily } from 'atoms';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
@@ -9,18 +9,33 @@ import * as S from './style';
 
 function Header() {
   const { pathname } = useLocation();
-  const [_, setSignupCurrentSection] = useRecoilState(signupCurrentSectionAtom);
-  const [___, setTimter] = useRecoilState(timerAtom);
-  const [__, setSignEmail] = useRecoilState(signupEmailAtom);
+
+  const [signupEmail, setSignupEmail] = useRecoilState(
+    authEmailAtomFamily('signup')
+  );
+  const [findPasswordEmail, setFindPasswordEmail] = useRecoilState(
+    authEmailAtomFamily('findPassword')
+  );
+  const [signupSection, setSignupSection] = useRecoilState(
+    currentSectionsAtomFamily('signup')
+  );
+  const [findPasswordSection, setFindPasswordSection] = useRecoilState(
+    currentSectionsAtomFamily('findPassword')
+  );
 
   useEffect(() => {
-    if (pathname !== '/auth/signup') {
-      setTimter({
-        minute: 5,
-        seconds: 0,
-      });
-      setSignupCurrentSection(1);
-      setSignEmail('');
+    if (signupEmail !== '' && signupSection !== 1) {
+      if (pathname !== '/auth/signup') {
+        setSignupEmail('');
+        setSignupSection(1);
+      }
+    }
+
+    if (findPasswordEmail !== '' && findPasswordSection !== 1) {
+      if (pathname !== '/auth/findPassword') {
+        setFindPasswordEmail('');
+        setFindPasswordSection(1);
+      }
     }
   }, []);
 
