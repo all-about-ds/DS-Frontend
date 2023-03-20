@@ -52,8 +52,8 @@ export const getGroup = {
   },
 };
 
-export const getHeader = {
+export const getUser = {
   getUserInfo: () => {
-    return REACT_APP_BASE_URL + 'header';
+    return REACT_APP_BASE_URL + 'user/header';
   },
 };
