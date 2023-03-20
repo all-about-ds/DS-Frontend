@@ -1,20 +1,29 @@
 import React from 'react';
 import * as S from './style';
 import * as I from 'assets/svg';
-import { SetterOrUpdater } from 'recoil';
+import { SetterOrUpdater, useRecoilValue } from 'recoil';
 import { useNavigate } from 'react-router-dom';
+import { authEmailAtomFamily, currentSectionsAtomFamily } from 'atoms';
+import auth from 'api/auth';
 
 interface AuthFrameProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
   title: string;
   progressBarValue?: number;
   setSection?: SetterOrUpdater<number>;
+  atomKey?: 'signup' | 'findPassword';
 }
 
 function AuthFrame(props: AuthFrameProps) {
   const navigate = useNavigate();
+  const authEmail = useRecoilValue(authEmailAtomFamily(props.atomKey));
+  const section = useRecoilValue(currentSectionsAtomFamily(props.atomKey));
 
-  const onBackIconClick = () => {
+  const onBackIconClick = async () => {
+    if (section === 3) {
+      await auth.sendAuthenticationNumber(authEmail);
+    }
+
     props.setSection?.((oldValue: number) => {
       if (oldValue === 1) {
         return 1;
