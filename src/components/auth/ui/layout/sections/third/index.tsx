@@ -1,13 +1,13 @@
 import * as S from './style';
 import * as I from 'assets/svg';
 import auth from 'api/auth';
-import { authEmailAtomFamily, currentSectionsAtomFamily } from 'atoms';
+import { authEmailAtomFamily } from 'atoms';
 import AuthButton from 'components/auth/ui/button';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { AuthFormSectionPropsInterface } from 'types/auth.type';
 
 interface UseFormType {
@@ -17,10 +17,7 @@ interface UseFormType {
 
 function ThirdSection(props: AuthFormSectionPropsInterface) {
   const [errorMessage, setErrorMessage] = useState<string>('');
-  const [email, setEmail] = useRecoilState(authEmailAtomFamily(props.atomKey));
-  const [_, setCurrentSection] = useRecoilState(
-    currentSectionsAtomFamily(props.atomKey)
-  );
+  const email = useRecoilValue(authEmailAtomFamily(props.atomKey));
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -60,8 +57,6 @@ function ThirdSection(props: AuthFormSectionPropsInterface) {
     }
 
     navigate('/auth/signin');
-    setEmail('');
-    setCurrentSection(1);
   };
 
   const inValid = () => {
@@ -69,7 +64,7 @@ function ThirdSection(props: AuthFormSectionPropsInterface) {
   };
 
   const inputsRendering = () => {
-    const view: any[] = [];
+    const view = [];
 
     switch (props.atomKey) {
       case 'signup':

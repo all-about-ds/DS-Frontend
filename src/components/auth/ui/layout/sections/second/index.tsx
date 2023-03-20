@@ -3,7 +3,7 @@ import { authEmailAtomFamily, timerAtomFamily } from 'atoms';
 import AuthButton from 'components/auth/ui/button';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { AuthFormSectionPropsInterface } from 'types/auth.type';
 import * as S from './style';
 
@@ -11,7 +11,7 @@ function SecondSection(props: AuthFormSectionPropsInterface) {
   const [inputs, setInputs] = useState<string[]>(['', '', '', '']);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [timer, setTimer] = useRecoilState(timerAtomFamily(props.atomKey));
-  const [email] = useRecoilState(authEmailAtomFamily(props.atomKey));
+  const email = useRecoilValue(authEmailAtomFamily(props.atomKey));
 
   const handleChange = (index: number, value: string) => {
     const newInputs = [...inputs];
@@ -80,15 +80,15 @@ function SecondSection(props: AuthFormSectionPropsInterface) {
       });
       toast.success('인증번호를 재전송 했어요');
     } catch {
-      setErrorMessage('알 수 없는 에러입니다');
+      setErrorMessage('알 수 없는 오류입니다');
     }
   };
 
   useEffect(() => {
-    if (email && timer.minute === 5 && timer.seconds === 0) {
+    if (email && timer.minute === 0 && timer.seconds === 0) {
       setErrorMessage('인증번호가 만료됐어요');
     }
-  }, []);
+  }, [timer]);
 
   return (
     <S.SecondSectionLayout>
