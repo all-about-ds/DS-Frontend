@@ -21,7 +21,16 @@ function AuthFrame(props: AuthFrameProps) {
 
   const onBackIconClick = async () => {
     if (section === 3) {
-      await auth.sendSignupAuthenticationNumber(authEmail);
+      switch (props.atomKey) {
+        case 'signup': {
+          await auth.sendSignupAuthenticationNumber(authEmail);
+          break;
+        }
+        case 'findPassword': {
+          await auth.sendFindPasswordAuthenticationNumber(authEmail);
+          break;
+        }
+      }
     }
 
     props.setSection?.((oldValue: number) => {

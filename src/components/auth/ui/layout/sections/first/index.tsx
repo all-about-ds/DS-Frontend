@@ -28,7 +28,16 @@ function FirstSection(props: AuthFormSectionPropsInterface) {
     setLoaded(false);
 
     try {
-      await auth.sendSignupAuthenticationNumber(email);
+      switch (props.atomKey) {
+        case 'signup': {
+          await auth.sendSignupAuthenticationNumber(email);
+          break;
+        }
+        case 'findPassword': {
+          await auth.sendFindPasswordAuthenticationNumber(email);
+          break;
+        }
+      }
       setLoaded(true);
       setEmail(email);
       setTimer({
