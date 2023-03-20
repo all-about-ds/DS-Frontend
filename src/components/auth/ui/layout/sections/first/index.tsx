@@ -4,23 +4,25 @@ import AuthButton from 'components/auth/ui/button';
 import AuthInput from 'components/auth/ui/input';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { AuthFormSectionPropsInterface } from 'types/auth.type';
 import * as S from './style';
 
 function FirstSection(props: AuthFormSectionPropsInterface) {
   const [loaded, setLoaded] = useState<boolean>(true);
-  const [_, setEmail] = useRecoilState(authEmailAtomFamily(props.atomKey));
-  const [__, setTimer] = useRecoilState(timerAtomFamily(props.atomKey));
-  const [, setAuthEmailErrorModal] = useRecoilState(
-    modalAtomFamily(props.atomKey)
-  );
+  const setEmail = useSetRecoilState(authEmailAtomFamily(props.atomKey));
+  const setTimer = useSetRecoilState(timerAtomFamily(props.atomKey));
+  const setAuthErrorModal = useSetRecoilState(modalAtomFamily(props.atomKey));
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<{ email: string }>();
+  } = useForm<{ email: string }>({
+    defaultValues: {
+      email: useRecoilValue(authEmailAtomFamily(props.atomKey)),
+    },
+  });
 
   const onValid = async ({ email }: { email: string }) => {
     setLoaded(false);
@@ -28,30 +30,30 @@ function FirstSection(props: AuthFormSectionPropsInterface) {
     try {
       await auth.sendAuthenticationNumber(email);
       setLoaded(true);
+      setEmail(email);
       setTimer({
         minute: 5,
         seconds: 0,
       });
-      setEmail(email);
       props.setSection(2);
     } catch {
       setLoaded(true);
-      setAuthEmailErrorModal(true);
+      setAuthErrorModal(true);
     }
   };
 
   return (
     <S.FirstSectionLayout onSubmit={handleSubmit(onValid)} isLoading={!loaded}>
-      <div className='lds-roller'>
-        <div />
-        <div />
-        <div />
-        <div />
-        <div />
-        <div />
-        <div />
-        <div />
-      </div>
+      <S.LoadingAnimation className='lds-roller'>
+        <div className='roll-item' />
+        <div className='roll-item' />
+        <div className='roll-item' />
+        <div className='roll-item' />
+        <div className='roll-item' />
+        <div className='roll-item' />
+        <div className='roll-item' />
+        <div className='roll-item' />
+      </S.LoadingAnimation>
       <AuthInput
         type='text'
         title={'이메일'}
