@@ -40,7 +40,7 @@ class Auth {
     try {
       return createAxios({
         method: 'POST',
-        url: getAuth.sendSignupAuthenticationNumber(),
+        url: getAuth.sendFindPasswordAuthenticationNumber(),
         params: {
           email: email,
         },

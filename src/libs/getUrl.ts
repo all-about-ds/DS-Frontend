@@ -9,6 +9,10 @@ export const getAuth = {
     return 'auth/email';
   },
 
+  sendFindPasswordAuthenticationNumber: () => {
+    return 'auth/password/email';
+  },
+
   checkAuthenticationNumber: () => {
     return 'auth/code';
   },
