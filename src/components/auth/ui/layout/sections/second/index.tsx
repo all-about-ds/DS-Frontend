@@ -73,7 +73,7 @@ function SecondSection(props: AuthFormSectionPropsInterface) {
     setErrorMessage('');
 
     try {
-      await auth.sendAuthenticationNumber(email);
+      await auth.sendSignupAuthenticationNumber(email);
       setTimer({
         minute: 5,
         seconds: 0,

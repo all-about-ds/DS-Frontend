@@ -22,7 +22,7 @@ class Auth {
     }
   }
 
-  sendAuthenticationNumber(email: string) {
+  sendSignupAuthenticationNumber(email: string) {
     try {
       return createAxios({
         method: 'POST',

@@ -21,7 +21,7 @@ function AuthFrame(props: AuthFrameProps) {
 
   const onBackIconClick = async () => {
     if (section === 3) {
-      await auth.sendAuthenticationNumber(authEmail);
+      await auth.sendSignupAuthenticationNumber(authEmail);
     }
 
     props.setSection?.((oldValue: number) => {

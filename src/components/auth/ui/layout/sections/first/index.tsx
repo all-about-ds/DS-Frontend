@@ -28,7 +28,7 @@ function FirstSection(props: AuthFormSectionPropsInterface) {
     setLoaded(false);
 
     try {
-      await auth.sendAuthenticationNumber(email);
+      await auth.sendSignupAuthenticationNumber(email);
       setLoaded(true);
       setEmail(email);
       setTimer({
