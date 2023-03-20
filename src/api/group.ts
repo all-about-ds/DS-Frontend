@@ -12,7 +12,7 @@ class Group {
         params: {
           page: data.page,
           size: data.size,
-          keword: data.keword,
+          keyword: data.keyword,
         },
       });
     } catch (error) {

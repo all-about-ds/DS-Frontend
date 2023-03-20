@@ -54,3 +54,11 @@ export const ImagesAtom = atom({
   default: undefined,
   effects_UNSTABLE: [persistAtom],
 });
+
+export const SearchAtom = atom({
+  key: 'search',
+  default: {
+    keyword: '',
+    isSearchRequested: false,
+  },
+});
