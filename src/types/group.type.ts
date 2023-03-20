@@ -10,7 +10,7 @@ export type UserProps = {
 };
 
 export interface GetGroupListInterface {
-  keword: string | undefined;
+  keyword: string | undefined;
   page: number;
   size: number;
 }
