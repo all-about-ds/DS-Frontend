@@ -5,7 +5,7 @@ import tokenService from 'utils/tokenService';
 class User {
   getMyInfo() {
     try {
-      createAxios({
+      return createAxios({
         method: 'GET',
         url: getUser.getMyInfo(),
         headers: {
