@@ -11,10 +11,10 @@ import {
   MemberSettingPage,
   EditGroupPage,
   GroupInformationPage,
+  GroupChattingPage,
 } from 'pages';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import GroupChattingPage from 'pages/GroupChattingPage';
 
 function App() {
   return (
