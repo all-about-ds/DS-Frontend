@@ -1,7 +1,7 @@
 import { modalAtomFamily } from 'atoms';
 import ModalLayout from 'components/common/layout/modal';
 import React from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import * as S from './style';
 import * as I from 'assets/svg';
 
@@ -12,7 +12,7 @@ interface MyPageModalLayoutProps {
 }
 
 function MyPageModalLayout(props: MyPageModalLayoutProps) {
-  const setModal = useSetRecoilState(modalAtomFamily(props.atomKey));
+  const [, setModal] = useRecoilState(modalAtomFamily(props.atomKey));
 
   return (
     <ModalLayout setModal={setModal}>

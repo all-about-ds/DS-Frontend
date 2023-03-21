@@ -43,17 +43,24 @@ export const ProfileImage = styled.img`
   border-radius: 120px;
 `;
 
-export const UpdateBox = styled.div`
+export const UpdateBox = styled.div<{ loaded: boolean }>`
   display: flex;
   align-items: center;
   gap: 8px;
   margin-bottom: 0.5rem;
+  pointer-events: ${(e) => !e.loaded && 'none'};
 
   p {
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
     color: #ffffff;
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   svg {

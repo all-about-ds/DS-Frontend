@@ -21,7 +21,7 @@ export const Description = styled.h3`
   margin: 1rem 0 2rem;
 `;
 
-export const Input = styled.input<{ isError?: boolean | undefined }>`
+export const Input = styled.input<{ isError: string }>`
   border: ${(e) => (e.isError ? '1px solid #EE3939' : 'none')};
   background: ${(e) => (e.isError ? '#412626' : '#363636')};
   display: block;
@@ -50,9 +50,10 @@ export const ErrorText = styled.p<{ isError: string }>`
   margin-left: 1.5rem;
   margin-top: 0.5rem;
 `;
+
 export const SubmitButton = styled.button<{ isError: string }>`
   display: block;
-  margin: ${(e) => (e.isError ? '4.8rem auto' : '5.5rem auto')};
+  margin: ${(e) => (e.isError ? '4.75rem auto 0' : '6rem auto 0')};
   width: 66px;
   height: 37px;
   background: #7848de;

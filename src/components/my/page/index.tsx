@@ -9,16 +9,25 @@ import tokenService from 'utils/tokenService';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import EditNameModal from 'components/modals/my/editName';
+import { useRecoilState } from 'recoil';
+import { modalAtomFamily } from 'atoms';
 
 function My() {
   const [myInfo, setMyInfo] = useState<GetMyInfoInterface>();
+  const [loaded, setLoaded] = useState<boolean>(false);
+
+  const [editNameModal, setEditNameModal] = useRecoilState(
+    modalAtomFamily('editName')
+  );
   const navigate = useNavigate();
 
   useEffect(() => {
     const getMyInfo = async () => {
+      setLoaded(false);
       try {
         const res: any = await user.getMyInfo();
         setMyInfo(res.data);
+        setLoaded(true);
       } catch (e: any) {
         console.log(e);
       }
@@ -36,7 +45,7 @@ function My() {
   return (
     <>
       <Header />
-      <EditNameModal />
+      {editNameModal && <EditNameModal oldName={String(myInfo?.name)} />}
       <S.MyPageLayout>
         <S.ProfileSection>
           <S.NameBox>
@@ -49,9 +58,11 @@ function My() {
           <S.ProfileBox>
             <S.ProfileImage src={myInfo?.img} alt='프로필 이미지' />
             <div>
-              <S.UpdateBox>
+              <S.UpdateBox loaded={loaded}>
                 <I.UpdateProfileImageIcon />
-                <I.UpdateNameIcon />
+                <div onClick={() => setEditNameModal(true)}>
+                  <I.UpdateNameIcon />
+                </div>
                 <p>{myInfo?.name}</p>
               </S.UpdateBox>
               <S.LogoutButton onClick={onLogout}>로그아웃</S.LogoutButton>
