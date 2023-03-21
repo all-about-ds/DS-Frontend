@@ -5,25 +5,38 @@ import { useEffect, useState } from 'react';
 import user from 'api/user';
 import { GetMyInfoInterface } from 'types/user.type';
 import MyGroupItem from '../item';
+import tokenService from 'utils/tokenService';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import EditNameModal from 'components/modals/my/editName';
 
 function My() {
   const [myInfo, setMyInfo] = useState<GetMyInfoInterface>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getMyInfo = async () => {
       try {
         const res: any = await user.getMyInfo();
         setMyInfo(res.data);
-      } catch {
-        console.log();
+      } catch (e: any) {
+        console.log(e);
       }
     };
 
     getMyInfo();
   }, []);
+
+  const onLogout = () => {
+    tokenService.removeUser();
+    toast.success('로그아웃 되었어요');
+    navigate('/');
+  };
+
   return (
     <>
       <Header />
+      <EditNameModal />
       <S.MyPageLayout>
         <S.ProfileSection>
           <S.NameBox>
@@ -41,15 +54,20 @@ function My() {
                 <I.UpdateNameIcon />
                 <p>{myInfo?.name}</p>
               </S.UpdateBox>
-              <S.LogoutButton>로그아웃</S.LogoutButton>
+              <S.LogoutButton onClick={onLogout}>로그아웃</S.LogoutButton>
             </div>
           </S.ProfileBox>
         </S.ProfileSection>
         <S.GroupSection>
           <S.GroupText>내 그룹</S.GroupText>
           <S.GroupList>
-            {myInfo?.myGroupList.map((group, index) => (
-              <MyGroupItem key={index} name={group.img} img={group.img} />
+            {myInfo?.myGroupList.map((group) => (
+              <MyGroupItem
+                key={group.idx}
+                idx={group.idx}
+                name={group.img}
+                img={group.img}
+              />
             ))}
           </S.GroupList>
         </S.GroupSection>
