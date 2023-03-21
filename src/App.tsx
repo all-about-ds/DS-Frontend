@@ -11,6 +11,7 @@ import {
   MemberSettingPage,
   EditGroupPage,
   GroupInformationPage,
+  GroupTimerPage,
 } from 'pages';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -36,6 +37,7 @@ function App() {
         <Route path='/group/:groupId/member' element={<MemberSettingPage />} />
         <Route path='/group/information' element={<GroupInformationPage />} />
         <Route path='/group/chatting' element={<GroupChattingPage />} />
+        <Route path='/group/:groupId/timer' element={<GroupTimerPage />} />
         <Route
           path='/group/information/:groupId'
           element={<GroupInformationPage />}
