@@ -8,7 +8,6 @@ import * as I from 'assets/svg';
 interface MyPageModalLayoutProps {
   title: string;
   atomKey: string;
-  onClick: () => void;
   children: React.ReactNode;
 }
 
@@ -26,7 +25,6 @@ function MyPageModalLayout(props: MyPageModalLayoutProps) {
           </div>
         </S.TopBar>
         {props.children}
-        <S.SubmitButton onClick={props.onClick}>완료</S.SubmitButton>
       </S.MyPageModal>
     </ModalLayout>
   );
