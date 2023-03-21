@@ -1,18 +1,25 @@
 import GroupPageHeader from 'components/group/ui/groupPageHeader';
 import * as S from './style';
 import * as I from '../../../../assets/svg';
+import { useEffect, useRef } from 'react';
 
 function GroupChatting() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    scrollRef.current!.scrollTop = scrollRef.current!.scrollHeight;
+  }, []);
+
   return (
     <>
       <S.GroupChattingLayout>
         <S.ChattingLayout>
           <GroupPageHeader />
-          <S.ChattingWrapper>
+          <S.ChattingWrapper ref={scrollRef}>
             <S.MemberWrapper>
               <S.MemberBox>
                 <S.MemberProfile image='' />
-                <S.MemberName>오종진</S.MemberName>
+                <S.MemberName>1</S.MemberName>
               </S.MemberBox>
               <S.ChattingBox>
                 <S.Chatting>
@@ -20,7 +27,7 @@ function GroupChatting() {
                     애국가(愛國歌)는 ‘나라를 사랑하는 노래’라는 뜻이에요.
                   </S.ChattingText>
                 </S.Chatting>
-                <S.Time>오후 1:34</S.Time>
+                <S.Time>오후 1:30</S.Time>
               </S.ChattingBox>
             </S.MemberWrapper>
 
@@ -38,7 +45,7 @@ function GroupChatting() {
             <S.MemberWrapper>
               <S.MemberBox>
                 <S.MemberProfile image='' />
-                <S.MemberName>오종진</S.MemberName>
+                <S.MemberName>1</S.MemberName>
               </S.MemberBox>
               <S.ChattingBox>
                 <S.Chatting>
@@ -46,14 +53,14 @@ function GroupChatting() {
                     애국가(愛國歌)는 ‘나라를 사랑하는 노래’라는 뜻이에요.
                   </S.ChattingText>
                 </S.Chatting>
-                <S.Time>오후 1:34</S.Time>
+                <S.Time>오후 1:30</S.Time>
               </S.ChattingBox>
             </S.MemberWrapper>
 
             <S.MemberWrapper>
               <S.MemberBox>
                 <S.MemberProfile image='' />
-                <S.MemberName>오종진</S.MemberName>
+                <S.MemberName>1</S.MemberName>
               </S.MemberBox>
               <S.ChattingBox>
                 <S.Chatting>
@@ -61,11 +68,25 @@ function GroupChatting() {
                     애국가(愛國歌)는 ‘나라를 사랑하는 노래’라는 뜻이에요.
                   </S.ChattingText>
                 </S.Chatting>
-                <S.Time>오후 1:34</S.Time>
+                <S.Time>오후 1:30</S.Time>
+              </S.ChattingBox>
+            </S.MemberWrapper>
+
+            <S.MemberWrapper>
+              <S.MemberBox>
+                <S.MemberProfile image='' />
+                <S.MemberName>1</S.MemberName>
+              </S.MemberBox>
+              <S.ChattingBox>
+                <S.Chatting>
+                  <S.ChattingText>
+                    애국가(愛國歌)는 ‘나라를 사랑하는 노래’라는 뜻이에요.
+                  </S.ChattingText>
+                </S.Chatting>
+                <S.Time>오후 1:30</S.Time>
               </S.ChattingBox>
             </S.MemberWrapper>
           </S.ChattingWrapper>
-
           <S.InputBox>
             <S.InputInnerBox>
               <I.LongRectengle />

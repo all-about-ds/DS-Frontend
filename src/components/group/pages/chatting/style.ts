@@ -9,7 +9,7 @@ export const GroupChattingLayout = styled.div`
 
 export const ChattingLayout = styled.div`
   width: 66.25vw;
-  height: 100vh;
+  height: calc(100vh - 80px);
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -23,15 +23,28 @@ export const ChattingLayout = styled.div`
 
 export const ChattingWrapper = styled.div`
   width: 60vw;
-  height: 85.93vh;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    height: 30%;
+    background: #3e3e3e;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #2b2b2b;
+  }
 `;
 
 export const InputBox = styled.div`
   width: 66.25vw;
   height: 80px;
   position: absolute;
-  bottom: 0;
+  bottom: -80px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -68,7 +81,7 @@ export const Input = styled.input`
 export const MemberWrapper = styled.div`
   display: flex;
   width: auto;
-  margin-top: 10.19vh;
+  margin-top: 3vh;
 `;
 
 export const MemberBox = styled.div`
@@ -140,7 +153,7 @@ export const MyChatBox = styled.div`
   flex-direction: column;
   position: relative;
   margin-left: 23.54vw;
-  margin-top: 9.26vh;
+  margin-top: 3vh;
 `;
 
 export const MyChatting = styled.div`
