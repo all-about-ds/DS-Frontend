@@ -64,8 +64,4 @@ export const getUser = {
   getUserInfo: () => {
     return REACT_APP_BASE_URL + 'user/header';
   },
-
-  getMyInfo: () => {
-    return 'user';
-  },
 };

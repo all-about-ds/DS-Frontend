@@ -1,5 +1,4 @@
 import { createAxios } from 'libs/createAxios';
-import { getUser } from 'libs/getUrl';
 import tokenService from 'utils/tokenService';
 
 class User {
@@ -7,7 +6,7 @@ class User {
     try {
       return createAxios({
         method: 'GET',
-        url: getUser.getMyInfo(),
+        url: 'user',
         headers: {
           Authorization: tokenService.getLocalAccessToken(),
         },
