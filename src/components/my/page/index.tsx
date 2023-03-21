@@ -61,7 +61,7 @@ function My() {
         <S.GroupSection>
           <S.GroupText>내 그룹</S.GroupText>
           <S.GroupList>
-            {myInfo?.myGroupList.map((group) => (
+            {myInfo?.groups.map((group) => (
               <MyGroupItem
                 key={group.idx}
                 idx={group.idx}
