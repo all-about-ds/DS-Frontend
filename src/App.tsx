@@ -37,7 +37,7 @@ function App() {
         <Route path='/group/information' element={<GroupInformationPage />} />
         <Route path='/group/chatting' element={<GroupChattingPage />} />
         <Route
-          path='/group/information/:groupId'
+          path='/group/:groupId/information'
           element={<GroupInformationPage />}
         />
       </Routes>
