@@ -1,10 +1,11 @@
 import { createAxios } from 'libs/createAxios';
-import { getAuth } from 'libs/getUrl';
+import { getAuth, getUser } from 'libs/getUrl';
 import {
   FindPasswordInterface,
   LoginInterface,
   SignupInterface,
 } from 'types/auth.type';
+import tokenService from 'utils/tokenService';
 
 class Auth {
   signin(data: LoginInterface) {
@@ -90,6 +91,23 @@ class Auth {
           email: data.email,
           password: data.password,
           newPassword: data.newPassword,
+        },
+      });
+    } catch (error) {
+      return error;
+    }
+  }
+
+  changeName(name: string) {
+    try {
+      return createAxios({
+        method: 'PATCH',
+        url: getUser.changeName(),
+        data: {
+          name: name,
+        },
+        headers: {
+          Authorization: 'Bearer ' + tokenService.getLocalAccessToken(),
         },
       });
     } catch (error) {
