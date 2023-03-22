@@ -9,6 +9,7 @@ import auth from 'api/auth';
 import { useNavigate } from 'react-router-dom';
 import tokenService from 'utils/tokenService';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 function Signin() {
   const navigate = useNavigate();
@@ -22,12 +23,8 @@ function Signin() {
   const onValid = async (data: LoginInterface) => {
     try {
       setError(false);
-
       const response: any = await auth.signin(data);
       tokenService.setUser(response.data);
-      if (localStorage.getItem('token') === null) {
-        throw new Error(`No token`);
-      }
       toast.success('로그인 성공!');
       navigate('/');
     } catch (e: any) {
@@ -37,7 +34,6 @@ function Signin() {
       if (e.response.status === 404) {
         toast.error('존재하지 않는 이메일입니다!');
       }
-      console.log(e);
     }
   };
 
@@ -104,10 +100,14 @@ function Signin() {
           </form>
           <S.BottomTextBox>
             <S.FirstText>DS가 처음이신가요?</S.FirstText>
-            <S.ClickText>회원가입</S.ClickText>
+            <Link to={'/auth/signup'}>
+              <S.ClickText>회원가입</S.ClickText>
+            </Link>
           </S.BottomTextBox>
           <S.Bar />
-          <S.ClickText>비밀번호 찾기</S.ClickText>
+          <Link to={'/auth/findPassword'}>
+            <S.ClickText>비밀번호 찾기</S.ClickText>
+          </Link>
         </AuthFrame>
       </CenterAlignmentLayout>
     </>
