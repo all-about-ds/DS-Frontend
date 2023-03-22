@@ -1,4 +1,4 @@
-import GroupTimer from 'components/group/pages/timer';
+import GroupTimer from 'components/group/pages/timer/page';
 
 function GroupTimerPage() {
   return <GroupTimer />;

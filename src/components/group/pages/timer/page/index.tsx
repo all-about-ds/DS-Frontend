@@ -1,5 +1,5 @@
 import GroupPageHeader from 'components/group/ui/groupPageHeader';
-import MemberTimerItem from './item';
+import MemberTimerItem from '../item';
 import * as S from './style';
 
 function GroupTimer() {
@@ -24,7 +24,6 @@ function GroupTimer() {
       </S.MyTimerBox>
       <S.ButtonDecorate />
       <S.TimerButton>시작</S.TimerButton>
-
       <S.MemberTimerBox>
         <MemberTimerItem isActive={true} />
         <MemberTimerItem isActive={false} />
