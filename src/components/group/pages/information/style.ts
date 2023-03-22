@@ -9,6 +9,7 @@ export const GroupInformationPageLayout = styled.section`
 export const GroupImage = styled.img`
   width: 100%;
   height: 450px;
+  object-fit: cover;
   border-radius: 10px;
 `;
 
