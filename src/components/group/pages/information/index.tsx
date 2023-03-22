@@ -53,6 +53,7 @@ function GroupInformation() {
               <I.DeleteButton />
             </div>
             <div
+              style={{ cursor: 'pointer' }}
               onClick={() =>
                 navigate('/group/edit', {
                   state: {
