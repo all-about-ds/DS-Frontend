@@ -71,8 +71,20 @@ export const TimerButton = styled.div`
 export const MemberTimerBox = styled.section`
   width: 44.5vw;
   min-width: 323px;
-  margin: 4rem auto 0;
+  margin: 4rem auto 1.5rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(132px, 4fr));
-  gap: 16px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+
+  @media screen and (max-width: 1622px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media screen and (max-width: 1230px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (max-width: 800px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;

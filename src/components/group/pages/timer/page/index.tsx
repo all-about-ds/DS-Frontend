@@ -27,6 +27,13 @@ function GroupTimer() {
       <S.MemberTimerBox>
         <MemberTimerItem isActive={true} />
         <MemberTimerItem isActive={false} />
+        <MemberTimerItem isActive={false} />
+        <MemberTimerItem isActive={false} />
+        <MemberTimerItem isActive={false} />
+        <MemberTimerItem isActive={false} />
+        <MemberTimerItem isActive={false} />
+        <MemberTimerItem isActive={false} />
+        <MemberTimerItem isActive={false} />
       </S.MemberTimerBox>
     </S.GroupTimerPageLayout>
   );

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 export const MemberTimerItem = styled.div<{ isActive: boolean }>`
+  width: 132px;
   height: 35px;
   border-radius: 10px;
   border: ${(e) =>
@@ -9,6 +10,8 @@ export const MemberTimerItem = styled.div<{ isActive: boolean }>`
   padding: 19px 17px;
   align-items: center;
   gap: 10px;
+
+  margin: 0 auto;
 
   svg {
     width: 33px;
@@ -21,6 +24,10 @@ export const MemberTimerItem = styled.div<{ isActive: boolean }>`
 
   div > p {
     color: ${(e) => e.isActive && 'white'};
+  }
+
+  @media screen and (max-width: 800px) {
+    width: 290px;
   }
 `;
 
