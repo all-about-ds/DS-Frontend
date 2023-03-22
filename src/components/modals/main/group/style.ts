@@ -8,9 +8,7 @@ export const GroupIsClickedModal = styled.div`
   border-radius: 10px;
 `;
 
-export const Image = styled.div<{ image: string | undefined }>`
-  background: url(${(props) => props.image});
-  background: #ffffff;
+export const Image = styled.img`
   position: relative;
   border-radius: 10px;
   width: 450px;
@@ -55,8 +53,7 @@ export const UserBox = styled.div`
   margin-bottom: 20px;
 `;
 
-export const Profile = styled.div<{ image: string | undefined }>`
-  background: url(${(props) => props.image});
+export const Profile = styled.img`
   width: 36px;
   height: 36px;
   border-radius: 50%;

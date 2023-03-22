@@ -17,12 +17,10 @@ export const HeaderContentBox = styled.div`
   justify-content: space-between;
 `;
 
-export const UserProfile = styled.div<{ image: string }>`
+export const UserProfile = styled.img`
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: url(${(props) => props.image});
-  background: #d9d9d9;
   cursor: pointer;
 `;
 
