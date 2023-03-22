@@ -33,7 +33,7 @@ function MainModal(props: GroupProps) {
           undefined,
           props.GroupProps?.idx
         );
-        navigate(`/group/information/${props.GroupProps?.idx}`);
+        navigate(`/group/${props.GroupProps?.idx}/information`);
       } catch (e: any) {
         if (e.response.status === 404) {
           toast.error('존재하지 않는 그룹이에요');
