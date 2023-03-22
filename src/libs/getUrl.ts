@@ -69,3 +69,9 @@ export const getUser = {
     return 'user/name';
   },
 };
+
+export const postImage = {
+  postImage: () => {
+    return 'image';
+  },
+};
