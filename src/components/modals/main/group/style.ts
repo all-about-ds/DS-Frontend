@@ -8,7 +8,8 @@ export const GroupIsClickedModal = styled.div`
   border-radius: 10px;
 `;
 
-export const Image = styled.img`
+export const Image = styled.div<{ image: string | undefined }>`
+  background: url(${(props) => props.image});
   position: relative;
   border-radius: 10px;
   width: 450px;

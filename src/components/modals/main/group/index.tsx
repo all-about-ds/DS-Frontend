@@ -49,7 +49,7 @@ function MainModal(props: GroupProps) {
     <>
       <ModalLayout setModal={setGroupIsClicked}>
         <S.GroupIsClickedModal onClick={(e) => e.stopPropagation()}>
-          <S.Image src={props.GroupProps?.img} alt='그룹 모달'>
+          <S.Image image={props.GroupProps?.img}>
             {props.GroupProps?.secret && (
               <S.LockBox>
                 <I.Lock />

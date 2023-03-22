@@ -90,6 +90,12 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
     };
   };
 
+  useEffect(() => {
+    if (location.state) {
+      setImage(location.state.img);
+    }
+  }, []);
+
   return (
     <>
       <S.Layout>
@@ -133,16 +139,15 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
                     }}
                     id={'image'}
                     accept='image/*'
-                    defaultValue={
-                      groupType === 'create' ? '' : location.state.img
-                    }
                   />
                   <S.ChangeText htmlFor='image'>변경</S.ChangeText>
                 </>
               )}
             </S.TextWrapper>
             <S.ImageBox>
-              {image && <S.UploadedImage image={image}></S.UploadedImage>}
+              {image && (
+                <S.UploadedImage src={image} alt='그룹이미지'></S.UploadedImage>
+              )}
               <S.ImageArea
                 type={'file'}
                 onChange={(e) => {
