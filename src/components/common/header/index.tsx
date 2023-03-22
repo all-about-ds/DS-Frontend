@@ -6,6 +6,8 @@ import tokenService from 'utils/tokenService';
 import AfterLoginHeader from './afterLogin';
 import BeforeLoginHeader from './beforeLogin';
 import * as S from './style';
+import * as I from 'assets/svg';
+import { Link } from 'react-router-dom';
 
 function Header() {
   const { pathname } = useLocation();
@@ -43,7 +45,11 @@ function Header() {
     <>
       <S.HeaderLayout>
         <S.HeaderContentWrapper>
-          <S.LogoText>Do Study</S.LogoText>
+          <Link to={'/'}>
+            <S.Logo>
+              <I.Logo />
+            </S.Logo>
+          </Link>
           {tokenService.getLocalAccessToken() ? (
             <AfterLoginHeader />
           ) : (

@@ -24,7 +24,6 @@ export const HeaderContentWrapper = styled.div`
   align-items: center;
 `;
 
-export const LogoText = styled.p`
-  font-size: 20px;
-  color: #ffffff;
+export const Logo = styled.div`
+  cursor: pointer;
 `;
