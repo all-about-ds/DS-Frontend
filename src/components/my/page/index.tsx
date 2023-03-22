@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import EditNameModal from 'components/modals/my/editName';
 import { useRecoilState } from 'recoil';
 import { modalAtomFamily } from 'atoms';
+import { Link } from 'react-router-dom';
 
 function My() {
   const [myInfo, setMyInfo] = useState<GetMyInfoInterface>();
@@ -73,12 +74,9 @@ function My() {
           <S.GroupText>내 그룹</S.GroupText>
           <S.GroupList>
             {myInfo?.groups.map((group) => (
-              <MyGroupItem
-                key={group.idx}
-                idx={group.idx}
-                name={group.img}
-                img={group.img}
-              />
+              <Link to={'/group/' + group.idx + '/information'} key={group.idx}>
+                <MyGroupItem idx={group.idx} name={group.img} img={group.img} />
+              </Link>
             ))}
           </S.GroupList>
         </S.GroupSection>
