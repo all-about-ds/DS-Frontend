@@ -4,14 +4,20 @@ import { CreateGroupInterface, ManageGroupType } from 'types/group.type';
 import * as S from './style';
 import * as I from '../../../../assets/svg';
 import { useForm } from 'react-hook-form';
-import { ImagesAtom, ImageSrcAtom } from 'atoms/container';
+import { ImagesAtom } from 'atoms/container';
 import { useRecoilState } from 'recoil';
-import group from 'api/group';
 import { toast } from 'react-toastify';
 import { useLocation, useNavigate } from 'react-router';
+import useImageToUrl from 'hooks/imageToUrl';
+import group from 'api/group';
+
+interface FormType {
+  name: string;
+  description: string;
+  password: string | undefined;
+}
 
 function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
-  const [imageSrc, setImageSrc] = useRecoilState<File[]>(ImageSrcAtom);
   const [image, setImage] = useRecoilState<string>(ImagesAtom);
   const [memberNum, setMemberNum] = useState<number>(1);
   const [isClicked, setIsClicked] = useState<boolean>(false);
@@ -21,7 +27,8 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
     register,
     handleSubmit,
     formState: { isSubmitting },
-  } = useForm<CreateGroupInterface>();
+  } = useForm<FormType>();
+  const { postImage, imageUrl } = useImageToUrl();
 
   useEffect(() => {
     setImage('');
@@ -43,27 +50,20 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
     setIsClicked(!isClicked);
   };
 
-  const onValid = async (data: CreateGroupInterface) => {
+  const onValid = async (data: FormType) => {
     try {
-      const formData = new FormData();
-      if (!imageSrc) return;
-      imageSrc.forEach((img) => formData.append('file', img));
-      const reqDto = {
+      const req: CreateGroupInterface = {
         name: data.name,
         description: data.description,
-        img: data.img,
+        img: imageUrl,
         maxCount: memberNum,
         secret: isClicked,
-        password: isClicked ? data.password : undefined,
+        password: data.password,
       };
-      formData.append(
-        'req',
-        new Blob([JSON.stringify(reqDto)], { type: 'application/json' })
-      );
       if (groupType === 'create') {
-        await group.createGroup(formData, undefined);
+        await group.createGroup(req);
       } else {
-        await group.createGroup(formData, location.state.idx);
+        await group.editGroup(req, location.state.idx);
       }
       setImage('');
       if (groupType === 'create') toast.success('생성되었어요!');
@@ -85,9 +85,16 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
     reader.onload = () => {
       if (reader.result) {
         setImage(reader.result.toString());
+        postImage(fileBlob);
       }
     };
   };
+
+  useEffect(() => {
+    if (location.state) {
+      setImage(location.state.img);
+    }
+  }, []);
 
   return (
     <>
@@ -127,26 +134,25 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
                   <S.ChangeButton
                     type={'file'}
                     onChange={(e) => {
-                      setImageSrc([...imageSrc, e.target.files![0]]);
-                      encodeFileToBase64(e.target.files![0]);
+                      if (!e.target?.files) return;
+                      encodeFileToBase64(e.target.files[0]);
                     }}
                     id={'image'}
                     accept='image/*'
-                    defaultValue={
-                      groupType === 'create' ? '' : location.state.img
-                    }
                   />
                   <S.ChangeText htmlFor='image'>변경</S.ChangeText>
                 </>
               )}
             </S.TextWrapper>
             <S.ImageBox>
-              {image && <S.UploadedImage image={image}></S.UploadedImage>}
+              {image && (
+                <S.UploadedImage src={image} alt='그룹이미지'></S.UploadedImage>
+              )}
               <S.ImageArea
                 type={'file'}
                 onChange={(e) => {
-                  setImageSrc([...imageSrc, e.target.files![0]]);
-                  encodeFileToBase64(e.target.files![0]);
+                  if (!e.target?.files) return;
+                  encodeFileToBase64(e.target.files[0]);
                 }}
                 accept='image/*'
                 id={'imageBox'}

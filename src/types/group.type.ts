@@ -63,5 +63,5 @@ export interface CreateGroupInterface {
   img: string;
   maxCount: number;
   secret: boolean;
-  password: string;
+  password: string | undefined;
 }

@@ -227,11 +227,10 @@ export const SubmitButton = styled.button`
   cursor: pointer;
 `;
 
-export const UploadedImage = styled.div<{ image: string }>`
+export const UploadedImage = styled.img`
   width: 300px;
   height: 200px;
   border-radius: 10px;
-  background: url(${(props) => props.image});
   flex-shrink: 0;
   background-size: contain;
   background-position: center;

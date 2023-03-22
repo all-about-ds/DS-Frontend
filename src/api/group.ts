@@ -1,6 +1,6 @@
 import { createAxios } from 'libs/createAxios';
 import { getGroup } from 'libs/getUrl';
-import { GetGroupListInterface } from 'types/group.type';
+import { CreateGroupInterface, GetGroupListInterface } from 'types/group.type';
 import tokenService from 'utils/tokenService';
 
 class Group {
@@ -62,7 +62,22 @@ class Group {
     }
   }
 
-  createGroup(data: FormData, index: number | undefined) {
+  createGroup(data: CreateGroupInterface) {
+    try {
+      return createAxios({
+        method: 'POST',
+        url: getGroup.getList(),
+        data,
+        headers: {
+          Authorization: 'Bearer ' + tokenService.getLocalAccessToken(),
+        },
+      });
+    } catch (error) {
+      return error;
+    }
+  }
+
+  editGroup(data: CreateGroupInterface, index: number) {
     try {
       return createAxios({
         method: 'POST',

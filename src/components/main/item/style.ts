@@ -65,9 +65,7 @@ export const User = styled.div`
   align-items: center;
 `;
 
-export const Profile = styled.div<{ image: string | undefined }>`
-  background: url(${(props) => props.image});
-  background: #d9d9d9;
+export const Profile = styled.img`
   width: 30px;
   height: 30px;
   border-radius: 50%;

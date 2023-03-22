@@ -28,7 +28,7 @@ function PasswordModal(props: PasswordProps) {
       setError(false);
       console.log(data.password);
       const response: any = await group.joinGroup(data.password, props.index);
-      navigate(`/group/information/${props.index}`);
+      navigate(`/group/${props.index}/information`);
     } catch (e: any) {
       console.log(e);
       if (e.response.status === 400) {

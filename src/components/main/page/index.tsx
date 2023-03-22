@@ -93,10 +93,6 @@ function Main() {
     }
   }, [search.isSearchRequested]);
 
-  useEffect(() => {
-    getGroupList();
-  }, []);
-
   return (
     <>
       {groupPassword && <PasswordModal index={index} />}
