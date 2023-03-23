@@ -52,7 +52,7 @@ function AfterLoginHeader() {
     <>
       {search && (
         <S.SearchBar>
-          <div style={{ marginLeft: 23, marginTop: 4 }}>
+          <div style={{ marginTop: 4 }} className='search'>
             <I.GraySearch />
           </div>
           <S.SearchArea
@@ -69,7 +69,7 @@ function AfterLoginHeader() {
           onClick={() => setSearch(!search)}
           style={{ marginTop: 4 }}
         />
-        <div onClick={() => window.location.replace('/')}>
+        <div onClick={() => window.location.replace('/')} className='home'>
           <I.Home />
         </div>
         <div onClick={() => navigate('/group/create')}>

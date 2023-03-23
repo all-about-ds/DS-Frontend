@@ -22,6 +22,10 @@ export const HeaderContentWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media screen and (max-width: 1050px) {
+    width: 97.5vw;
+  }
 `;
 
 export const Logo = styled.div`
