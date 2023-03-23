@@ -61,6 +61,7 @@ function GroupInformation() {
                     img: information?.img,
                     title: information?.name,
                     description: information?.description,
+                    maxCount: information?.memberList.length,
                   },
                 })
               }

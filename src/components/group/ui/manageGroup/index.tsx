@@ -41,8 +41,10 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
   };
 
   const memberDown = () => {
-    if (memberNum !== 1) {
+    if (memberNum !== memberNum) {
       setMemberNum(memberNum - 1);
+    } else {
+      toast.error('현재 인원보다 낮게 설정할 수 없어요!');
     }
   };
 
@@ -93,6 +95,7 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
   useEffect(() => {
     if (location.state) {
       setImage(location.state.img);
+      setMemberNum(location.state.maxCount + 1);
     }
   }, []);
 
