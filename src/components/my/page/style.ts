@@ -3,6 +3,10 @@ import styled from '@emotion/styled';
 export const MyPageLayout = styled.section`
   width: 66.25vw;
   margin: auto;
+
+  @media screen and (max-width: 926px) {
+    width: 93vw;
+  }
 `;
 
 export const ProfileSection = styled.section`
@@ -13,6 +17,12 @@ export const ProfileSection = styled.section`
 export const NameBox = styled.div`
   display: flex;
   gap: 1rem;
+
+  @media screen and (max-width: 926px) {
+    svg {
+      display: none;
+    }
+  }
 `;
 
 export const Name = styled.p`
@@ -20,6 +30,10 @@ export const Name = styled.p`
   font-weight: 700;
   font-size: 64px;
   color: #ffffff;
+
+  @media screen and (max-width: 900px) {
+    font-size: 40px;
+  }
 `;
 
 export const Description = styled.p`
@@ -96,4 +110,19 @@ export const GroupText = styled.p`
 
 export const GroupList = styled.div`
   margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+
+  @media screen and (max-width: 1832px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media screen and (max-width: 1379px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (max-width: 660px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;

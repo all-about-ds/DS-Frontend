@@ -8,9 +8,13 @@ export const GroupItem = styled.div`
     rgba(0, 0, 0, 0) 100%
   );
   border-radius: 10px;
-  width: 300px;
+  width: 100%;
   height: 200px;
   cursor: pointer;
+
+  @media screen and (max-width: 660px) {
+    height: 165px;
+  }
 `;
 
 export const ItemBackgroundImage = styled.img`
@@ -29,7 +33,7 @@ export const Shadow = styled.div`
     rgba(0, 0, 0, 0) 100%
   );
   border-radius: 10px;
-  width: 300px;
+  width: 100%;
   height: 165px;
   z-index: 5;
 `;
