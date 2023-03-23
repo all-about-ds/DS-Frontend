@@ -78,10 +78,6 @@ function My() {
                 <MyGroupItem idx={group.idx} name={group.img} img={group.img} />
               </Link>
             ))}
-            <MyGroupItem idx={1} name={'1'} img={''} />
-            <MyGroupItem idx={2} name={'2'} img={''} />
-            <MyGroupItem idx={3} name={'3'} img={''} />
-            <MyGroupItem idx={4} name={'4'} img={''} />
           </S.GroupList>
         </S.GroupSection>
       </S.MyPageLayout>
