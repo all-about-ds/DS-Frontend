@@ -8,7 +8,7 @@ import { ImagesAtom } from 'atoms/container';
 import { useRecoilState } from 'recoil';
 import { toast } from 'react-toastify';
 import { useLocation, useNavigate } from 'react-router';
-import useImageToUrl from 'hooks/imageToUrl';
+import useImageToUrl from 'hooks/useImageUploads';
 import group from 'api/group';
 
 interface FormType {
