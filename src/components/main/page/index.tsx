@@ -1,6 +1,4 @@
 import Header from 'components/common/header';
-import CenterAlignmentLayout from 'components/common/layout/align/center';
-import MainFrame from 'components/frame/main';
 import MainModal from 'components/modals/main/group';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import GroupItem from '../item';
@@ -98,33 +96,30 @@ function Main() {
       {groupPassword && <PasswordModal index={index} />}
       {groupIsClicked && <MainModal GroupProps={modalData} />}
       <Header />
-      <CenterAlignmentLayout>
-        <MainFrame>
-          <S.SortButtonWrapper>
-            <S.SortButton
-              byPopularity={byPopularity}
-              onClick={() => sortButton('인기')}
-            >
-              인기
-            </S.SortButton>
-            <S.SortButton
-              byPopularity={byLatest}
-              onClick={() => sortButton('최신')}
-            >
-              최신순
-            </S.SortButton>
-          </S.SortButtonWrapper>
-
-          <S.GroupBoxWrapper>
-            {list.map((group: GroupType, index: number) => (
-              <div key={index} onClick={() => groupClick(group)}>
-                <GroupItem GroupProps={group} />
-              </div>
-            ))}
-            <div ref={observerTargetEl} />
-          </S.GroupBoxWrapper>
-        </MainFrame>
-      </CenterAlignmentLayout>
+      <S.MainPageLayout>
+        <S.SortButtonWrapper>
+          <S.SortButton
+            byPopularity={byPopularity}
+            onClick={() => sortButton('인기')}
+          >
+            인기
+          </S.SortButton>
+          <S.SortButton
+            byPopularity={byLatest}
+            onClick={() => sortButton('최신')}
+          >
+            최신순
+          </S.SortButton>
+        </S.SortButtonWrapper>
+        <S.GroupBoxWrapper>
+          {list.map((group: GroupType, index: number) => (
+            <div key={index} onClick={() => groupClick(group)}>
+              <GroupItem GroupProps={group} />
+            </div>
+          ))}
+          <div ref={observerTargetEl} />
+        </S.GroupBoxWrapper>
+      </S.MainPageLayout>
     </>
   );
 }

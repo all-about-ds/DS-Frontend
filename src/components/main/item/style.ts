@@ -5,7 +5,7 @@ export const Description = styled.div`
   font-weight: 400;
   font-size: 14px;
   color: #717171;
-  width: 300px;
+  width: 100%;
   text-overflow: ellipsis;
   overflow: hidden;
   display: -webkit-box;
@@ -15,10 +15,7 @@ export const Description = styled.div`
 `;
 
 export const GroupBox = styled.div`
-  height: 362px;
-  width: 300px;
-  margin-right: 24px;
-  margin-bottom: 45px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   cursor: pointer;
@@ -34,13 +31,25 @@ export const GroupBox = styled.div`
 `;
 
 export const Image = styled.div<{ image: string }>`
-  width: 300px;
+  width: 100%;
   height: 200px;
   border-radius: 10px;
   margin-bottom: 12px;
   background: url(${(props) => props.image});
   background-color: #ffffff;
   position: relative;
+
+  @media screen and (max-width: 1883px) {
+    height: 320px;
+  }
+
+  @media screen and (max-width: 1110px) {
+    height: 300px;
+  }
+
+  @media screen and (max-width: 645px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 
 export const MaxPeople = styled.div`
