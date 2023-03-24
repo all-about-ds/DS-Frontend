@@ -8,13 +8,13 @@ export const GroupIsClickedModal = styled.div`
   border-radius: 10px;
 `;
 
-export const Image = styled.div<{ image: string | undefined }>`
-  background: url(${(props) => props.image});
+export const Image = styled.img`
   position: relative;
   border-radius: 10px;
   width: 450px;
   height: 300px;
   border-radius: 10px;
+  object-fit: cover;
 `;
 
 export const ContentWrapper = styled.div`

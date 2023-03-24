@@ -49,7 +49,8 @@ function MainModal(props: GroupProps) {
     <>
       <ModalLayout setModal={setGroupIsClicked}>
         <S.GroupIsClickedModal onClick={(e) => e.stopPropagation()}>
-          <S.Image image={props.GroupProps?.img}>
+          <div style={{ position: 'relative' }}>
+            <S.Image src={props.GroupProps?.img} alt='그룹이미지'></S.Image>
             {props.GroupProps?.secret && (
               <S.LockBox>
                 <I.Lock />
@@ -58,7 +59,7 @@ function MainModal(props: GroupProps) {
             <S.ExitBox onClick={() => setGroupIsClicked(false)}>
               <I.Exit />
             </S.ExitBox>
-          </S.Image>
+          </div>
           <S.ContentWrapper>
             <S.memberNum>
               현재 {props.GroupProps?.memberCount}/{props.GroupProps?.maxCount}
