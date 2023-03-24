@@ -10,13 +10,14 @@ function GroupItem(props: GroupProps) {
   return (
     <>
       <S.GroupBox>
-        <S.Image image={props.GroupProps.img}>
+        <div style={{ position: 'relative' }}>
+          <S.Image src={props.GroupProps.img} alt='그룹이미지'></S.Image>
           {props.GroupProps.secret && (
             <S.LockBox>
               <I.Lock />
             </S.LockBox>
           )}
-        </S.Image>
+        </div>
         <S.MaxPeople>
           현재 {props.GroupProps.memberCount}/{props.GroupProps.maxCount}명
         </S.MaxPeople>
