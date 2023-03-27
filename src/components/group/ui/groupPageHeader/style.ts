@@ -15,7 +15,11 @@ export const Elements = styled.div`
   gap: 16px;
   color: white;
 
-  & > svg {
+  & .active > svg > * > * {
+    fill: #7848de;
+  }
+
+  & > div > svg {
     cursor: pointer;
   }
 
