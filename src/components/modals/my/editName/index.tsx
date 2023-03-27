@@ -1,7 +1,8 @@
 import user from 'api/user';
+import { modalAtomFamily } from 'atoms';
 import useInputs from 'hooks/useInputs';
 import { useState } from 'react';
-import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
 import MyPageModalLayout from '../layout';
 import * as S from './style';
 
@@ -11,6 +12,7 @@ interface EditNameModalProps {
 
 function EditNameModal(props: EditNameModalProps) {
   const [error, setError] = useState<string>('');
+  const setEditNameModal = useSetRecoilState(modalAtomFamily('editName'));
   const [{ name }, onChange] = useInputs({
     name: props.oldName,
   });
@@ -20,7 +22,8 @@ function EditNameModal(props: EditNameModalProps) {
       if (name.trim().length <= 8) {
         if (name.replace(/(\s*)/g, '').length > 0) {
           await user.changeName(name);
-          toast.success('이름을 변경했어요');
+          setEditNameModal(false);
+          window.location.reload();
         } else {
           setError('빈 칸을 정확히 채워주세요');
         }
