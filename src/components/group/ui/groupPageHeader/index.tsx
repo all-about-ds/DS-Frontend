@@ -18,7 +18,9 @@ function GroupPageHeader({ title }: { title?: titleType }) {
   return (
     <S.GroupPageHeader>
       <S.Elements>
-        <I.BackButton />
+        <Link to={'/'}>
+          <I.BackButton />
+        </Link>
       </S.Elements>
       <S.Elements className='center'>
         <p>{title}</p>
