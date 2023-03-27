@@ -1,13 +1,58 @@
 import GroupPageHeader from 'components/group/ui/groupPageHeader';
 import * as S from './style';
 import * as I from '../../../../assets/svg';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import SockJs from 'sockjs-client';
+import * as StompJs from 'stompjs';
+import tokenService from 'utils/tokenService';
 
 function GroupChatting() {
+  const [chattings, setChattings] = useState([]);
+  const [participants, setParticipants] = useState({});
   const scrollRef = useRef<HTMLDivElement>(null);
+  const client = useRef<any>();
+
+  const connectHandler = () => {
+    try {
+      //client.current.active();
+      client.current.connect(
+        { Authorization: 'Bearer ' + tokenService.getLocalAccessToken() },
+        () => {
+          client.current.subscribe(
+            `주소`,
+            (message: any) => {
+              setChattings(message.body);
+            },
+            { Authorization: 'Bearer ' + tokenService.getLocalAccessToken() }
+          );
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const disconnect = () => {
+    try {
+      client.current.disconnect(
+        () => {
+          client.current.unsubscribe('sub-0');
+        },
+        { Authorization: 'Bearer ' + tokenService.getLocalAccessToken() }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     scrollRef.current!.scrollTop = scrollRef.current!.scrollHeight;
+    const socket = new SockJs('STOMP 서버가 구현되어 있는 URL');
+    client.current = StompJs.over(socket);
+
+    connectHandler();
+
+    return () => disconnect();
   }, []);
 
   return (
