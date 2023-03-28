@@ -3,25 +3,35 @@ import * as S from './style';
 import * as I from '../../../../assets/svg';
 import { useEffect, useRef, useState } from 'react';
 import SockJs from 'sockjs-client';
-import * as StompJs from 'stompjs';
+import { Stomp } from '@stomp/stompjs';
 import tokenService from 'utils/tokenService';
 
 function GroupChatting() {
+  const [userChat, setUserChat] = useState<string>('');
   const [chattings, setChattings] = useState([]);
-  const [participants, setParticipants] = useState({});
   const scrollRef = useRef<HTMLDivElement>(null);
   const client = useRef<any>();
 
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserChat(e.target.value);
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      send();
+    }
+  };
+
   const connectHandler = () => {
     try {
-      //client.current.active();
       client.current.connect(
         { Authorization: 'Bearer ' + tokenService.getLocalAccessToken() },
         () => {
           client.current.subscribe(
-            `주소`,
+            `주소 + 그룹id`,
             (message: any) => {
-              setChattings(message.body);
+              const json_chatting = JSON.parse(message.body);
+              setChattings((prev) => ({ ...prev, json_chatting }));
             },
             { Authorization: 'Bearer ' + tokenService.getLocalAccessToken() }
           );
@@ -45,10 +55,30 @@ function GroupChatting() {
     }
   };
 
+  const send = () => {
+    try {
+      if (!client.current.connected) return;
+      const data = {
+        type: '',
+        roomId: `그룹아이디`,
+        sender: `유저이름`,
+        message: userChat,
+      };
+      client.current.send(
+        'pub/~~~',
+        { Authorization: 'Bearer ' + tokenService.getLocalAccessToken() },
+        JSON.stringify(data)
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    scrollRef.current!.scrollTop = scrollRef.current!.scrollHeight;
+    if (!scrollRef.current) return;
+    scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     const socket = new SockJs('STOMP 서버가 구현되어 있는 URL');
-    client.current = StompJs.over(socket);
+    client.current = Stomp.over(socket);
 
     connectHandler();
 
@@ -86,57 +116,16 @@ function GroupChatting() {
               </S.MyChatting>
               <S.MyChatTime>오후 3:10</S.MyChatTime>
             </S.MyChatBox>
-
-            <S.MemberWrapper>
-              <S.MemberBox>
-                <S.MemberProfile image='' />
-                <S.MemberName>1</S.MemberName>
-              </S.MemberBox>
-              <S.ChattingBox>
-                <S.Chatting>
-                  <S.ChattingText>
-                    애국가(愛國歌)는 ‘나라를 사랑하는 노래’라는 뜻이에요.
-                  </S.ChattingText>
-                </S.Chatting>
-                <S.Time>오후 1:30</S.Time>
-              </S.ChattingBox>
-            </S.MemberWrapper>
-
-            <S.MemberWrapper>
-              <S.MemberBox>
-                <S.MemberProfile image='' />
-                <S.MemberName>1</S.MemberName>
-              </S.MemberBox>
-              <S.ChattingBox>
-                <S.Chatting>
-                  <S.ChattingText>
-                    애국가(愛國歌)는 ‘나라를 사랑하는 노래’라는 뜻이에요.
-                  </S.ChattingText>
-                </S.Chatting>
-                <S.Time>오후 1:30</S.Time>
-              </S.ChattingBox>
-            </S.MemberWrapper>
-
-            <S.MemberWrapper>
-              <S.MemberBox>
-                <S.MemberProfile image='' />
-                <S.MemberName>1</S.MemberName>
-              </S.MemberBox>
-              <S.ChattingBox>
-                <S.Chatting>
-                  <S.ChattingText>
-                    애국가(愛國歌)는 ‘나라를 사랑하는 노래’라는 뜻이에요.
-                  </S.ChattingText>
-                </S.Chatting>
-                <S.Time>오후 1:30</S.Time>
-              </S.ChattingBox>
-            </S.MemberWrapper>
           </S.ChattingWrapper>
           <S.InputBox>
             <S.InputInnerBox>
               <I.LongRectengle />
-              <S.Input></S.Input>
-              <div style={{ cursor: 'pointer' }}>
+              <S.Input
+                onChange={onChange}
+                value={userChat}
+                onKeyDown={handleKeyPress}
+              ></S.Input>
+              <div style={{ cursor: 'pointer' }} onClick={send}>
                 <I.SubmitArrow />
               </div>
             </S.InputInnerBox>
