@@ -24,10 +24,13 @@ function GroupItem(props: GroupProps) {
         <S.Title>{props.GroupProps.name}</S.Title>
         <S.Description>{props.GroupProps.description}</S.Description>
         <S.User>
-          <S.Profile
-            src={props.GroupProps.leaderImg}
-            alt='방장 프로필'
-          ></S.Profile>
+          {!props.GroupProps.leaderImg && <I.DefaultProfile />}
+          {props.GroupProps.leaderImg && (
+            <S.Profile
+              src={props.GroupProps.leaderImg}
+              alt='방장 프로필'
+            ></S.Profile>
+          )}
           <S.UserName>{props.GroupProps.leaderName}</S.UserName>
         </S.User>
       </S.GroupBox>

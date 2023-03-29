@@ -75,11 +75,18 @@ function AfterLoginHeader() {
         <div onClick={() => navigate('/group/create')}>
           <I.MakeGroup />
         </div>
-        <S.UserProfile
-          src={image}
-          alt='유저 프로필'
-          onClick={() => navigate('/my')}
-        />
+        {!image && (
+          <div onClick={() => navigate('/my')} style={{ cursor: 'pointer' }}>
+            <I.DefaultProfile />
+          </div>
+        )}
+        {image && (
+          <S.UserProfile
+            src={image}
+            alt='유저 프로필'
+            onClick={() => navigate('/my')}
+          />
+        )}
         <S.UserName onClick={() => navigate('/my')}>{name}님</S.UserName>
       </S.HeaderContentBox>
     </>

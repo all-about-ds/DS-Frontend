@@ -34,7 +34,10 @@ function User(props: UserProps) {
     <>
       <S.UserItem>
         <S.UserBox>
-          <S.UserProfile src={props.profileImg} alt='그룹원 이미지' />
+          {!props.profileImg && <I.DefaultProfile />}
+          {props.profileImg && (
+            <S.UserProfile src={props.profileImg} alt='그룹원 이미지' />
+          )}
           <S.UserName>{props.name}</S.UserName>
         </S.UserBox>
         <S.SettingBox onClick={() => handleClick(elementIndex)}>

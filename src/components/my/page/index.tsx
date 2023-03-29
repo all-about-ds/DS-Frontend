@@ -57,7 +57,10 @@ function My() {
             프로필 사진과 닉네임으로 자신을 표현해봐요.
           </S.Description>
           <S.ProfileBox>
-            <S.ProfileImage src={myInfo?.img} alt='프로필 이미지' />
+            {!myInfo?.img && <I.MyPageDefaultProfile />}
+            {myInfo?.img && (
+              <S.ProfileImage src={myInfo?.img} alt='프로필 이미지' />
+            )}
             <div>
               <S.UpdateBox loaded={loaded}>
                 <I.UpdateProfileImageIcon />
@@ -75,7 +78,11 @@ function My() {
           <S.GroupList>
             {myInfo?.groups.map((group) => (
               <Link to={'/group/' + group.idx + '/information'} key={group.idx}>
-                <MyGroupItem idx={group.idx} name={group.img} img={group.img} />
+                <MyGroupItem
+                  idx={group.idx}
+                  name={group.name}
+                  img={group.img}
+                />
               </Link>
             ))}
           </S.GroupList>

@@ -94,10 +94,13 @@ function GroupInformation() {
       </div>
       <S.MemberList>
         <S.MemberBox key={'head'}>
-          <S.MemberImage
-            src={information?.head.profileImg}
-            alt='그룹원 이미지'
-          />
+          {!information?.head.profileImg && <I.DefaultProfile />}
+          {information?.head.profileImg && (
+            <S.MemberImage
+              src={information?.head.profileImg}
+              alt='그룹원 이미지'
+            />
+          )}
           <div>
             <S.MemberRole>동아리 부장</S.MemberRole>
             <S.MemberName>{information?.head.name}</S.MemberName>
@@ -105,7 +108,10 @@ function GroupInformation() {
         </S.MemberBox>
         {information?.memberList.map((member) => (
           <S.MemberBox key={member.idx}>
-            <S.MemberImage src={member.profileImg} alt='그룹원 이미지' />
+            {!member.profileImg && <I.DefaultProfile />}
+            {member.profileImg && (
+              <S.MemberImage src={member.profileImg} alt='그룹원 이미지' />
+            )}
             <div>
               <S.MemberRole>동아리원</S.MemberRole>
               <S.MemberName>{member.name}</S.MemberName>
