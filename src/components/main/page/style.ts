@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const MainPageLayout = styled.div`
+export const MainPageLayout = styled.main`
   width: 66.25vw;
   margin: 0 auto;
   margin-top: 3rem;
@@ -10,14 +10,14 @@ export const MainPageLayout = styled.div`
   }
 `;
 
-export const SortButtonWrapper = styled.div`
+export const SortButtonWrapper = styled.nav`
   width: 85px;
   height: 21px;
   display: flex;
   justify-content: space-between;
 `;
 
-export const SortButton = styled.div<{ byPopularity: boolean }>`
+export const SortButton = styled.p<{ byPopularity: boolean }>`
   font-weight: 400;
   font-size: 15px;
   color: ${(props) =>
@@ -25,7 +25,7 @@ export const SortButton = styled.div<{ byPopularity: boolean }>`
   cursor: pointer;
 `;
 
-export const GroupBoxWrapper = styled.div`
+export const GroupBoxWrapper = styled.section`
   width: 100%;
   margin: 27px auto 0;
   gap: 1.75rem 1rem;
