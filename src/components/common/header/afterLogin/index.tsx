@@ -76,7 +76,7 @@ function AfterLoginHeader() {
           <I.MakeGroup />
         </div>
         {!image && (
-          <div onClick={() => navigate('/my')}>
+          <div onClick={() => navigate('/my')} style={{ cursor: 'pointer' }}>
             <I.DefaultProfile />
           </div>
         )}
