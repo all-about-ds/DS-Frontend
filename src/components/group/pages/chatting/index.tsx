@@ -14,7 +14,7 @@ function GroupChatting() {
     <>
       <S.GroupChattingLayout>
         <S.ChattingLayout>
-          <GroupPageHeader />
+          <GroupPageHeader title='채팅방' />
           <S.ChattingWrapper ref={scrollRef}>
             <S.MemberWrapper>
               <S.MemberBox>
