@@ -67,7 +67,13 @@ function MainModal(props: GroupProps) {
             </S.memberNum>
             <S.Title>{props.GroupProps?.name}</S.Title>
             <S.UserBox>
-              <S.Profile src={props.GroupProps?.leaderImg} alt='유저 프로필' />
+              {!props.GroupProps?.leaderImg && <I.DefaultProfile />}
+              {props.GroupProps?.leaderImg && (
+                <S.Profile
+                  src={props.GroupProps?.leaderImg}
+                  alt='유저 프로필'
+                />
+              )}
               <S.UserName>{props.GroupProps?.leaderName}</S.UserName>
             </S.UserBox>
             <S.Description>{props.GroupProps?.description}</S.Description>
