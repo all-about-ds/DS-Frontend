@@ -25,7 +25,7 @@ export const ContentWrapper = styled.div`
   margin-left: 21px;
 `;
 
-export const memberNum = styled.div`
+export const memberNum = styled.p`
   font-family: 'AppleSDGothicNeoB00';
   font-style: normal;
   font-weight: 400;
@@ -35,7 +35,7 @@ export const memberNum = styled.div`
   margin-bottom: 12px;
 `;
 
-export const Title = styled.div`
+export const Title = styled.p`
   margin-bottom: 16px;
   font-family: 'AppleSDGothicNeoB00';
   font-style: normal;
