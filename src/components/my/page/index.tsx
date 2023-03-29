@@ -78,7 +78,11 @@ function My() {
           <S.GroupList>
             {myInfo?.groups.map((group) => (
               <Link to={'/group/' + group.idx + '/information'} key={group.idx}>
-                <MyGroupItem idx={group.idx} name={group.img} img={group.img} />
+                <MyGroupItem
+                  idx={group.idx}
+                  name={group.name}
+                  img={group.img}
+                />
               </Link>
             ))}
           </S.GroupList>
