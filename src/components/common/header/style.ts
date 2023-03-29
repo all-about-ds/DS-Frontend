@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const HeaderLayout = styled.div`
+export const HeaderLayout = styled.header`
   width: 100vw;
   height: 80px;
   background: rgba(16, 16, 16, 0.56);
