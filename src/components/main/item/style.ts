@@ -1,6 +1,6 @@
 import styled from '@emotion/styled/macro';
 
-export const Description = styled.div`
+export const Description = styled.p`
   font-family: 'AppleSDGothicNeoM00';
   font-weight: 400;
   font-size: 14px;
@@ -50,14 +50,14 @@ export const Image = styled.img`
   }
 `;
 
-export const MaxPeople = styled.div`
+export const MaxPeople = styled.p`
   font-weight: 400;
   font-size: 13px;
   color: rgba(255, 255, 255, 0.6);
   margin-bottom: 10px;
 `;
 
-export const Title = styled.div`
+export const Title = styled.p`
   font-weight: 400;
   font-size: 16px;
   color: rgba(255, 255, 255, 0.8);
@@ -78,7 +78,7 @@ export const Profile = styled.img`
   border-radius: 50%;
 `;
 
-export const UserName = styled.div`
+export const UserName = styled.p`
   font-weight: 400;
   font-size: 14px;
   color: #ffffff;
