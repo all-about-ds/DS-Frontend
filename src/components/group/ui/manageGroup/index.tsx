@@ -18,7 +18,7 @@ interface FormType {
 }
 
 function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
-  const [image, setImage] = useRecoilState<string>(ImagesAtom);
+  const [image, setImage] = useState<string>('');
   const [memberNum, setMemberNum] = useState<number>(1);
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const navigate = useNavigate();
