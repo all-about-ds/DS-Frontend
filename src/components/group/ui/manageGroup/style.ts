@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const Layout = styled.div`
+export const Layout = styled.main`
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -9,7 +9,7 @@ export const Layout = styled.div`
   background: #161616;
 `;
 
-export const TopText = styled.div`
+export const TopText = styled.h1`
   font-weight: 400;
   font-size: 20px;
   color: #ffffff;
@@ -17,7 +17,7 @@ export const TopText = styled.div`
   font-family: 'AppleSDGothicNeoB00';
 `;
 
-export const TitleText = styled.div`
+export const TitleText = styled.h1`
   font-weight: 400;
   font-size: 22px;
   color: #ffffff;
@@ -25,14 +25,14 @@ export const TitleText = styled.div`
   font-family: 'AppleSDGothicNeoEB00';
 `;
 
-export const ElementsWrapper = styled.div`
+export const ElementsWrapper = styled.section`
   width: 300px;
   display: flex;
   flex-direction: column;
   margin-top: 53px;
 `;
 
-export const BoldText = styled.div`
+export const BoldText = styled.p`
   font-family: 'AppleSDGothicNeoB00';
   font-weight: 400;
   font-size: 16px;

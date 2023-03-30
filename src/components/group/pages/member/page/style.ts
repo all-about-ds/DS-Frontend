@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const Layout = styled.div`
+export const Layout = styled.main`
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -9,7 +9,7 @@ export const Layout = styled.div`
   background: linear-gradient(180deg, rgba(31, 31, 31, 0) 0%, #1f1f1f 100%);
 `;
 
-export const TopText = styled.div`
+export const TopText = styled.h1`
   font-weight: 400;
   font-size: 20px;
   color: #ffffff;
@@ -17,7 +17,7 @@ export const TopText = styled.div`
   font-family: 'AppleSDGothicNeoB00';
 `;
 
-export const TitleText = styled.div`
+export const TitleText = styled.h1`
   font-weight: 400;
   font-size: 22px;
   color: #ffffff;
@@ -35,7 +35,7 @@ export const SubmithButtonBox = styled.div`
   margin-top: 899px;
 `;
 
-export const SubmitButton = styled.div`
+export const SubmitButton = styled.button`
   background: #7848de;
   border-radius: 10px;
   width: 160px;
@@ -50,4 +50,5 @@ export const SubmitButton = styled.div`
   font-size: 15px;
   color: #ffffff;
   cursor: pointer;
+  border: none;
 `;

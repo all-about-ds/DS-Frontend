@@ -21,7 +21,7 @@ export const ChattingLayout = styled.div`
   position: relative;
 `;
 
-export const ChattingWrapper = styled.div`
+export const ChattingWrapper = styled.main`
   width: 60vw;
   position: relative;
   display: flex;
@@ -40,7 +40,7 @@ export const ChattingWrapper = styled.div`
   }
 `;
 
-export const InputBox = styled.div`
+export const InputBox = styled.section`
   width: 66.25vw;
   height: 80px;
   position: absolute;
@@ -78,7 +78,7 @@ export const Input = styled.input`
   color: rgba(255, 255, 255, 0.8);
 `;
 
-export const MemberWrapper = styled.div`
+export const MemberWrapper = styled.section`
   display: flex;
   width: auto;
   margin-top: 3vh;
@@ -101,7 +101,7 @@ export const MemberProfile = styled.div<{ image: string | undefined }>`
   border-radius: 50%;
 `;
 
-export const MemberName = styled.div`
+export const MemberName = styled.p`
   font-family: 'AppleSDGothicNeoB00';
   font-style: normal;
   font-weight: 400;
@@ -147,7 +147,7 @@ export const Time = styled.p`
   margin-left: 12px;
 `;
 
-export const MyChatBox = styled.div`
+export const MyChatBox = styled.section`
   width: auto;
   display: flex;
   flex-direction: column;
