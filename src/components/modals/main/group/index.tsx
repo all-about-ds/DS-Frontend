@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router';
 import { GroupType } from 'types/group.type';
 import group from 'api/group';
 import { toast } from 'react-toastify';
+import { useEffect } from 'react';
 
 interface GroupProps {
   GroupProps: GroupType | undefined;
@@ -23,6 +24,9 @@ function MainModal(props: GroupProps) {
   const navigate = useNavigate();
 
   const onClick = async () => {
+    if (props.GroupProps?.isMember) {
+      navigate(`/group/${props.GroupProps.idx}/information`);
+    }
     if (props.GroupProps?.secret) {
       setIndex(props.GroupProps?.idx);
       setGroupIsClicked(false);
@@ -77,7 +81,9 @@ function MainModal(props: GroupProps) {
               <S.UserName>{props.GroupProps?.leaderName}</S.UserName>
             </S.UserBox>
             <S.Description>{props.GroupProps?.description}</S.Description>
-            <S.JoinButton onClick={onClick}>가입</S.JoinButton>
+            <S.JoinButton onClick={onClick}>
+              {props.GroupProps?.isMember ? '이동' : '가입'}
+            </S.JoinButton>
           </S.ContentWrapper>
         </S.GroupIsClickedModal>
       </ModalLayout>
