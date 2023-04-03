@@ -11,7 +11,6 @@ import { useNavigate } from 'react-router';
 import { GroupType } from 'types/group.type';
 import group from 'api/group';
 import { toast } from 'react-toastify';
-import { useEffect } from 'react';
 
 interface GroupProps {
   GroupProps: GroupType | undefined;
