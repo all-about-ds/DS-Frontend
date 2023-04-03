@@ -18,7 +18,7 @@ interface FormType {
 }
 
 function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
-  const [image, setImage] = useState<string>('');
+  const [image, setImage] = useRecoilState<string>(ImagesAtom);
   const [memberNum, setMemberNum] = useState<number>(1);
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
     handleSubmit,
     formState: { isSubmitting },
   } = useForm<FormType>();
-  const { postImage, imageUrl } = useImageToUrl();
+  const { postImage } = useImageToUrl();
 
   useEffect(() => {
     setImage('');
@@ -57,7 +57,7 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
       const req: CreateGroupInterface = {
         name: data.name,
         description: data.description,
-        img: imageUrl,
+        img: image,
         maxCount: memberNum,
         secret: isClicked,
         password: data.password,
@@ -76,8 +76,12 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
     }
   };
 
-  const inValid = () => {
-    return;
+  const inValid = (e: any) => {
+    if (e.response.status === 400) {
+      toast.error('잘못된 형식의 요청이에요!');
+    } else if (e.response.status === 401) {
+      toast.error('새로고침 후 다시 시도해주세요!');
+    }
   };
 
   const encodeFileToBase64 = async (fileBlob: any) => {
@@ -86,7 +90,6 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
 
     reader.onload = () => {
       if (reader.result) {
-        setImage(reader.result.toString());
         postImage(fileBlob);
       }
     };
