@@ -80,7 +80,7 @@ class Group {
   editGroup(data: CreateGroupInterface, index: number) {
     try {
       return createAxios({
-        method: 'POST',
+        method: 'PATCH',
         url: getGroup.getList() + `/${index}`,
         data,
         headers: {
