@@ -134,7 +134,7 @@ class Group {
     }
   }
 
-  getIsMember(idx: number) {
+  getIsMember(idx: number | undefined) {
     try {
       return createAxios({
         method: 'GET',
