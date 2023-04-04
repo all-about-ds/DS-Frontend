@@ -13,6 +13,7 @@ export interface GetGroupListInterface {
   keyword: string | undefined;
   page: number;
   size: number;
+  popularity: boolean;
 }
 
 export interface GroupContents {
