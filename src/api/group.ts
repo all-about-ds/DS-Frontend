@@ -8,7 +8,9 @@ class Group {
     try {
       return createAxios({
         method: 'GET',
-        url: getGroup.getList(),
+        url: data.popularity
+          ? getGroup.getList() + '/popularity'
+          : getGroup.getList(),
         params: {
           page: data.page,
           size: data.size,
