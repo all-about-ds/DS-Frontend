@@ -8,7 +8,9 @@ class Group {
     try {
       return createAxios({
         method: 'GET',
-        url: getGroup.getList(),
+        url: data.popularity
+          ? getGroup.getList() + '/popularity'
+          : getGroup.getList(),
         params: {
           page: data.page,
           size: data.size,
@@ -125,6 +127,20 @@ class Group {
       return createAxios({
         method: 'DELETE',
         url: getGroup.deleteGroup() + `${index}`,
+        headers: {
+          Authorization: 'Bearer ' + tokenService.getLocalAccessToken(),
+        },
+      });
+    } catch (error) {
+      return error;
+    }
+  }
+
+  getIsMember(idx: number | undefined) {
+    try {
+      return createAxios({
+        method: 'GET',
+        url: getGroup.getModalDetail() + `${idx}`,
         headers: {
           Authorization: 'Bearer ' + tokenService.getLocalAccessToken(),
         },

@@ -13,6 +13,7 @@ export interface GetGroupListInterface {
   keyword: string | undefined;
   page: number;
   size: number;
+  popularity: boolean;
 }
 
 export interface GroupContents {
@@ -31,7 +32,6 @@ export interface GroupType {
   leaderImg: string;
   leaderName: string;
   secret: boolean;
-  isMember: boolean;
 }
 
 export type PasswordType = {
