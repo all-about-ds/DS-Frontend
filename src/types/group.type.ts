@@ -31,7 +31,6 @@ export interface GroupType {
   leaderImg: string;
   leaderName: string;
   secret: boolean;
-  isMember: boolean;
 }
 
 export type PasswordType = {
