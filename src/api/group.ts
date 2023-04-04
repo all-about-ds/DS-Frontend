@@ -133,6 +133,20 @@ class Group {
       return error;
     }
   }
+
+  getIsMember(idx: number) {
+    try {
+      return createAxios({
+        method: 'GET',
+        url: getGroup.getModalDetail() + `${idx}`,
+        headers: {
+          Authorization: 'Bearer ' + tokenService.getLocalAccessToken(),
+        },
+      });
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
 export default new Group();
