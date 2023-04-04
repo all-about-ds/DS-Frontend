@@ -19,8 +19,8 @@ function Main() {
   const page = useRef<number>(0);
   const [hasNextPage, setHasNextPage] = useState<boolean>(true);
   const [loaded, setLoaded] = useState<boolean>(true);
-  const [byPopularity, setByPopularity] = useState<boolean>(true);
-  const [byLatest, setByLatest] = useState<boolean>(false);
+  const [byPopularity, setByPopularity] = useState<boolean>(false);
+  const [byLatest, setByLatest] = useState<boolean>(true);
   const [list, setList] = useState<GroupType[]>([]);
   const [modalData, setModalData] = useState<GroupType>();
   const [groupIsClicked, setGroupIsClicked] =
@@ -30,12 +30,16 @@ function Main() {
   const [search, setSearch] = useRecoilState(SearchAtom);
 
   const sortButton = (type: string) => {
+    page.current = 0;
+    setList([]);
     if (type === '인기') {
       setByLatest(false);
       setByPopularity(true);
+      getGroupList(true);
     } else {
       setByLatest(true);
       setByPopularity(false);
+      getGroupList(false);
     }
   };
 
@@ -44,33 +48,37 @@ function Main() {
     setGroupIsClicked(true);
   };
 
-  const getGroupList = useCallback(async () => {
-    setLoaded(false);
-    try {
-      const response: any = await group.getGroupList({
-        keyword: search.keyword === '' ? undefined : search.keyword,
-        page: page.current,
-        size: 8,
-      });
+  const getGroupList = useCallback(
+    async (popularity: boolean) => {
+      setLoaded(false);
+      try {
+        const response: any = await group.getGroupList({
+          keyword: search.keyword === '' ? undefined : search.keyword,
+          page: page.current,
+          size: 8,
+          popularity,
+        });
 
-      setHasNextPage(response.data.groups.length === 8);
-      setList((prevPosts) => [...prevPosts, ...response.data.groups]);
-      setLoaded(true);
+        setHasNextPage(response.data.groups.length === 8);
+        setList((prevPosts) => [...prevPosts, ...response.data.groups]);
+        setLoaded(true);
 
-      if (response.data.groups.length) {
-        page.current += 1;
+        if (response.data.groups.length) {
+          page.current += 1;
+        }
+      } catch (e: any) {
+        Promise.reject(e);
       }
-    } catch (e: any) {
-      throw new Error(e);
-    }
-  }, [search]);
+    },
+    [search]
+  );
 
   useEffect(() => {
     if (!observerTargetEl.current || !hasNextPage) return;
 
     const io = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting && loaded) {
-        getGroupList();
+        getGroupList(byPopularity);
       }
     });
 
@@ -82,7 +90,7 @@ function Main() {
     if (search.isSearchRequested) {
       page.current = 0;
       setList([]);
-      getGroupList();
+      getGroupList(byPopularity);
       setSearch((oldValue) => ({
         ...oldValue,
         keyword: '',
@@ -99,16 +107,16 @@ function Main() {
       <S.MainPageLayout>
         <S.SortButtonWrapper>
           <S.SortButton
-            byPopularity={byPopularity}
-            onClick={() => sortButton('인기')}
-          >
-            인기
-          </S.SortButton>
-          <S.SortButton
             byPopularity={byLatest}
             onClick={() => sortButton('최신')}
           >
             최신순
+          </S.SortButton>
+          <S.SortButton
+            byPopularity={byPopularity}
+            onClick={() => sortButton('인기')}
+          >
+            인기
           </S.SortButton>
         </S.SortButtonWrapper>
         <S.GroupBoxWrapper>
