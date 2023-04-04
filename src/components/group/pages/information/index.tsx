@@ -89,7 +89,7 @@ function GroupInformation() {
           </div>
         )}
       </S.TextMembersBox>
-      <div style={{ margin: '0px 0px 2px 0.38rem' }}>
+      <div style={{ margin: '0px 0px 2px 0.3975rem' }}>
         <I.OwnerIcon />
       </div>
       <S.MemberList>
