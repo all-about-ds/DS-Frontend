@@ -5,6 +5,7 @@ export const HeaderContentBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
 `;
 
 export const Text = styled.p`
@@ -12,4 +13,5 @@ export const Text = styled.p`
   font-size: 15px;
   font-weight: 400;
   cursor: pointer;
+  white-space: pre;
 `;
