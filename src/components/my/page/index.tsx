@@ -12,6 +12,7 @@ import EditNameModal from 'components/modals/my/editName';
 import { useRecoilState } from 'recoil';
 import { modalAtomFamily } from 'atoms';
 import { Link } from 'react-router-dom';
+import EditProfileImageModal from 'components/modals/my/editProfileImage';
 
 function My() {
   const [myInfo, setMyInfo] = useState<GetMyInfoInterface>();
@@ -20,6 +21,10 @@ function My() {
   const [editNameModal, setEditNameModal] = useRecoilState(
     modalAtomFamily('editName')
   );
+  const [editProfileImageModal, setEditProfileImageModal] = useRecoilState(
+    modalAtomFamily('editProfileImage')
+  );
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -47,6 +52,7 @@ function My() {
     <>
       <Header />
       {editNameModal && <EditNameModal oldName={String(myInfo?.name)} />}
+      {editProfileImageModal && <EditProfileImageModal />}
       <S.MyPageLayout>
         <S.ProfileSection>
           <S.NameBox>
@@ -63,7 +69,9 @@ function My() {
             )}
             <div>
               <S.UpdateBox loaded={loaded}>
-                <I.UpdateProfileImageIcon />
+                <div onClick={() => setEditProfileImageModal(true)}>
+                  <I.UpdateProfileImageIcon />
+                </div>
                 <div onClick={() => setEditNameModal(true)}>
                   <I.UpdateNameIcon />
                 </div>
