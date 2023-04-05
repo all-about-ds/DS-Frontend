@@ -33,6 +33,23 @@ class User {
       return error;
     }
   }
+
+  changeProfileImage(profileImage: string) {
+    try {
+      return createAxios({
+        method: 'PATCH',
+        url: getUser.changeProfileImage(),
+        data: {
+          updateUserProfile: profileImage,
+        },
+        headers: {
+          Authorization: 'Bearer ' + tokenService.getLocalAccessToken(),
+        },
+      });
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
 export default new User();
