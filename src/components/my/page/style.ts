@@ -48,6 +48,11 @@ export const ProfileBox = styled.div`
   display: flex;
   margin-top: 3rem;
   gap: 3rem;
+
+  & > svg {
+    width: 120px;
+    height: 120px;
+  }
 `;
 
 export const ProfileImage = styled.img`

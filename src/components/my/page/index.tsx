@@ -63,7 +63,7 @@ function My() {
             프로필 사진과 닉네임으로 자신을 표현해봐요.
           </S.Description>
           <S.ProfileBox>
-            {!myInfo?.img && <I.MyPageDefaultProfile />}
+            {!myInfo?.img && <I.DefaultProfile />}
             {myInfo?.img && (
               <S.ProfileImage src={myInfo?.img} alt='프로필 이미지' />
             )}
