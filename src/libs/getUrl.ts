@@ -58,6 +58,9 @@ export const getGroup = {
   deleteGroup: () => {
     return 'group/';
   },
+  getGroupTimer: () => {
+    return 'group/timer/';
+  },
 };
 
 export const getUser = {
