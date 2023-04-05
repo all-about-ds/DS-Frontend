@@ -68,6 +68,10 @@ export const getUser = {
   changeName: () => {
     return 'user/name';
   },
+
+  changeProfileImage: () => {
+    return 'user/image';
+  },
 };
 
 export const postImage = {
