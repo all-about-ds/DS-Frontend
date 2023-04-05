@@ -23,6 +23,7 @@ export const OwnerButton = () => {
 export const DeleteButton = () => {
   return (
     <svg
+      cursor={'pointer'}
       width='20'
       height='20'
       viewBox='0 0 20 20'
