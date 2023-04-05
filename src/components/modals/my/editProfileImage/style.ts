@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 export const ImageUploadSection = styled.section`
+  position: relative;
   width: 180px;
   height: 180px;
   background: #363636;
@@ -25,6 +26,26 @@ export const EmotikonBox = styled.div`
   justify-content: center;
   font-size: 32px;
   cursor: pointer;
+`;
+
+export const UploadedImageChange = styled.p`
+  position: absolute;
+  font-family: 'AppleSDGothicNeoM00';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  color: #915de7;
+  cursor: pointer;
+  top: 5px;
+  right: 9px;
+`;
+
+export const UploadedImage = styled.img`
+  width: 180px;
+  height: 180px;
+  border-radius: 10px;
+  object-fit: cover;
 `;
 
 export const Text = styled.p`
