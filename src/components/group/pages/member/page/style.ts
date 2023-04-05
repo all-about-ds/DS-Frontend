@@ -32,7 +32,7 @@ export const SubmithButtonBox = styled.div`
   display: flex;
   justify-content: space-between;
   position: absolute;
-  margin-top: 899px;
+  margin-top: 83.24vh;
 `;
 
 export const SubmitButton = styled.button`
