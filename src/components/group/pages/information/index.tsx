@@ -49,7 +49,7 @@ function GroupInformation() {
         <S.Title>{information?.name}</S.Title>
         {isOwner && (
           <S.GroupManageButtonBox>
-            <div>
+            <div onClick={deleteGroup}>
               <I.DeleteButton />
             </div>
             <div
@@ -119,11 +119,6 @@ function GroupInformation() {
           </S.MemberBox>
         ))}
       </S.MemberList>
-      {isOwner && (
-        <S.RemoveGroupButton onClick={deleteGroup}>
-          그룹삭제
-        </S.RemoveGroupButton>
-      )}
     </S.GroupInformationPageLayout>
   );
 }
