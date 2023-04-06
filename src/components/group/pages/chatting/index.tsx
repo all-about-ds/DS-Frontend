@@ -1,13 +1,77 @@
 import GroupPageHeader from 'components/group/ui/groupPageHeader';
 import * as S from './style';
 import * as I from '../../../../assets/svg';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import SockJS from 'sockjs-client';
+import * as StompJS from '@stomp/stompjs';
+import tokenService from 'utils/tokenService';
 
 function GroupChatting() {
+  const [userChat, setUserChat] = useState<string>('');
+  const [chattings, setChattings] = useState<never[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const client = useRef<any>();
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserChat(e.target.value);
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      send();
+    }
+  };
+
+  const connectHandler = () => {
+    try {
+      client.current = new StompJS.Client({
+        brokerURL: 'ws://localhost:3000/stomp/chat',
+        connectHeaders: {
+          Authorization: 'Bearer ' + tokenService.getLocalAccessToken(),
+        },
+        onConnect: () => {
+          subscribe();
+        },
+      });
+
+      client.current.activate();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const subscribe = () => {
+    client.current.subscribe('/sub', (message: any) => {
+      const json_chatting = JSON.parse(message.body);
+      setChattings((prev) => ({ ...prev, json_chatting }));
+    });
+  };
+
+  const disconnect = () => {
+    client.current.deactivate();
+  };
+
+  const send = () => {
+    if (!client.current.connected) return;
+
+    client.current.send({
+      destination: '/pub',
+      body: JSON.stringify({
+        applyId: '',
+        chat: userChat,
+      }),
+    });
+
+    setUserChat('');
+  };
 
   useEffect(() => {
-    scrollRef.current!.scrollTop = scrollRef.current!.scrollHeight;
+    if (!scrollRef.current) return;
+    scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+
+    connectHandler();
+
+    return () => disconnect();
   }, []);
 
   return (
@@ -90,7 +154,11 @@ function GroupChatting() {
           <S.InputBox>
             <S.InputInnerBox>
               <I.LongRectengle />
-              <S.Input></S.Input>
+              <S.Input
+                onChange={onChange}
+                onKeyDown={handleKeyPress}
+                value={userChat}
+              ></S.Input>
               <div style={{ cursor: 'pointer' }}>
                 <I.SubmitArrow />
               </div>
