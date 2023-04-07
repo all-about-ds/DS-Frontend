@@ -39,6 +39,14 @@ export const Title = styled.h1`
   color: #f1f1f1;
 `;
 
+export const LeaveGroupText = styled.h3`
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  color: #9773e3;
+  cursor: pointer;
+`;
+
 export const Description = styled.article`
   width: 100%;
   font-style: normal;

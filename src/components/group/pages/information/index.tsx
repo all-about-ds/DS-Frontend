@@ -6,8 +6,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import group from 'api/group';
 import { GroupInformationInterface } from 'types/group.type';
 import { toast } from 'react-toastify';
+import { modalAtomFamily } from 'atoms';
+import { useRecoilState } from 'recoil';
+import NormalModal from 'components/modals/normal';
+import member from 'api/member';
 
 function GroupInformation() {
+  const [modal, setModal] = useRecoilState(modalAtomFamily('leaveGroup'));
+
   const [isOwner, setIsOwner] = useState<boolean>(false);
   const [information, setInformation] = useState<GroupInformationInterface>();
   const params = useParams();
@@ -33,7 +39,7 @@ function GroupInformation() {
 
   const deleteGroup = async () => {
     try {
-      const response: any = await group.deleteGroup(information?.idx);
+      await group.deleteGroup(information?.idx);
       toast.error('삭제되었습니다!');
       navigate('/');
     } catch (e) {
@@ -41,13 +47,34 @@ function GroupInformation() {
     }
   };
 
+  const leaveGroup = async () => {
+    try {
+      await member.leaveGroup(String(params.groupId));
+      toast.success('그룹을 나갔어요');
+      setModal(false);
+      navigate('/my');
+    } catch {
+      toast.error('알 수 없는 오류에요');
+      setModal(false);
+    }
+  };
+
   return (
     <S.GroupInformationPageLayout>
+      {modal && (
+        <NormalModal
+          atomKey='leaveGroup'
+          title='그룹 나가기'
+          description='정말 그룹을 나가시겠어요?'
+          executionText='나가기'
+          onExecute={leaveGroup}
+        />
+      )}
       <GroupPageHeader />
       <S.GroupImage src={information?.img} alt='그룹 이미지' />
       <S.TitleBox>
         <S.Title>{information?.name}</S.Title>
-        {isOwner && (
+        {isOwner ? (
           <S.GroupManageButtonBox>
             <div onClick={deleteGroup}>
               <I.DeleteButton />
@@ -69,6 +96,10 @@ function GroupInformation() {
               <I.OwnerButton />
             </div>
           </S.GroupManageButtonBox>
+        ) : (
+          <S.LeaveGroupText onClick={() => setModal(true)}>
+            그룹 나가기
+          </S.LeaveGroupText>
         )}
       </S.TitleBox>
       <S.Description>{information?.description}</S.Description>
