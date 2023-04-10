@@ -5,12 +5,15 @@ import { useEffect, useRef, useState } from 'react';
 import SockJS from 'sockjs-client';
 import * as StompJS from '@stomp/stompjs';
 import tokenService from 'utils/tokenService';
+import { useParams } from 'react-router';
+import { REACT_APP_SOCKET_URL } from 'shared/config';
 
 function GroupChatting() {
   const [userChat, setUserChat] = useState<string>('');
   const [chattings, setChattings] = useState<never[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
   const client = useRef<any>();
+  const params = useParams();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserChat(e.target.value);
@@ -25,7 +28,7 @@ function GroupChatting() {
   const connectHandler = () => {
     try {
       client.current = new StompJS.Client({
-        brokerURL: 'ws://localhost:3000/stomp/chat',
+        brokerURL: REACT_APP_SOCKET_URL + '/stomp/chat',
         connectHeaders: {
           Authorization: 'Bearer ' + tokenService.getLocalAccessToken(),
         },
@@ -41,7 +44,7 @@ function GroupChatting() {
   };
 
   const subscribe = () => {
-    client.current.subscribe('/sub', (message: any) => {
+    client.current.subscribe('/sub/' + params.groupId, (message: any) => {
       const json_chatting = JSON.parse(message.body);
       setChattings((prev) => ({ ...prev, json_chatting }));
     });
