@@ -11,6 +11,7 @@ import { REACT_APP_SOCKET_URL } from 'shared/config';
 function GroupChatting() {
   const [userChat, setUserChat] = useState<string>('');
   const [chattings, setChattings] = useState<never[]>([]);
+  const [subId, setSubId] = useState<string>('');
   const scrollRef = useRef<HTMLDivElement>(null);
   const client = useRef<any>();
   const params = useParams();
@@ -31,12 +32,14 @@ function GroupChatting() {
         brokerURL: REACT_APP_SOCKET_URL + '/stomp/chat',
         connectHeaders: {
           Authorization: 'Bearer ' + tokenService.getLocalAccessToken(),
+          Origin: 'http://localhost:3000',
         },
+        reconnectDelay: 5000,
         onConnect: () => {
           subscribe();
         },
       });
-
+      client.current.debug = null;
       client.current.activate();
     } catch (error) {
       console.log(error);
@@ -44,13 +47,18 @@ function GroupChatting() {
   };
 
   const subscribe = () => {
-    client.current.subscribe('/sub/' + params.groupId, (message: any) => {
-      const json_chatting = JSON.parse(message.body);
-      setChattings((prev) => ({ ...prev, json_chatting }));
-    });
+    const sub: any = client.current.subscribe(
+      '/sub/' + params.groupId,
+      (message: any) => {
+        const json_chatting = JSON.parse(message.body);
+        setChattings((prev) => ({ ...prev, json_chatting }));
+        setSubId(sub.id);
+      }
+    );
   };
 
   const disconnect = () => {
+    client.current.unscribe(subId);
     client.current.deactivate();
   };
 
