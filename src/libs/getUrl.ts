@@ -79,3 +79,9 @@ export const postImage = {
     return 'image';
   },
 };
+
+export const getMember = {
+  leaveGroup: () => {
+    return 'member/exit/';
+  },
+};
