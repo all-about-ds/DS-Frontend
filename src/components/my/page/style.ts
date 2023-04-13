@@ -89,7 +89,7 @@ export const UpdateBox = styled.div<{ loaded: boolean }>`
 export const ColumnSortingBox = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.95 rem;
+  gap: 0.95rem;
 `;
 
 export const LogoutButton = styled.button`
