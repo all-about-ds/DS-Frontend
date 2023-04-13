@@ -63,11 +63,11 @@ function My() {
             프로필 사진과 닉네임으로 자신을 표현해봐요.
           </S.Description>
           <S.ProfileBox>
-            {!myInfo?.img && <I.MyPageDefaultProfile />}
-            {myInfo?.img && (
-              <S.ProfileImage src={myInfo?.img} alt='프로필 이미지' />
+            {!myInfo?.profileImg && <I.DefaultProfile />}
+            {myInfo?.profileImg && (
+              <S.ProfileImage src={myInfo?.profileImg} alt='프로필 이미지' />
             )}
-            <div>
+            <S.ColumnSortingBox>
               <S.UpdateBox loaded={loaded}>
                 <div onClick={() => setEditProfileImageModal(true)}>
                   <I.UpdateProfileImageIcon />
@@ -78,7 +78,8 @@ function My() {
                 <p>{myInfo?.name}</p>
               </S.UpdateBox>
               <S.LogoutButton onClick={onLogout}>로그아웃</S.LogoutButton>
-            </div>
+              <S.UserWithdrawalButton>회원탈퇴</S.UserWithdrawalButton>
+            </S.ColumnSortingBox>
           </S.ProfileBox>
         </S.ProfileSection>
         <S.GroupSection>

@@ -48,6 +48,11 @@ export const ProfileBox = styled.div`
   display: flex;
   margin-top: 3rem;
   gap: 3rem;
+
+  & > svg {
+    width: 115px;
+    height: 115px;
+  }
 `;
 
 export const ProfileImage = styled.img`
@@ -61,7 +66,6 @@ export const UpdateBox = styled.div<{ loaded: boolean }>`
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 0.5rem;
   pointer-events: ${(e) => !e.loaded && 'none'};
 
   p {
@@ -82,6 +86,12 @@ export const UpdateBox = styled.div<{ loaded: boolean }>`
   }
 `;
 
+export const ColumnSortingBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.95 rem;
+`;
+
 export const LogoutButton = styled.button`
   background: #7848de;
   border-radius: 10px;
@@ -94,6 +104,32 @@ export const LogoutButton = styled.button`
   font-size: 13px;
   color: #101010;
   cursor: pointer;
+  border: 1px solid #7848de;
+
+  :hover {
+    background: #101010;
+    color: #7848de;
+    border: 1px solid #7848de;
+  }
+`;
+
+export const UserWithdrawalButton = styled.button`
+  background: #101010;
+  border-radius: 10px;
+  width: 85px;
+  height: 32px;
+  outline: none;
+  border: 1px solid #7848de;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  color: #7848de;
+  cursor: pointer;
+
+  :hover {
+    background: #7848de;
+    color: #101010;
+  }
 `;
 
 export const GroupSection = styled.section`
