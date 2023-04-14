@@ -21,6 +21,9 @@ function My() {
   const [logoutModal, setLogoutModal] = useRecoilState(
     modalAtomFamily('logout')
   );
+  const [withdrawalModal, setWithdrawalModal] = useRecoilState(
+    modalAtomFamily('withdrawal')
+  );
   const [editNameModal, setEditNameModal] = useRecoilState(
     modalAtomFamily('editName')
   );
@@ -51,6 +54,19 @@ function My() {
     navigate('/');
   };
 
+  const onWithdrawal = async () => {
+    try {
+      await user.withdrawal();
+      tokenService.removeUser();
+      toast.success('회원탈퇴 되었어요');
+      navigate('/');
+      setWithdrawalModal(false);
+    } catch {
+      toast.error('알 수 없는 에러에요');
+      setWithdrawalModal(false);
+    }
+  };
+
   return (
     <>
       <Header />
@@ -61,6 +77,15 @@ function My() {
           description='정말 로그아웃 하시겠어요?'
           excuteButtonText='로그아웃'
           executeFunc={onLogout}
+        />
+      )}
+      {withdrawalModal && (
+        <DefaultModal
+          atomKey='withdrawal'
+          title='탈퇴하기'
+          description='정말 저희 DS를 탈퇴하시겠어요?'
+          excuteButtonText='탈퇴'
+          executeFunc={onWithdrawal}
         />
       )}
       {editNameModal && <EditNameModal oldName={String(myInfo?.name)} />}
@@ -92,7 +117,9 @@ function My() {
               <S.LogoutButton onClick={() => setLogoutModal(true)}>
                 로그아웃
               </S.LogoutButton>
-              <S.UserWithdrawalButton>회원탈퇴</S.UserWithdrawalButton>
+              <S.UserWithdrawalButton onClick={() => setWithdrawalModal(true)}>
+                회원탈퇴
+              </S.UserWithdrawalButton>
             </S.ColumnSortingBox>
           </S.ProfileBox>
         </S.ProfileSection>
