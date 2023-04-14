@@ -13,11 +13,14 @@ import { useRecoilState } from 'recoil';
 import { modalAtomFamily } from 'atoms';
 import { Link } from 'react-router-dom';
 import EditProfileImageModal from 'components/modals/my/editProfileImage';
+import DefaultModal from 'components/modals/default';
 
 function My() {
   const [myInfo, setMyInfo] = useState<GetMyInfoInterface>();
   const [loaded, setLoaded] = useState<boolean>(false);
-
+  const [logoutModal, setLogoutModal] = useRecoilState(
+    modalAtomFamily('logout')
+  );
   const [editNameModal, setEditNameModal] = useRecoilState(
     modalAtomFamily('editName')
   );
@@ -51,6 +54,15 @@ function My() {
   return (
     <>
       <Header />
+      {logoutModal && (
+        <DefaultModal
+          atomKey='logout'
+          title='로그아웃하기'
+          description='정말 로그아웃 하시겠어요?'
+          excuteButtonText='로그아웃'
+          executeFunc={onLogout}
+        />
+      )}
       {editNameModal && <EditNameModal oldName={String(myInfo?.name)} />}
       {editProfileImageModal && <EditProfileImageModal />}
       <S.MyPageLayout>
@@ -77,7 +89,9 @@ function My() {
                 </div>
                 <p>{myInfo?.name}</p>
               </S.UpdateBox>
-              <S.LogoutButton onClick={onLogout}>로그아웃</S.LogoutButton>
+              <S.LogoutButton onClick={() => setLogoutModal(true)}>
+                로그아웃
+              </S.LogoutButton>
               <S.UserWithdrawalButton>회원탈퇴</S.UserWithdrawalButton>
             </S.ColumnSortingBox>
           </S.ProfileBox>
