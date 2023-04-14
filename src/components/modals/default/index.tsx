@@ -12,9 +12,11 @@ interface DefaultModal {
 }
 
 function DefaultModal(props: DefaultModal) {
-  const [modal, setModal] = useRecoilState(modalAtomFamily(props.atomKey));
+  const [_, setModal] = useRecoilState(modalAtomFamily(props.atomKey));
 
-  console.log(props);
+  const onCancle = () => {
+    setModal(false);
+  };
 
   return (
     <ModalLayout setModal={setModal}>
@@ -24,7 +26,7 @@ function DefaultModal(props: DefaultModal) {
           <S.Description>{props.description}</S.Description>
         </div>
         <S.ButtonBox>
-          <S.CancleButton>취소</S.CancleButton>
+          <S.CancleButton onClick={onCancle}>취소</S.CancleButton>
           <S.ExecuteButton onClick={props.executeFunc}>
             {props.excuteButtonText}
           </S.ExecuteButton>
