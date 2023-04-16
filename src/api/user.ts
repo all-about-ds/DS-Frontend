@@ -50,6 +50,20 @@ class User {
       return error;
     }
   }
+
+  withdrawal() {
+    try {
+      return createAxios({
+        method: 'DELETE',
+        url: 'user',
+        headers: {
+          Authorization: 'Bearer ' + tokenService.getLocalAccessToken(),
+        },
+      });
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
 export default new User();

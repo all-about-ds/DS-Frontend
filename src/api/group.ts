@@ -149,6 +149,20 @@ class Group {
       return error;
     }
   }
+
+  getGroupTimer(id: string) {
+    try {
+      return createAxios({
+        method: 'GET',
+        url: getGroup.getGroupTimer() + id,
+        headers: {
+          Authorization: 'Bearer ' + tokenService.getLocalAccessToken(),
+        },
+      });
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
 export default new Group();

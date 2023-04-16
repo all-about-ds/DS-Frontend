@@ -1,7 +1,7 @@
 export interface GetMyInfoInterface {
   idx: number;
   name: string;
-  img: string;
+  profileImg: string;
   groups: MyGroupListInterface[];
 }
 
