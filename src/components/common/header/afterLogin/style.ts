@@ -34,6 +34,7 @@ export const UserProfile = styled.img`
   height: 36px;
   border-radius: 50%;
   cursor: pointer;
+  object-fit: cover;
 `;
 
 export const UserName = styled.p`

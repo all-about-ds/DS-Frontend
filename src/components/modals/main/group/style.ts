@@ -58,6 +58,7 @@ export const Profile = styled.img`
   border-radius: 50%;
   background: #d9d9d9;
   margin-right: 8px;
+  object-fit: cover;
 `;
 
 export const UserName = styled.div`

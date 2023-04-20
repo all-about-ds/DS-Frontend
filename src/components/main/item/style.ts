@@ -76,6 +76,7 @@ export const Profile = styled.img`
   height: 30px;
   border-radius: 50%;
   margin-right: 8px;
+  object-fit: cover;
 `;
 
 export const UserName = styled.p`
