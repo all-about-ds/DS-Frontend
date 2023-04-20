@@ -66,7 +66,6 @@ export const Title = styled.p`
 `;
 
 export const User = styled.div`
-  width: 79px;
   height: 30px;
   display: flex;
   align-items: center;
