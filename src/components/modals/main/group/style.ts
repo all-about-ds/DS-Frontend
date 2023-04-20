@@ -61,7 +61,7 @@ export const Profile = styled.img`
   object-fit: cover;
 `;
 
-export const UserName = styled.div`
+export const UserName = styled.p`
   font-family: 'AppleSDGothicNeoB00';
   font-style: normal;
   font-weight: 400;
