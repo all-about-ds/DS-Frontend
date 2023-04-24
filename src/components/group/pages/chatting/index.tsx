@@ -59,7 +59,6 @@ function GroupChatting() {
   };
 
   const disconnect = () => {
-    client.current.unscribe(subId);
     client.current.deactivate();
   };
 
