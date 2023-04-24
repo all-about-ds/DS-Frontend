@@ -10,12 +10,14 @@ import { modalAtomFamily } from 'atoms';
 import { useRecoilState } from 'recoil';
 import NormalModal from 'components/modals/normal';
 import member from 'api/member';
+import { groupIsClickedAtom } from 'atoms';
 
 function GroupInformation() {
   const [modal, setModal] = useRecoilState(modalAtomFamily('leaveGroup'));
 
   const [isOwner, setIsOwner] = useState<boolean>(false);
   const [information, setInformation] = useState<GroupInformationInterface>();
+  const [, setGroupIsClicked] = useRecoilState(groupIsClickedAtom);
   const params = useParams();
   const navigate = useNavigate();
 
@@ -41,6 +43,7 @@ function GroupInformation() {
     try {
       await group.deleteGroup(information?.idx);
       toast.error('삭제되었습니다!');
+      setGroupIsClicked(false);
       navigate('/');
     } catch (e) {
       console.log(e);
