@@ -1,11 +1,12 @@
 import styled from '@emotion/styled/macro';
 
-export const Description = styled.p`
+export const Description = styled.div`
   font-family: 'AppleSDGothicNeoM00';
   font-weight: 400;
   font-size: 14px;
   color: #717171;
-  width: 100%;
+  width: 300px;
+  height: 28px;
   text-overflow: ellipsis;
   overflow: hidden;
   display: -webkit-box;
@@ -65,10 +66,8 @@ export const Title = styled.p`
 `;
 
 export const User = styled.div`
-  width: 79px;
   height: 30px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
 `;
 
@@ -76,6 +75,8 @@ export const Profile = styled.img`
   width: 30px;
   height: 30px;
   border-radius: 50%;
+  margin-right: 8px;
+  object-fit: cover;
 `;
 
 export const UserName = styled.p`

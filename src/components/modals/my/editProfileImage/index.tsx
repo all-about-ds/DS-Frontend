@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import MyPageModalLayout from '../layout';
 import * as S from './style';
 import useImageToUrl from 'hooks/useImageToUrl';
@@ -9,10 +9,11 @@ import { toast } from 'react-toastify';
 
 function EditProfileImageModal() {
   const setImage = useRef<HTMLInputElement>(null);
-  const [uploadedImage] = useRecoilState<string>(ImagesAtom);
+  const [uploadedImage, setUplodedAtom] = useRecoilState<string>(ImagesAtom);
   const [, setModal] = useRecoilState(modalAtomFamily('editProfileImage'));
-
   const { postImage } = useImageToUrl();
+
+  useEffect(() => setUplodedAtom(''), []);
 
   const uploadButtonClick = (e: any) => {
     e.preventDefault();
@@ -67,8 +68,12 @@ function EditProfileImageModal() {
           {uploadedImage && (
             <S.UploadedImage src={uploadedImage} onClick={uploadButtonClick} />
           )}
-          <S.EmotikonBox onClick={uploadButtonClick}>📷</S.EmotikonBox>
-          <S.Text>업로드</S.Text>
+          {!uploadedImage && (
+            <>
+              <S.EmotikonBox onClick={uploadButtonClick}>📷</S.EmotikonBox>
+              <S.Text>업로드</S.Text>
+            </>
+          )}
         </div>
       </S.ImageUploadSection>
       <S.Description>이미지를 업로드 해주세요</S.Description>

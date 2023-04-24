@@ -58,6 +58,9 @@ export const getGroup = {
   deleteGroup: () => {
     return 'group/';
   },
+  getGroupTimer: () => {
+    return 'group/timer/';
+  },
 };
 
 export const getUser = {
@@ -77,5 +80,11 @@ export const getUser = {
 export const postImage = {
   postImage: () => {
     return 'image';
+  },
+};
+
+export const getMember = {
+  leaveGroup: () => {
+    return 'member/exit/';
   },
 };

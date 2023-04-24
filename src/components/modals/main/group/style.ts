@@ -46,10 +46,8 @@ export const Title = styled.p`
 `;
 
 export const UserBox = styled.div`
-  width: 83px;
   height: 36px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 `;
@@ -59,13 +57,15 @@ export const Profile = styled.img`
   height: 36px;
   border-radius: 50%;
   background: #d9d9d9;
+  margin-right: 8px;
+  object-fit: cover;
 `;
 
-export const UserName = styled.div`
+export const UserName = styled.p`
   font-family: 'AppleSDGothicNeoB00';
   font-style: normal;
   font-weight: 400;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 21px;
   color: #ffffff;
 `;

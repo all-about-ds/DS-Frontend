@@ -13,11 +13,17 @@ import { useRecoilState } from 'recoil';
 import { modalAtomFamily } from 'atoms';
 import { Link } from 'react-router-dom';
 import EditProfileImageModal from 'components/modals/my/editProfileImage';
+import DefaultModal from 'components/modals/default';
 
 function My() {
   const [myInfo, setMyInfo] = useState<GetMyInfoInterface>();
   const [loaded, setLoaded] = useState<boolean>(false);
-
+  const [logoutModal, setLogoutModal] = useRecoilState(
+    modalAtomFamily('logout')
+  );
+  const [withdrawalModal, setWithdrawalModal] = useRecoilState(
+    modalAtomFamily('withdrawal')
+  );
   const [editNameModal, setEditNameModal] = useRecoilState(
     modalAtomFamily('editName')
   );
@@ -48,9 +54,40 @@ function My() {
     navigate('/');
   };
 
+  const onWithdrawal = async () => {
+    try {
+      await user.withdrawal();
+      tokenService.removeUser();
+      toast.success('회원탈퇴 되었어요');
+      navigate('/');
+      setWithdrawalModal(false);
+    } catch {
+      toast.error('알 수 없는 에러에요');
+      setWithdrawalModal(false);
+    }
+  };
+
   return (
     <>
       <Header />
+      {logoutModal && (
+        <DefaultModal
+          atomKey='logout'
+          title='로그아웃하기'
+          description='정말 로그아웃 하시겠어요?'
+          excuteButtonText='로그아웃'
+          executeFunc={onLogout}
+        />
+      )}
+      {withdrawalModal && (
+        <DefaultModal
+          atomKey='withdrawal'
+          title='탈퇴하기'
+          description='정말 저희 DS를 탈퇴하시겠어요?'
+          excuteButtonText='탈퇴'
+          executeFunc={onWithdrawal}
+        />
+      )}
       {editNameModal && <EditNameModal oldName={String(myInfo?.name)} />}
       {editProfileImageModal && <EditProfileImageModal />}
       <S.MyPageLayout>
@@ -63,11 +100,11 @@ function My() {
             프로필 사진과 닉네임으로 자신을 표현해봐요.
           </S.Description>
           <S.ProfileBox>
-            {!myInfo?.img && <I.MyPageDefaultProfile />}
-            {myInfo?.img && (
-              <S.ProfileImage src={myInfo?.img} alt='프로필 이미지' />
+            {!myInfo?.profileImg && <I.DefaultProfile />}
+            {myInfo?.profileImg && (
+              <S.ProfileImage src={myInfo?.profileImg} alt='프로필 이미지' />
             )}
-            <div>
+            <S.ColumnSortingBox>
               <S.UpdateBox loaded={loaded}>
                 <div onClick={() => setEditProfileImageModal(true)}>
                   <I.UpdateProfileImageIcon />
@@ -77,8 +114,13 @@ function My() {
                 </div>
                 <p>{myInfo?.name}</p>
               </S.UpdateBox>
-              <S.LogoutButton onClick={onLogout}>로그아웃</S.LogoutButton>
-            </div>
+              <S.LogoutButton onClick={() => setLogoutModal(true)}>
+                로그아웃
+              </S.LogoutButton>
+              <S.UserWithdrawalButton onClick={() => setWithdrawalModal(true)}>
+                회원탈퇴
+              </S.UserWithdrawalButton>
+            </S.ColumnSortingBox>
           </S.ProfileBox>
         </S.ProfileSection>
         <S.GroupSection>
