@@ -28,23 +28,19 @@ function GroupChatting() {
   };
 
   const connectHandler = () => {
-    try {
-      client.current = new StompJS.Client({
-        brokerURL: REACT_APP_SOCKET_URL + '/stomp/chat',
-        connectHeaders: {
-          Authorization: 'Bearer ' + tokenService.getLocalAccessToken(),
-          Origin: 'http://localhost:3000',
-        },
-        reconnectDelay: 5000,
-        onConnect: () => {
-          subscribe();
-        },
-      });
-      client.current.debug = null;
-      client.current.activate();
-    } catch (error) {
-      console.log(error);
-    }
+    client.current = new StompJS.Client({
+      brokerURL: REACT_APP_SOCKET_URL + '/stomp/chat',
+      connectHeaders: {
+        Authorization: 'Bearer ' + tokenService.getLocalAccessToken(),
+        Origin: 'http://localhost:3000',
+      },
+      reconnectDelay: 5000,
+      onConnect: () => {
+        subscribe();
+      },
+    });
+    client.current.debug(null);
+    client.current.activate();
   };
 
   const subscribe = () => {
