@@ -27,23 +27,25 @@ function GroupChatting() {
     }
   };
 
-  const connectHandler = () => {
-    client.current = new StompJS.Client({
-      brokerURL: REACT_APP_SOCKET_URL + '/stomp/chat',
+  const connectHandler = async () => {
+    client.current = await new StompJS.Client({
+      brokerURL: REACT_APP_SOCKET_URL + 'stomp/chat',
       connectHeaders: {
         Authorization: 'Bearer ' + tokenService.getLocalAccessToken(),
         Origin: 'http://localhost:3000',
       },
-      reconnectDelay: 5000,
+      reconnectDelay: 10000,
       onConnect: () => {
+        console.log('success');
         subscribe();
       },
     });
-    client.current.debug(null);
+    //client.current.debug(null);
     client.current.activate();
   };
 
   const subscribe = () => {
+    console.log('구독시작');
     const sub: any = client.current.subscribe(
       '/sub/' + params.groupId,
       (message: any) => {
