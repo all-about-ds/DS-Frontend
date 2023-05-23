@@ -2,20 +2,12 @@ import GroupPageHeader from 'components/group/ui/groupPageHeader';
 import * as S from './style';
 import * as I from '../../../../assets/svg';
 import { useEffect, useRef, useState } from 'react';
-import SockJS from 'sockjs-client';
-import * as StompJS from '@stomp/stompjs';
-import tokenService from 'utils/tokenService';
-import { useParams } from 'react-router';
-import { REACT_APP_SOCKET_URL } from 'shared/config';
 import { ChatType } from 'types/chat.type';
 
 function GroupChatting() {
   const [userChat, setUserChat] = useState<string>('');
   const [chattings, setChattings] = useState<ChatType[]>([]);
-  const [subId, setSubId] = useState<string>('');
   const scrollRef = useRef<HTMLDivElement>(null);
-  const client = useRef<any>();
-  const params = useParams();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserChat(e.target.value);
@@ -23,65 +15,9 @@ function GroupChatting() {
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      send();
+      return;
     }
   };
-
-  const connectHandler = async () => {
-    client.current = await new StompJS.Client({
-      brokerURL: REACT_APP_SOCKET_URL + 'stomp/chat',
-      connectHeaders: {
-        Authorization: 'Bearer ' + tokenService.getLocalAccessToken(),
-        Origin: 'http://localhost:3000',
-      },
-      reconnectDelay: 10000,
-      onConnect: () => {
-        console.log('success');
-        subscribe();
-      },
-    });
-    //client.current.debug(null);
-    client.current.activate();
-  };
-
-  const subscribe = () => {
-    console.log('구독시작');
-    const sub: any = client.current.subscribe(
-      '/sub/' + params.groupId,
-      (message: any) => {
-        const json_chatting = JSON.parse(message.body);
-        setChattings(json_chatting);
-        setSubId(sub.id);
-      }
-    );
-  };
-
-  const disconnect = () => {
-    client.current.deactivate();
-  };
-
-  const send = () => {
-    if (!client.current.connected) return;
-
-    client.current.send({
-      destination: '/pub',
-      body: JSON.stringify({
-        applyId: '',
-        chat: userChat,
-      }),
-    });
-
-    setUserChat('');
-  };
-
-  useEffect(() => {
-    if (!scrollRef.current) return;
-    scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-
-    connectHandler();
-
-    return () => disconnect();
-  }, []);
 
   return (
     <>
