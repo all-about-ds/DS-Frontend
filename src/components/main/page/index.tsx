@@ -13,6 +13,8 @@ import {
   SearchAtom,
 } from 'atoms/container';
 import PasswordModal from 'components/modals/main/passwordCheck';
+import tokenService from 'utils/tokenService';
+import { useNavigate } from 'react-router';
 
 function Main() {
   const observerTargetEl = useRef<HTMLDivElement>(null);
@@ -28,6 +30,7 @@ function Main() {
   const [groupPassword] = useRecoilState(groupPasswordModalAtom);
   const [index] = useRecoilState(groupIndexAtom);
   const [search, setSearch] = useRecoilState(SearchAtom);
+  const navigate = useNavigate();
 
   const sortButton = (type: string) => {
     page.current = 0;
@@ -44,8 +47,12 @@ function Main() {
   };
 
   const groupClick = (props: GroupType) => {
-    setModalData(props);
-    setGroupIsClicked(true);
+    if (!tokenService.getLocalAccessToken()) {
+      navigate('auth/signin');
+    } else {
+      setModalData(props);
+      setGroupIsClicked(true);
+    }
   };
 
   const getGroupList = useCallback(
