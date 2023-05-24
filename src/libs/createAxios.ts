@@ -5,14 +5,7 @@ import { getAuth } from './getUrl';
 
 export const createAxios = axios.create({
   baseURL: REACT_APP_BASE_URL,
-  headers: {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type,Authorization',
-    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS,PATCH',
-    'Access-Control-Allow-Credentials': true,
-    'Content-Type': 'application/json',
-    'Cache-Control': 'no-store',
-  },
+  withCredentials: true,
 });
 
 createAxios.interceptors.request.use(
