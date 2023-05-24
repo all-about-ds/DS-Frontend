@@ -72,7 +72,16 @@ function AfterLoginHeader() {
         <div onClick={() => window.location.replace('/')} className='home'>
           <I.Home />
         </div>
-        <div onClick={() => navigate('/group/create')}>
+        <div
+          onClick={() =>
+            navigate('/group/create', {
+              state: {
+                name,
+                profile: image,
+              },
+            })
+          }
+        >
           <I.MakeGroup />
         </div>
         {!image && (
