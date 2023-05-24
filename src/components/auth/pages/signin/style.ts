@@ -7,6 +7,7 @@ export const DescWrapper = styled.div`
   background: #1c1c1c;
   border-radius: 10px;
   margin: 18px 0 1.22vh;
+  align-items: center;
 `;
 
 export const IconBox = styled.div`
@@ -27,7 +28,7 @@ export const DescText = styled.p`
   font-weight: 400;
   font-size: 12px;
   color: #acacac;
-  margin: 12px 12px 0 0;
+  margin-right: 12px;
 `;
 
 export const InputWrapper = styled.div`
