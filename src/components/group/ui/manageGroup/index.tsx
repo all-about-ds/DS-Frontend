@@ -32,11 +32,6 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
   } = useForm<FormType>();
   const { postImage } = useImageToUrl();
 
-  useEffect(() => {
-    setImage('');
-    setMemberNum(1);
-  }, []);
-
   const memberUp = () => {
     if (memberNum !== 7) {
       setMemberNum(memberNum + 1);
@@ -104,9 +99,11 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
   };
 
   useEffect(() => {
-    if (location.state) {
+    if (location.state.img) {
       setImage(location.state.img);
       setMemberNum(location.state.maxCount + 1);
+    } else {
+      setImage('');
     }
   }, []);
 
