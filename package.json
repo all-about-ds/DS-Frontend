@@ -32,7 +32,8 @@
     "react-scripts": "^5.0.1",
     "react-toastify": "^9.1.1",
     "recoil": "^0.7.6",
-    "recoil-persist": "^4.2.0"
+    "recoil-persist": "^4.2.0",
+    "uid": "^2.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
