@@ -3,7 +3,7 @@ import * as I from 'assets/svg';
 import { useLocation, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-type titleType = '채팅방' | '그룹정보' | '타이머';
+type titleType = string | '그룹정보' | '타이머';
 
 function GroupPageHeader({ title }: { title?: titleType }) {
   const params = useParams();
@@ -26,7 +26,10 @@ function GroupPageHeader({ title }: { title?: titleType }) {
         <p>{title}</p>
       </S.Elements>
       <S.Elements>
-        <Link to={'/group/' + params.groupId + '/chatting'}>
+        <Link
+          to={'/group/' + params.groupId + '/chatting'}
+          state={{ groupName: title }}
+        >
           <div className={select('/group/' + params.groupId + '/chatting')}>
             <I.ChattingIcon />
           </div>
