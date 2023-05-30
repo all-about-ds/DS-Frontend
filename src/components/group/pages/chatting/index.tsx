@@ -3,7 +3,15 @@ import * as S from './style';
 import * as I from '../../../../assets/svg';
 import { useEffect, useRef, useState } from 'react';
 import { ChatMessageType } from 'types/chat.type';
-import { child, get, off, ref, set } from '@firebase/database';
+import {
+  Unsubscribe,
+  child,
+  get,
+  off,
+  onValue,
+  ref,
+  set,
+} from '@firebase/database';
 import { db } from '../../../../firebase';
 import { useLocation } from 'react-router';
 import { useRecoilState } from 'recoil';
@@ -77,34 +85,18 @@ function GroupChatting() {
   };
 
   useEffect(() => {
-    get(child(dbRef, `chattings/${location.state.groupName}/chat`))
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          setChat(Object.values(snapshot.val()));
-
-          console.log(snapshot.val());
-        } else {
-          console.log('No data available');
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
     const chatRef = ref(db, `chattings/${location.state.groupName}/chat`);
 
-    const handleChatUpdate = (snapshot: any) => {
+    const unscribe: Unsubscribe = onValue(chatRef, (snapshot) => {
       const data = snapshot.val();
-
       if (data) {
-        setChat(Object.values(data));
-      } else {
-        setChat([]);
+        const messages: ChatMessageType[] = Object.values(data);
+        setChat(messages);
       }
-    };
+    });
 
     return () => {
-      off(chatRef, 'value', handleChatUpdate);
+      off(chatRef, 'value', unscribe);
     };
   }, []);
 
