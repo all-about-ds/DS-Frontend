@@ -20,6 +20,27 @@ function GroupChatting() {
   const dbRef = ref(db);
   const uuid = uid();
 
+  function formatTime(timestamp: number): string {
+    console.log(timestamp);
+    const date = new Date(timestamp);
+    const now = new Date();
+    const timeDiff = now.getTime() - date.getTime();
+    const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+    if (daysDiff === 0) {
+      const hours = date.getHours();
+      const minutes = date.getMinutes();
+      const ampm = hours >= 12 ? '오후' : '오전';
+      const formattedHours = hours % 12 || 12;
+      const formattedMinutes = minutes.toString().padStart(2, '0');
+      return `${ampm} ${formattedHours}:${formattedMinutes}`;
+    } else if (daysDiff === 1) {
+      return '어제';
+    } else {
+      return `${daysDiff}일 전`;
+    }
+  }
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserChat(e.target.value);
   };
@@ -33,6 +54,7 @@ function GroupChatting() {
             img: userImage ? userImage : null,
             name: userName,
             chat: userChat,
+            createdAt: Date.now(),
             isMine: true,
           }
         );
@@ -47,6 +69,7 @@ function GroupChatting() {
         img: userImage ? userImage : null,
         name: userName,
         chat: userChat,
+        createdAt: Date.now(),
         isMine: true,
       });
       setUserChat('');
@@ -105,7 +128,7 @@ function GroupChatting() {
                           <S.Chatting>
                             <S.ChattingText>{data.chat}</S.ChattingText>
                           </S.Chatting>
-                          <S.Time>오후 {data.createdAt}</S.Time>
+                          <S.Time>{formatTime(data.createdAt)}</S.Time>
                         </S.ChattingBox>
                       </S.MemberWrapper>
                       <div></div>
@@ -118,7 +141,9 @@ function GroupChatting() {
                         <S.MyChatting>
                           <S.MyChatText>{data.chat}</S.MyChatText>
                         </S.MyChatting>
-                        <S.MyChatTime>오후 {data.createdAt}</S.MyChatTime>
+                        <S.MyChatTime>
+                          {formatTime(data.createdAt)}
+                        </S.MyChatTime>
                       </S.MyChatBox>
                     </S.ChatWrapper>
                   )}
