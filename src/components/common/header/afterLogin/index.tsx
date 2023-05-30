@@ -5,21 +5,21 @@ import { ReactComponent as Search } from '../../../../assets/svg/search.svg';
 import { useNavigate } from 'react-router';
 import header from 'api/header';
 import { useRecoilState } from 'recoil';
-import { SearchAtom } from 'atoms/container';
+import { SearchAtom, userInfoAtomFamily } from 'atoms/container';
 
 function AfterLoginHeader() {
   const [search, setSearch] = useState(false);
   const navigate = useNavigate();
-  const [name, setName] = useState<string>('');
-  const [image, setImage] = useState<string>('');
   const [searchEnter, setEnterSearch] = useRecoilState(SearchAtom);
+  const [userName, setUserName] = useRecoilState(userInfoAtomFamily('name'));
+  const [userImage, setUserImage] = useRecoilState(userInfoAtomFamily('image'));
 
   const getUser = async () => {
     try {
       const response: any = await header.getUserInfo();
 
-      setName(response.data.name);
-      setImage(response.data.img);
+      setUserName(response.data.name);
+      setUserImage(response.data.img);
     } catch (e) {
       console.log(e);
     }
@@ -72,22 +72,31 @@ function AfterLoginHeader() {
         <div onClick={() => window.location.replace('/')} className='home'>
           <I.Home />
         </div>
-        <div onClick={() => navigate('/group/create')}>
+        <div
+          onClick={() =>
+            navigate('/group/create', {
+              state: {
+                name,
+                profile: userImage,
+              },
+            })
+          }
+        >
           <I.MakeGroup />
         </div>
-        {!image && (
+        {!userImage && (
           <div onClick={() => navigate('/my')} style={{ cursor: 'pointer' }}>
             <I.DefaultProfile />
           </div>
         )}
-        {image && (
+        {userImage && (
           <S.UserProfile
-            src={image}
+            src={userImage}
             alt='유저 프로필'
             onClick={() => navigate('/my')}
           />
         )}
-        <S.UserName onClick={() => navigate('/my')}>{name}님</S.UserName>
+        <S.UserName onClick={() => navigate('/my')}>{userName}님</S.UserName>
       </S.HeaderContentBox>
     </>
   );

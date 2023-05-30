@@ -62,3 +62,9 @@ export const SearchAtom = atom({
     isSearchRequested: false,
   },
 });
+
+export const userInfoAtomFamily = atomFamily({
+  key: 'userInfo',
+  default: '',
+  effects_UNSTABLE: [persistAtom],
+});

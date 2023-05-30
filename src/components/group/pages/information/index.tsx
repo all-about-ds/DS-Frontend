@@ -73,7 +73,7 @@ function GroupInformation() {
           onExecute={leaveGroup}
         />
       )}
-      <GroupPageHeader />
+      <GroupPageHeader title={information?.name} />
       <S.GroupImage src={information?.img} alt='그룹 이미지' />
       <S.TitleBox>
         <S.Title>{information?.name}</S.Title>

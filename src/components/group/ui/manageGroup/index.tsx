@@ -10,6 +10,8 @@ import { toast } from 'react-toastify';
 import { useLocation, useNavigate } from 'react-router';
 import useImageToUrl from 'hooks/useImageToUrl';
 import group from 'api/group';
+import { ref, set } from 'firebase/database';
+import { db } from '../../../../firebase';
 
 interface FormType {
   name: string;
@@ -29,10 +31,6 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
     formState: { isSubmitting },
   } = useForm<FormType>();
   const { postImage } = useImageToUrl();
-
-  useEffect(() => {
-    setImage('');
-  }, []);
 
   const memberUp = () => {
     if (memberNum !== 7) {
@@ -64,6 +62,11 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
       };
       if (groupType === 'create') {
         await group.createGroup(req);
+
+        set(ref(db, `chattings/${data.name}/users/` + location.state.name), {
+          name: location.state.name,
+          profile: location.state.profile,
+        });
       } else {
         await group.editGroup(req, location.state.idx);
       }
@@ -96,9 +99,11 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
   };
 
   useEffect(() => {
-    if (location.state) {
+    if (location.state.img) {
       setImage(location.state.img);
       setMemberNum(location.state.maxCount + 1);
+    } else {
+      setImage('');
     }
   }, []);
 

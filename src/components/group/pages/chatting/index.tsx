@@ -1,97 +1,148 @@
 import GroupPageHeader from 'components/group/ui/groupPageHeader';
 import * as S from './style';
 import * as I from '../../../../assets/svg';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { ChatMessageType } from 'types/chat.type';
+import {
+  Unsubscribe,
+  child,
+  get,
+  off,
+  onValue,
+  ref,
+  set,
+} from '@firebase/database';
+import { db } from '../../../../firebase';
+import { useLocation } from 'react-router';
+import { useRecoilState } from 'recoil';
+import { userInfoAtomFamily } from 'atoms/container';
 
 function GroupChatting() {
+  const [userChat, setUserChat] = useState<string>('');
+  const [chat, setChat] = useState<ChatMessageType[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
+  const [userName] = useRecoilState(userInfoAtomFamily('name'));
+  const [userImage] = useRecoilState(userInfoAtomFamily('image'));
+  const [endNum, setEndNum] = useState<number>(0);
+
+  function formatTime(timestamp: number): string {
+    const date = new Date(timestamp);
+    const now = new Date();
+    const timeDiff = now.getTime() - date.getTime();
+    const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+    if (daysDiff === 0) {
+      const hours = date.getHours();
+      const minutes = date.getMinutes();
+      const ampm = hours >= 12 ? '오후' : '오전';
+      const formattedHours = hours % 12 || 12;
+      const formattedMinutes = minutes.toString().padStart(2, '0');
+      return `${ampm} ${formattedHours}:${formattedMinutes}`;
+    } else if (daysDiff === 1) {
+      return '어제';
+    } else {
+      return `${daysDiff}일 전`;
+    }
+  }
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserChat(e.target.value);
+  };
+
+  const handleKeyPress = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (userChat !== '') {
+        await set(
+          ref(
+            db,
+            `chattings/${location.state.groupName}/chat/` + `${endNum + 1}`
+          ),
+          {
+            img: userImage ? userImage : null,
+            name: userName,
+            chat: userChat,
+            createdAt: Date.now(),
+          }
+        );
+        setUserChat('');
+      }
+    }
+  };
+
+  useEffect(() => {
+    const chatRef = ref(db, `chattings/${location.state.groupName}/chat`);
+
+    const unscribe: Unsubscribe = onValue(chatRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        const messages: ChatMessageType[] = Object.values(data);
+        setEndNum(messages.length);
+        setChat(messages);
+      }
+    });
+
+    return () => {
+      off(chatRef, 'value', unscribe);
+    };
+  }, []);
 
   useEffect(() => {
     scrollRef.current!.scrollTop = scrollRef.current!.scrollHeight;
-  }, []);
+  }, [chat]);
 
   return (
     <>
       <S.GroupChattingLayout>
         <S.ChattingLayout>
-          <GroupPageHeader title='채팅방' />
+          <GroupPageHeader title={location.state.groupName} />
           <S.ChattingWrapper ref={scrollRef}>
-            <S.MemberWrapper>
-              <S.MemberBox>
-                <S.MemberProfile image='' />
-                <S.MemberName>1</S.MemberName>
-              </S.MemberBox>
-              <S.ChattingBox>
-                <S.Chatting>
-                  <S.ChattingText>
-                    애국가(愛國歌)는 ‘나라를 사랑하는 노래’라는 뜻이에요.
-                  </S.ChattingText>
-                </S.Chatting>
-                <S.Time>오후 1:30</S.Time>
-              </S.ChattingBox>
-            </S.MemberWrapper>
-
-            <S.MyChatBox>
-              <S.MyChatting>
-                <S.MyChatText>
-                  행정안전부는 여러분과 여러분의 가족, 친구들이 더 행복하게
-                  생활할 수 있도록 국민의 안전을 책임지고, 전국을 골고루 함께 잘
-                  살게 만드는 일을 하는 곳입니다.행정안전부는 대한민국의 희
-                </S.MyChatText>
-              </S.MyChatting>
-              <S.MyChatTime>오후 3:10</S.MyChatTime>
-            </S.MyChatBox>
-
-            <S.MemberWrapper>
-              <S.MemberBox>
-                <S.MemberProfile image='' />
-                <S.MemberName>1</S.MemberName>
-              </S.MemberBox>
-              <S.ChattingBox>
-                <S.Chatting>
-                  <S.ChattingText>
-                    애국가(愛國歌)는 ‘나라를 사랑하는 노래’라는 뜻이에요.
-                  </S.ChattingText>
-                </S.Chatting>
-                <S.Time>오후 1:30</S.Time>
-              </S.ChattingBox>
-            </S.MemberWrapper>
-
-            <S.MemberWrapper>
-              <S.MemberBox>
-                <S.MemberProfile image='' />
-                <S.MemberName>1</S.MemberName>
-              </S.MemberBox>
-              <S.ChattingBox>
-                <S.Chatting>
-                  <S.ChattingText>
-                    애국가(愛國歌)는 ‘나라를 사랑하는 노래’라는 뜻이에요.
-                  </S.ChattingText>
-                </S.Chatting>
-                <S.Time>오후 1:30</S.Time>
-              </S.ChattingBox>
-            </S.MemberWrapper>
-
-            <S.MemberWrapper>
-              <S.MemberBox>
-                <S.MemberProfile image='' />
-                <S.MemberName>1</S.MemberName>
-              </S.MemberBox>
-              <S.ChattingBox>
-                <S.Chatting>
-                  <S.ChattingText>
-                    애국가(愛國歌)는 ‘나라를 사랑하는 노래’라는 뜻이에요.
-                  </S.ChattingText>
-                </S.Chatting>
-                <S.Time>오후 1:30</S.Time>
-              </S.ChattingBox>
-            </S.MemberWrapper>
+            {chat &&
+              chat.map((data: ChatMessageType, idx) => (
+                <div key={idx}>
+                  {data.name !== userName && (
+                    <S.ChatWrapper>
+                      <S.MemberWrapper>
+                        <S.MemberBox>
+                          <S.MemberProfile image={data.img} />
+                          <S.MemberName>{data.name}</S.MemberName>
+                        </S.MemberBox>
+                        <S.ChattingBox>
+                          <S.Chatting>
+                            <S.ChattingText>{data.chat}</S.ChattingText>
+                          </S.Chatting>
+                          <S.Time>{formatTime(data.createdAt)}</S.Time>
+                        </S.ChattingBox>
+                      </S.MemberWrapper>
+                      <div></div>
+                    </S.ChatWrapper>
+                  )}
+                  {data.name === userName && (
+                    <S.ChatWrapper>
+                      <div></div>
+                      <S.MyChatBox>
+                        <S.MyChatting>
+                          <S.MyChatText>{data.chat}</S.MyChatText>
+                        </S.MyChatting>
+                        <S.MyChatTime>
+                          {formatTime(data.createdAt)}
+                        </S.MyChatTime>
+                      </S.MyChatBox>
+                    </S.ChatWrapper>
+                  )}
+                </div>
+              ))}
           </S.ChattingWrapper>
           <S.InputBox>
             <S.InputInnerBox>
               <I.LongRectengle />
-              <S.Input></S.Input>
-              <div style={{ cursor: 'pointer' }}>
+              <S.Input
+                onChange={onChange}
+                onKeyPress={handleKeyPress}
+                value={userChat}
+              ></S.Input>
+              <div style={{ cursor: 'pointer' }} onClick={() => handleKeyPress}>
                 <I.SubmitArrow />
               </div>
             </S.InputInnerBox>

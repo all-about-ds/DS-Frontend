@@ -1,4 +1,8 @@
-import { groupIsClickedAtom, groupPasswordModalAtom } from 'atoms/container';
+import {
+  groupIsClickedAtom,
+  groupPasswordModalAtom,
+  userInfoAtomFamily,
+} from 'atoms/container';
 import ModalLayout from 'components/common/layout/modal';
 import { useRecoilState } from 'recoil';
 import * as S from './style';
@@ -8,6 +12,8 @@ import { GroupType } from 'types/group.type';
 import group from 'api/group';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
+import { ref, set } from '@firebase/database';
+import { db } from '../../../../firebase';
 
 interface GroupProps {
   GroupProps: GroupType | undefined;
@@ -17,6 +23,8 @@ function MainModal(props: GroupProps) {
   const [, setGroupIsClicked] = useRecoilState(groupIsClickedAtom);
   const [, setGroupPasswordModal] = useRecoilState(groupPasswordModalAtom);
   const [isMember, setIsMember] = useState<boolean>(false);
+  const [userName] = useRecoilState(userInfoAtomFamily('name'));
+  const [userImage] = useRecoilState(userInfoAtomFamily('image'));
   const navigate = useNavigate();
 
   const onClick = async () => {
@@ -29,6 +37,15 @@ function MainModal(props: GroupProps) {
       } else {
         try {
           await group.joinGroup(undefined, props.GroupProps?.idx);
+
+          await set(
+            ref(db, `chattings/${props.GroupProps?.name}/users/` + userName),
+            {
+              name: userName,
+              profile: userImage,
+            }
+          );
+
           navigate(`/group/${props.GroupProps?.idx}/information`);
         } catch (e: any) {
           if (e.response.status === 404) {
