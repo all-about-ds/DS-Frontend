@@ -155,9 +155,7 @@ export const Time = styled.p`
 export const MyChatBox = styled.section`
   display: flex;
   flex-direction: column;
-  position: relative;
   margin-top: 3vh;
-  margin-bottom: 3vh;
 `;
 
 export const MyChatting = styled.div`
@@ -189,7 +187,4 @@ export const MyChatTime = styled.p`
   color: #6a6a6a;
   margin-top: 10px;
   margin-right: 12px;
-  position: absolute;
-  bottom: -28px;
-  right: 0;
 `;
