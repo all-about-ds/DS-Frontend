@@ -12,6 +12,6 @@ export interface ChatMessageType {
   img: string;
   name: string;
   chat: string;
-  createAt: string;
+  createdAt: string;
   isMine: boolean;
 }

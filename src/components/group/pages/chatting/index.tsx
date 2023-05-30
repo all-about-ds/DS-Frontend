@@ -2,12 +2,23 @@ import GroupPageHeader from 'components/group/ui/groupPageHeader';
 import * as S from './style';
 import * as I from '../../../../assets/svg';
 import { useEffect, useRef, useState } from 'react';
-import { ChatType } from 'types/chat.type';
+import { ChatMessageType } from 'types/chat.type';
+import { child, get, off, ref, set } from '@firebase/database';
+import { db } from '../../../../firebase';
+import { useLocation } from 'react-router';
+import { useRecoilState } from 'recoil';
+import { userInfoAtomFamily } from 'atoms/container';
+import { uid } from 'uid';
 
 function GroupChatting() {
   const [userChat, setUserChat] = useState<string>('');
-  const [chattings, setChattings] = useState<ChatType[]>([]);
+  const [chat, setChat] = useState<ChatMessageType[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
+  const [userName] = useRecoilState(userInfoAtomFamily('name'));
+  const [userImage] = useRecoilState(userInfoAtomFamily('image'));
+  const dbRef = ref(db);
+  const uuid = uid();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserChat(e.target.value);
@@ -15,39 +26,87 @@ function GroupChatting() {
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      return;
+      set(ref(db, `chattings/${location.state.groupName}/chat/` + `${uuid}`), {
+        img: userImage ? userImage : null,
+        name: userName,
+        chat: userChat,
+        isMine: true,
+      });
+      setUserChat('');
     }
   };
+
+  const sendChat = () => {
+    set(ref(db, `chattings/${location.state.groupName}/chat/` + `${uuid}`), {
+      img: userImage ? userImage : null,
+      name: userName,
+      chat: userChat,
+      isMine: true,
+    });
+    setUserChat('');
+  };
+
+  useEffect(() => {
+    get(child(dbRef, `chattings/${location.state.groupName}/chat`))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          setChat(Object.values(snapshot.val()));
+
+          console.log(snapshot.val());
+        } else {
+          console.log('No data available');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    const chatRef = ref(db, `chattings/${location.state.groupName}/chat`);
+
+    const handleChatUpdate = (snapshot: any) => {
+      const data = snapshot.val();
+
+      if (data) {
+        setChat(Object.values(data));
+      } else {
+        setChat([]);
+      }
+    };
+
+    return () => {
+      off(chatRef, 'value', handleChatUpdate);
+    };
+  }, []);
 
   return (
     <>
       <S.GroupChattingLayout>
         <S.ChattingLayout>
-          <GroupPageHeader title='채팅방' />
+          <GroupPageHeader title={location.state.groupName} />
           <S.ChattingWrapper ref={scrollRef}>
-            {chattings &&
-              chattings.map((chat: ChatType) => (
+            {chat &&
+              chat.map((data: ChatMessageType, idx) => (
                 <>
-                  {!chat.isMine && (
+                  {!data.isMine && (
                     <S.MemberWrapper>
                       <S.MemberBox>
-                        <S.MemberProfile image={chat.img} />
-                        <S.MemberName>{chat.name}</S.MemberName>
+                        <S.MemberProfile image={data.img} />
+                        <S.MemberName>{data.name}</S.MemberName>
                       </S.MemberBox>
                       <S.ChattingBox>
                         <S.Chatting>
-                          <S.ChattingText>{chat.chat}</S.ChattingText>
+                          <S.ChattingText>{data.chat}</S.ChattingText>
                         </S.Chatting>
-                        <S.Time>오후 {chat.createdAt}</S.Time>
+                        <S.Time>오후 {data.createdAt}</S.Time>
                       </S.ChattingBox>
                     </S.MemberWrapper>
                   )}
-                  {chat.isMine && (
+                  {data.isMine && (
                     <S.MyChatBox>
                       <S.MyChatting>
-                        <S.MyChatText>{chat.chat}</S.MyChatText>
+                        <S.MyChatText>{data.chat}</S.MyChatText>
                       </S.MyChatting>
-                      <S.MyChatTime>오후 {chat.createdAt}</S.MyChatTime>
+                      <S.MyChatTime>오후 {data.createdAt}</S.MyChatTime>
                     </S.MyChatBox>
                   )}
                 </>
@@ -59,6 +118,7 @@ function GroupChatting() {
               <S.Input
                 onChange={onChange}
                 onKeyDown={handleKeyPress}
+                onClick={sendChat}
                 value={userChat}
               ></S.Input>
               <div style={{ cursor: 'pointer' }}>
