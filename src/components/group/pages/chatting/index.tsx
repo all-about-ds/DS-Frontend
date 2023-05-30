@@ -16,7 +16,6 @@ import { db } from '../../../../firebase';
 import { useLocation } from 'react-router';
 import { useRecoilState } from 'recoil';
 import { userInfoAtomFamily } from 'atoms/container';
-import { uid } from 'uid';
 
 function GroupChatting() {
   const [userChat, setUserChat] = useState<string>('');
@@ -25,11 +24,9 @@ function GroupChatting() {
   const location = useLocation();
   const [userName] = useRecoilState(userInfoAtomFamily('name'));
   const [userImage] = useRecoilState(userInfoAtomFamily('image'));
-  const dbRef = ref(db);
-  const uuid = uid();
+  const [endNum, setEndNum] = useState<number>(0);
 
   function formatTime(timestamp: number): string {
-    console.log(timestamp);
     const date = new Date(timestamp);
     const now = new Date();
     const timeDiff = now.getTime() - date.getTime();
@@ -53,34 +50,24 @@ function GroupChatting() {
     setUserChat(e.target.value);
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyPress = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
+      e.preventDefault();
       if (userChat !== '') {
-        set(
-          ref(db, `chattings/${location.state.groupName}/chat/` + `${uuid}`),
+        await set(
+          ref(
+            db,
+            `chattings/${location.state.groupName}/chat/` + `${endNum + 1}`
+          ),
           {
             img: userImage ? userImage : null,
             name: userName,
             chat: userChat,
             createdAt: Date.now(),
-            isMine: true,
           }
         );
         setUserChat('');
       }
-    }
-  };
-
-  const sendChat = () => {
-    if (userChat !== '') {
-      set(ref(db, `chattings/${location.state.groupName}/chat/` + `${uuid}`), {
-        img: userImage ? userImage : null,
-        name: userName,
-        chat: userChat,
-        createdAt: Date.now(),
-        isMine: true,
-      });
-      setUserChat('');
     }
   };
 
@@ -91,6 +78,7 @@ function GroupChatting() {
       const data = snapshot.val();
       if (data) {
         const messages: ChatMessageType[] = Object.values(data);
+        setEndNum(messages.length);
         setChat(messages);
       }
     });
@@ -99,6 +87,10 @@ function GroupChatting() {
       off(chatRef, 'value', unscribe);
     };
   }, []);
+
+  useEffect(() => {
+    scrollRef.current!.scrollTop = scrollRef.current!.scrollHeight;
+  }, [chat]);
 
   return (
     <>
@@ -109,7 +101,7 @@ function GroupChatting() {
             {chat &&
               chat.map((data: ChatMessageType, idx) => (
                 <div key={idx}>
-                  {!data.isMine && (
+                  {data.name !== userName && (
                     <S.ChatWrapper>
                       <S.MemberWrapper>
                         <S.MemberBox>
@@ -126,7 +118,7 @@ function GroupChatting() {
                       <div></div>
                     </S.ChatWrapper>
                   )}
-                  {data.isMine && (
+                  {data.name === userName && (
                     <S.ChatWrapper>
                       <div></div>
                       <S.MyChatBox>
@@ -147,11 +139,10 @@ function GroupChatting() {
               <I.LongRectengle />
               <S.Input
                 onChange={onChange}
-                onKeyDown={handleKeyPress}
-                onClick={sendChat}
+                onKeyPress={handleKeyPress}
                 value={userChat}
               ></S.Input>
-              <div style={{ cursor: 'pointer' }}>
+              <div style={{ cursor: 'pointer' }} onClick={() => handleKeyPress}>
                 <I.SubmitArrow />
               </div>
             </S.InputInnerBox>
