@@ -40,6 +40,11 @@ export const ChattingWrapper = styled.main`
   }
 `;
 
+export const ChatWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const InputBox = styled.section`
   width: 66.25vw;
   height: 80px;
@@ -148,12 +153,11 @@ export const Time = styled.p`
 `;
 
 export const MyChatBox = styled.section`
-  width: auto;
   display: flex;
   flex-direction: column;
   position: relative;
-  margin-left: 23.54vw;
   margin-top: 3vh;
+  margin-bottom: 3vh;
 `;
 
 export const MyChatting = styled.div`

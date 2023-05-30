@@ -26,6 +26,23 @@ function GroupChatting() {
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
+      if (userChat !== '') {
+        set(
+          ref(db, `chattings/${location.state.groupName}/chat/` + `${uuid}`),
+          {
+            img: userImage ? userImage : null,
+            name: userName,
+            chat: userChat,
+            isMine: true,
+          }
+        );
+        setUserChat('');
+      }
+    }
+  };
+
+  const sendChat = () => {
+    if (userChat !== '') {
       set(ref(db, `chattings/${location.state.groupName}/chat/` + `${uuid}`), {
         img: userImage ? userImage : null,
         name: userName,
@@ -34,16 +51,6 @@ function GroupChatting() {
       });
       setUserChat('');
     }
-  };
-
-  const sendChat = () => {
-    set(ref(db, `chattings/${location.state.groupName}/chat/` + `${uuid}`), {
-      img: userImage ? userImage : null,
-      name: userName,
-      chat: userChat,
-      isMine: true,
-    });
-    setUserChat('');
   };
 
   useEffect(() => {
@@ -86,30 +93,36 @@ function GroupChatting() {
           <S.ChattingWrapper ref={scrollRef}>
             {chat &&
               chat.map((data: ChatMessageType, idx) => (
-                <>
+                <div key={idx}>
                   {!data.isMine && (
-                    <S.MemberWrapper>
-                      <S.MemberBox>
-                        <S.MemberProfile image={data.img} />
-                        <S.MemberName>{data.name}</S.MemberName>
-                      </S.MemberBox>
-                      <S.ChattingBox>
-                        <S.Chatting>
-                          <S.ChattingText>{data.chat}</S.ChattingText>
-                        </S.Chatting>
-                        <S.Time>오후 {data.createdAt}</S.Time>
-                      </S.ChattingBox>
-                    </S.MemberWrapper>
+                    <S.ChatWrapper>
+                      <S.MemberWrapper>
+                        <S.MemberBox>
+                          <S.MemberProfile image={data.img} />
+                          <S.MemberName>{data.name}</S.MemberName>
+                        </S.MemberBox>
+                        <S.ChattingBox>
+                          <S.Chatting>
+                            <S.ChattingText>{data.chat}</S.ChattingText>
+                          </S.Chatting>
+                          <S.Time>오후 {data.createdAt}</S.Time>
+                        </S.ChattingBox>
+                      </S.MemberWrapper>
+                      <div></div>
+                    </S.ChatWrapper>
                   )}
                   {data.isMine && (
-                    <S.MyChatBox>
-                      <S.MyChatting>
-                        <S.MyChatText>{data.chat}</S.MyChatText>
-                      </S.MyChatting>
-                      <S.MyChatTime>오후 {data.createdAt}</S.MyChatTime>
-                    </S.MyChatBox>
+                    <S.ChatWrapper>
+                      <div></div>
+                      <S.MyChatBox>
+                        <S.MyChatting>
+                          <S.MyChatText>{data.chat}</S.MyChatText>
+                        </S.MyChatting>
+                        <S.MyChatTime>오후 {data.createdAt}</S.MyChatTime>
+                      </S.MyChatBox>
+                    </S.ChatWrapper>
                   )}
-                </>
+                </div>
               ))}
           </S.ChattingWrapper>
           <S.InputBox>
