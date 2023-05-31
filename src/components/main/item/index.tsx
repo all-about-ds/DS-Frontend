@@ -24,7 +24,11 @@ function GroupItem(props: GroupProps) {
         <S.Title>{props.GroupProps.name}</S.Title>
         <S.Description>{props.GroupProps.description}</S.Description>
         <S.User>
-          {!props.GroupProps.leaderImg && <I.DefaultProfile />}
+          {!props.GroupProps.leaderImg && (
+            <div style={{ marginRight: 8 }}>
+              <I.DefaultProfile />
+            </div>
+          )}
           {props.GroupProps.leaderImg && (
             <S.Profile
               src={props.GroupProps.leaderImg}
