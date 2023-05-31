@@ -30,6 +30,7 @@ function MainModal(props: GroupProps) {
   const onClick = async () => {
     if (isMember) {
       await navigate(`/group/${props.GroupProps?.idx}/information`);
+      setGroupIsClicked(false);
     } else {
       if (props.GroupProps?.memberCount !== props.GroupProps?.maxCount) {
         if (props.GroupProps?.secret) {
@@ -48,6 +49,7 @@ function MainModal(props: GroupProps) {
             );
 
             navigate(`/group/${props.GroupProps?.idx}/information`);
+            setGroupIsClicked(false);
           } catch (e: any) {
             if (e.response.status === 404) {
               toast.error('존재하지 않는 그룹이에요');
