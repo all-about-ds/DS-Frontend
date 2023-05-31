@@ -54,7 +54,7 @@ function GroupChatting() {
     if (e.key === 'Enter') {
       e.preventDefault();
       if (userChat !== '') {
-        await set(
+        set(
           ref(
             db,
             `chattings/${location.state.groupName}/chat/` + `${endNum + 1}`
