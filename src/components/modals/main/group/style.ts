@@ -68,6 +68,7 @@ export const UserName = styled.p`
   font-size: 14px;
   line-height: 21px;
   color: #ffffff;
+  margin-left: 8px;
 `;
 
 export const Description = styled.div`
