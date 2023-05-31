@@ -113,8 +113,8 @@ export const MemberName = styled.h3`
 `;
 
 export const MemberImage = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 36px;
+  height: 36px;
   border-radius: 50px;
   object-fit: cover;
   cursor: pointer;
