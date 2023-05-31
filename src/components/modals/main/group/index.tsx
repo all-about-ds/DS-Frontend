@@ -31,30 +31,34 @@ function MainModal(props: GroupProps) {
     if (isMember) {
       await navigate(`/group/${props.GroupProps?.idx}/information`);
     } else {
-      if (props.GroupProps?.secret) {
-        setGroupIsClicked(false);
-        setGroupPasswordModal(true);
-      } else {
-        try {
-          await group.joinGroup(undefined, props.GroupProps?.idx);
+      if (props.GroupProps?.memberCount !== props.GroupProps?.maxCount) {
+        if (props.GroupProps?.secret) {
+          setGroupIsClicked(false);
+          setGroupPasswordModal(true);
+        } else {
+          try {
+            await group.joinGroup(undefined, props.GroupProps?.idx);
 
-          await set(
-            ref(db, `chattings/${props.GroupProps?.name}/users/` + userName),
-            {
-              name: userName,
-              profile: userImage,
+            await set(
+              ref(db, `chattings/${props.GroupProps?.name}/users/` + userName),
+              {
+                name: userName,
+                profile: userImage,
+              }
+            );
+
+            navigate(`/group/${props.GroupProps?.idx}/information`);
+          } catch (e: any) {
+            if (e.response.status === 404) {
+              toast.error('존재하지 않는 그룹이에요');
+            } else if (e.response.status === 409) {
+              toast.error('이미 가입된 그룹이에요!');
             }
-          );
-
-          navigate(`/group/${props.GroupProps?.idx}/information`);
-        } catch (e: any) {
-          if (e.response.status === 404) {
-            toast.error('존재하지 않는 그룹이에요');
-          } else if (e.response.status === 409) {
-            toast.error('이미 가입된 그룹이에요!');
+            console.log(e);
           }
-          console.log(e);
         }
+      } else {
+        toast.error('최대 인원 초과로 가입하실 수 없어요!');
       }
     }
   };
