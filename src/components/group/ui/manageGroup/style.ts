@@ -56,6 +56,9 @@ export const Input = styled.textarea`
   -moz-box-sizing: border-box; /* Firefox, other Gecko */
   font-family: 'AppleSDGothicNeoM00';
   box-sizing: border-box; /* Opera/IE 8+ */
+  ::-webkit-scrollbar {
+    display: none;
+  }
 
   :focus {
     outline: none;
