@@ -21,25 +21,23 @@ interface FormType {
 
 function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
   const [image, setImage] = useRecoilState<string>(ImagesAtom);
-  const [memberNum, setMemberNum] = useState<number>(1);
+  const [memberNum, setMemberNum] = useState<number>(2);
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const {
-    register,
-    handleSubmit,
-    formState: { isSubmitting },
-  } = useForm<FormType>();
+  const { register, handleSubmit } = useForm<FormType>();
   const { postImage } = useImageToUrl();
 
   const memberUp = () => {
     if (memberNum !== 7) {
       setMemberNum(memberNum + 1);
+    } else {
+      toast.error('현재 인원보다 높게 설정할 수 없어요!');
     }
   };
 
   const memberDown = () => {
-    if (memberNum !== memberNum) {
+    if (memberNum !== 2) {
       setMemberNum(memberNum - 1);
     } else {
       toast.error('현재 인원보다 낮게 설정할 수 없어요!');
