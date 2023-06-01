@@ -5,14 +5,14 @@ export const Description = styled.div`
   font-weight: 400;
   font-size: 14px;
   color: #717171;
-  width: 300px;
+  width: 100%;
   height: 28px;
   text-overflow: ellipsis;
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
-  margin-bottom: 14px;
+  margin-bottom: 0.5rem;
 `;
 
 export const GroupBox = styled.div`
@@ -66,14 +66,14 @@ export const Title = styled.p`
 `;
 
 export const User = styled.div`
-  height: 30px;
+  height: 36px;
   display: flex;
   align-items: center;
 `;
 
 export const Profile = styled.img`
-  width: 30px;
-  height: 30px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   margin-right: 8px;
   object-fit: cover;
@@ -83,6 +83,7 @@ export const UserName = styled.p`
   font-weight: 400;
   font-size: 14px;
   color: #ffffff;
+  margin-bottom: 3px;
 `;
 
 export const LockBox = styled.div`
