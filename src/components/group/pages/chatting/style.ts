@@ -27,6 +27,7 @@ export const ChattingWrapper = styled.main`
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  padding: 0px 3.125vw;
   &::-webkit-scrollbar {
     width: 8px;
   }
