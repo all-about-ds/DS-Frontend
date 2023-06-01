@@ -59,19 +59,22 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
           secret: isClicked,
           password: data.password,
         };
+
         if (groupType === 'create') {
           await group.createGroup(req);
-
           set(ref(db, `chattings/${data.name}/users/` + location.state.name), {
             name: location.state.name,
             profile: location.state.profile,
           });
-        } else {
-          await group.editGroup(req, location.state.idx);
+          toast.success('생성되었어요!');
         }
+
+        if (groupType === 'edit') {
+          await group.editGroup(req, location.state.idx);
+          toast.success('수정되었어요!');
+        }
+
         setImage('');
-        if (groupType === 'create') toast.success('생성되었어요!');
-        else toast.success('수정되었어요!');
         navigate('/');
       } catch (e: any) {
         if (e.response.status === 400) {
@@ -81,20 +84,22 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
         }
       }
     } else {
-      toast.error('그룹 배너 사진이 없어요!');
+      toast.error('그룹 배너 사진이 없어요');
     }
   };
 
   const inValid = (e: any) => {
-    const name = e.name;
-    const desc = e.description;
+    const name = e?.name;
+    const desc = e?.description;
 
-    if (name.type === 'required' && desc.type === 'required') {
-      toast.error('이름과 설명은 필수 입력입니다');
-    } else if (name.type === 'required') {
+    if (name && desc && name.type === 'required' && desc.type === 'required') {
+      toast.error('이름과 설명은 필수 입력입니다.');
+    } else if (name && name.type === 'required') {
       toast.error(name.message);
-    } else if (desc.type === 'required') {
+    } else if (desc && desc.type === 'required') {
       toast.error(desc.message);
+    } else if (name && name.type === 'maxLength') {
+      toast.error('그룹 이름은 최대 16자 입니다');
     }
   };
 
@@ -134,13 +139,14 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
               placeholder='그룹 이름을 입력해주세요.'
               {...register('name', {
                 required: '이름은 필수 입력입니다.',
+                maxLength: 16,
               })}
               defaultValue={groupType === 'create' ? '' : location.state.title}
             ></Input>
 
             <S.BoldText style={{ marginTop: '1.5rem' }}>그룹 설명</S.BoldText>
             <S.Input
-              placeholder='어떤 그룹인지 설명해주세요.'
+              placeholder='그룹을 설명해주세요'
               {...register('description', {
                 required: '설명은 필수 입력입니다.',
               })}
