@@ -13,7 +13,12 @@ import member from 'api/member';
 import { groupIsClickedAtom } from 'atoms';
 
 function GroupInformation() {
-  const [modal, setModal] = useRecoilState(modalAtomFamily('leaveGroup'));
+  const [leaveGroupModal, setLeaveGroupModal] = useRecoilState(
+    modalAtomFamily('leaveGroup')
+  );
+  const [deleteGroupModal, setDeleteGroupModal] = useRecoilState(
+    modalAtomFamily('leaveGroup')
+  );
 
   const [isOwner, setIsOwner] = useState<boolean>(false);
   const [information, setInformation] = useState<GroupInformationInterface>();
@@ -42,6 +47,7 @@ function GroupInformation() {
   const deleteGroup = async () => {
     try {
       await group.deleteGroup(information?.idx);
+      setDeleteGroupModal(false);
       toast.error('삭제되었습니다!');
       setGroupIsClicked(false);
       navigate('/');
@@ -53,18 +59,18 @@ function GroupInformation() {
   const leaveGroup = async () => {
     try {
       await member.leaveGroup(String(params.groupId));
+      setLeaveGroupModal(false);
       toast.success('그룹을 나갔어요');
-      setModal(false);
       navigate('/my');
     } catch {
+      setLeaveGroupModal(false);
       toast.error('알 수 없는 오류에요');
-      setModal(false);
     }
   };
 
   return (
     <S.GroupInformationPageLayout>
-      {modal && (
+      {leaveGroupModal && (
         <NormalModal
           atomKey='leaveGroup'
           title='그룹 나가기'
@@ -73,13 +79,22 @@ function GroupInformation() {
           onExecute={leaveGroup}
         />
       )}
+      {deleteGroupModal && (
+        <NormalModal
+          atomKey='deleteGroup'
+          title='그룹 삭제하기'
+          description='정말 그룹을 삭제 하시겠어요?'
+          executionText='삭제하기'
+          onExecute={deleteGroup}
+        />
+      )}
       <GroupPageHeader title={information?.name} />
       <S.GroupImage src={information?.img} alt='그룹 이미지' />
       <S.TitleBox>
         <S.Title>{information?.name}</S.Title>
         {isOwner ? (
           <S.GroupManageButtonBox>
-            <div onClick={deleteGroup}>
+            <div onClick={() => setDeleteGroupModal(true)}>
               <I.DeleteButton />
             </div>
             <div
@@ -100,7 +115,7 @@ function GroupInformation() {
             </div>
           </S.GroupManageButtonBox>
         ) : (
-          <S.LeaveGroupText onClick={() => setModal(true)}>
+          <S.LeaveGroupText onClick={() => setLeaveGroupModal(true)}>
             그룹 나가기
           </S.LeaveGroupText>
         )}
@@ -136,7 +151,7 @@ function GroupInformation() {
             />
           )}
           <div>
-            <S.MemberRole>동아리 부장</S.MemberRole>
+            <S.MemberRole>그룹 부장</S.MemberRole>
             <S.MemberName>{information?.head.name}</S.MemberName>
           </div>
         </S.MemberBox>
@@ -147,7 +162,7 @@ function GroupInformation() {
               <S.MemberImage src={member.profileImg} alt='그룹원 이미지' />
             )}
             <div>
-              <S.MemberRole>동아리원</S.MemberRole>
+              <S.MemberRole>그룹원</S.MemberRole>
               <S.MemberName>{member.name}</S.MemberName>
             </div>
           </S.MemberBox>

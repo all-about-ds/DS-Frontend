@@ -21,25 +21,23 @@ interface FormType {
 
 function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
   const [image, setImage] = useRecoilState<string>(ImagesAtom);
-  const [memberNum, setMemberNum] = useState<number>(1);
+  const [memberNum, setMemberNum] = useState<number>(2);
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const {
-    register,
-    handleSubmit,
-    formState: { isSubmitting },
-  } = useForm<FormType>();
+  const { register, handleSubmit } = useForm<FormType>();
   const { postImage } = useImageToUrl();
 
   const memberUp = () => {
     if (memberNum !== 7) {
       setMemberNum(memberNum + 1);
+    } else {
+      toast.error('현재 인원보다 높게 설정할 수 없어요!');
     }
   };
 
   const memberDown = () => {
-    if (memberNum !== memberNum) {
+    if (memberNum !== 2) {
       setMemberNum(memberNum - 1);
     } else {
       toast.error('현재 인원보다 낮게 설정할 수 없어요!');
@@ -51,39 +49,57 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
   };
 
   const onValid = async (data: FormType) => {
-    try {
-      const req: CreateGroupInterface = {
-        name: data.name,
-        description: data.description,
-        img: image,
-        maxCount: memberNum,
-        secret: isClicked,
-        password: data.password,
-      };
-      if (groupType === 'create') {
-        await group.createGroup(req);
+    if (image) {
+      try {
+        const req: CreateGroupInterface = {
+          name: data.name,
+          description: data.description,
+          img: image,
+          maxCount: memberNum,
+          secret: isClicked,
+          password: data.password,
+        };
 
-        set(ref(db, `chattings/${data.name}/users/` + location.state.name), {
-          name: location.state.name,
-          profile: location.state.profile,
-        });
-      } else {
-        await group.editGroup(req, location.state.idx);
+        if (groupType === 'create') {
+          await group.createGroup(req);
+          set(ref(db, `chattings/${data.name}/users/` + location.state.name), {
+            name: location.state.name,
+            profile: location.state.profile,
+          });
+          toast.success('생성되었어요!');
+        }
+
+        if (groupType === 'edit') {
+          await group.editGroup(req, location.state.idx);
+          toast.success('수정되었어요!');
+        }
+
+        setImage('');
+        navigate('/');
+      } catch (e: any) {
+        if (e.response.status === 400) {
+          toast.error('잘못된 형식의 요청이에요!');
+        } else if (e.response.status === 401) {
+          toast.error('새로고침 후 다시 시도해주세요!');
+        }
       }
-      setImage('');
-      if (groupType === 'create') toast.success('생성되었어요!');
-      else toast.success('수정되었어요!');
-      navigate('/');
-    } catch (e) {
-      console.log(e);
+    } else {
+      toast.error('그룹 배너 사진이 없어요');
     }
   };
 
   const inValid = (e: any) => {
-    if (e.response.status === 400) {
-      toast.error('잘못된 형식의 요청이에요!');
-    } else if (e.response.status === 401) {
-      toast.error('새로고침 후 다시 시도해주세요!');
+    const name = e?.name;
+    const desc = e?.description;
+
+    if (name && desc && name.type === 'required' && desc.type === 'required') {
+      toast.error('이름과 설명은 필수 입력입니다.');
+    } else if (name && name.type === 'required') {
+      toast.error(name.message);
+    } else if (desc && desc.type === 'required') {
+      toast.error(desc.message);
+    } else if (name && name.type === 'maxLength') {
+      toast.error('그룹 이름은 최대 16자 입니다');
     }
   };
 
@@ -123,13 +139,14 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
               placeholder='그룹 이름을 입력해주세요.'
               {...register('name', {
                 required: '이름은 필수 입력입니다.',
+                maxLength: 16,
               })}
               defaultValue={groupType === 'create' ? '' : location.state.title}
             ></Input>
 
             <S.BoldText style={{ marginTop: '1.5rem' }}>그룹 설명</S.BoldText>
             <S.Input
-              placeholder='어떤 그룹인지 설명해주세요.'
+              placeholder='그룹을 설명해주세요'
               {...register('description', {
                 required: '설명은 필수 입력입니다.',
               })}
@@ -231,7 +248,7 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
             )}
 
             <S.SubmithButtonBox>
-              <S.CancelButton>취소</S.CancelButton>
+              <S.CancleButton onClick={() => navigate(-1)}>취소</S.CancleButton>
               <S.SubmitButton>완료</S.SubmitButton>
             </S.SubmithButtonBox>
           </form>

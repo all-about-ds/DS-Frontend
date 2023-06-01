@@ -5,7 +5,7 @@ export const Layout = styled.main`
   align-items: center;
   flex-direction: column;
   width: 340px;
-  height: calc(100vh - 81px);
+  height: fit-content;
   background: #161616;
 `;
 
@@ -56,6 +56,9 @@ export const Input = styled.textarea`
   -moz-box-sizing: border-box; /* Firefox, other Gecko */
   font-family: 'AppleSDGothicNeoM00';
   box-sizing: border-box; /* Opera/IE 8+ */
+  ::-webkit-scrollbar {
+    display: none;
+  }
 
   :focus {
     outline: none;
@@ -191,11 +194,10 @@ export const SubmithButtonBox = styled.div`
   height: 40px;
   display: flex;
   justify-content: space-between;
-  margin-left: 52px;
-  margin-top: 60px;
+  margin: 2rem 0 3rem 52px;
 `;
 
-export const CancelButton = styled.div`
+export const CancleButton = styled.div`
   background: #2e2e2e;
   border-radius: 10px;
   width: 92px;

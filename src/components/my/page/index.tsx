@@ -50,6 +50,7 @@ function My() {
 
   const onLogout = () => {
     tokenService.removeUser();
+    setLogoutModal(false);
     toast.success('로그아웃 되었어요');
     navigate('/');
   };
@@ -57,13 +58,13 @@ function My() {
   const onWithdrawal = async () => {
     try {
       await user.withdrawal();
+      setWithdrawalModal(false);
       tokenService.removeUser();
       toast.success('회원탈퇴 되었어요');
       navigate('/');
-      setWithdrawalModal(false);
     } catch {
-      toast.error('알 수 없는 에러에요');
       setWithdrawalModal(false);
+      toast.error('알 수 없는 에러에요');
     }
   };
 
