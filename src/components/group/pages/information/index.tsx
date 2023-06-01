@@ -136,7 +136,7 @@ function GroupInformation() {
             />
           )}
           <div>
-            <S.MemberRole>동아리 부장</S.MemberRole>
+            <S.MemberRole>그룹 부장</S.MemberRole>
             <S.MemberName>{information?.head.name}</S.MemberName>
           </div>
         </S.MemberBox>
@@ -147,7 +147,7 @@ function GroupInformation() {
               <S.MemberImage src={member.profileImg} alt='그룹원 이미지' />
             )}
             <div>
-              <S.MemberRole>동아리원</S.MemberRole>
+              <S.MemberRole>그룹원</S.MemberRole>
               <S.MemberName>{member.name}</S.MemberName>
             </div>
           </S.MemberBox>
