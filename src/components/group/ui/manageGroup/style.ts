@@ -194,7 +194,7 @@ export const SubmithButtonBox = styled.div`
   margin: 2rem 0 3rem 52px;
 `;
 
-export const CancelButton = styled.div`
+export const CancleButton = styled.div`
   background: #2e2e2e;
   border-radius: 10px;
   width: 92px;

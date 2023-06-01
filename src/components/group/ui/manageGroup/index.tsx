@@ -242,9 +242,7 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
             )}
 
             <S.SubmithButtonBox>
-              <S.CancelButton onClick={() => navigate('/')}>
-                취소
-              </S.CancelButton>
+              <S.CancleButton onClick={() => navigate(-1)}>취소</S.CancleButton>
               <S.SubmitButton>완료</S.SubmitButton>
             </S.SubmithButtonBox>
           </form>
