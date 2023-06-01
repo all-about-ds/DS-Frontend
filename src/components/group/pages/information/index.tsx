@@ -47,6 +47,7 @@ function GroupInformation() {
   const deleteGroup = async () => {
     try {
       await group.deleteGroup(information?.idx);
+      setDeleteGroupModal(false);
       toast.error('삭제되었습니다!');
       setGroupIsClicked(false);
       navigate('/');
@@ -58,12 +59,12 @@ function GroupInformation() {
   const leaveGroup = async () => {
     try {
       await member.leaveGroup(String(params.groupId));
-      toast.success('그룹을 나갔어요');
       setLeaveGroupModal(false);
+      toast.success('그룹을 나갔어요');
       navigate('/my');
     } catch {
-      toast.error('알 수 없는 오류에요');
       setLeaveGroupModal(false);
+      toast.error('알 수 없는 오류에요');
     }
   };
 
