@@ -9,13 +9,15 @@ function GlobalStyle() {
         @font-face {
           font-family: 'AppleSDGothicNeoB00';
           font-style: normal;
-          src: url('/font/AppleSDGothicNeoB.woff') format('woff');
+          src: url('/font/AppleSDGothicNeoB.woff') format('woff'),
+            url('/font/AppleSDGothicNeoB.woff2') format('font-woff2');
         }
 
         @font-face {
           font-family: 'AppleSDGothicNeoM00';
           font-style: normal;
-          src: url('../font/AppleSDGothicNeoM.woff') format('woff');
+          src: url('../font/AppleSDGothicNeoM.woff') format('woff'),
+            url('/font/AppleSDGothicNeoM.woff2') format('font-woff2');
         }
 
         @font-face {
@@ -32,15 +34,18 @@ function GlobalStyle() {
           font-family: 'AppleSDGothicNeoM00', sans-serif;
           background-color: #101010;
         }
+        p {
+          font-family: 'AppleSDGothicNeoM00', sans-serif;
+        }
         a {
           text-decoration: none;
           color: #ffffff;
         }
         button {
-          font-family: 'AppleSDGothiCNeoM00', sans-serif;
+          font-family: 'AppleSDGothicNeoM00', sans-serif;
         }
         input {
-          font-family: 'AppleSDGothiCNeoM00', sans-serif;
+          font-family: 'AppleSDGothicNeoM00', sans-serif;
 
           :focus {
             outline: none;
