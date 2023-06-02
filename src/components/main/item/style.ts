@@ -1,7 +1,7 @@
 import styled from '@emotion/styled/macro';
 
 export const Description = styled.div`
-  font-family: 'AppleSDGothicNeoM00';
+  font-family: AppleSDGothicNeoM00;
   font-weight: 400;
   font-size: 14px;
   color: #717171;
@@ -95,6 +95,7 @@ export const LockBox = styled.div`
   background: rgba(132, 132, 132, 0.2);
   backdrop-filter: blur(3px);
   border-radius: 50%;
+
   position: absolute;
   top: 16px;
   left: 16px;

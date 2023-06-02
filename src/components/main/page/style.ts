@@ -22,6 +22,7 @@ export const SortButton = styled.p<{ byPopularity: boolean }>`
   font-size: 15px;
   color: ${(props) =>
     props.byPopularity ? '#ffffff' : 'rgba(255, 255, 255, 0.4)'};
+  font-family: AppleSDGothicNeoB00;
   cursor: pointer;
 `;
 
