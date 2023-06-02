@@ -76,7 +76,7 @@ export const Input = styled.input`
   margin-left: 10px;
   margin-right: 14px;
   height: 20px;
-  font-family: 'AppleSDGothicNeoM00';
+  font-family: AppleSDGothicNeoM00;
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
@@ -108,7 +108,7 @@ export const MemberProfile = styled.div<{ image: string | undefined }>`
 `;
 
 export const MemberName = styled.p`
-  font-family: 'AppleSDGothicNeoB00';
+  font-family: AppleSDGothicNeoB00;
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
@@ -134,7 +134,7 @@ export const Chatting = styled.div`
 `;
 
 export const ChattingText = styled.p`
-  font-family: 'AppleSDGothicNeoM00';
+  font-family: AppleSDGothicNeoM00;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -143,7 +143,7 @@ export const ChattingText = styled.p`
 `;
 
 export const Time = styled.p`
-  font-family: 'AppleSDGothicNeoB00';
+  font-family: AppleSDGothicNeoB00;
   font-style: normal;
   font-weight: 400;
   font-size: 13px;
@@ -171,7 +171,7 @@ export const MyChatting = styled.div`
 `;
 
 export const MyChatText = styled.p`
-  font-family: 'AppleSDGothicNeoM00';
+  font-family: AppleSDGothicNeoM00;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -180,7 +180,7 @@ export const MyChatText = styled.p`
 `;
 
 export const MyChatTime = styled.p`
-  font-family: 'AppleSDGothicNeoB00';
+  font-family: AppleSDGothicNeoB00;
   font-style: normal;
   font-weight: 400;
   font-size: 13px;

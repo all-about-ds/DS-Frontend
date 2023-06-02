@@ -14,7 +14,7 @@ export const TopText = styled.h1`
   font-size: 20px;
   color: #ffffff;
   margin-top: 2.06rem;
-  font-family: 'AppleSDGothicNeoB00';
+  font-family: AppleSDGothicNeoB00;
 `;
 
 export const TitleText = styled.h1`
@@ -22,7 +22,7 @@ export const TitleText = styled.h1`
   font-size: 22px;
   color: #ffffff;
   margin-top: 0.7rem;
-  font-family: 'AppleSDGothicNeoEB00';
+  font-family: AppleSDGothicNeoEB00;
 `;
 
 export const ElementsWrapper = styled.section`
@@ -33,7 +33,7 @@ export const ElementsWrapper = styled.section`
 `;
 
 export const BoldText = styled.p`
-  font-family: 'AppleSDGothicNeoB00';
+  font-family: AppleSDGothicNeoB00;
   font-weight: 400;
   font-size: 16px;
   color: #ffffff;
@@ -54,7 +54,7 @@ export const Input = styled.textarea`
   padding: 13px;
   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
   -moz-box-sizing: border-box; /* Firefox, other Gecko */
-  font-family: 'AppleSDGothicNeoM00';
+  font-family: AppleSDGothicNeoM00;
   box-sizing: border-box; /* Opera/IE 8+ */
 
   :focus {
@@ -97,7 +97,7 @@ export const SmallBox = styled.div`
 `;
 
 export const ImageText = styled.div`
-  font-family: 'AppleSDGothicNeoB00';
+  font-family: AppleSDGothicNeoB00;
   font-style: normal;
   font-weight: 400;
   font-size: 13px;
@@ -124,7 +124,7 @@ export const MemberTextWrapper = styled.div`
 `;
 
 export const Member = styled.div`
-  font-family: 'AppleSDGothicNeoB00';
+  font-family: AppleSDGothicNeoB00;
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
@@ -179,7 +179,7 @@ export const RightRadiusButton = styled.div`
 `;
 
 export const TextInButton = styled.div`
-  font-family: 'AppleSDGothicNeoM00';
+  font-family: AppleSDGothicNeoM00;
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
@@ -203,7 +203,7 @@ export const CancelButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'AppleSDGothicNeoSB00';
+  font-family: AppleSDGothicNeoSB00;
   font-style: normal;
   font-weight: 400;
   color: #818181;
@@ -219,7 +219,7 @@ export const SubmitButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'AppleSDGothicNeoSB00';
+  font-family: AppleSDGothicNeoSB00;
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
@@ -243,7 +243,7 @@ export const ChangeButton = styled.input`
 `;
 
 export const ChangeText = styled.label`
-  font-family: 'AppleSDGothicNeoM00';
+  font-family: AppleSDGothicNeoM00;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;

@@ -26,7 +26,7 @@ export const ContentWrapper = styled.div`
 `;
 
 export const memberNum = styled.p`
-  font-family: 'AppleSDGothicNeoB00';
+  font-family: AppleSDGothicNeoB00;
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
@@ -37,7 +37,7 @@ export const memberNum = styled.p`
 
 export const Title = styled.p`
   margin-bottom: 16px;
-  font-family: 'AppleSDGothicNeoB00';
+  font-family: AppleSDGothicNeoB00;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -62,7 +62,7 @@ export const Profile = styled.img`
 `;
 
 export const UserName = styled.p`
-  font-family: 'AppleSDGothicNeoB00';
+  font-family: AppleSDGothicNeoB00;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -72,7 +72,7 @@ export const UserName = styled.p`
 `;
 
 export const Description = styled.div`
-  font-family: 'AppleSDGothicNeoM00';
+  font-family: AppleSDGothicNeoM00;
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
@@ -89,7 +89,7 @@ export const JoinButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'AppleSDGothicNeoB00';
+  font-family: AppleSDGothicNeoB00;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
