@@ -11,6 +11,8 @@ import { useRecoilState } from 'recoil';
 import NormalModal from 'components/modals/normal';
 import member from 'api/member';
 import { groupIsClickedAtom } from 'atoms';
+import { ref, remove } from '@firebase/database';
+import { db } from '../../../../firebase';
 
 function GroupInformation() {
   const [leaveGroupModal, setLeaveGroupModal] = useRecoilState(
@@ -47,6 +49,7 @@ function GroupInformation() {
   const deleteGroup = async () => {
     try {
       await group.deleteGroup(information?.idx);
+      remove(ref(db, `chattings/${information?.name}`));
       setDeleteGroupModal(false);
       toast.error('삭제되었습니다!');
       setGroupIsClicked(false);
