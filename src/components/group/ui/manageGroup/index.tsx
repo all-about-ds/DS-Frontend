@@ -62,6 +62,14 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
 
         if (groupType === 'create') {
           await group.createGroup(req);
+          set(ref(db, `chattings/${data.name}/users/` + location.state.name), {
+            name: location.state.name,
+            profile: location.state.profile,
+          });
+          set(ref(db, `timers/${data.name}/users/` + location.state.name), {
+            name: location.state.name,
+            time: 0,
+          });
           toast.success('생성되었어요!');
         }
 
