@@ -69,6 +69,7 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
           set(ref(db, `timers/${data.name}/users/` + location.state.name), {
             name: location.state.name,
             time: 0,
+            active: false,
           });
           toast.success('생성되었어요!');
         }
