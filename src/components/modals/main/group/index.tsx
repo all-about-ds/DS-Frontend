@@ -48,6 +48,15 @@ function MainModal(props: GroupProps) {
               }
             );
 
+            await set(
+              ref(db, `timers/${props.GroupProps?.name}/users/` + userName),
+              {
+                name: userName,
+                time: 0,
+                active: false,
+              }
+            );
+
             navigate(`/group/${props.GroupProps?.idx}/information`);
             setGroupIsClicked(false);
           } catch (e: any) {
