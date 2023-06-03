@@ -50,7 +50,7 @@ function GroupChatting() {
     setUserChat(e.target.value);
   };
 
-  const handleKeyPress = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       e.preventDefault();
       if (userChat !== '') {
@@ -68,6 +68,24 @@ function GroupChatting() {
         );
         setUserChat('');
       }
+    }
+  };
+
+  const sendChat = () => {
+    if (userChat !== '') {
+      set(
+        ref(
+          db,
+          `chattings/${location.state.groupName}/chat/` + `${endNum + 1}`
+        ),
+        {
+          img: userImage ? userImage : null,
+          name: userName,
+          chat: userChat,
+          createdAt: Date.now(),
+        }
+      );
+      setUserChat('');
     }
   };
 
@@ -142,7 +160,7 @@ function GroupChatting() {
                 onKeyPress={handleKeyPress}
                 value={userChat}
               ></S.Input>
-              <div style={{ cursor: 'pointer' }} onClick={() => handleKeyPress}>
+              <div style={{ cursor: 'pointer' }} onClick={sendChat}>
                 <I.SubmitArrow />
               </div>
             </S.InputInnerBox>
