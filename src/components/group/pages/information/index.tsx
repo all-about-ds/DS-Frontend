@@ -50,6 +50,7 @@ function GroupInformation() {
     try {
       await group.deleteGroup(information?.idx);
       remove(ref(db, `chattings/${information?.name}`));
+      remove(ref(db, `timers/${information?.name}`));
       setDeleteGroupModal(false);
       toast.error('삭제되었습니다!');
       setGroupIsClicked(false);
