@@ -108,7 +108,9 @@ function Main() {
 
   return (
     <>
-      {groupPassword && <PasswordModal index={index} />}
+      {groupPassword && (
+        <PasswordModal index={modalData?.idx} groupName={modalData?.name} />
+      )}
       {groupIsClicked && <MainModal GroupProps={modalData} />}
       <Header />
       <S.MainPageLayout>
