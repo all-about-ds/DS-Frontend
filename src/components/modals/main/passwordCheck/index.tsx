@@ -1,20 +1,23 @@
 import group from 'api/group';
-import { groupPasswordModalAtom } from 'atoms/container';
+import { groupPasswordModalAtom, userInfoAtomFamily } from 'atoms/container';
 import ModalLayout from 'components/common/layout/modal';
+import { ref, set } from '@firebase/database';
+import { db } from '../../../../firebase';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 import { useRecoilState } from 'recoil';
-import tokenService from 'utils/tokenService';
 import * as S from './style';
 
 interface PasswordProps {
   index: number | undefined;
+  groupName: string | undefined;
 }
 
 function PasswordModal(props: PasswordProps) {
   const [, setGroupPasswordModal] = useRecoilState(groupPasswordModalAtom);
+  const [userName] = useRecoilState(userInfoAtomFamily('name'));
   const navigate = useNavigate();
   const [isError, setError] = useState<boolean>(false);
   const {
@@ -26,11 +29,16 @@ function PasswordModal(props: PasswordProps) {
   const onValid = async (data: { password: string | undefined }) => {
     try {
       setError(false);
-      console.log(data.password);
-      const response: any = await group.joinGroup(data.password, props.index);
+      await group.joinGroup(data.password, props.index);
+
+      await set(ref(db, `timers/${props.groupName}/users/${userName}`), {
+        name: userName,
+        time: 0,
+        active: false,
+      });
+
       navigate(`/group/${props.index}/information`);
     } catch (e: any) {
-      console.log(e);
       if (e.response.status === 400) {
         toast.error('비밀번호가 일치하지 않았어요!');
       } else if (e.response.status === 404) {
@@ -43,7 +51,6 @@ function PasswordModal(props: PasswordProps) {
 
   const inValid = (error: any) => {
     setError(true);
-    console.log(error);
   };
 
   const cancel = () => {
