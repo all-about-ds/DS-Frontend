@@ -60,10 +60,12 @@ function GroupTimer() {
       }, 1000);
 
       return () => clearInterval(id);
-    } else {
+    }
+
+    if (!active && myInfo.time !== 0) {
       set(ref(db, `timers/${location.state.groupName}/users/${name}`), {
         name: name,
-        time: myInfo?.time,
+        time: time,
         active: active,
       });
     }
