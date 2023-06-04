@@ -52,6 +52,7 @@ function GroupTimer() {
     if (active) {
       const id = setInterval(() => {
         time = time += 1;
+
         set(ref(db, `timers/${location.state.groupName}/users/${name}`), {
           name: name,
           time: time,
@@ -66,7 +67,7 @@ function GroupTimer() {
       set(ref(db, `timers/${location.state.groupName}/users/${name}`), {
         name: name,
         time: time,
-        active: active,
+        active: false,
       });
     }
   }, [active]);
@@ -118,14 +119,16 @@ function GroupTimer() {
         <S.TimerButton onClick={() => setActive(false)}>중단</S.TimerButton>
       )}
       <S.MemberTimerBox>
-        {users.map((item, index) => (
-          <MemberTimerItem
-            key={index}
-            memberName={item.name}
-            memberTime={item.time}
-            isActive={item.active}
-          />
-        ))}
+        {users
+          .filter((item) => item.name !== name)
+          .map((item, index) => (
+            <MemberTimerItem
+              key={index}
+              memberName={item.name}
+              memberTime={item.time}
+              isActive={item.active}
+            />
+          ))}
       </S.MemberTimerBox>
     </S.GroupTimerPageLayout>
   );
