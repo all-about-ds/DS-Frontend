@@ -4,7 +4,7 @@ import { CreateGroupInterface, ManageGroupType } from 'types/group.type';
 import * as S from './style';
 import * as I from '../../../../assets/svg';
 import { useForm } from 'react-hook-form';
-import { ImagesAtom } from 'atoms/container';
+import { ImagesAtom, userInfoAtomFamily } from 'atoms/container';
 import { useRecoilState } from 'recoil';
 import { toast } from 'react-toastify';
 import { useLocation, useNavigate } from 'react-router';
@@ -23,6 +23,7 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
   const [image, setImage] = useRecoilState<string>(ImagesAtom);
   const [memberNum, setMemberNum] = useState<number>(2);
   const [isClicked, setIsClicked] = useState<boolean>(false);
+  const [userName] = useRecoilState(userInfoAtomFamily('name'));
   const navigate = useNavigate();
   const location = useLocation();
   const { register, handleSubmit } = useForm<FormType>();
@@ -66,8 +67,8 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
             name: location.state.name,
             profile: location.state.profile,
           });
-          set(ref(db, `timers/${data.name}/users/` + location.state.name), {
-            name: location.state.name,
+          set(ref(db, `timers/${data.name}/users/${userName}`), {
+            name: userName,
             time: 0,
             active: false,
           });
