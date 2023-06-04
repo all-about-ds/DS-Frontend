@@ -26,6 +26,18 @@ function GroupTimer() {
   });
 
   useEffect(() => {
+    const handleBeforeUnload = () => {
+      setActive(false);
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
+
+  useEffect(() => {
     const timerRef = ref(db, `timers/${location.state.groupName}/users`);
 
     const unscribe: Unsubscribe = onValue(timerRef, (snapshot) => {
