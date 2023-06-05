@@ -10,10 +10,13 @@ import { useNavigate } from 'react-router-dom';
 import tokenService from 'utils/tokenService';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
+import Loader from 'components/auth/ui/loading';
 
 function Signin() {
   const navigate = useNavigate();
   const [isError, setError] = useState<boolean>(false);
+  const [isSuccess, setIsSuccess] = useState<boolean>(true);
+
   const {
     register,
     handleSubmit,
@@ -21,9 +24,11 @@ function Signin() {
   } = useForm<LoginInterface>();
 
   const onValid = async (data: LoginInterface) => {
+    setIsSuccess(false);
     try {
       setError(false);
       const response: any = await auth.signin(data);
+      setIsSuccess(true);
       tokenService.setUser(response.data);
       toast.success('로그인 성공!');
       navigate('/');
@@ -37,16 +42,14 @@ function Signin() {
     }
   };
 
-  const inValid = (error: any) => {
-    setError(true);
-    console.log(error);
-  };
+  const inValid = () => setError(true);
 
   return (
     <>
       <Header />
       <CenterAlignmentLayout>
         <AuthFrame title='로그인'>
+          <Loader isLoading={!isSuccess} />
           <S.DescWrapper>
             <S.IconBox>😎</S.IconBox>
             <S.DescText>

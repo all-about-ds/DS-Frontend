@@ -17,6 +17,10 @@ export const HeaderContentBox = styled.div`
   justify-content: space-between;
   gap: 10px;
 
+  @media screen and (max-width: 1050px) {
+    justify-content: right;
+    gap: 10px;
+  }
   .home {
     @media screen and (max-width: 630px) {
       display: none;
@@ -41,8 +45,8 @@ export const UserName = styled.p`
   color: rgba(255, 255, 255, 0.8);
   font-size: 15px;
   cursor: pointer;
-
-  @media screen and (max-width: 630px) {
+  white-space: nowrap;
+  @media screen and (max-width: 1050px) {
     display: none;
   }
 `;

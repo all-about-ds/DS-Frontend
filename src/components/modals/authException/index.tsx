@@ -13,6 +13,8 @@ interface AuthEmailErrorModalProps {
 function AuthEmailErrorModal(props: AuthEmailErrorModalProps) {
   const [_, setModal] = useRecoilState(modalAtomFamily(props.pageType));
 
+  const onMove = () => setModal(false);
+
   return (
     <ModalLayout setModal={setModal}>
       <S.AuthEmailErrorModal onClick={(e) => e.stopPropagation()}>
@@ -26,7 +28,7 @@ function AuthEmailErrorModal(props: AuthEmailErrorModalProps) {
           <Link
             to={props.pageType === 'signup' ? '/auth/signin' : '/auth/signup'}
           >
-            <S.GoLoginBox>
+            <S.GoLoginBox onClick={onMove}>
               {props.pageType === 'signup' && '로그인 하러가기'}
               {props.pageType === 'findPassword' && '회원가입 하기'}
             </S.GoLoginBox>

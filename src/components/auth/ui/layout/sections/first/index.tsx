@@ -2,7 +2,8 @@ import auth from 'api/auth';
 import { authEmailAtomFamily, modalAtomFamily, timerAtomFamily } from 'atoms';
 import AuthButton from 'components/auth/ui/button';
 import AuthInput from 'components/auth/ui/input';
-import { useState } from 'react';
+import Loader from 'components/auth/ui/loading';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { AuthFormSectionPropsInterface } from 'types/auth.type';
@@ -23,6 +24,8 @@ function FirstSection(props: AuthFormSectionPropsInterface) {
       email: useRecoilValue(authEmailAtomFamily(props.atomKey)),
     },
   });
+
+  useEffect(() => setAuthErrorModal(false), []);
 
   const onValid = async ({ email }: { email: string }) => {
     setLoaded(false);
@@ -53,16 +56,7 @@ function FirstSection(props: AuthFormSectionPropsInterface) {
 
   return (
     <S.FirstSectionLayout onSubmit={handleSubmit(onValid)} isLoading={!loaded}>
-      <S.LoadingAnimation className='lds-roller'>
-        <div className='roll-item' />
-        <div className='roll-item' />
-        <div className='roll-item' />
-        <div className='roll-item' />
-        <div className='roll-item' />
-        <div className='roll-item' />
-        <div className='roll-item' />
-        <div className='roll-item' />
-      </S.LoadingAnimation>
+      <Loader isLoading={!loaded} />
       <AuthInput
         type='text'
         title={'이메일'}

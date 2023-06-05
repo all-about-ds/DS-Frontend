@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 export const AuthFrame = styled.div`
+  position: relative;
   width: 21vw;
   min-width: 372px;
   height: 55vh;

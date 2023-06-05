@@ -10,7 +10,7 @@ function Signup() {
   const [currentSection, setCurrentSecion] = useRecoilState(
     currentSectionsAtomFamily('signup')
   );
-  const [__, setEmail] = useRecoilState(authEmailAtomFamily('signup'));
+  const [, setEmail] = useRecoilState(authEmailAtomFamily('signup'));
   const navigate = useNavigate();
 
   const [progress, setProgress] = useState<number>(33);
