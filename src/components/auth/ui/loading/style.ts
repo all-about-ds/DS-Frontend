@@ -21,7 +21,7 @@ export const LoadingAnimation = styled.div<{ isLoading: boolean }>`
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #fff;
+    background: #7848de;
     margin: -4px 0 0 -4px;
   }
   .lds-roller div:nth-of-type(1) {
