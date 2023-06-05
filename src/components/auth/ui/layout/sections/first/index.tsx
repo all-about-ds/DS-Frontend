@@ -3,7 +3,7 @@ import { authEmailAtomFamily, modalAtomFamily, timerAtomFamily } from 'atoms';
 import AuthButton from 'components/auth/ui/button';
 import AuthInput from 'components/auth/ui/input';
 import Loader from 'components/auth/ui/loading';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { AuthFormSectionPropsInterface } from 'types/auth.type';
@@ -24,6 +24,8 @@ function FirstSection(props: AuthFormSectionPropsInterface) {
       email: useRecoilValue(authEmailAtomFamily(props.atomKey)),
     },
   });
+
+  useEffect(() => setAuthErrorModal(false), []);
 
   const onValid = async ({ email }: { email: string }) => {
     setLoaded(false);
