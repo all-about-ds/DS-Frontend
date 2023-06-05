@@ -2,6 +2,7 @@ import auth from 'api/auth';
 import { authEmailAtomFamily, modalAtomFamily, timerAtomFamily } from 'atoms';
 import AuthButton from 'components/auth/ui/button';
 import AuthInput from 'components/auth/ui/input';
+import Loader from 'components/auth/ui/loading';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
@@ -53,16 +54,7 @@ function FirstSection(props: AuthFormSectionPropsInterface) {
 
   return (
     <S.FirstSectionLayout onSubmit={handleSubmit(onValid)} isLoading={!loaded}>
-      <S.LoadingAnimation className='lds-roller'>
-        <div className='roll-item' />
-        <div className='roll-item' />
-        <div className='roll-item' />
-        <div className='roll-item' />
-        <div className='roll-item' />
-        <div className='roll-item' />
-        <div className='roll-item' />
-        <div className='roll-item' />
-      </S.LoadingAnimation>
+      <Loader isLoading={!loaded} />
       <AuthInput
         type='text'
         title={'이메일'}
