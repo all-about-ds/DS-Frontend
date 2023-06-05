@@ -37,10 +37,7 @@ function Signin() {
     }
   };
 
-  const inValid = (error: any) => {
-    setError(true);
-    console.log(error);
-  };
+  const inValid = () => setError(true);
 
   return (
     <>

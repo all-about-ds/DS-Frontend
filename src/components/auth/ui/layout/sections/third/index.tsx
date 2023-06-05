@@ -59,9 +59,7 @@ function ThirdSection(props: AuthFormSectionPropsInterface) {
     navigate('/auth/signin');
   };
 
-  const inValid = () => {
-    setErrorMessage('비밀번호를 다시 확인해주세요');
-  };
+  const inValid = () => setErrorMessage('비밀번호를 다시 확인해주세요');
 
   const inputsRendering = () => {
     const view = [];
