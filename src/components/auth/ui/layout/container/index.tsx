@@ -15,7 +15,7 @@ function AuthSectionContainer(props: AuthSectionContainerProps) {
   );
 
   const sectionRendering = () => {
-    const view: any[] = [];
+    const view = [];
 
     switch (currentSection) {
       case 1:
