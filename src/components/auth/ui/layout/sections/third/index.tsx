@@ -34,6 +34,7 @@ function ThirdSection(props: AuthFormSectionPropsInterface) {
           password: data.input2,
         });
         toast.success('회원가입 성공!');
+        navigate('/auth/signin');
       } catch {
         setErrorMessage('이미 있는 이름이에요');
       }
@@ -48,6 +49,7 @@ function ThirdSection(props: AuthFormSectionPropsInterface) {
             newPassword: data.input2,
           });
           toast.success('비밀번호를 변경했어요!');
+          navigate('/auth/signin');
         } catch {
           setErrorMessage('알 수 없는 에러에요');
         }
@@ -55,11 +57,20 @@ function ThirdSection(props: AuthFormSectionPropsInterface) {
         setErrorMessage('비밀번호가 일치하지 않아요');
       }
     }
-
-    navigate('/auth/signin');
   };
 
-  const inValid = () => setErrorMessage('비밀번호를 다시 확인해주세요');
+  const inValid = (e: any) => {
+    const input1 = e?.input1;
+    const input2 = e?.input2;
+
+    if (input1 && input1.message) {
+      setErrorMessage(e.input1.message);
+    }
+
+    if (input2 && input2.message) {
+      setErrorMessage(e.input2.message);
+    }
+  };
 
   const inputsRendering = () => {
     const view = [];
@@ -77,6 +88,14 @@ function ThirdSection(props: AuthFormSectionPropsInterface) {
                 type='text'
                 {...register('input1', {
                   required: '이름은 필수 입력입니다.',
+                  minLength: {
+                    message: '닉네임은 2자 이상이어야해요.',
+                    value: 2,
+                  },
+                  maxLength: {
+                    message: '닉네임은 최대 8자 입니다.',
+                    value: 8,
+                  },
                 })}
                 isError={Boolean(errorMessage)}
               />
