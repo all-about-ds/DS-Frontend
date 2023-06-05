@@ -13,15 +13,17 @@ import member from 'api/member';
 import { groupIsClickedAtom } from 'atoms';
 import { ref, remove } from '@firebase/database';
 import { db } from '../../../../firebase';
+import { userInfoAtomFamily } from 'atoms/container';
 
 function GroupInformation() {
   const [leaveGroupModal, setLeaveGroupModal] = useRecoilState(
     modalAtomFamily('leaveGroup')
   );
   const [deleteGroupModal, setDeleteGroupModal] = useRecoilState(
-    modalAtomFamily('leaveGroup')
+    modalAtomFamily('deleteGroup')
   );
 
+  const [userName] = useRecoilState(userInfoAtomFamily('name'));
   const [isOwner, setIsOwner] = useState<boolean>(false);
   const [information, setInformation] = useState<GroupInformationInterface>();
   const [, setGroupIsClicked] = useRecoilState(groupIsClickedAtom);
@@ -63,6 +65,7 @@ function GroupInformation() {
   const leaveGroup = async () => {
     try {
       await member.leaveGroup(String(params.groupId));
+      remove(ref(db, `timers/${information?.name}/users/${userName}`));
       setLeaveGroupModal(false);
       toast.success('그룹을 나갔어요');
       navigate('/my');

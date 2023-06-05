@@ -10,3 +10,9 @@ export interface MyGroupListInterface {
   name: string;
   img: string;
 }
+
+export interface TimerUserInterface {
+  name: string;
+  time: number;
+  active: boolean;
+}
