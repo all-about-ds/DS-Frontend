@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useRecoilValue } from 'recoil';
 import { AuthFormSectionPropsInterface } from 'types/auth.type';
+import Loader from 'components/auth/ui/loading';
 
 interface UseFormType {
   input1: string;
@@ -16,6 +17,7 @@ interface UseFormType {
 }
 
 function ThirdSection(props: AuthFormSectionPropsInterface) {
+  const [isSuccess, setIsSuccess] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const email = useRecoilValue(authEmailAtomFamily(props.atomKey));
   const navigate = useNavigate();
@@ -26,6 +28,7 @@ function ThirdSection(props: AuthFormSectionPropsInterface) {
   const { register, handleSubmit } = useForm<UseFormType>();
 
   const onValid = async (data: UseFormType) => {
+    setIsSuccess(false);
     if (props.atomKey === 'signup') {
       try {
         await auth.signup({
@@ -33,6 +36,7 @@ function ThirdSection(props: AuthFormSectionPropsInterface) {
           email: email,
           password: data.input2,
         });
+        setIsSuccess(true);
         toast.success('회원가입 성공!');
         navigate('/auth/signin');
       } catch {
@@ -198,6 +202,7 @@ function ThirdSection(props: AuthFormSectionPropsInterface) {
 
   return (
     <S.ThirdSectionLayout onSubmit={handleSubmit(onValid, inValid)}>
+      <Loader isLoading={!isSuccess} />
       <S.Text>
         {props.title === '회원가입'
           ? '사용하실 닉네임과 비밀번호를 입력해주세요.'

@@ -1,6 +1,7 @@
 import auth from 'api/auth';
 import { authEmailAtomFamily, timerAtomFamily } from 'atoms';
 import AuthButton from 'components/auth/ui/button';
+import Loader from 'components/auth/ui/loading';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -8,6 +9,7 @@ import { AuthFormSectionPropsInterface } from 'types/auth.type';
 import * as S from './style';
 
 function SecondSection(props: AuthFormSectionPropsInterface) {
+  const [isSuccess, setIsSuccess] = useState<boolean>(true);
   const [inputs, setInputs] = useState<string[]>(['', '', '', '']);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [timer, setTimer] = useRecoilState(timerAtomFamily(props.atomKey));
@@ -57,20 +59,25 @@ function SecondSection(props: AuthFormSectionPropsInterface) {
   }, [timer]);
 
   const checkAuthenticationNumber = async () => {
+    setIsSuccess(false);
+
     try {
       let code = '';
       inputs.forEach(function (currentvalue) {
         code += currentvalue;
       });
       await auth.checkAuthenticationNumber(email, code);
+      setIsSuccess(true);
       props.setSection(3);
     } catch {
+      setIsSuccess(true);
       setErrorMessage('거부된 인증번호 입니다');
     }
   };
 
   const resend = async () => {
     setErrorMessage('');
+    setIsSuccess(false);
 
     try {
       switch (props.atomKey) {
@@ -88,9 +95,11 @@ function SecondSection(props: AuthFormSectionPropsInterface) {
         minute: 5,
         seconds: 0,
       });
+      setIsSuccess(true);
       toast.success('인증번호를 재전송 했어요');
     } catch {
       setErrorMessage('알 수 없는 오류입니다');
+      setIsSuccess(true);
     }
   };
 
@@ -102,6 +111,7 @@ function SecondSection(props: AuthFormSectionPropsInterface) {
 
   return (
     <S.SecondSectionLayout>
+      <Loader isLoading={!isSuccess} />
       <S.Text>입력하신 이메일로 인증번호 4자리를 전송했어요</S.Text>
       <S.NumberForm isError={errorMessage}>
         {inputs.map((input, index) => (
