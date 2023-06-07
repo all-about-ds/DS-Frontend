@@ -38,7 +38,7 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
   };
 
   const memberDown = () => {
-    if (memberNum !== 2) {
+    if (memberNum !== 2 && memberNum !== location.state.maxCount + 1) {
       setMemberNum(memberNum - 1);
     } else {
       toast.error('현재 인원보다 낮게 설정할 수 없어요!');
@@ -87,6 +87,8 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
           toast.error('잘못된 형식의 요청이에요!');
         } else if (e.response.status === 401) {
           toast.error('새로고침 후 다시 시도해주세요!');
+        } else if (e.response.status === 409) {
+          toast.error('이미 존재하는 이름이에요!');
         }
       }
     } else {
