@@ -162,3 +162,45 @@ export const GroupList = styled.div`
     grid-template-columns: repeat(1, 1fr);
   }
 `;
+
+export const MyGroupNotFound = styled.div`
+  width: 100%;
+  height: 31vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  div > button {
+    margin: 0 auto;
+  }
+`;
+
+export const NotFoundText = styled.h1`
+  color: white;
+  font-size: 1.75em;
+  margin-bottom: 1.5rem;
+  text-align: center;
+`;
+
+export const MoveMainButton = styled.button`
+  width: 300px;
+  outline: none;
+  display: block;
+  border: none;
+  cursor: pointer;
+  height: 40px;
+  background: #7848de;
+  border-radius: 8px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: #ffffff;
+  transition: 0.2s;
+
+  :hover {
+    box-sizing: border-box;
+    border: 1px solid #7848de;
+    color: #7848de;
+    background: #161616;
+  }
+`;

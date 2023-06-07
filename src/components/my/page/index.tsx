@@ -14,6 +14,7 @@ import { modalAtomFamily } from 'atoms';
 import { Link } from 'react-router-dom';
 import EditProfileImageModal from 'components/modals/my/editProfileImage';
 import DefaultModal from 'components/modals/default';
+import AuthButton from 'components/auth/ui/button';
 
 function My() {
   const [myInfo, setMyInfo] = useState<GetMyInfoInterface>();
@@ -137,6 +138,16 @@ function My() {
               </Link>
             ))}
           </S.GroupList>
+          {!myInfo?.groups.length && (
+            <S.MyGroupNotFound>
+              <div>
+                <S.NotFoundText>아직 가입된 그룹이 없어요. 🧐</S.NotFoundText>
+                <S.MoveMainButton onClick={() => navigate('/')}>
+                  그룹 가입하기
+                </S.MoveMainButton>
+              </div>
+            </S.MyGroupNotFound>
+          )}
         </S.GroupSection>
       </S.MyPageLayout>
     </>
