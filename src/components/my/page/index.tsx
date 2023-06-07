@@ -14,7 +14,6 @@ import { modalAtomFamily } from 'atoms';
 import { Link } from 'react-router-dom';
 import EditProfileImageModal from 'components/modals/my/editProfileImage';
 import DefaultModal from 'components/modals/default';
-import AuthButton from 'components/auth/ui/button';
 
 function My() {
   const [myInfo, setMyInfo] = useState<GetMyInfoInterface>();
@@ -41,8 +40,9 @@ function My() {
         const res: any = await user.getMyInfo();
         setMyInfo(res.data);
         setLoaded(true);
-      } catch (e: any) {
-        console.log(e);
+      } catch {
+        toast.error('없는 유저입니다');
+        navigate('/');
       }
     };
 
