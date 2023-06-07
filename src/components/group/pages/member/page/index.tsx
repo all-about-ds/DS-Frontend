@@ -11,12 +11,14 @@ interface LocationType {
 }
 
 function MemberSetting() {
-  const [isClicked, setIsClicked] = useState<any>(false);
   const location = useLocation().state as LocationType;
+  const [isClicked, setIsClicked] = useState<boolean[]>(
+    Array(location.list.length).fill(false)
+  );
   const navigate = useNavigate();
   const params = useParams();
 
-  const handleClick = (idx: any) => {
+  const handleClick = (idx: number) => {
     const newArr = Array(location.list.length).fill(false);
     newArr[idx] = !isClicked[idx];
     setIsClicked(newArr);
