@@ -3,15 +3,7 @@ import * as S from './style';
 import * as I from '../../../../assets/svg';
 import { useEffect, useRef, useState } from 'react';
 import { ChatMessageType } from 'types/chat.type';
-import {
-  Unsubscribe,
-  child,
-  get,
-  off,
-  onValue,
-  ref,
-  set,
-} from '@firebase/database';
+import { Unsubscribe, off, onValue, ref, set } from '@firebase/database';
 import { db } from '../../../../firebase';
 import { useLocation } from 'react-router';
 import { useRecoilState } from 'recoil';
