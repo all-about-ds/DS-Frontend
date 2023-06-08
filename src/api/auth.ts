@@ -84,12 +84,11 @@ class Auth {
   findPassword(data: FindPasswordInterface) {
     try {
       return createAxios({
-        method: 'POST',
+        method: 'PATCH',
         url: getAuth.findPassword(),
         data: {
           email: data.email,
           password: data.password,
-          newPassword: data.newPassword,
         },
       });
     } catch (error) {

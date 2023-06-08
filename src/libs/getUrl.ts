@@ -26,7 +26,7 @@ export const getAuth = {
   },
 
   findPassword: () => {
-    return 'auth/change';
+    return 'auth/password';
   },
 };
 

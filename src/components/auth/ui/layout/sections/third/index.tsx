@@ -38,7 +38,6 @@ function ThirdSection(props: AuthFormSectionPropsInterface) {
         });
         setIsRequestEnd(true);
         toast.success('회원가입 성공!');
-        navigate('/auth/signin');
       } catch {
         setErrorMessage('이미 있는 이름이에요');
         setIsRequestEnd(true);
@@ -51,14 +50,18 @@ function ThirdSection(props: AuthFormSectionPropsInterface) {
           await auth.findPassword({
             email: email,
             password: data.input1,
-            newPassword: data.input2,
           });
+          setIsRequestEnd(true);
           toast.success('비밀번호를 변경했어요!');
           navigate('/auth/signin');
-        } catch {
+        } catch (e) {
+          console.log(e);
+
+          setIsRequestEnd(true);
           setErrorMessage('알 수 없는 에러에요');
         }
       } else {
+        setIsRequestEnd(true);
         setErrorMessage('비밀번호가 일치하지 않아요');
       }
     }

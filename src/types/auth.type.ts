@@ -14,7 +14,6 @@ export interface SignupInterface {
 export interface FindPasswordInterface {
   email: string;
   password: string;
-  newPassword: string;
 }
 
 export interface AuthFormSectionPropsInterface {
