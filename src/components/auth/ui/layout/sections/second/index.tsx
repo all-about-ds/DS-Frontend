@@ -9,7 +9,7 @@ import { AuthFormSectionPropsInterface } from 'types/auth.type';
 import * as S from './style';
 
 function SecondSection(props: AuthFormSectionPropsInterface) {
-  const [isSuccess, setIsSuccess] = useState<boolean>(true);
+  const [isRequestEnd, setIsRequestEnd] = useState<boolean>(true);
   const [inputs, setInputs] = useState<string[]>(['', '', '', '']);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [timer, setTimer] = useRecoilState(timerAtomFamily(props.atomKey));
@@ -59,7 +59,7 @@ function SecondSection(props: AuthFormSectionPropsInterface) {
   }, [timer]);
 
   const checkAuthenticationNumber = async () => {
-    setIsSuccess(false);
+    setIsRequestEnd(false);
 
     try {
       let code = '';
@@ -67,17 +67,17 @@ function SecondSection(props: AuthFormSectionPropsInterface) {
         code += currentvalue;
       });
       await auth.checkAuthenticationNumber(email, code);
-      setIsSuccess(true);
+      setIsRequestEnd(true);
       props.setSection(3);
     } catch {
-      setIsSuccess(true);
+      setIsRequestEnd(true);
       setErrorMessage('거부된 인증번호 입니다');
     }
   };
 
   const resend = async () => {
     setErrorMessage('');
-    setIsSuccess(false);
+    setIsRequestEnd(false);
 
     try {
       switch (props.atomKey) {
@@ -95,11 +95,11 @@ function SecondSection(props: AuthFormSectionPropsInterface) {
         minute: 5,
         seconds: 0,
       });
-      setIsSuccess(true);
+      setIsRequestEnd(true);
       toast.success('인증번호를 재전송 했어요');
     } catch {
       setErrorMessage('알 수 없는 오류입니다');
-      setIsSuccess(true);
+      setIsRequestEnd(true);
     }
   };
 
@@ -111,7 +111,7 @@ function SecondSection(props: AuthFormSectionPropsInterface) {
 
   return (
     <S.SecondSectionLayout>
-      <Loader isLoading={!isSuccess} />
+      <Loader isLoading={!isRequestEnd} />
       <S.Text>입력하신 이메일로 인증번호 4자리를 전송했어요</S.Text>
       <S.NumberForm isError={errorMessage}>
         {inputs.map((input, index) => (
