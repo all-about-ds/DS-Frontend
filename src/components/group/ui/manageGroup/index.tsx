@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import { useLocation, useNavigate } from 'react-router';
 import useImageToUrl from 'hooks/useImageToUrl';
 import group from 'api/group';
-import { ref, set } from 'firebase/database';
+import { get, ref, set } from 'firebase/database';
 import { db } from '../../../../firebase';
 
 interface FormType {
@@ -72,6 +72,38 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
         }
 
         if (groupType === 'edit') {
+          if (location.state.title !== req.name) {
+            const prevChatRef = ref(db, `chattings/${location.state.title}`);
+            const prevTimerRef = ref(db, `timers/${location.state.title}`);
+            get(prevChatRef).then((snapshot) => {
+              if (snapshot.exists()) {
+                const data = snapshot.val();
+
+                const newChatRef = ref(db, `chattings/${req.name}`);
+                set(newChatRef, data).then(() => {
+                  set(prevChatRef, null)
+                    .then()
+                    .catch(() => {
+                      toast.error('오류가 발생했어요!');
+                    });
+                });
+              }
+            });
+            get(prevTimerRef).then((snapshot) => {
+              if (snapshot.exists()) {
+                const data = snapshot.val();
+
+                const newTimerRef = ref(db, `timers/${req.name}`);
+                set(newTimerRef, data).then(() => {
+                  set(prevTimerRef, null)
+                    .then()
+                    .catch(() => {
+                      toast.error('오류가 발생했어요!');
+                    });
+                });
+              }
+            });
+          }
           await group.editGroup(req, location.state.idx);
           toast.success('수정되었어요!');
         }
