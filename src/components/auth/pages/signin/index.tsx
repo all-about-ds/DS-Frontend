@@ -15,7 +15,7 @@ import Loader from 'components/auth/ui/loading';
 function Signin() {
   const navigate = useNavigate();
   const [isError, setError] = useState<boolean>(false);
-  const [isSuccess, setIsSuccess] = useState<boolean>(true);
+  const [isRequestEnd, setIsRequestEnd] = useState<boolean>(true);
 
   const {
     register,
@@ -24,20 +24,22 @@ function Signin() {
   } = useForm<LoginInterface>();
 
   const onValid = async (data: LoginInterface) => {
-    setIsSuccess(false);
+    setIsRequestEnd(false);
     try {
       setError(false);
       const response: any = await auth.signin(data);
-      setIsSuccess(true);
+      setIsRequestEnd(true);
       tokenService.setUser(response.data);
       toast.success('로그인 성공!');
       navigate('/');
     } catch (e: any) {
       if (e.response.status === 400) {
         toast.error('유효하지 않는 비밀번호입니다!');
+        setIsRequestEnd(true);
       }
       if (e.response.status === 404) {
         toast.error('존재하지 않는 이메일입니다!');
+        setIsRequestEnd(true);
       }
     }
   };
@@ -49,7 +51,7 @@ function Signin() {
       <Header />
       <CenterAlignmentLayout>
         <AuthFrame title='로그인'>
-          <Loader isLoading={!isSuccess} />
+          <Loader isLoading={!isRequestEnd} />
           <S.DescWrapper>
             <S.IconBox>😎</S.IconBox>
             <S.DescText>
