@@ -14,9 +14,13 @@ import { modalAtomFamily } from 'atoms';
 import { Link } from 'react-router-dom';
 import EditProfileImageModal from 'components/modals/my/editProfileImage';
 import DefaultModal from 'components/modals/default';
+import { ref, remove } from 'firebase/database';
+import { db } from '../../../firebase';
+import { userInfoAtomFamily } from 'atoms/container';
 
 function My() {
   const [myInfo, setMyInfo] = useState<GetMyInfoInterface>();
+  const [userName] = useRecoilState(userInfoAtomFamily('name'));
   const [loaded, setLoaded] = useState<boolean>(false);
   const [logoutModal, setLogoutModal] = useRecoilState(
     modalAtomFamily('logout')
@@ -59,14 +63,21 @@ function My() {
   const onWithdrawal = async () => {
     try {
       await user.withdrawal();
+      removeUserOnFirebase();
       setWithdrawalModal(false);
       tokenService.removeUser();
       toast.success('회원탈퇴 되었어요');
       navigate('/');
     } catch {
       setWithdrawalModal(false);
-      toast.error('알 수 없는 에러에요');
+      toast.error('알 수 없는 오류에요');
     }
+  };
+
+  const removeUserOnFirebase = () => {
+    myInfo?.groups.map((item) => {
+      remove(ref(db, `timers/${item.name}/users/${userName}`));
+    });
   };
 
   return (
