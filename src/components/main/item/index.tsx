@@ -18,11 +18,13 @@ function GroupItem(props: GroupProps) {
             </S.LockBox>
           )}
         </div>
-        <S.MaxPeople>
-          현재 {props.GroupProps.memberCount}/{props.GroupProps.maxCount}명
-        </S.MaxPeople>
-        <S.Title>{props.GroupProps.name}</S.Title>
-        <S.Description>{props.GroupProps.description}</S.Description>
+        <S.TextBox>
+          <S.MaxPeople>
+            현재 {props.GroupProps.memberCount}/{props.GroupProps.maxCount}명
+          </S.MaxPeople>
+          <S.Title>{props.GroupProps.name}</S.Title>
+          <S.Description>{props.GroupProps.description}</S.Description>
+        </S.TextBox>
         <S.User>
           {!props.GroupProps.leaderImg && (
             <div style={{ marginRight: 8 }}>

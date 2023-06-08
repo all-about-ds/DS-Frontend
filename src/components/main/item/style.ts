@@ -1,42 +1,12 @@
 import styled from '@emotion/styled/macro';
 
-export const Description = styled.div`
-  font-family: AppleSDGothicNeoM00;
-  font-weight: 400;
-  font-size: 14px;
-  color: #717171;
-  width: 100%;
-  height: 28px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  margin-bottom: 0.5rem;
-`;
-
-export const GroupBox = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  cursor: pointer;
-
-  &:hover {
-    transform: translateY(-20px);
-    transition-duration: 0.5s;
-  }
-
-  &:hover ${Description} {
-    color: #b2b2b2;
-  }
-`;
-
 export const Image = styled.img`
   width: 100%;
   height: 200px;
   border-radius: 10px;
-  margin-bottom: 12px;
   object-fit: cover;
+  transition: 0.2s;
+  margin-bottom: 10px;
 
   @media screen and (max-width: 1883px) {
     height: 320px;
@@ -51,18 +21,50 @@ export const Image = styled.img`
   }
 `;
 
+export const GroupBox = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+
+  @media screen and (min-width: 645px) {
+    &:hover ${Image} {
+      transform: translateY(-7px);
+      transition-duration: 0.2s;
+    }
+  }
+`;
+
+export const TextBox = styled.div`
+  margin-left: 4px;
+`;
+
+export const Description = styled.div`
+  font-family: AppleSDGothicNeoM00;
+  font-weight: 400;
+  font-size: 14px;
+  color: #a3a1a1;
+  width: 100%;
+  height: fit-content;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  margin-bottom: 0.7rem;
+`;
 export const MaxPeople = styled.p`
   font-weight: 400;
   font-size: 13px;
   color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 10px;
+  margin-bottom: 7px;
 `;
 
 export const Title = styled.p`
   font-weight: 400;
   font-size: 16px;
   color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 20px;
+  margin-bottom: 12.5px;
 `;
 
 export const User = styled.div`

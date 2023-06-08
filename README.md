@@ -11,7 +11,7 @@ Do Study는 다양한 사람들과 간단하게 스터디를 맺고 동기부여
 
 ## Skills
 
-`Reactjs` `typescript` `axios` `emotion` `recoil` `react-hook-form` `WebSocket` `IntersectionObserver`
+`Reactjs` `typescript` `axios` `Firebase` `emotion` `recoil` `react-hook-form` `IntersectionObserver` 
 
 ## How To Start
 
@@ -20,5 +20,5 @@ $ git clone https://github.com/all-about-ds/DS-Frontend.git
 
 $ yarn install 
 
-$ yarn dev
+$ yarn start
 ```
