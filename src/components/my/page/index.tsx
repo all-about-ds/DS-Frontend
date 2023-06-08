@@ -14,9 +14,13 @@ import { modalAtomFamily } from 'atoms';
 import { Link } from 'react-router-dom';
 import EditProfileImageModal from 'components/modals/my/editProfileImage';
 import DefaultModal from 'components/modals/default';
+import { ref, remove } from 'firebase/database';
+import { db } from '../../../firebase';
+import { userInfoAtomFamily } from 'atoms/container';
 
 function My() {
   const [myInfo, setMyInfo] = useState<GetMyInfoInterface>();
+  const [userName] = useRecoilState(userInfoAtomFamily('name'));
   const [loaded, setLoaded] = useState<boolean>(false);
   const [logoutModal, setLogoutModal] = useRecoilState(
     modalAtomFamily('logout')
@@ -40,8 +44,10 @@ function My() {
         const res: any = await user.getMyInfo();
         setMyInfo(res.data);
         setLoaded(true);
-      } catch (e: any) {
-        console.log(e);
+      } catch {
+        toast.error('잘못된 접근입니다');
+        tokenService.removeUser();
+        navigate('/');
       }
     };
 
@@ -58,14 +64,21 @@ function My() {
   const onWithdrawal = async () => {
     try {
       await user.withdrawal();
+      removeUserOnFirebase();
       setWithdrawalModal(false);
       tokenService.removeUser();
       toast.success('회원탈퇴 되었어요');
       navigate('/');
     } catch {
       setWithdrawalModal(false);
-      toast.error('알 수 없는 에러에요');
+      toast.error('알 수 없는 오류에요');
     }
+  };
+
+  const removeUserOnFirebase = () => {
+    myInfo?.groups.map((item) => {
+      remove(ref(db, `timers/${item.name}/users/${userName}`));
+    });
   };
 
   return (
@@ -137,6 +150,16 @@ function My() {
               </Link>
             ))}
           </S.GroupList>
+          {!myInfo?.groups.length && (
+            <S.MyGroupNotFound>
+              <div>
+                <S.NotFoundText>아직 가입된 그룹이 없어요. 🧐</S.NotFoundText>
+                <S.MoveMainButton onClick={() => navigate('/')}>
+                  그룹 가입하기
+                </S.MoveMainButton>
+              </div>
+            </S.MyGroupNotFound>
+          )}
         </S.GroupSection>
       </S.MyPageLayout>
     </>
