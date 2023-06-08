@@ -45,7 +45,8 @@ function My() {
         setMyInfo(res.data);
         setLoaded(true);
       } catch {
-        toast.error('없는 유저입니다');
+        toast.error('잘못된 접근입니다');
+        tokenService.removeUser();
         navigate('/');
       }
     };
