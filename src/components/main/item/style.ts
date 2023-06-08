@@ -50,7 +50,7 @@ export const Description = styled.div`
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   margin-bottom: 0.7rem;
 `;
 export const MaxPeople = styled.p`
