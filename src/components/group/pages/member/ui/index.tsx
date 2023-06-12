@@ -1,4 +1,3 @@
-import React from 'react';
 import * as S from './style';
 import * as I from '../../../../../assets/svg';
 import { UserProps } from 'types/group.type';

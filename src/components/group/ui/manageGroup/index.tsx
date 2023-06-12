@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import { useLocation, useNavigate } from 'react-router';
 import useImageToUrl from 'hooks/useImageToUrl';
 import group from 'api/group';
-import { ref, set } from 'firebase/database';
+import { get, ref, set } from 'firebase/database';
 import { db } from '../../../../firebase';
 
 interface FormType {
@@ -38,7 +38,7 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
   };
 
   const memberDown = () => {
-    if (memberNum !== 2) {
+    if (memberNum !== 2 && memberNum !== location.state.maxCount + 1) {
       setMemberNum(memberNum - 1);
     } else {
       toast.error('현재 인원보다 낮게 설정할 수 없어요!');
@@ -63,10 +63,6 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
 
         if (groupType === 'create') {
           await group.createGroup(req);
-          set(ref(db, `chattings/${data.name}/users/` + location.state.name), {
-            name: location.state.name,
-            profile: location.state.profile,
-          });
           set(ref(db, `timers/${data.name}/users/${userName}`), {
             name: userName,
             time: 0,
@@ -76,6 +72,38 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
         }
 
         if (groupType === 'edit') {
+          if (location.state.title !== req.name) {
+            const prevChatRef = ref(db, `chattings/${location.state.title}`);
+            const prevTimerRef = ref(db, `timers/${location.state.title}`);
+            get(prevChatRef).then((snapshot) => {
+              if (snapshot.exists()) {
+                const data = snapshot.val();
+
+                const newChatRef = ref(db, `chattings/${req.name}`);
+                set(newChatRef, data).then(() => {
+                  set(prevChatRef, null)
+                    .then()
+                    .catch(() => {
+                      toast.error('오류가 발생했어요!');
+                    });
+                });
+              }
+            });
+            get(prevTimerRef).then((snapshot) => {
+              if (snapshot.exists()) {
+                const data = snapshot.val();
+
+                const newTimerRef = ref(db, `timers/${req.name}`);
+                set(newTimerRef, data).then(() => {
+                  set(prevTimerRef, null)
+                    .then()
+                    .catch(() => {
+                      toast.error('오류가 발생했어요!');
+                    });
+                });
+              }
+            });
+          }
           await group.editGroup(req, location.state.idx);
           toast.success('수정되었어요!');
         }
@@ -87,6 +115,8 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
           toast.error('잘못된 형식의 요청이에요!');
         } else if (e.response.status === 401) {
           toast.error('새로고침 후 다시 시도해주세요!');
+        } else if (e.response.status === 409) {
+          toast.error('이미 존재하는 이름이에요!');
         }
       }
     } else {

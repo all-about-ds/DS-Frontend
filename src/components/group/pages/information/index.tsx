@@ -40,7 +40,8 @@ function GroupInformation() {
         setInformation(res.data);
       } catch (e: any) {
         if (e.response.status === 404) {
-          console.log('없는 그룹');
+          toast.error('존재하지 않는 그룹입니다');
+          navigate('/');
         }
       }
     };

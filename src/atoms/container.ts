@@ -68,3 +68,9 @@ export const userInfoAtomFamily = atomFamily({
   default: '',
   effects_UNSTABLE: [persistAtom],
 });
+
+export const groupTitleAtom = atom({
+  key: 'groupTitle',
+  default: '',
+  effects_UNSTABLE: [persistAtom],
+});
