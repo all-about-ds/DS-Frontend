@@ -232,7 +232,7 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
             <S.BoldText style={{ marginTop: '2.5rem' }}>인원</S.BoldText>
             <S.MemberBox>
               <S.MemberTextWrapper>
-                <S.Member>{memberNum}</S.Member>
+                <S.Member>{memberNum < 2 ? 2 : memberNum}</S.Member>
                 <S.Member>명</S.Member>
               </S.MemberTextWrapper>
 
