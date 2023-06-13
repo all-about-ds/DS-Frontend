@@ -115,7 +115,8 @@ function GroupChatting() {
                     <S.ChatWrapper>
                       <S.MemberWrapper>
                         <S.MemberBox>
-                          <S.MemberProfile image={data.img} />
+                          {!data.img && <I.ChattingDefaultProfile />}
+                          {data.img && <S.MemberProfile src={data.img} />}
                           <S.MemberName>{data.name}</S.MemberName>
                         </S.MemberBox>
                         <S.ChattingBox>
