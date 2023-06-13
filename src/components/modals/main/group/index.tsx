@@ -1,6 +1,7 @@
 import {
   groupIsClickedAtom,
   groupPasswordModalAtom,
+  userIdAtom,
   userInfoAtomFamily,
 } from 'atoms/container';
 import ModalLayout from 'components/common/layout/modal';
@@ -22,9 +23,9 @@ interface GroupProps {
 function MainModal(props: GroupProps) {
   const [, setGroupIsClicked] = useRecoilState(groupIsClickedAtom);
   const [, setGroupPasswordModal] = useRecoilState(groupPasswordModalAtom);
+  const [userId] = useRecoilState(userIdAtom);
   const [isMember, setIsMember] = useState<boolean>(false);
   const [userName] = useRecoilState(userInfoAtomFamily('name'));
-  const [userImage] = useRecoilState(userInfoAtomFamily('image'));
   const navigate = useNavigate();
 
   const onClick = async () => {
@@ -46,6 +47,7 @@ function MainModal(props: GroupProps) {
                 name: userName,
                 time: 0,
                 active: false,
+                id: userId,
               }
             );
 

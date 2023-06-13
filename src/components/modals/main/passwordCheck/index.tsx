@@ -1,5 +1,9 @@
 import group from 'api/group';
-import { groupPasswordModalAtom, userInfoAtomFamily } from 'atoms/container';
+import {
+  groupPasswordModalAtom,
+  userIdAtom,
+  userInfoAtomFamily,
+} from 'atoms/container';
 import ModalLayout from 'components/common/layout/modal';
 import { ref, set } from '@firebase/database';
 import { db } from '../../../../firebase';
@@ -17,6 +21,7 @@ interface PasswordProps {
 
 function PasswordModal(props: PasswordProps) {
   const [, setGroupPasswordModal] = useRecoilState(groupPasswordModalAtom);
+  const [userId] = useRecoilState(userIdAtom);
   const [userName] = useRecoilState(userInfoAtomFamily('name'));
   const navigate = useNavigate();
   const [isError, setError] = useState<boolean>(false);
@@ -35,6 +40,7 @@ function PasswordModal(props: PasswordProps) {
         name: userName,
         time: 0,
         active: false,
+        id: userId,
       });
 
       navigate(`/group/${props.index}/information`);
