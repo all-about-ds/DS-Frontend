@@ -136,6 +136,8 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
       toast.error(desc.message);
     } else if (name && name.type === 'maxLength') {
       toast.error('그룹 이름은 최대 16자 입니다');
+    } else if (desc && desc.type === 'maxLength') {
+      toast.error('그룹 설명은 최대 100자 입니다');
     }
   };
 
@@ -182,9 +184,10 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
 
             <S.BoldText style={{ marginTop: '1.5rem' }}>그룹 설명</S.BoldText>
             <S.Input
-              placeholder='그룹을 설명해주세요'
+              placeholder='그룹을 설명해주세요 (100자 이내)'
               {...register('description', {
                 required: '설명은 필수 입력입니다.',
+                maxLength: 100,
               })}
               defaultValue={
                 groupType === 'create' ? '' : location.state.description
@@ -232,7 +235,7 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
             <S.BoldText style={{ marginTop: '2.5rem' }}>인원</S.BoldText>
             <S.MemberBox>
               <S.MemberTextWrapper>
-                <S.Member>{memberNum}</S.Member>
+                <S.Member>{memberNum < 2 ? 2 : memberNum}</S.Member>
                 <S.Member>명</S.Member>
               </S.MemberTextWrapper>
 
