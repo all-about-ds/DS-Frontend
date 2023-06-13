@@ -188,4 +188,5 @@ export const MyChatTime = styled.p`
   color: #6a6a6a;
   margin-top: 10px;
   margin-right: 12px;
+  text-align: right;
 `;
