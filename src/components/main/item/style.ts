@@ -52,6 +52,7 @@ export const Description = styled.div`
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   margin-bottom: 0.7rem;
+  line-height: 14.5px;
 `;
 export const MaxPeople = styled.p`
   font-weight: 400;
