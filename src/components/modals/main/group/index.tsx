@@ -41,14 +41,6 @@ function MainModal(props: GroupProps) {
             await group.joinGroup(undefined, props.GroupProps?.idx);
 
             await set(
-              ref(db, `chattings/${props.GroupProps?.name}/users/` + userName),
-              {
-                name: userName,
-                profile: userImage,
-              }
-            );
-
-            await set(
               ref(db, `timers/${props.GroupProps?.name}/users/` + userName),
               {
                 name: userName,
