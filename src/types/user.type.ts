@@ -15,4 +15,5 @@ export interface TimerUserInterface {
   name: string;
   time: number;
   active: boolean;
+  id: number;
 }
