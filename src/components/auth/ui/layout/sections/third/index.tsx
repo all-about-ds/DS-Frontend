@@ -38,6 +38,7 @@ function ThirdSection(props: AuthFormSectionPropsInterface) {
         });
         setIsRequestEnd(true);
         toast.success('회원가입 성공!');
+        navigate('/auth/signin');
       } catch {
         setErrorMessage('이미 있는 이름이에요');
         setIsRequestEnd(true);
