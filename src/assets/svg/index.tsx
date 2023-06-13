@@ -22,4 +22,8 @@ export { LongRectengle } from './rectengle';
 export { ShowPassword } from './showPassword';
 export { HidePassword } from './hidePassword';
 export { Logo } from './logo';
-export { DefaultProfile, MyPageDefaultProfile } from './defaultProfile';
+export {
+  DefaultProfile,
+  MyPageDefaultProfile,
+  ChattingDefaultProfile,
+} from './defaultProfile';

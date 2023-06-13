@@ -99,10 +99,10 @@ export const MemberBox = styled.div`
   justify-content: space-between;
 `;
 
-export const MemberProfile = styled.div<{ image: string | undefined }>`
+export const MemberProfile = styled.img`
   width: 44px;
   height: 44px;
-  background: url(${(props) => props.image});
+  object-fit: cover;
   background: #d9d9d9;
   border-radius: 50%;
 `;
@@ -188,4 +188,5 @@ export const MyChatTime = styled.p`
   color: #6a6a6a;
   margin-top: 10px;
   margin-right: 12px;
+  text-align: right;
 `;

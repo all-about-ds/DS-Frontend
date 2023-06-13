@@ -7,13 +7,14 @@ import { Unsubscribe, off, onValue, ref, set } from '@firebase/database';
 import { db } from '../../../../firebase';
 import { useLocation } from 'react-router';
 import { useRecoilState } from 'recoil';
-import { userInfoAtomFamily } from 'atoms/container';
+import { userIdAtom, userInfoAtomFamily } from 'atoms/container';
 
 function GroupChatting() {
   const [userChat, setUserChat] = useState<string>('');
   const [chat, setChat] = useState<ChatMessageType[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
+  const [userId] = useRecoilState(userIdAtom);
   const [userName] = useRecoilState(userInfoAtomFamily('name'));
   const [userImage] = useRecoilState(userInfoAtomFamily('image'));
   const [endNum, setEndNum] = useState<number>(0);
@@ -56,6 +57,7 @@ function GroupChatting() {
             name: userName,
             chat: userChat,
             createdAt: Date.now(),
+            userId,
           }
         );
         setUserChat('');
@@ -75,6 +77,7 @@ function GroupChatting() {
           name: userName,
           chat: userChat,
           createdAt: Date.now(),
+          userId,
         }
       );
       setUserChat('');
@@ -111,11 +114,12 @@ function GroupChatting() {
             {chat &&
               chat.map((data: ChatMessageType, idx) => (
                 <div key={idx}>
-                  {data.name !== userName && (
+                  {data.userId !== userId && (
                     <S.ChatWrapper>
                       <S.MemberWrapper>
                         <S.MemberBox>
-                          <S.MemberProfile image={data.img} />
+                          {!data.img && <I.ChattingDefaultProfile />}
+                          {data.img && <S.MemberProfile src={data.img} />}
                           <S.MemberName>{data.name}</S.MemberName>
                         </S.MemberBox>
                         <S.ChattingBox>
@@ -128,7 +132,7 @@ function GroupChatting() {
                       <div></div>
                     </S.ChatWrapper>
                   )}
-                  {data.name === userName && (
+                  {data.userId === userId && (
                     <S.ChatWrapper>
                       <div></div>
                       <S.MyChatBox>

@@ -3,5 +3,5 @@ export interface ChatMessageType {
   name: string;
   chat: string;
   createdAt: number;
-  isMine: boolean;
+  userId: number;
 }

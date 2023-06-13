@@ -8,13 +8,14 @@ import { GroupType } from 'types/group.type';
 import { useRecoilState } from 'recoil';
 import { groupIsClickedAtom } from 'atoms';
 import {
-  groupIndexAtom,
   groupPasswordModalAtom,
   SearchAtom,
+  userIdAtom,
 } from 'atoms/container';
 import PasswordModal from 'components/modals/main/passwordCheck';
 import tokenService from 'utils/tokenService';
 import { useNavigate } from 'react-router';
+import user from 'api/user';
 
 function Main() {
   const observerTargetEl = useRef<HTMLDivElement>(null);
@@ -28,7 +29,7 @@ function Main() {
   const [groupIsClicked, setGroupIsClicked] =
     useRecoilState(groupIsClickedAtom);
   const [groupPassword] = useRecoilState(groupPasswordModalAtom);
-  const [index] = useRecoilState(groupIndexAtom);
+  const [, setUserId] = useRecoilState(userIdAtom);
   const [search, setSearch] = useRecoilState(SearchAtom);
   const navigate = useNavigate();
 
@@ -105,6 +106,21 @@ function Main() {
       }));
     }
   }, [search.isSearchRequested]);
+
+  useEffect(() => {
+    const getId = async () => {
+      try {
+        const res: any = await user.getUserId();
+        setUserId(res.data.uid);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    if (tokenService.getLocalAccessToken()) {
+      getId();
+    }
+  }, []);
 
   return (
     <>

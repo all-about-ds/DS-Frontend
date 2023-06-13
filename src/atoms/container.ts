@@ -74,3 +74,9 @@ export const groupTitleAtom = atom({
   default: '',
   effects_UNSTABLE: [persistAtom],
 });
+
+export const userIdAtom = atom({
+  key: 'userId',
+  default: 0,
+  effects_UNSTABLE: [persistAtom],
+});

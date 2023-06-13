@@ -7,7 +7,7 @@ import { TimerUserInterface } from 'types/user.type';
 import MemberTimerItem from '../item';
 import * as S from './style';
 import { useRecoilState } from 'recoil';
-import { userInfoAtomFamily } from 'atoms/container';
+import { userIdAtom, userInfoAtomFamily } from 'atoms/container';
 import { set } from 'firebase/database';
 
 type MyInfo = TimerUserInterface;
@@ -15,6 +15,7 @@ type MyInfo = TimerUserInterface;
 function GroupTimer() {
   const [users, setUsers] = useState<TimerUserInterface[]>([]);
   const [active, setActive] = useState<boolean>(false);
+  const [userId] = useRecoilState(userIdAtom);
   const [name] = useRecoilState(userInfoAtomFamily('name'));
 
   const location = useLocation();
@@ -23,6 +24,7 @@ function GroupTimer() {
     name: '',
     time: 0,
     active: false,
+    id: 0,
   });
 
   useEffect(() => {
@@ -46,7 +48,7 @@ function GroupTimer() {
         const timer: TimerUserInterface[] = Object.values(data);
         setUsers(timer);
         timer.forEach((item) => {
-          if (item.name === name) {
+          if (item.id === userId) {
             setMyInfo(item);
           }
         });
@@ -69,6 +71,7 @@ function GroupTimer() {
           name: name,
           time: time,
           active: active,
+          id: userId,
         });
       }, 1000);
 
@@ -80,6 +83,7 @@ function GroupTimer() {
         name: name,
         time: time,
         active: false,
+        id: userId,
       });
     }
   }, [active]);
@@ -132,7 +136,7 @@ function GroupTimer() {
       )}
       <S.MemberTimerBox>
         {users
-          .filter((item) => item.name !== name)
+          .filter((item) => item.id !== userId)
           .map((item, index) => (
             <MemberTimerItem
               key={index}
