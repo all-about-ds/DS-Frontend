@@ -64,6 +64,20 @@ class User {
       return error;
     }
   }
+
+  getUserId() {
+    try {
+      return createAxios({
+        method: 'GET',
+        url: 'chat',
+        headers: {
+          Authorization: 'Bearer ' + tokenService.getLocalAccessToken(),
+        },
+      });
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
 export default new User();
