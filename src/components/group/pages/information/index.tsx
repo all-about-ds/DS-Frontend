@@ -13,7 +13,8 @@ import member from 'api/member';
 import { groupIsClickedAtom } from 'atoms';
 import { ref, remove } from '@firebase/database';
 import { db } from '../../../../firebase';
-import { userInfoAtomFamily } from 'atoms/container';
+import { userIdAtom, userInfoAtomFamily } from 'atoms/container';
+import user from 'api/user';
 
 function GroupInformation() {
   const [leaveGroupModal, setLeaveGroupModal] = useRecoilState(
@@ -27,6 +28,7 @@ function GroupInformation() {
   const [isOwner, setIsOwner] = useState<boolean>(false);
   const [information, setInformation] = useState<GroupInformationInterface>();
   const [, setGroupIsClicked] = useRecoilState(groupIsClickedAtom);
+  const [, setUserId] = useRecoilState(userIdAtom);
   const params = useParams();
   const navigate = useNavigate();
 
@@ -46,6 +48,16 @@ function GroupInformation() {
       }
     };
 
+    const getId = async () => {
+      try {
+        const res: any = await user.getUserId();
+        setUserId(res.data.uid);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getId();
     getGroupInformationById();
   }, []);
 
