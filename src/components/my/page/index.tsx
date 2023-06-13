@@ -76,8 +76,8 @@ function My() {
   };
 
   const removeUserOnFirebase = () => {
-    myInfo?.groups.map((item) => {
-      remove(ref(db, `timers/${item.name}/users/${userName}`));
+    myInfo?.groups.map(async (item) => {
+      await remove(ref(db, `timers/${item.name}/users/${userName}`));
     });
   };
 
