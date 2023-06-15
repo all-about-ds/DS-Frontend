@@ -19,12 +19,14 @@ import user from 'api/user';
 
 function Main() {
   const observerTargetEl = useRef<HTMLDivElement>(null);
-  const page = useRef<number>(0);
-  const [hasNextPage, setHasNextPage] = useState<boolean>(true);
+  const latestPage = useRef<number>(0);
+  const popularPage = useRef<number>(0);
+  const [hasNextLatestPage, setHasNextLatestPage] = useState<boolean>(true);
+  const [hasNextPopularPage, setHasNextPopularPage] = useState<boolean>(true);
   const [loaded, setLoaded] = useState<boolean>(true);
   const [byPopularity, setByPopularity] = useState<boolean>(false);
-  const [byLatest, setByLatest] = useState<boolean>(true);
-  const [list, setList] = useState<GroupType[]>([]);
+  const [latestList, setLatestList] = useState<GroupType[]>([]);
+  const [popularList, setPopularList] = useState<GroupType[]>([]);
   const [modalData, setModalData] = useState<GroupType>();
   const [groupIsClicked, setGroupIsClicked] =
     useRecoilState(groupIsClickedAtom);
@@ -32,20 +34,6 @@ function Main() {
   const [, setUserId] = useRecoilState(userIdAtom);
   const [search, setSearch] = useRecoilState(SearchAtom);
   const navigate = useNavigate();
-
-  const sortButton = (type: string) => {
-    page.current = 0;
-    setList([]);
-    if (type === '인기') {
-      setByLatest(false);
-      setByPopularity(true);
-      getGroupList(true);
-    } else {
-      setByLatest(true);
-      setByPopularity(false);
-      getGroupList(false);
-    }
-  };
 
   const groupClick = (props: GroupType) => {
     if (!tokenService.getLocalAccessToken()) {
@@ -56,49 +44,73 @@ function Main() {
     }
   };
 
-  const getGroupList = useCallback(
-    async (popularity: boolean) => {
-      setLoaded(false);
-      try {
+  const getGroupList = useCallback(async () => {
+    setLoaded(false);
+    try {
+      if (!byPopularity) {
         const response: any = await group.getGroupList({
           keyword: search.keyword === '' ? undefined : search.keyword,
-          page: page.current,
+          page: latestPage.current,
           size: 8,
-          popularity,
+          popularity: false,
         });
 
-        setHasNextPage(response.data.groups.length === 8);
-        setList((prevPosts) => [...prevPosts, ...response.data.groups]);
+        console.log(response.data);
+
+        setHasNextLatestPage(response.data.groups.length === 8);
+        setLatestList((prevPosts) => [...prevPosts, ...response.data.groups]);
         setLoaded(true);
 
-        if (response.data.groups.length) {
-          page.current += 1;
+        if (response.data.groups.length === 8) {
+          latestPage.current += 1;
         }
-      } catch (e: any) {
-        Promise.reject(e);
+      } else if (byPopularity) {
+        const response: any = await group.getGroupList({
+          keyword: search.keyword === '' ? undefined : search.keyword,
+          page: popularPage.current,
+          size: 8,
+          popularity: true,
+        });
+
+        console.log(response.data);
+
+        setHasNextPopularPage(response.data.groups.length === 8);
+        setPopularList((prevPosts) => [...prevPosts, ...response.data.groups]);
+        setLoaded(true);
+
+        if (response.data.groups.length === 8) {
+          popularPage.current += 1;
+        }
       }
-    },
-    [search]
-  );
+    } catch (e: any) {
+      Promise.reject(e);
+    }
+  }, [search, byPopularity]);
 
   useEffect(() => {
-    if (!observerTargetEl.current || !hasNextPage) return;
+    if (
+      !observerTargetEl.current ||
+      (byPopularity && !hasNextPopularPage) ||
+      (!byPopularity && !hasNextLatestPage)
+    )
+      return;
 
     const io = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting && loaded) {
-        getGroupList(byPopularity);
+        getGroupList();
       }
     });
 
     io.observe(observerTargetEl.current as HTMLElement);
     return () => io.disconnect();
-  }, [getGroupList, hasNextPage]);
+  }, [getGroupList, hasNextLatestPage, byPopularity, !loaded]);
 
   useEffect(() => {
     if (search.isSearchRequested) {
-      page.current = 0;
-      setList([]);
-      getGroupList(byPopularity);
+      latestPage.current = 0;
+      setLatestList([]);
+      setByPopularity(false);
+      getGroupList();
       setSearch((oldValue) => ({
         ...oldValue,
         keyword: '',
@@ -132,24 +144,30 @@ function Main() {
       <S.MainPageLayout>
         <S.SortButtonWrapper>
           <S.SortButton
-            byPopularity={byLatest}
-            onClick={() => sortButton('최신')}
+            byPopularity={!byPopularity}
+            onClick={() => setByPopularity(false)}
           >
             최신순
           </S.SortButton>
           <S.SortButton
             byPopularity={byPopularity}
-            onClick={() => sortButton('인기')}
+            onClick={() => setByPopularity(true)}
           >
             인기
           </S.SortButton>
         </S.SortButtonWrapper>
         <S.GroupBoxWrapper>
-          {list.map((group: GroupType, index: number) => (
-            <div key={index} onClick={() => groupClick(group)}>
-              <GroupItem GroupProps={group} />
-            </div>
-          ))}
+          {byPopularity
+            ? popularList.map((group: GroupType, index: number) => (
+                <div key={index} onClick={() => groupClick(group)}>
+                  <GroupItem GroupProps={group} />
+                </div>
+              ))
+            : latestList.map((group: GroupType, index: number) => (
+                <div key={index} onClick={() => groupClick(group)}>
+                  <GroupItem GroupProps={group} />
+                </div>
+              ))}
           <div ref={observerTargetEl} />
         </S.GroupBoxWrapper>
       </S.MainPageLayout>
