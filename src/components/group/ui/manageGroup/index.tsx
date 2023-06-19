@@ -273,7 +273,7 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
               <>
                 <S.BoldText style={{ marginTop: '24px' }}>비밀번호</S.BoldText>
                 <Input
-                  placeholder='비밀번호를 입력해주세요'
+                  placeholder='숫자 4자리를 입력해주세요'
                   type='password'
                   {...register('password', {
                     required: '비밀번호는 필수 입력입니다.',
