@@ -56,7 +56,7 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
           name: data.name,
           description: data.description,
           img: image,
-          maxCount: memberNum,
+          maxCount: memberNum !== 1 ? memberNum : 2,
           secret: isClicked,
           password: data.password,
         };
