@@ -9,19 +9,19 @@ interface MemberTimerItemProps {
 
 function MemberTimerItem(props: MemberTimerItemProps) {
   const format = (time: number) => {
-    const hour =
-      time / 3600 > 9
-        ? parseInt(String(time / 3600))
-        : '0' + parseInt(String(time / 3600));
+    const hour = time / 3600;
+    const minute = (time % 3600) / 60;
+    const second = time % 60;
 
-    const min =
-      (time % 3600) / 60 > 9
-        ? parseInt(String((time % 3600) / 60))
-        : '0' + parseInt(String(time / 3600));
+    const hourValue =
+      hour > 9 ? parseInt(String(hour)) : '0' + parseInt(String(hour));
 
-    const sec = time % 60 > 9 ? time % 60 : '0' + (time % 60);
+    const minuteValue =
+      minute > 9 ? parseInt(String(minute)) : '0' + parseInt(String(minute));
 
-    return hour + ':' + min + ':' + sec;
+    const secondValue = second > 9 ? second : '0' + second;
+
+    return hourValue + ':' + minuteValue + ':' + secondValue;
   };
 
   return (

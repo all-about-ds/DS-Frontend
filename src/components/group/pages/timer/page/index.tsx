@@ -90,20 +90,22 @@ function GroupTimer() {
   const format = (type: string) => {
     const time = myInfo.time;
 
+    const hour = time / 3600;
+    const minute = (time % 3600) / 60;
+    const second = time % 60;
+
     if (type == 'hour') {
-      return time / 3600 > 9
-        ? parseInt(String(time / 3600))
-        : '0' + parseInt(String(time / 3600));
+      return hour > 9 ? parseInt(String(hour)) : '0' + parseInt(String(hour));
     }
 
     if (type == 'minute') {
-      return (time % 3600) / 60 > 9
-        ? parseInt(String((time % 3600) / 60))
-        : '0' + parseInt(String(time / 3600));
+      return minute > 9
+        ? parseInt(String(minute))
+        : '0' + parseInt(String(minute));
     }
 
     if (type == 'second') {
-      return time % 60 > 9 ? time % 60 : '0' + (time % 60);
+      return second > 9 ? second : '0' + second;
     }
   };
 
@@ -135,7 +137,7 @@ function GroupTimer() {
       )}
       <S.MemberTimerBox>
         {users
-          .filter((item) => item.id !== userId)
+          .filter((item) => item.name !== name)
           .map((item, index) => (
             <MemberTimerItem
               key={index}
