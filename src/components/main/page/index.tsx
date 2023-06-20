@@ -55,8 +55,6 @@ function Main() {
           popularity: false,
         });
 
-        console.log(response.data);
-
         setHasNextLatestPage(response.data.groups.length === 8);
         setLatestList((prevPosts) => [...prevPosts, ...response.data.groups]);
         setLoaded(true);
@@ -71,8 +69,6 @@ function Main() {
           size: 8,
           popularity: true,
         });
-
-        console.log(response.data);
 
         setHasNextPopularPage(response.data.groups.length === 8);
         setPopularList((prevPosts) => [...prevPosts, ...response.data.groups]);
@@ -168,7 +164,7 @@ function Main() {
                   <GroupItem GroupProps={group} />
                 </div>
               ))}
-          <div ref={observerTargetEl} />
+          <div ref={observerTargetEl} style={{ marginTop: 12 }} />
         </S.GroupBoxWrapper>
       </S.MainPageLayout>
     </>

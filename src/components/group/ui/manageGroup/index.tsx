@@ -52,11 +52,16 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
   const onValid = async (data: FormType) => {
     if (image) {
       try {
+        if (data.password && !/^[0-9]{4}$/.test(data.password)) {
+          toast.error('숫자 4자리를 입력해주세요!');
+          return;
+        }
+
         const req: CreateGroupInterface = {
           name: data.name,
           description: data.description,
           img: image,
-          maxCount: memberNum,
+          maxCount: memberNum !== 1 ? memberNum : 2,
           secret: isClicked,
           password: data.password,
         };
@@ -273,14 +278,10 @@ function ManageGroup({ groupType }: { groupType: ManageGroupType }) {
               <>
                 <S.BoldText style={{ marginTop: '24px' }}>비밀번호</S.BoldText>
                 <Input
-                  placeholder='비밀번호를 입력해주세요'
+                  placeholder='숫자 4자리를 입력해주세요'
                   type='password'
                   {...register('password', {
                     required: '비밀번호는 필수 입력입니다.',
-                    pattern: {
-                      value: /^[0-9]{4}$/,
-                      message: '숫자 4자리를 입력해주세요',
-                    },
                   })}
                 />
               </>
