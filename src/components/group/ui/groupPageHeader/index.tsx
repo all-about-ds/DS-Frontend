@@ -51,7 +51,7 @@ function GroupPageHeader({ title }: { title?: titleType }) {
         </Link>
         <Link
           to={'/group/' + params.groupId + '/timer'}
-          state={{ groupName: title }}
+          state={{ groupName: groupTitle }}
         >
           <div className={select('/group/' + params.groupId + '/timer')}>
             <I.TimerIcon />

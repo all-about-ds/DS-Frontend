@@ -15,10 +15,9 @@ type MyInfo = TimerUserInterface;
 function GroupTimer() {
   const [users, setUsers] = useState<TimerUserInterface[]>([]);
   const [active, setActive] = useState<boolean>(false);
+  const location = useLocation();
   const [userId] = useRecoilState(userIdAtom);
   const [name] = useRecoilState(userInfoAtomFamily('name'));
-
-  const location = useLocation();
 
   const [myInfo, setMyInfo] = useState<MyInfo>({
     name: '',
@@ -110,7 +109,7 @@ function GroupTimer() {
 
   return (
     <S.GroupTimerPageLayout>
-      <GroupPageHeader title={'타이머'} />
+      <GroupPageHeader title={location.state.groupName} />
       <S.MyTimerBox>
         <div className='hour'>
           <S.ElementType>시간</S.ElementType>
