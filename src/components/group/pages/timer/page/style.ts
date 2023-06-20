@@ -24,6 +24,7 @@ export const ElementType = styled.h3`
 `;
 
 export const ElementValue = styled.h1`
+  width: 80px;
   text-align: center;
   font-style: normal;
   font-weight: 400;
