@@ -136,7 +136,7 @@ function GroupTimer() {
       )}
       <S.MemberTimerBox>
         {users
-          .filter((item) => item.id !== userId)
+          .filter((item) => item.name !== name)
           .map((item, index) => (
             <MemberTimerItem
               key={index}
