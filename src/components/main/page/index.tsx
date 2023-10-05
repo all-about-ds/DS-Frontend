@@ -164,8 +164,8 @@ function Main() {
                   <GroupItem GroupProps={group} />
                 </div>
               ))}
-          <div ref={observerTargetEl} style={{ marginTop: 12 }} />
         </S.GroupBoxWrapper>
+        <div ref={observerTargetEl}  />
       </S.MainPageLayout>
     </>
   );
